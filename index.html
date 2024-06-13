@@ -19,7 +19,11 @@
     </script>
 </head>
 <body>
-    <!-- SKIP TO CONTENT -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    <div id="content" style="display: none;">
+   <!-- SKIP TO CONTENT -->
     <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button" class="firstpage">
@@ -205,8 +209,25 @@
             &copy; Patrick Feeney Design 2024 | All rights reserved
         </div>
     </footer>
+    </div>
    <script>
     
+    // scripts.js
+document.addEventListener("DOMContentLoaded", function() {
+    // Simulate a delay for loading content (e.g., fetching data from an API)
+    setTimeout(function() {
+        document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }, 3000); // Adjust the time as needed for your content loading duration
+});
+
+// scripts.js
+window.addEventListener("load", function() {
+    // Once everything is loaded, hide the loading screen and show the content
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("content").style.display = "block";
+});
+
     document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav, nav.li');
     const toggleButton = document.querySelector('.menu-toggle');
