@@ -1027,45 +1027,41 @@ li.dropdown.active {
         color: #f7f7f7;
     }
 
+
     .backgroundimg {
-        /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/updated/Background.gif');
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('img/backgroundimg.gif');
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
-    }
+        height: 63vh;
+        /* Initial scale for the background image */
+        transform: scale(1);
+        transition: transform 0.2s ease-out; /* Smooth transition */
+        z-index: 1;
+        }
     
     .backgroundimg p {
         color: #f7f7f7;
-        padding-top: 12vw;
-        padding-bottom: 12vw;
+        line-height: 9vw;
+        font-size: 7vw;
+        margin-top: 5vw;
     }
 
-
-
-    .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/Terratoma05_02.png');
-        background-size:cover;
-    }
-
-    .backgroundimg2 p {
+    .pink p {
         color: #f7f7f7;
+        line-height: 9vw;
+        font-size: 7vw;
+        margin-top: 5vw;
     }
 
-    .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/realness.jpg');
-        background-size:cover;
+
+    .pink a {
+        transition: all 0.5s ease; /* Smooth transition */
+        text-decoration: none;
 
     }
-
-    .backgroundimg3 p {
-        color: #f7f7f7;
-    }
-
-    .pink {
-        background-color: #161717;
-        /* ADDING A MARGIN BECUASE OF FOOTER OVERLAP */
-        margin-bottom: 10vw;
-    }
-
+        
+ 
 
 
 
@@ -1171,10 +1167,11 @@ article p {
 
 
     .gallery {
-        column-count: 3; /* Creates five columns */
+        column-count: 2; /* Creates five columns */
         column-gap: 2vw; /* Space between columns */
         width: 94%; /* Full width of the container */
         padding-left: 3.8vw;
+        padding-bottom: 15vw;
     }
     
     .gallery .image-container {
@@ -1199,7 +1196,7 @@ article p {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        background: rgba(0, 0, 0, 0); /* Semi-transparent overlay */
         color:#f7f7f7;
         font-size: 4vw;
         display: flex;
@@ -1220,24 +1217,21 @@ article p {
 /* FOR THE TIEMTABLE PAGE */
 
 .overlay span {
-    font-size: 2vw;
-    font-weight: 200;
-    line-height: 3vw;
+display: none;
 
 }
 
 
 .overlay em {
-    font-size: 3vw;
-    font-weight: 200;
-    font-style: normal;
-    line-height: 3vw;
+    display: none;
+
 
 }
 
 
 .overlay strong {
-    font-size: 4vw;
+    display: none;
+
 
 }
 
