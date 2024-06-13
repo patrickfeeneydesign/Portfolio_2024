@@ -1063,19 +1063,15 @@ li.dropdown.active {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 63vh;
-        /* Initial scale for the background image */
-        transform: scale(1);
-        transition: transform 0.2s ease-out; /* Smooth transition */
-        z-index: 1;
+        height: 63vw;
+        margin-left: 6vw;
+        margin-right: 6vw;
+        margin-top: 6vw;
+
+        border-radius: 10vw;
+
         }
     
-    .backgroundimg p {
-        color: #f7f7f7;
-        line-height: 9vw;
-        font-size: 7vw;
-        margin-top: 5vw;
-    }
 
     .pink p {
         color: #f7f7f7;
