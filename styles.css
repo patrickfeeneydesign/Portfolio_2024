@@ -90,20 +90,25 @@ html, body {
         background-color: white;
         mix-blend-mode: difference; /* Ensure the cursor blends with the background */
         box-shadow: 5px 0 15px rgba(0,0,0,0.5); /* Shadow for depth */
-        transition: width 0.5s ease;
-        transition: height 0.5s ease;
-
+        transition: width 0.5s linear;
+        transition: mix-blend-mode 0.5s linear;
 
     }
-    
+    .custom-cursor:hover {
+        transition: width 0.5s linear;
+        transition: mix-blend-mode 0.5s linear;   
+        mix-blend-mode: normal; /* Ensure the cursor blends with the background */
+ 
+    }
     .hovered {
         background-color: white;
         border: 1px solid white;
         mix-blend-mode: normal;
         width: 20px;
         height: 20px;
-        transition: width 0.5s ease;
-        transition: height 0.5s ease;
+        transition: width 0.5s linear;
+        transition: mix-blend-mode 0.5s linear;
+
 
     }
 
