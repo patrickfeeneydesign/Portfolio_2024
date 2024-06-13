@@ -435,7 +435,6 @@ main a:hover {
         font-size: 7vw;
         margin-top: 5vw;
     }
-    
     .pink p {
         color: #f7f7f7;
         line-height: 10vw;
@@ -624,12 +623,15 @@ main a:hover {
     position: relative;
     overflow: hidden;
     border-radius: 3px; /* Default border-radius */
-    transition: border-radius 0.2s ease-in-out; /* Smooth transition */
+    transition: all 0.3s ease; /* Smooth transition */
 }
 
 .image-container:hover {
     border-radius: 2vw;
+    width: 112%;
+    z-index: 1000;
 }
+
 
 .image-container.highlighted {
     border-radius: 3vw; /* Constantly enlarged border radius for highlighted items */
@@ -647,7 +649,7 @@ main a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0,); /* Blue background */
+    background: #6f22ff; /* Blue background */
     color: #f7f7f7;
     font-size: 3vw;
     display: flex;
@@ -662,7 +664,7 @@ main a:hover {
 .overlay:hover {
     transition:  0.5s ease;
     font-size: 3.8vw;
-    background: rgba(0, 0, 0, 0.6); /* Blue background */
+    background: #6f22ff; /* Blue background */
 
 }
 
@@ -686,12 +688,12 @@ main a:hover {
 /* FOR THE TIEMTABLE PAGE */
 
 .overlay span {
-    font-size: 0.7vw;
+    font-size: 1vw;
     font-weight: 200;
 }
 
 .overlay:hover span {
-    font-size: 1vw;
+    font-size: 1.5vw;
     font-weight: 200;
     transition:  0.5s ease-in-out;
 
@@ -699,7 +701,7 @@ main a:hover {
 }
 
 .overlay em {
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-weight: 200;
     font-style: normal;
     line-height: 1vw;
@@ -707,7 +709,7 @@ main a:hover {
 }
 
 .overlay:hover em {
-    font-size: 1.5vw;
+    font-size: 2vw;
     font-weight: 200;
     font-style: normal;
     line-height: 2vw;
@@ -718,13 +720,15 @@ main a:hover {
 
 .overlay strong {
     font-size: 1.8vw;
+    line-height: 4vw;
+
 
 }
 
 .overlay:hover strong {
-    font-size: 2vw;
+    font-size: 2.5vw;
     transition:  0.3s ease-in-out;
-    line-height: 2.4vw;
+    line-height: 54w;
 
 }
 
