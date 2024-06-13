@@ -443,12 +443,15 @@ main a:hover {
         font-style: normal;
         font-family: seismic-latin-variable, sans-serif;
         font-variation-settings: "SEIS" 0, "wght" 1000;
+        
     }
 
 
     .pink a {
         transition: all 0.7s ease; /* Smooth transition */
         white-space: nowrap;
+        font-style: normal;
+
 
 
     }
@@ -457,7 +460,6 @@ main a:hover {
         font-family: seismic-latin-variable, sans-serif;
         font-variation-settings: "SEIS" 100, "wght" 400;
         transition: all 0.7s ease; /* Smooth transition */
-        font-style: italic;
         white-space: nowrap;
 
 
@@ -649,7 +651,6 @@ main a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #6f22ff; /* Blue background */
     color: #f7f7f7;
     font-size: 3vw;
     display: flex;
@@ -657,7 +658,7 @@ main a:hover {
     justify-content: center;
     opacity: 0;
     text-align: left;
-    transition:  0.5s ease;
+    transition:  all 0.5s ease;
 
 }
 
@@ -665,6 +666,8 @@ main a:hover {
     transition:  0.5s ease;
     font-size: 3.8vw;
     background: #6f22ff; /* Blue background */
+        transition:  all 0.5s ease;
+
 
 }
 
