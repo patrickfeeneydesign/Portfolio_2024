@@ -435,26 +435,32 @@ main a:hover {
         font-size: 7vw;
         margin-top: 5vw;
     }
-
+    
     .pink p {
         color: #f7f7f7;
-        line-height: 9vw;
-        font-size: 7vw;
+        line-height: 10vw;
+        font-size: 10vw;
         margin-top: 5vw;
+        font-style: normal;
         font-family: seismic-latin-variable, sans-serif;
-        font-variation-settings: "SEIS" 0, "wght" 600;
+        font-variation-settings: "SEIS" 0, "wght" 1000;
     }
 
 
     .pink a {
-        transition: all 0.5s ease; /* Smooth transition */
+        transition: all 0.7s ease; /* Smooth transition */
+        white-space: nowrap;
+
 
     }
         
     .pink a:hover {
         font-family: seismic-latin-variable, sans-serif;
-        font-variation-settings: "SEIS" 100, "wght" 600;
-        transition: all 0.5s ease; /* Smooth transition */
+        font-variation-settings: "SEIS" 100, "wght" 400;
+        transition: all 0.7s ease; /* Smooth transition */
+        font-style: italic;
+        white-space: nowrap;
+
 
     }
     
