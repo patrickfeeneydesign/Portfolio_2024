@@ -630,8 +630,7 @@ main a:hover {
 
 .image-container:hover {
     border-radius: 2vw;
-    width: 112%;
-    z-index: 1000;
+        z-index: 1000;
 }
 
 
@@ -658,7 +657,7 @@ main a:hover {
     justify-content: center;
     opacity: 0;
     text-align: left;
-    transition:  all 0.5s ease;
+    transition:  all 0.3s ease;
 
 }
 
