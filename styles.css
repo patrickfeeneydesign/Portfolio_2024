@@ -23,7 +23,7 @@ html, body {
 
     .tooltip {
         position: absolute;
-        background-color: #f9f9f9;
+        background-color: #161717;
         box-shadow: 20px solid #161717;
         padding: 2vw;
         font-size: 1vw;
@@ -31,8 +31,9 @@ html, body {
         height: fit-content;
         display: none;
         z-index: 1000000;
-        color: #333;   
-        border-radius: 3vw; 
+        color: #f7f7f7;   
+        border-radius: 1vw; 
+        border: 1px solid #f7f7f7;
     }
     
 
@@ -152,12 +153,13 @@ html, body {
  
     }
     .hovered {
-        background-color: white;
-        border: 1px solid white;
+        background-color: #161717;
+        border: 1px solid #f7f7f7;
+        outline-offset: 10px;
         mix-blend-mode: normal;
         width: 20px;
         height: 20px;
-        transition: width 0.5s linear;
+        transition: all 0.5s linear;
         transition: mix-blend-mode 0.5s linear;
 
 
@@ -432,9 +434,6 @@ main a {
     font-weight: 600;
 }
 
-main a:hover {
-    color: #52d26c;
-}
     /* This area contains styling for the sections which have images in the bacgkround */ 
 
 
@@ -512,34 +511,6 @@ main a:hover {
     }
 
 
-
-    .fat {
-        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('img/fat.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 63vh;
-        /* Initial scale for the background image */
-        transform: scale(1);
-        transition: transform 0.2s ease-out; /* Smooth transition */
-        z-index: 1;
-        }
-   
-
-        .gaze {
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('img/gaze24img.png');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 63vh;
-            /* Initial scale for the background image */
-            transform: scale(1);
-            transition: transform 0.2s ease-out; /* Smooth transition */
-            z-index: 1;
-            }
-       
-    
-    
 
 
 
@@ -632,128 +603,31 @@ main a:hover {
     z-index: 1000;
 }
 .gallery {
-    column-count: 3;
-    column-gap: 2vw;
+    column-count: 2;
+    column-gap: 5vw;
     width: 94%;
     padding-left: 3vw;
+
 }
 
-.gallery .image-container {
-    break-inside: avoid-column;
-    margin-bottom: 2vw;
-    width: 100%;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    border-radius: 3px; /* Default border-radius */
-    transition: all 0.3s ease; /* Smooth transition */
+.gallery a {
+    font-size: 1.2vw;
+    background-color: #6f22ff;
+    color:#f7f7f7;
+    font-weight: 300;
+    z-index: 10000;
 }
 
-.image-container:hover {
-    border-radius: 2vw;
-        z-index: 1000;
-}
-
-
-.image-container.highlighted {
-    border-radius: 3vw; /* Constantly enlarged border radius for highlighted items */
-}
 
 .gallery img {
     width: 100%;
     height: auto;
     display: block;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: #f7f7f7;
-    font-size: 3vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    text-align: left;
-    transition:  all 0.3s ease;
+    margin-bottom: 7vw;
 
 }
 
-.overlay:hover {
-    transition:  0.5s ease;
-    font-size: 3.8vw;
-    background: #6f22ff; /* Blue background */
-        transition:  all 0.5s ease;
 
-
-}
-
-.image-container:hover .overlay,
-.overlay.always-show {
-    opacity: 1; /* Make the overlay always visible on hover or if class always-show is present */
-}
-
-.image-container.highlighted .overlay {
-    opacity: 1; /* Ensure the overlay is always visible */
-}
-
-.image-container.highlighted .overlay:hover {
-    background-color: #e0e0e0;
-    color:#161717;
-    transition:  0.5s ease;
-    font-size: 3.3vw;
-
-}
-
-/* FOR THE TIEMTABLE PAGE */
-
-.overlay span {
-    font-size: 1vw;
-    font-weight: 200;
-}
-
-.overlay:hover span {
-    font-size: 1.5vw;
-    font-weight: 200;
-    transition:  0.5s ease-in-out;
-
-
-}
-
-.overlay em {
-    font-size: 1vw;
-    font-weight: 200;
-    font-style: normal;
-    line-height: 1vw;
-
-}
-
-.overlay:hover em {
-    font-size: 2vw;
-    font-weight: 200;
-    font-style: normal;
-    line-height: 2vw;
-    transition:  0.4s ease-in-out;
-
-
-}
-
-.overlay strong {
-    font-size: 1.8vw;
-    line-height: 4vw;
-
-
-}
-
-.overlay:hover strong {
-    font-size: 2.5vw;
-    transition:  0.3s ease-in-out;
-    line-height: 54w;
-
-}
 
 
 
@@ -1156,52 +1030,17 @@ article p {
         width: 100%; /* Ensures the image fills its container */
         height: auto; /* Maintains aspect ratio */
         display: block; /* Remove extra space below the image */
+        margin-bottom: 4vw;
     }
-    
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0); /* Semi-transparent overlay */
+
+    .gallery a {
+        font-size: 3vw;
+        background-color: #6f22ff;
         color:#f7f7f7;
-        font-size: 4vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        transition: opacity 0.5s ease;
-        text-align: left;
-        padding-left: 2vw;
-        
+        font-weight: 300;
     }
     
-    .image-container:hover .overlay {
-        opacity: 1;
-    }
     
-
-/* FOR THE TIEMTABLE PAGE */
-
-.overlay span {
-display: none;
-
-}
-
-
-.overlay em {
-    display: none;
-
-
-}
-
-
-.overlay strong {
-    display: none;
-
-
-}
 
 
 
