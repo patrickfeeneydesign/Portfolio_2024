@@ -38,7 +38,8 @@
     <nav>
         <ul>
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">About</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="desktophide">☰</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="mobilehide">About</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Who are we?" role="button"><a href="about.html">Who am I?</a></li>
                     <li tabindex="0" aria-label=" Who are we?" role="button"><a href="mailto:patfeeney1098@gmail.com">Contact Me</a></li>
@@ -70,13 +71,28 @@
     </nav>
     <!-- Main Body -->
     <main id="maincontent">
-
         <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
         </section>
 
         <section class="pink">
-            <p tabindex="0" role="heading"><a>print</a> + <a>digital</a> + <br><a>experience</a> + <br><a>identity</a> + <a>sustainability</a> + <br>
-                <a>research</a> + <a>frontend</a> + <br><a>copy</a> + <a>brand</a></p>
+            <p tabindex="0" role="heading"><a class="tooltip-trigger" data-tooltip="I have a breadth of experience designing and publishing print materials, 
+                including working directly with printers and managing all required logistics.">print</a> + <a class="tooltip-trigger" data-tooltip="Proficient in the full 
+                Adobe Creative Suite with particular affinity for InDesign and Illustrator. Experience taking and editing imagery, filming and editing video content, 
+                creating animations and recording V/O's. Some experience in 3D graphics and rendering (mostly using the soon-to- be defunked 
+                Adobe Dimensions, RIP.)">digital</a> + <br><a class="tooltip-trigger" data-tooltip=" Designing exhibitions and experiences. 
+                From an immersive Gen AI photobooth to a human sized game of Ker-plunk, and from a Virtual Reality maze to an interactive moving wall of fabric. I have 
+                worked across ideation and implementation on a variety of experiences. My work often involves distilling complex research and data into creative engagements, 
+                and my team have collaborated with organisations such as Think Design and Domestic Data Streamers in bringing these concepts to 
+                life.">experience</a> + <br><a class="tooltip-trigger" data-tooltip="Developing vibrant visual identities which are rooted in deep 
+                research and coherent thinking.">identity</a> + <a class="tooltip-trigger" data-tooltip="Championing sustainable design practices. I have attended a 
+                number of trainings on sustainable design, 
+                and understand best practices for eco friendly print & production.">sustainability</a> + <br>
+                <a class="tooltip-trigger" data-tooltip="Conducting research under short deadlines, presenting research fluently with a clear understanding 
+                of art history, culture, trends (both social, political, economic and visual.) Showcasing my work in high quality presentations, no matter 
+                the audience.">research</a> + <a class="tooltip-trigger" data-tooltip=" Designing, wire framing, coding and implementing websites
+                 using CSS/HTML/Java.">frontend</a> + <br><a class="tooltip-trigger" data-tooltip="Copy-writing and script writing, I enjoy the challenge to 
+                 distill complex ideas into useful soundbites.">copy</a> + <a class="tooltip-trigger" data-tooltip=" Working within a variety of brand guidelines and identities, writing and 
+                 managing my own brand guidelines.">brand</a></p>
         </section>
 
         <div class="gallery">
@@ -221,6 +237,48 @@ window.addEventListener("load", function() {
     document.getElementById("loading-screen").style.display = "none";
     document.getElementById("content").style.display = "block";
 });
+
+
+
+
+
+
+
+document.querySelectorAll('.tooltip-trigger').forEach(element => {
+    // Create tooltip once
+    let tooltipDiv = document.createElement('div');
+    tooltipDiv.className = 'tooltip';
+    tooltipDiv.style.opacity = '0'; // Start fully transparent
+    tooltipDiv.style.display = 'none'; // Start hidden
+    tooltipDiv.style.transition = 'opacity 0.4s'; // Transition for opacity
+    document.body.appendChild(tooltipDiv);
+
+    element.addEventListener('mouseenter', function(event) {
+        tooltipDiv.textContent = this.getAttribute('data-tooltip');
+        tooltipDiv.style.left = event.pageX + 'px';
+        tooltipDiv.style.top = event.pageY + 'px';
+        tooltipDiv.style.display = 'block'; // Make sure it's block before starting the fade in
+        requestAnimationFrame(() => {
+            tooltipDiv.style.opacity = '0.95'; // Fade in
+        });
+    });
+
+    element.addEventListener('mousemove', function(event) {
+        tooltipDiv.style.left = event.pageX + 40 + 'px';
+        tooltipDiv.style.top = event.pageY + 40 + 'px';
+    });
+
+    element.addEventListener('mouseleave', function() {
+        tooltipDiv.style.opacity = '0'; // Fade out
+        tooltipDiv.addEventListener('transitionend', () => tooltipDiv.style.display = 'none', { once: true });
+    });
+});
+
+
+
+
+
+
 
     document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav, nav.li');

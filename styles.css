@@ -21,6 +21,27 @@ html, body {
 
 
 
+    .tooltip {
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 20px solid #161717;
+        padding: 2vw;
+        font-size: 1vw;
+        width: 25vw;
+        height: fit-content;
+        display: none;
+        z-index: 1000000;
+        color: #333;   
+        border-radius: 3vw; 
+    }
+    
+
+
+
+
+
+
+
 
 #loading-screen {
     position: fixed;
@@ -108,7 +129,7 @@ html, body {
 
 
 /* CUSTOM CURSOR */
-
+ 
     .custom-cursor {
         position: fixed;
         width: 30px;
@@ -738,106 +759,6 @@ main a:hover {
 
 
 
-
-    
-
-
-
-/* FORM SUBSCRIBE */
-/* FORM SUBSCRIBE */
-#mc_embed_signup {
-    
-    width: 100vw;
-    height: 100vh;
-    margin: auto;
-    padding: 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-fieldset {
-    margin-top: 6vw;
-
-    margin-bottom: 20px;
-    width: 50vw;
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 1vw;
-    color: #f7f7f7;
-}
-
-legend:focus {
-    outline: 2px dashed white; /* white outline */
-    outline-offset: 2px;       /* Space between outline and element */
-    z-index: 1000;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    color: #f7f7f7;
-}
-
-input[type="text"],
-input[type="email"] {
-    width: 36vw;
-    height: 3vw;
-    background-color: #161717;
-    color: #f7f7f7;
-    font-size: medium;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #aaa;
-    box-sizing: border-box;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus {
-    outline: 2px dashed white; /* white outline */
-    outline-offset: 2px;       /* Space between outline and element */
-    z-index: 1000;
-}
-
-input[type="submit"] {
-    background-color: #161717;
-    border-radius: 2vw;
-    margin-top: 6vw;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 2em;
-    height: 5vw;
-    width: 12vw;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:focus {
-    outline: 2px dashed white; /* white outline */
-    outline-offset: 2px;       /* Space between outline and element */
-    z-index: 1000;
-}
-
-input[type="submit"]:hover {
-    background-color: #333;
-}
-
-
-
-
-
-
-
-
-
-
     /* Footer */
     footer {
         background-color: #f7f7f7;
@@ -974,18 +895,25 @@ input[type="submit"]:hover {
         width: 100%;
         background-color: #f7f7f7;
         border-bottom: 1px solid black;
+
     }
 
    .menu-toggle {
     display: none;
    }
 header img {
-    height: 10vw;
+    height: 8vw;
     width: auto;
     padding: 5vw;
     -moz-transition: all 0.3s; /* Mozilla specific transition */
     transition: all 0.3s;
 }
+
+
+
+
+
+
 nav {
     width: 100%;
     background-color: #161717;
@@ -996,6 +924,8 @@ nav ul {
     text-align: left;
     list-style: none;
     margin: 0;
+    font-weight: 200;
+
     padding: 0;
     background-color: #161717;
     color:#e0e0e0
@@ -1004,7 +934,7 @@ nav ul {
 nav ul li a {
     width: 100%;
     font-size: 8vw; /* Adjust font size for mobile */
-    font-weight: 500;
+    font-weight: 200;
     text-decoration: none;
     color: #f7f7f7;
 }
@@ -1024,7 +954,7 @@ li.dropdown.active {
     overflow: hidden;
     max-height: 0; /* Initially hide the submenu */
     width: 100%;
-    background-color: #f7f7f7; /* Different background color for submenu */
+    background-color: #161717; /* Different background color for submenu */
     transition: max-height 0.5s ease-out; /* Smooth transition for opening and closing */
 }
 
@@ -1037,7 +967,7 @@ li.dropdown.active {
 .dropdown-content li a {
     font-size: 4vw; /* Adjust font size for submenu items */
     margin: 2vw;
-    color: #161717;
+    color:#f7f7f7;
 }
 
 /* Assuming active class is added via JS when dropdown is expanded */
