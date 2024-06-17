@@ -36,7 +36,18 @@ html, body {
         border: 1px solid #f7f7f7;
     }
     
-
+/* This applies only in Firefox */
+@supports (-moz-appearance: none) {
+    .tooltip {
+      line-height: 1.5vw; /* Example style */
+    }
+    p {
+        line-height: 1.8vw;
+    }
+    article {
+        padding-bottom: 7vw;
+    }
+  }
 
 
 
