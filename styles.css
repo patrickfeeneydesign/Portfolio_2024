@@ -765,6 +765,20 @@ main a {
 
 
 
+.tooltip {
+    position: absolute;
+    background-color: #161717;
+    box-shadow: 20px solid #161717;
+    padding: 2vw;
+    font-size: 3vw;
+    width: 50vw;
+    height: fit-content;
+    display: none;
+    z-index: 1000000;
+    color: #f7f7f7;   
+    border-radius: 1vw; 
+    border: 1px solid #f7f7f7;
+}
 
     /* SKIP LINK STYLE */
 

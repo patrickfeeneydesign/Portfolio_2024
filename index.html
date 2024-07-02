@@ -350,34 +350,46 @@ window.addEventListener("load", function() {
 });
 
 
-
-
-
-
-
 document.querySelectorAll('.tooltip-trigger').forEach(element => {
     // Create tooltip once
     let tooltipDiv = document.createElement('div');
     tooltipDiv.className = 'tooltip';
     tooltipDiv.style.opacity = '0'; // Start fully transparent
+    tooltipDiv.style.position = 'fixed'; // Position fixed to the viewport
     tooltipDiv.style.display = 'none'; // Start hidden
     tooltipDiv.style.transition = 'opacity 0.4s'; // Transition for opacity
     document.body.appendChild(tooltipDiv);
 
+    // Function to position tooltip in the center for mobile
+    const positionTooltipInCenter = () => {
+        tooltipDiv.style.left = '50%';
+        tooltipDiv.style.top = '50%';
+        tooltipDiv.style.transform = 'translate(-50%, -50%)'; // Center the tooltip
+    };
+
+    // Detect if the viewport width suggests a mobile device
+    const isMobileDevice = () => window.innerWidth <= 768;
+
     element.addEventListener('mouseenter', function(event) {
         tooltipDiv.textContent = this.getAttribute('data-tooltip');
-        tooltipDiv.style.left = event.pageX + 'px';
-        tooltipDiv.style.top = event.pageY + 'px';
+        if (!isMobileDevice()) {
+            tooltipDiv.style.left = (event.clientX + 20) + 'px'; // 20 pixels right from the mouse for visibility
+            tooltipDiv.style.top = (event.clientY + 20) + 'px'; // 20 pixels down from the mouse for visibility
+        } else {
+            positionTooltipInCenter();
+        }
         tooltipDiv.style.display = 'block'; // Make sure it's block before starting the fade in
         requestAnimationFrame(() => {
             tooltipDiv.style.opacity = '0.95'; // Fade in
         });
     });
 
-    element.addEventListener('mousemove', function(event) {
-        tooltipDiv.style.left = event.pageX + 40 + 'px';
-        tooltipDiv.style.top = event.pageY + 40 + 'px';
-    });
+    if (!isMobileDevice()) {
+        element.addEventListener('mousemove', function(event) {
+            tooltipDiv.style.left = (event.clientX + 20) + 'px';
+            tooltipDiv.style.top = (event.clientY + 20) + 'px';
+        });
+    }
 
     element.addEventListener('mouseleave', function() {
         tooltipDiv.style.opacity = '0'; // Fade out
@@ -386,7 +398,18 @@ document.querySelectorAll('.tooltip-trigger').forEach(element => {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a');
+    const isMobileDevice = window.innerWidth <= 768;
 
+    if (isMobileDevice) {
+        links.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevents the link from navigating
+            });
+        });
+    }
+});
 
 
 
