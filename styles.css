@@ -445,7 +445,6 @@ main a {
     font-weight: 600;
 }
 
-    /* This area contains styling for the sections which have images in the bacgkround */ 
 
 
     .backgroundimg {
@@ -771,7 +770,7 @@ main a {
     box-shadow: 20px solid #161717;
     padding: 2vw;
     font-size: 3vw;
-    width: 50vw;
+    width: 90vw;
     height: fit-content;
     display: none;
     z-index: 1000000;
