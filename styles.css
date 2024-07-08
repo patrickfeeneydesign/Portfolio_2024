@@ -782,7 +782,7 @@ main a {
 /* HIDDEN ON mobile */
 
 .mobilehide {
-    display:none;
+    display: none;
 }
 
 
@@ -792,14 +792,15 @@ main a {
     background-color: #161717;
     box-shadow: 20px solid #161717;
     padding: 3vw;
-    font-size: 2.9vw;
+    font-size: 2.1vw;
     width: 32vw;
-    height: fit-content;
+    height: 100vw;
     display: none;
     z-index: 1000000;
     color: #f7f7f7;   
     border-radius: 1vw; 
     border: 1px solid #f7f7f7;
+    /* box-shadow: 0 0 0 12px #161717; Second border */
 }
 
     /* SKIP LINK STYLE */
@@ -903,12 +904,12 @@ li.dropdown.active {
         flex-direction: column; /* Ensures text and other elements are stacked vertically */
         align-items: center;
         justify-content: center;
-        text-align: center;
+        text-align: left;
     }
     
     section p {
         line-height: 13vw;
-        font-size: 12vw; /* Adjust this value to change the text size */
+        font-size: 7vw; /* Adjust this value to change the text size */
         color: #66cdff;
         font-weight: 600;
         padding: 5vw;
@@ -929,6 +930,7 @@ li.dropdown.active {
         height: 63vw;
         margin-left: 6vw;
         margin-right: 6vw;
+        margin-bottom: 15vw;
         margin-top: 6vw;
 
         border-radius: 10vw;
@@ -967,9 +969,6 @@ main a {
     font-weight: 600;
 }
 
-main a:hover {
-    color: #52d26c;
-}
 
 /* Article / lsiting  */
 
@@ -1083,6 +1082,9 @@ article p {
         height: auto; /* Maintains aspect ratio */
         display: block; /* Remove extra space below the image */
         margin-bottom: 7vw;
+        margin-top: -2vw;
+        margin-left: 2vw;
+        border-radius: 10px;
     }
 
     .gallery a:hover img {
@@ -1092,7 +1094,6 @@ article p {
 
     .gallery a {
         font-size: 3vw;
-        background-color: #6f22ff;
         color:#f7f7f7;
         font-weight: 300;
         margin-bottom: -2px;
@@ -1109,11 +1110,13 @@ article p {
         filter: blur(5px);
     }
 
-
-
-
-
-
+    .txt {
+        text-wrap:nowrap;
+        padding: 7px 10px 7px 60vw;
+        border-radius: 10px;
+        background-color: #161717;
+        border: 1px solid white;
+    }
 
 
     
