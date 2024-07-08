@@ -643,6 +643,10 @@ main a {
     margin-bottom: 7vw;
 
 }
+.gallery a:hover img {
+    border: 1px solid #f7f7f7;
+    border-radius: 8px;
+}
 
 
 
@@ -776,7 +780,7 @@ main a {
     background-color: #161717;
     box-shadow: 20px solid #161717;
     padding: 3vw;
-    font-size: 2.5vw;
+    font-size: 2.9vw;
     width: 32vw;
     height: fit-content;
     display: none;
@@ -1048,7 +1052,7 @@ article p {
         column-count: 1; /* Creates five columns */
         column-gap: 2vw; /* Space between columns */
         width: 49%; /* Full width of the container */
-        padding-left: 5vw;
+        padding-left: 4vw;
         padding-bottom: 15vw;
     }
     
@@ -1070,7 +1074,8 @@ article p {
     }
 
     .gallery a:hover img {
-        opacity: 60%;
+        border: 1px solid white;
+        border-radius: 8px;
     }
 
     .gallery a {
@@ -1078,6 +1083,7 @@ article p {
         background-color: #6f22ff;
         color:#f7f7f7;
         font-weight: 300;
+        margin-bottom: -2px;
     }
     
     
