@@ -421,7 +421,6 @@ nav ul li a:hover {
         border-radius: 90px;
         margin:3.5vw 3vw 3.5vw 3vw;
     }
-    
     section p {
         line-height: 10vh;
         font-size: 10vh;
@@ -465,10 +464,16 @@ main a {
         font-size: 7vw;
         margin-top: 5vw;
     }
+
+ .pink {
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+    }
+
     .pink p {
         color: #f7f7f7;
-        line-height: 10vw;
-        font-size: 10vw;
+        line-height: 7vw;
+        font-size: 6vw;
         margin-top: 5vw;
         font-style: normal;
         font-family: seismic-latin-variable, sans-serif;
@@ -614,9 +619,11 @@ main a {
 }
 .gallery {
     column-count: 2;
-    column-gap: 5vw;
-    width: 94%;
+    column-gap: 7vw;
+    width: 90%;
     padding-left: 3vw;
+    margin-left: 2vw;
+    margin-right: 3vw;
 
 }
 
@@ -768,9 +775,9 @@ main a {
     position: absolute;
     background-color: #161717;
     box-shadow: 20px solid #161717;
-    padding: 2vw;
-    font-size: 3vw;
-    width: 90vw;
+    padding: 3vw;
+    font-size: 2.5vw;
+    width: 32vw;
     height: fit-content;
     display: none;
     z-index: 1000000;
@@ -938,8 +945,6 @@ li.dropdown.active {
 }
 
 
-
-
 main a {
     color: #50bef5;
     text-decoration: none;
@@ -1040,10 +1045,10 @@ article p {
 
 
     .gallery {
-        column-count: 2; /* Creates five columns */
+        column-count: 1; /* Creates five columns */
         column-gap: 2vw; /* Space between columns */
-        width: 94%; /* Full width of the container */
-        padding-left: 3.8vw;
+        width: 49%; /* Full width of the container */
+        padding-left: 5vw;
         padding-bottom: 15vw;
     }
     
@@ -1061,7 +1066,11 @@ article p {
         width: 100%; /* Ensures the image fills its container */
         height: auto; /* Maintains aspect ratio */
         display: block; /* Remove extra space below the image */
-        margin-bottom: 4vw;
+        margin-bottom: 7vw;
+    }
+
+    .gallery a:hover img {
+        opacity: 60%;
     }
 
     .gallery a {
