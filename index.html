@@ -32,7 +32,9 @@
             <img class="desktophide" src="img/title.gif">
         </a>
     </header>
-    <!-- BUTTON TOGGLE MENU -->
+
+    <!-- Desktop menu -->
+    <div class="mobilehide">
     <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
     <!-- Menu -->
     <nav>
@@ -45,6 +47,35 @@
                     <li tabindex="0" aria-label=" Who are we?" role="button"><a href="mailto:patfeeney1098@gmail.com">Contact Me</a></li>
                 </ul>
             </li>
+    </div>
+
+
+       <!-- Mobile menu -->
+       <div class="desktophide">
+        <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
+        <!-- Menu -->
+        <nav>
+            <ul>
+                <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
+                    <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="desktophide">☰</a>
+                    <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="mobilehide">About</a>
+                    <ul class="dropdown-content">
+                        <li tabindex="0" aria-label=" Who are we?" role="button"><a class="tooltip-trigger" data-tooltip="My name is Patrick Feeney, I'm a visual designer currently working for Accenture at the Human Sciences Studio. 
+                            The HSS is a humanities research studio, doing qualitative research on the future of sustainable and ethical 
+                            technology, and exploring the human impact. The Studio is client facing and lives in The Dock, Accenture's global 
+                            innovation hub. We regularly host a wide variety of industry leading clients across fashion, aerospace, pharmaceuticals, 
+                            media, technology and more! Additionally, I've been working with GAZE International LGBTQIA
+                            Film Festival since 2021, developing their visual identity and handling all aspects of their visual outputs. 
+                            I specialise in:Visual Design • Tech Ethics • Sustainability • Speculative Design • Workshop Design">Who am I?</a></li>
+                        <li tabindex="0" aria-label=" Who are we?" role="button"><a class="tooltip-trigger" data-tooltip="If you'd like to work together you can email me at patfeeney1098@gmail.com or message
+                            me on instagram @patrickfeeneydesigner">Contact Me</a></li>
+                    </ul>
+                </li>
+        </div>
+
+
+
+
                 <!--            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">Digital</a>
                 <ul class="dropdown-content">
