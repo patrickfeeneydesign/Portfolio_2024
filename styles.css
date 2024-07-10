@@ -465,6 +465,7 @@ main a {
         margin-top: 5vw;
     }
 
+
  .pink {
         padding-top: 2vw;
         padding-bottom: 2vw;
@@ -473,8 +474,7 @@ main a {
     .pink p {
         color: #f7f7f7;
         line-height: 7vw;
-        font-size: 6vw;
-        margin-top: 5vw;
+        font-size: 5vw;
         font-style: normal;
         font-family: seismic-latin-variable, sans-serif;
         font-variation-settings: "SEIS" 0, "wght" 1000;
@@ -941,16 +941,16 @@ li.dropdown.active {
     .pink p {
         color: #f7f7f7;
         line-height: 9vw;
-        font-size: 7vw;
-        margin-top: 5vw;
+        font-size: 6vw;
     }
 
 
     .pink a {
         transition: all 0.5s ease; /* Smooth transition */
         text-decoration: none;
-        transition: all 0.7s ease; /* Smooth transition */
-
+        font-family: seismic-latin-variable, sans-serif;
+        font-variation-settings: "SEIS" 0, "wght" 100;
+        font-size: 6vw;
 
     }
         
