@@ -208,6 +208,7 @@ header {
         align-content: center;
     }
 
+
 header img {
     height: 3.5vw;
     width: auto;
@@ -531,76 +532,36 @@ main a {
 
 
     article {
-        background-color: #f7f7f7;
+        background-color: #161717;
         display: flex;
         flex-direction: column;
-    }
-
-    h2 {
-        background-color: #161717;
         color: #f7f7f7;
-        text-align: left;
-        font-size: 10vw;
-        line-height: 12vw;
-        padding-left: 23vw;
-        padding-top: 4vw;
-        padding-right: 25vw;
-        margin: 0;
-        font-weight: 600;
+        margin: 5vw;
     }
 
-    h3 {
-        background-color: #161717;
-        color: #66cdff;
+    article img {
+        height:fit-content;
+        width: 50vw;
+        border-radius: 0.5vw;
+        border: 1px solid white;
+
+    }
+
+    article h1 {
         font-size: 3vw;
-        font-weight: 300;
-        padding-left: 24vw;
-        padding-bottom: 4vw;
-        margin: 0;
-
-    }
-
-    figure {
-        padding: 0;
-        margin: 0;
-        height: 20vw; /* Fixed height */
-        width: 20vw; /* Adjust width as necessary */
-        overflow: hidden; /* Ensures that any overflowing content is hidden */
-        position:absolute; /* Ensures proper positioning of the image */
-        right: 0px;
-        top: 38.5vw;
-    }
-    
-   figure img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover; /* Covers the area, will be clipped to fit */
-        position: absolute;
-        right: 0;
-    }
-    h4 {
-        padding: 4vw 36vw 2vw 8vw;
-        font-size: max(1.5vw, 30px);
         font-weight: 500;
-        margin: 0;
+        margin-top: 3vw;
 
     }
 
-
-    h5 {
-        padding: 2vw 5vw 2vw 8vw;
-        font-size: max(1.5vw, 30px);
-        font-weight: 300;
-        margin: 0;
-        font-style: italic;
-
-    }
 
     article p {
-        padding: 2vw 28vw 2vw 8vw;
         font-size: max(1.3vw, 20px);
         font-weight: 200;
         margin: 0;
+        columns: 2;
+        column-gap: 5vw;
+
     }
     
 
