@@ -596,6 +596,21 @@ main a {
     z-index: 10000;
 }
 
+.tiny {
+    position: absolute;
+    margin-left: 42vw;
+    margin-top: -2vw;
+    width: 9vw;
+    height: auto;
+}
+
+.tiny2 {
+    position: absolute;
+    margin-left: 90vw;
+    margin-top: 5vw;
+    width: 9vw;
+    height: auto;
+}
 
 .gallery img {
     width: 100%;
@@ -1079,7 +1094,17 @@ article p {
         border: 1px solid white;
     }
 
-
+    .tiny {
+        position: absolute;
+        margin-left: 3vw;
+        margin-top: -5vw;
+        width: 14vw;
+        height: auto;
+    }
+    
+    .tiny2 {
+        display: none;
+    }
     
 
 
