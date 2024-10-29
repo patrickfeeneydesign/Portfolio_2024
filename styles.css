@@ -16,7 +16,7 @@ html, body {
     }
 
     body, a, button, input {
-        cursor: none; /* Hide the default cursor for the body and all interactive elements */
+        cursor: default; /* Hide the default cursor for the body and all interactive elements */
     }
 
 
@@ -600,7 +600,7 @@ main a {
     position: absolute;
     margin-left: 42vw;
     margin-top: -2vw;
-    width: 9vw;
+    width: 7vw;
     height: auto;
 }
 
@@ -608,7 +608,7 @@ main a {
     position: absolute;
     margin-left: 90vw;
     margin-top: 5vw;
-    width: 9vw;
+    width: 7vw;
     height: auto;
 }
 
