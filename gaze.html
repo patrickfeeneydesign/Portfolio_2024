@@ -271,11 +271,19 @@
     
             updateImagePosition(); // Start the animation
     
+            // Browser detection for Firefox and Chrome
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isFirefox = userAgent.indexOf('firefox') > -1;
+            const isChrome = userAgent.includes('chrome') && !userAgent.includes('edge') && !userAgent.includes('opr');
+    
             // Condition to apply custom scrolling only on desktop
             if (window.innerWidth > 768) {
                 window.addEventListener('wheel', function(event) {
                     event.preventDefault();
-                    const scrollAmount = event.deltaY * 1;
+    
+                    // Adjust scroll sensitivity based on the browser
+                    const scrollMultiplier = isFirefox ? 4 : (isChrome ? 5 : 1); // Example: 3 for Firefox, 2 for Chrome, 1 for others
+                    const scrollAmount = event.deltaY * scrollMultiplier;
                     scrollContainer.scrollLeft += scrollAmount;
                 }, {passive: false});
             }
@@ -284,6 +292,7 @@
             console.log('Max scroll width:', scrollContainer.scrollWidth - scrollContainer.clientWidth);
         });
     </script>
+    
     
 </body>
 </html>
