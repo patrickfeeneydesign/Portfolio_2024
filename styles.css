@@ -47,6 +47,9 @@ html, body {
     article {
         padding-bottom: 7vw;
     }
+    a.txt {
+        padding: 4pt;
+    }
   }
 
 
