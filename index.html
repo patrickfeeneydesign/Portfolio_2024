@@ -28,7 +28,7 @@
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img class="mobilehide" src="img/title.gif">
+            <img class="mobilehide" src="img/logo.png">
             <img class="desktophide" src="img/title.gif">
         </a>
     </header>
@@ -102,67 +102,28 @@
         </ul>
     </nav>
     <!-- Main Body -->
+     
+        <section class="pink">
+            <div class="mobilehide">
+            <p role="heading"><a tabindex="0" class="tooltip-trigger" data-tooltip="From a giant game of Kerplunk to a futuristic photo booth, and from a 
+                moving wall of fabric to a deck of tarot cards, I've collaborated with my team on a wide range of creative outputs—spanning print, 
+                interaction design, web development, art direction, exhibitions, branding, copywriting, motion graphics, illustration, 
+                and more.">creative</a>, <a tabindex="0" class="tooltip-trigger" data-tooltip="Working in Accenture's global innovation hub has helped me 
+                develop the skills to adapt to novel challenges and make an impact. I pride myself on building robust, 
+                compelling narratives through design, backed up with rigorous academic and strategic 
+                thinking."> research</a>, <br><a tabindex="0" class="tooltip-trigger" data-tooltip="My work is also focused on human centred technology. 
+                As part of my practice I use speculative design techniques to unravel potential futures, and their positive or negative 
+                implications. "> futures</a>, <a tabindex="0" class="tooltip-trigger" data-tooltip="Developing vibrant visual identities which are rooted in deep 
+                research and coherent thinking."> identity.</a></p>
+            </div>
+        </section>
+
     <main id="maincontent">
         <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
         </section>
 
-        <section class="pink">
-            <div class="mobilehide">
-            <p role="heading"><a tabindex="0" class="tooltip-trigger" data-tooltip="I have a breadth of experience designing and publishing print materials, 
-                including working directly with printers and managing all required logistics.">print</a> + <a tabindex="0" class="tooltip-trigger" data-tooltip="Proficient in the full 
-                Adobe Creative Suite with particular affinity for InDesign and Illustrator. Experience taking and editing imagery, filming and editing video content, 
-                creating animations and recording V/O's. Some experience in 3D graphics and rendering (mostly using the soon-to- be defunked 
-                Adobe Dimensions, RIP.)">digital</a> + <br><a tabindex="0" class="tooltip-trigger" data-tooltip=" Designing exhibitions and experiences. 
-                From an immersive Gen AI photobooth to a human sized game of Ker-plunk, and from a Virtual Reality maze to an interactive moving wall of fabric. I have 
-                worked across ideation and implementation on a variety of experiences. My work often involves distilling complex research and data into creative engagements, 
-                and my team have collaborated with organisations such as Think Design and Domestic Data Streamers in bringing these concepts to 
-                life.">experience</a> + <br><a tabindex="0" class="tooltip-trigger" data-tooltip="Developing vibrant visual identities which are rooted in deep 
-                research and coherent thinking.">identity</a> + <a tabindex="0" class="tooltip-trigger" data-tooltip="Championing sustainable design practices. I have attended a 
-                number of trainings on sustainable design, 
-                and understand best practices for eco friendly print & production.">sustainability</a> + <br>
-                <a tabindex="0" class="tooltip-trigger" data-tooltip="Conducting research under short deadlines, presenting research fluently with a clear understanding 
-                of art history, culture, trends (both social, political, economic and visual.) Showcasing my work in high quality presentations, no matter 
-                the audience.">research</a> + <a tabindex="0" class="tooltip-trigger" data-tooltip=" Designing, wire framing, coding and implementing websites
-                 using CSS/HTML/Java.">web</a> + <br><a tabindex="0" class="tooltip-trigger" data-tooltip="Copy-writing and script writing, I enjoy the challenge to 
-                 distill complex ideas into useful soundbites.">copy</a> + <a tabindex="0" class="tooltip-trigger" data-tooltip=" Working within a variety of brand guidelines and identities, writing and 
-                 managing my own brand guidelines.">brand</a></p>
-            </div>
-        </section>
-        <!-- 100 archive asset
-        <img class="tiny" src="img/gallery2/Asset 1.png">
-        <img class="tiny2" src="img/gallery2/Asset 1.png">
 
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br><br>
 
 
 
@@ -172,7 +133,7 @@ DESKTOP VERSION OF GALLERY!!!!!
 -->
         <div class="mobilehide">
 
-
+<h1>Projects</h1>
 
 
 
@@ -1073,7 +1034,7 @@ function applyParallaxEffect() {
         backgrounds.forEach(bg => {
             if (bg.element) {
                 const scrollPosition = window.pageYOffset;
-                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.0001 : 1;
+                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.00002 : 1;
                 bg.element.style.transform = `scale(${scale})`;
             }
         });

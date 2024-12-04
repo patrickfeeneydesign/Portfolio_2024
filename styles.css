@@ -11,7 +11,7 @@ html, body {
         font-family: tt-commons-pro, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #161717;
+        background-color: #010101;
 
     }
 
@@ -23,8 +23,8 @@ html, body {
 
     .tooltip {
         position: absolute;
-        background-color: #161717;
-        box-shadow: 20px solid #161717;
+        background-color: #1d1c1c;
+        box-shadow: 20px solid #313333;
         padding: 2vw;
         font-size: 1vw;
         width: 25vw;
@@ -32,8 +32,7 @@ html, body {
         display: none;
         z-index: 1000000;
         color: #f7f7f7;   
-        border-radius: 1vw; 
-        border: 1px solid #f7f7f7;
+        border-radius: 2vw; 
     }
     
 /* This applies only in Firefox */
@@ -185,13 +184,10 @@ html, body {
     /* MAIN HEADER */
 header {
     position: fixed;
-    width: max(18vw, 230px);
-    min-height: 100px;
-    color: white;
     text-align: left;
-     background-color: white; /* Ensure this is not overridden */
      border-radius: 0 0 40px 40px;
-     left: 40vw;
+     background-color: #161717;
+     right: -9vw;
      top: -0.1vw;
     margin: 0;
     padding: 0;
@@ -201,22 +197,23 @@ header {
     /* MAIN HEADER */
     header.firstpage {
         position: fixed;
-        width: 19vw;
-        color: white;
         text-align: left;
-        background-color: #f7f7f7; /* Ensure this is not overridden */
         margin: 0;
-        padding: 0;
+        height: 3vw;
+        padding-left: 1vw;
+        padding-right: 10vw;
+        padding-top: 0.8vw;
+        padding-bottom: 0.8vw;
         z-index: 4000;
         align-content: center;
     }
 
 
 header img {
-    height: 3.5vw;
+    height: 1vw;
     width: auto;
 
-    padding: 0 0 0 2vw;
+    padding: 0 0 0 1vw;
     -moz-transition: all 0.3s; /* Mozilla specific transition */
     transition: all 0.3s;
 }
@@ -239,7 +236,7 @@ header img {
     height: 4vw;
     min-width: 50px;
     min-height: 40px;
-    background-color: #6f22ff;
+    background-color: #161717;
     z-index: 3500; /* Adjust if necessary to be above other elements */
 
     color: white;
@@ -274,8 +271,8 @@ header img {
     z-index: 5000; /* Adjust if necessary to be above other elements */
     border-radius: 0 20px 20px 0;
 
-    background-color: #6f22ff;
-    color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #010101;
 }
 
 /* PARENT NAV */
@@ -286,7 +283,7 @@ nav {
     position: fixed;
     top: 4vw;
     width: 14vw;
-    left: -20vw;  /* Explicitly start off-screen */
+    left: 0vw;  /* Explicitly start off-screen */
     opacity: 0;  /* Start fully transparent */
     z-index: 1100;
     transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;  /* Smooth slide and fade transition */
@@ -327,7 +324,8 @@ nav ul li a span {
 
 nav ul li a:focus, 
 nav ul li a:hover {
-    background-color: #6f22ff;
+    background-color: #f7f7f7;
+    color: #010101;
     outline: none;
     z-index: 1100;
 
@@ -368,8 +366,8 @@ nav ul li a:hover {
 }
 
 .dropdown-content a:hover {
-    background-color: #6f22ff;
-    color: #f7f7f7;
+    background-color: #f7f7f7;
+    color: #010101;
     z-index: 1100;
 } 
 .dropdown:focus .dropdown-content {
@@ -438,7 +436,7 @@ section p a {
 }
 section p a:hover {
     text-decoration: none;
-    color: #6f22ff;
+    color: #c4ed22;
     
 }
 
@@ -471,17 +469,18 @@ main a {
 
 
  .pink {
-        padding-top: 2vw;
-        padding-bottom: 2vw;
+    margin-top: 3vw;
+        padding-top: 4vw;
+        padding-bottom: 4vw;
     }
 
     .pink p {
         color: #f7f7f7;
-        line-height: 7vw;
-        font-size: 5vw;
+        line-height: 8vw;
+        font-size: 6.5vw;
         font-style: normal;
         font-family: seismic-latin-variable, sans-serif;
-        font-variation-settings: "SEIS" 0, "wght" 1000;
+        font-variation-settings: "SEIS" 0, "wght" 500;
         
     }
 
@@ -534,44 +533,19 @@ main a {
 
 
 
-    article {
-        background-color: #161717;
-        display: flex;
-        flex-direction: column;
-        color: #f7f7f7;
-        margin: 5vw;
-    }
-
-    article img {
-        height:fit-content;
-        width: 50vw;
-        border-radius: 0.5vw;
-        border: 1px solid white;
-
-    }
-
-    article h1 {
-        font-size: 3vw;
-        font-weight: 500;
-        margin-top: 3vw;
-
-    }
 
 
-    article p {
-        font-size: max(1.3vw, 20px);
-        font-weight: 200;
-        margin: 0;
-        columns: 2;
-        column-gap: 5vw;
-
-    }
-    
-
-
-
-
-
+h1 {
+    color: #e0e0e0;
+    font-size: 2vw;
+    width: 90%;
+    font-weight: 300;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5vw;
+    margin-left: 4vw;
+    margin-bottom: 7vw;
+}
 
     /* GALLERY */
 
@@ -593,7 +567,7 @@ main a {
 
 .gallery a {
     font-size: 1.2vw;
-    background-color: #6f22ff;
+    background-color: #262525;
     color:#f7f7f7;
     font-weight: 300;
     z-index: 10000;
@@ -623,7 +597,7 @@ main a {
 
 }
 .gallery a:hover img {
-    border: 1px solid #f7f7f7;
+    border: 1px solid #f3f3f3;
     border-radius: 8px;
 }
 
@@ -647,32 +621,24 @@ main a {
 
     /* Footer */
     footer {
-        background-color: #f7f7f7;
+        background-color: #1d1c1c;
         height: 3.5vw;
         width: 32vw;
         position: fixed;
         bottom: 0;
-       right: 33vw;
+       left: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1000;
-        color: black;
-        border-radius: 30px 30px 0 0;
+        color: #e0e0e0;
+        border-radius: 0px 30px 0 0;
         
-    }
-
-    footer.black-background {
-        background-color: #f7f7f7;
-        color: #161717;
-        border-bottom: none;
-
     }
     
     .social-icons {
         display: flex;
         gap: 20px;
-        filter: invert(100%); 
 
     }
     
@@ -684,14 +650,10 @@ main a {
         /* filter: invert(100%); */
     }
 
-    footer.black-background .social-icons a img {
-        filter: invert(100%); 
-    }
-
     
 
     .footer-text {
-        color: black; /* Text color for readability on dark background */
+        color: #e0e0e0; /* Text color for readability on dark background */
         font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
         text-align: right; /* Text aligned to the left */
         padding-left: 2vw;
