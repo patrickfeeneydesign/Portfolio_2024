@@ -47,7 +47,13 @@ html, body {
         padding-bottom: 7vw;
     }
     a.txt {
-        padding: 4pt;
+        padding: 13px;
+    }
+    h1 {
+        line-height: 70px;
+    }
+    section a {
+        font-weight: 200;
     }
   }
 
@@ -440,11 +446,33 @@ section p a:hover {
     
 }
 
-main a {
-    color: #50bef5;
-    text-decoration: none;
-    font-weight: 600;
+/* QUICKL LINK COLOUR TARGETING*/
+
+
+#blue:hover {
+    color: #22b7ed;
 }
+
+
+#lilac:hover {
+    color: #767dff;
+}
+
+
+#purple:hover {
+    color: #771cde;
+}
+
+
+#cherry:hover {
+    color: #de1c46;
+}
+
+
+#pink:hover {
+    color: #ff66fc;
+}
+
 
 
 
@@ -500,10 +528,47 @@ main a {
         transition: all 0.7s ease; /* Smooth transition */
         white-space: nowrap;
 
-
     }
     
+    /* SECOND SECTION OKAY */
 
+    .pink2 {
+        margin-top: 2vw;
+            padding-top: 2vw;
+            padding-bottom: 3vw;
+        }
+    
+        .pink2 p {
+            color: #f7f7f7;
+            line-height: 6vw;
+            font-size: 4vw;
+            font-style: normal;   
+            text-align: left;        
+        font-family: seismic-latin-variable, sans-serif;
+            font-variation-settings: "SEIS" 0, "wght" 400;
+        }
+    
+    
+        .pink2 a {
+            transition: all 0.7s ease; /* Smooth transition */
+            white-space: nowrap;
+            padding-left: 0;
+            padding-right: 40vw;
+            font-style: normal;
+            border-bottom: solid 1px white; 
+    
+    
+    
+        }
+            
+        .pink2 a:hover {
+            font-family: seismic-latin-variable, sans-serif;
+            font-variation-settings: "SEIS" 100, "wght" 400;
+            transition: all 0.7s ease; /* Smooth transition */
+            white-space: nowrap;
+    
+    
+        }
     /* Article / lsiting  */
 
 

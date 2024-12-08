@@ -16,6 +16,15 @@
         gtag('config', 'UA-XXXXX-Y');
     </script>
     <style>
+
+@supports (-moz-appearance: none) {
+
+p {
+    line-height: 1.7vw;
+}
+}
+
+
         body {
             font-family: tt-commons-pro, sans-serif;
             margin: 0;
@@ -181,32 +190,34 @@
 
 /* Add styles for the arrow buttons */
 .arrow-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.539);
-    border: none;
-    color: white;
-    font-size: 5vw;
-    font-weight: 100;
-    cursor: pointer;
-    z-index: 1000;
-}
+            position: absolute;
+            bottom: 0;
+            border: none;
+            font-size: 6vw;
+            font-weight: 100;
+            cursor: pointer;
+            z-index: 1000;
+            color: white;
+            background-color: rgb(26, 26, 26);
+        }
 
-#leftArrow {
-    left: 0;
-    padding: 10px 30px 20px 30px;
+        #leftArrow {
+            left: 0;
+            padding: 10px 30px 20px 30px;
+            transform: scaleX(-1);
+            bottom: -1vw;
+        }
 
-}
+        #rightArrow {
+            right: 0;
+            padding: 10px 25px 20px 25px;
+            bottom: -1vw;
 
-#rightArrow {
-    right: 0;
-    padding: 10px 25px 20px 25px;
-}
+        }
 
 .arrow-button:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: black;
+    color: #22b7ed;
+    mix-blend-mode: normal; /* Ensure the cursor blends with the background */
 }
 
 /* Zoom modal styles */
@@ -233,7 +244,7 @@
 <body>
     <button id="backButton" onclick="history.back();">&#60; Exit</button>
     <div class="container">
-        <button id="leftArrow" class="arrow-button"> < </button>
+        <button id="leftArrow" class="arrow-button"> &#10132; </button>
         <div class="scroll-container">
             <article>
                 <h1>Pathfinder</h1>
@@ -252,7 +263,7 @@
         <img class="final" src="" alt="Gallery Image">
     </div>
 </div>
-<button id="rightArrow" class="arrow-button"> > </button>
+<button id="rightArrow" class="arrow-button"> &#10132; </button>
 </div>
 <div id="zoomModal">
 <img id="zoomedImage" src="">
