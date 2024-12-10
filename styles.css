@@ -47,7 +47,7 @@ html, body {
         padding-bottom: 7vw;
     }
     a.txt {
-        padding: 13px;
+        padding: 9px;
     }
     h1 {
         line-height: 70px;
@@ -533,15 +533,14 @@ section p a:hover {
     /* SECOND SECTION OKAY */
 
     .pink2 {
-        margin-top: 2vw;
             padding-top: 2vw;
             padding-bottom: 3vw;
         }
     
         .pink2 p {
             color: #f7f7f7;
-            line-height: 6vw;
-            font-size: 4vw;
+            line-height: 5vw;
+            font-size: 3vw;
             font-style: normal;   
             text-align: left;        
         font-family: seismic-latin-variable, sans-serif;
@@ -553,7 +552,7 @@ section p a:hover {
             transition: all 0.7s ease; /* Smooth transition */
             white-space: nowrap;
             padding-left: 0;
-            padding-right: 40vw;
+            padding-right: 44vw;
             font-style: normal;
             border-bottom: solid 1px white; 
     
