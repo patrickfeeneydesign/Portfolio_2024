@@ -8,355 +8,238 @@
     <link rel="icon" href="img/black_circle.png" type="image/png">
     <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
     <link rel="stylesheet" href="https://use.typekit.net/kyu3tgb.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-XXXXX-Y');
-    </script>
     <style>
 
-@supports (-moz-appearance: none) {
-
-p {
-    line-height: 1.7vw;
+html, body {
+    overflow-x: hidden;
 }
+@-moz-document url-prefix() {
+    /* Your specific styles for Firefox go here */
+    .band h1 {
+        line-height: 65pt;
+    }
+    .band h3 {
+        line-height: 35pt;
+
+    }
 }
 
         body {
             font-family: tt-commons-pro, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #161717;
+            background-color: #eeeeee;
             scrollbar-width: none; /* For Firefox */
         }
+
         #backButton {
             position: fixed;
             padding: 1vw 1.5vw;
-            top: 2vw;
+            top: 3vw;
             left: 0;
             font-size: 1.2vw;
-            font-weight: 600;
-            background-color: rgb(238, 238, 238);
-            color: rgb(23, 23, 23);
+            font-weight: 700;
+            background-color: rgb(194, 88, 255);
+            color: rgb(20, 20, 20);
             border: none;
             cursor: pointer;
             z-index: 1000; /* Ensures the button is above other elements */
         }
 
-        .container {
-            display: flex;
-            flex-direction: row;
-            height: 100vh;
-            overflow: hidden;
-        }
 
-        .scroll-container {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-        }
-
-        article {
-            min-width: 35vw; /* Adjust the width as needed */
-            padding: 3.3vw 5vw 2vw 14vw;
-            color: white;
-        }
-
-        article h1 {
-            font-size: 3vw;
-            font-weight: 500;
-            line-height: 3.5vw;
-            margin: 0 0 2vw 0;
-        }
-
-        article h2 {
-            font-size: 1.5vw;
-            line-height: 1.5vw;
-            font-weight: 400;
-        }
-
-        article p {
-            margin: 2vw 0 2vw 0;
-            font-weight: 300;
-        }
-
-        .gallery2 {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            align-items: center;
-            justify-content: flex-start;
-            white-space: nowrap;
-            padding: 1vw;
-        }
-
-        .gallery2 img {
-            height: 46.5vw;
-            margin: 2vw;
-            flex-shrink: 0;
-            transition: transform 1s ease-in-out;
-            border: 1px solid white;
-            border-radius: 15px;
-        }
-
-        .final {
-            width: 0.1vw;
-            opacity: 0;
-        }
-
-        /* For Chrome, Safari, and other WebKit-based browsers */
-        body::-webkit-scrollbar {
-            display: none;
-        }
-
-        #zoomModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100vw;
-            background-color: rgba(0, 0, 0, 0.8);
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #zoomedImage {
-            transition: transform 0.3s ease;
-            cursor: grab;
-            transform: scale(2);
-        }
-        
-        @media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Change from row to column */
-        overflow-y: auto; /* Allows vertical scrolling */
-        height: auto; /* Removes the fixed height */
+    .band {
+        width: 100vw;
+        height: 7vw;
+        background-color: rgb(27, 27, 27);
+        margin: 0;
+        padding: 8vh 15vh 15vh 25vh;
     }
 
-    .scroll-container {
-        flex-direction: column; /* Ensures elements stack vertically */
-        overflow-x: hidden; /* Disables horizontal scrolling */
+    .band h3 {
+        font-weight: 200;
+        margin: 0;
+        padding: 0;
+        font-size: 3vh;
+        color: #eeeeee;
     }
+
+    .band h1 {
+        font-weight: 500;
+        font-size: 6vh;
+        padding: 0;
+        margin: 0;
+        color: #eeeeee;
+    }
+    .band h2 {
+        font-weight: 400;
+        padding: 0.7vh 0 0 0;
+        margin: 0;
+        font-size: 3vh;
+        color: rgb(194, 88, 255);
+    }
+#blue h2 {
+    color: rgb(194, 88, 255);
+
+}
+
+.band a {
+    margin: 0;
+    text-decoration: none;
+    color: #706700;
+}
+
 
     article {
-        min-width: 100%; /* Ensures article takes full width */
-        padding: 15% 10% 10% 10%; /* Adjust padding for smaller screens */
-        box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-    }
-    article h1 {
-        font-size: 10vw;
-        line-height: 10vw;
+        background-color: #eeeeee;
+        padding:  10vw 23vw;
     }
 
-    article h2 {
-        font-size: 5vw;
-        line-height: 5vw;
+    article p {
+        font-size: 1.3vw;
+        line-height: 2.5vw;
     }
 
-    .gallery2 {
-        flex-direction: column; /* Stack images vertically */
-        align-items: center; /* Center images vertically */
-    }
-
-    .gallery2 img {
-        width: 90%; /* Adjust image width to be responsive */
-        height: auto; /* Maintain aspect ratio */
-        margin: 5% 0; /* Add vertical spacing between images */
-    }
-
-    #backButton {
-            position: fixed;
-            padding: 3vw;
-            top: 0vw;
-            font-size: 3.6vw;
-            font-weight: 500;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 1000; /* Ensures the button is above other elements */
-        }
-        .final {
-            display: none;
-        }
+article h2 {
+    font-weight: 600;
 }
 
-/* Add styles for the arrow buttons */
-.arrow-button {
-            position: absolute;
-            bottom: 0;
-            border: none;
-            font-size: 6vw;
-            font-weight: 100;
-            cursor: pointer;
-            z-index: 1000;
-            color: white;
-            background-color: rgb(26, 26, 26);
-        }
 
-        #leftArrow {
-            left: 0;
-            padding: 10px 30px 20px 30px;
-            transform: scaleX(-1);
-            bottom: -1vw;
-        }
-
-        #rightArrow {
-            right: 0;
-            padding: 10px 25px 20px 25px;
-            bottom: -1vw;
-
-        }
-
-.arrow-button:hover {
-    color: #767dff;
-    mix-blend-mode: normal; /* Ensure the cursor blends with the background */
+.bodyimg {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100vw; /* Full viewport width */
+    height: 120vh; /* Fixed height */
+    overflow: hidden; /* Prevent overflow */
+    position: relative; /* Ensure proper positioning */
+    margin: 0; /* Remove margin */
+    padding: 5vw 0 5vw 0;
+    background-color: rgb(16, 16, 16);
 }
 
-/* Zoom modal styles */
-#zoomModal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.8);
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    z-index: 2000;
+.bodyimg img {
+    height: 70%; /* Fixed height */
+    width: auto; /* Automatically scale width relative to height */
+    object-fit: contain; /* Maintain aspect ratio and prevent distortion */
 }
 
-#zoomedImage {
-    transition: transform 0.3s ease;
-    cursor: grab;
+.bodyimg2 {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100vw; /* Full viewport width */
+    height: 120vh; /* Fixed height */
+    overflow: hidden; /* Prevent overflow */
+    position: relative; /* Ensure proper positioning */
+    margin: 0; /* Remove margin */
+    padding: 5vw 0 5vw 0;
+    background-color: rgb(16, 16, 16);
 }
+
+.bodyimg2 img {
+    height: 100%; /* Fixed height */
+    width: auto; /* Automatically scale width relative to height */
+    object-fit: contain; /* Maintain aspect ratio and prevent distortion */
+}
+
     </style>
 </head>
 <body>
-    <button id="backButton" onclick="history.back();">&#60; Exit</button>
-    <div class="container">
-        <button id="leftArrow" class="arrow-button"> &#10132; </button>
-        <div class="scroll-container">
-            <article>
-                <h1>Trust Fall</h1>
-                <h2>2023 | Accenture</h2>
-                <p>
-                    What does it mean for technology to deserve our trust? And what do clients need to do to build it?
+    <button id="backButton" onclick="history.back();">&#x2190;</button>
 
-                    These are the driving question behind the interactive game Trust Fall. Trust Fall is about pinpointing a company's strengths and identifying any vulnerabilities when it comes to establishing and maintaining organizational trust.
-                    <br><br>
-                    Inspired by KerPlunk, a game of dexterity in which a collection of marbles is held in place by a nest of straws, this giant version asks players to consider a piece of technology, such as a product or service, and explore the gravity of earning or losing trust. 
-                                        
-                    
-                    At the game's conclusion, you get a review of your processes to help fortify success or address issues. Because, in real life, you rarely get a second go.
-                <br><br>
-            <em>
-                Official Selection | 100 Archive | 2023
-                <br>
-                Shortlisted | IDI Awards | 2024
-            </em>
-        </p>
-            </article>
-    <div class="gallery2">
-        <img class="final" src="" alt="Gallery Image">
-        <img src="img/Slide10.jpeg" alt="Gallery Image">
-        <img src="img/top+down.png" alt="Gallery Image">
-        <img src="img/Slide12.jpeg" alt="Gallery Image">
-        <img src="img/Slide8.jpeg" alt="Gallery Image">
-        <img src="img/Slide1.jpeg" alt="Gallery Image" >
-        <img class="final" src="" alt="Gallery Image">
+    <div class="band">
+        <h3>Interaction Design</h3>
+        <h1>Trust Fall | The Game</h1>
+        <h2>Accenture Ireland</h2>
+
     </div>
-</div>
-<button id="rightArrow" class="arrow-button"> &#10132; </button>
-</div>
-<div id="zoomModal">
-<img id="zoomedImage" src="">
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const scrollContainer = document.querySelector('.scroll-container');
-    const leftArrow = document.getElementById('leftArrow');
-    const rightArrow = document.getElementById('rightArrow');
-    const gallery = document.querySelector('.gallery2');
-    const images = gallery.querySelectorAll('img:not(.final)');
-    const modal = document.getElementById('zoomModal');
-    const zoomedImage = document.getElementById('zoomedImage');
-    let currentX = 0;
-    let currentY = 0;
-    let aimX = 0;
-    let aimY = 0;
-    let initialMouseX = 0;
-    let initialMouseY = 0;
-    let hasSetInitial = false;
-    let scaleFactor = 1;
 
-    // Disable mouse wheel scrolling
-    window.addEventListener('wheel', function (event) {
-        event.preventDefault();
-    }, { passive: false });
 
-    // Scroll left on left arrow click
-    leftArrow.addEventListener('click', function () {
-        scrollContainer.scrollBy({
-            left: -500,
-            behavior: 'smooth'
-        });
-    });
+    <figure class="bodyimg">
+        <img src="img/Slide10.jpeg" alt="Gallery Image">
+    </figure>
 
-    // Scroll right on right arrow click
-    rightArrow.addEventListener('click', function () {
-        scrollContainer.scrollBy({
-            left: 500,
-            behavior: 'smooth'
-        });
-    });
+        <article>
+            <h2>Introduction</h2>
+            <p>
+                What does it mean for technology to deserve our trust? How can clients build
+                it? These questions drive the interactive game, Trust Fall. An exercise in self-
+                reflection, the games asks industry professionals to place their organisation
+                under the microscope when it comes to building and maintaining trustworthy
+                practices. Inspired by KerPlunk, a game of dexterity in which a collection of
+                marbles is held in place by a nest of straws, this giant version asks players to
+                consider a piece of technology – such as a product or service – and explore
+                the importance of earning and maintaining trust.
+            </p>
+            <p>
+                <em>Official Selection | 100 Archive | 2023
+                    <br>
+                    Shortlisted | IDI Awards | 2024
+                </em>
+            </p>
+        </article>
 
-    // Zoom functionality
-    images.forEach(img => {
-        img.addEventListener('click', function () {
-            zoomedImage.src = this.src; // Set the source of the zoomed image
-            modal.style.display = 'flex'; // Show the modal
-            // Calculate the scale factor based on the image's natural height and 130% of viewport height
-            scaleFactor = (window.innerHeight * 1.3) / this.naturalHeight;
-            zoomedImage.style.transform = `scale(${scaleFactor})`;
-            hasSetInitial = false; // Reset initial position flag
-        });
-    });
 
-    modal.addEventListener('mousemove', function (e) {
-        if (!hasSetInitial) {
-            const rect = modal.getBoundingClientRect();
-            initialMouseX = e.clientX - rect.left;
-            initialMouseY = e.clientY - rect.top;
-            hasSetInitial = true;
-        }
-        // Calculate movement based on the initial mouse position
-        aimX = -(e.clientX - initialMouseX) * 0.6;
-        aimY = -(e.clientY - initialMouseY) * 0.6;
-    });
 
-    // Close modal when the zoomed image itself is clicked
-    zoomedImage.addEventListener('click', function () {
-        modal.style.display = 'none'; // Hide the modal
-    });
+            <figure class="bodyimg">
+                <img src="img/top+down.png" alt="Gallery Image">
+            </figure>
 
-    const updateImagePosition = () => {
-        currentX += (aimX - currentX) * 0.05; // Easing the movement
-        currentY += (aimY - currentY) * 0.05; // Easing the movement
-        zoomedImage.style.transform = `scale(${scaleFactor}) translate(${currentX}px, ${currentY}px)`;
 
-        requestAnimationFrame(updateImagePosition); // Continuously update position
-    };
+            <article>
+                <p>
+                    The sticks represent some of the core foundations of trustworthy technology: Data Protection, Ethics,
+                    Inclusivity, and Transparency. The balls themselves symbolize the trust, precariously supported by these
+                    foundations. As players progress, they face rapid-fire questions about organizational policy, design, and
+                    public perception. For each pain point or unclear answer, players must remove three sticks, watching their
+                    trust fall in the process. At the game’s conclusion, you get a review of your processes to help fortify success
+                    or address issues. Because, in real life, you rarely get a second go.
+                </p>
+            </article>
 
-    updateImagePosition(); // Start the animation
-});
-</script>
+
+            <figure class="bodyimg">
+                <img src="img/Slide12.jpeg" alt="Gallery Image">
+            </figure>
+            
+            <article>
+                <h2>Creative Development</h2>
+                <p>
+                    The concept for Trust Fall emerged during a creative team sprint, where we explored innovative
+                    ways to represent both the fragility of trust, and how it can be built and supported over time.
+                    The visual identity I created was inspired by the game itself, riffing on the intersection between
+                    the foundations of trust and the gaps that inevitably occur. To enhance the game, we also
+                    developed a digital app that accompanies the physical setup. This app allows users to answer
+                    questions in real-time and receive a personalised printout of their results to take with them.
+                    This project was awarded a place in the 100 archive for its design excellence.
+                </p>
+            </article>
+
+            <figure class="bodyimg">
+                <img src="img/Slide8.jpeg" alt="Gallery Image">
+            </figure>
+
+            <article>
+                <h2>Engaging Audiences</h2>
+                <p>
+                    I ran this engagement with a variety of cross-industry Accenture clients to pinpoint their
+                    organisational weaknesses, potential threats to public trust & safety, and socialise the
+                    themes and methodologies of the Human Sciences Studio. Most notably, I ran a session
+                    with a C-Suite member of a Global South CSO. We used the game to analyse the potential
+                    harms of using AI chatbots to augment support for victims of gender based violence.
+                </p>
+            </article>
+
+            <figure class="bodyimg">
+                <img src="img/Slide1.jpeg" alt="Gallery Image" >
+            </figure>
+<!--
+            <img src="img/37377337.png" alt="Gallery Image">
+            <img src="img/gaze large format.png" alt="Gallery Image">
+            <img src="img/GAZE_01.png" alt="Gallery Image">
+            <img src="img/GAZE-Poster-2021-81.png" alt="Gallery Image">
+            <img src="img/gazefilm.gif" alt="Gallery Image">
+            <img src="img/IMG_7865cover-4-4.jpg" alt="Gallery Image">
+             -->
 </body>
+</html>

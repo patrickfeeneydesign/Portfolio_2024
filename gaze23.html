@@ -39,13 +39,27 @@ html, body {
             left: 0;
             font-size: 1.2vw;
             font-weight: 700;
-            background-color: rgb(255, 114, 114);
+            background-color: rgb(215, 215, 31);
             color: rgb(20, 20, 20);
             border: none;
             cursor: pointer;
             z-index: 1000; /* Ensures the button is above other elements */
         }
 
+        .hero {
+        width: 100vw; /* 85% of the viewport width */
+        height: 120vh; /* 50% of the viewport height */
+        overflow: hidden; /* Hide any image overflow */
+        position: relative; /* Required for child positioning */
+        margin: 0;
+    }
+
+    .hero img {
+        width: 100%; /* Make the image width fill the figure */
+        height: 100%; /* Make the image height fill the figure */
+        object-fit: cover; /* Ensure the image covers the figure without distortion */
+        object-position: center; /* Center the image within the figure */
+    }
 
     .band {
         width: 100vw;
@@ -75,9 +89,12 @@ html, body {
         padding: 0.7vh 0 0 0;
         margin: 0;
         font-size: 3vh;
-        color:rgb(255, 114, 114);
+        color: rgb(215, 215, 31);
     }
+#blue h2 {
+    color: rgb(31, 144, 215);
 
+}
 
 .band a {
     margin: 0;
@@ -96,10 +113,10 @@ html, body {
         line-height: 2.5vw;
     }
 
-article h2 {
+article h1 {
     font-weight: 600;
+    font-size: 3vw;
 }
-
 
 .bodyimg {
     display: flex; /* Use flexbox for centering */
@@ -145,40 +162,48 @@ article h2 {
     <button id="backButton" onclick="history.back();">&#x2190;</button>
 
     <div class="band">
-        <h3>Speculative Design</h3>
-        <h1>Daily Metaverse</h1>
-        <h2>Accenture Ireland</h2>
-
+        <h3>Visual Identity</h3>
+        <h1>GAZE International LGBTQIA Film Festival</h1>
+        <a href="https://www.gaze.ie" target="_blank"><h2>+ Visit the GAZE website</h2></a>
     </div>
 
 
-    <figure class="bodyimg">
-        <img src="img/newspaper1.jpg" alt="Gallery Image">
+    <figure class="hero">
+        <img src="img/GAZE_01.png">
     </figure>
 
         <article>
-            <h2>Introduction</h2>
             <p>
-                This collaborative publication highlights a selection of articles on the theme of
-                utopian and dystopian futures. Deep diving into the future implications of the metaverse, the piece is a speculative newspaper describing 
-                the best and worst case scenarios for the future of work.
+                GAZE is a queer film festival hosted in the Light House Cinema and Irish Film Institute every summer. 
+                Initially formed in 1992 as an underground film club, the festival itself predates the decriminalisation of 
+                homosexuality in Ireland. GAZE's visual identity is inspired by research into the history of queer resistance 
+                in Ireland, riffing on protest posters and underground nightclub leaflets. Rooted in our past but looking forwards, 
+                the design puts shape around that which cannot be contained or defined. Namely, queer joy.
             </p>
-
+            <p>
+                <em>Official Selection | 100 Archive | 2023</em>
+            </p>
         </article>
 
-        <figure class="bodyimg">
-            <img src="img/newspaper2.jpg" alt="Gallery Image">
-        </figure>
 
+
+            <figure class="bodyimg">
+                <img src="img/GAZE-04___default_3000_1377.jpg" alt="Gallery Image">
+            </figure>
 
 
             <article>
                 <p>
-                    The publication is reversible, with two 'sister' covers which riff on the theme of 
-                    utopia and dytopia. The red cover utlises elements of glitch, and follows the design principles of a tabloid newspaper with a bold sans serif. 
-                    The purple cover emulates a broad-sheet, with opposing serif fonts and a more subdued colour pallete.
+                    Each year champions a new colour, building a rainbow of programmes as the years progress. The powerful sunlight yellow of 2023 
+                    references the rebirth of summer, as we emerged from the pandemic together and set our sights on the future.
                 </p>
             </article>
+
+
+            <figure class="bodyimg">
+                <img src="img/GAZE-06___default_2000_1333.jpg" alt="Gallery Image">
+            </figure>
+            
 
 
 

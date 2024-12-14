@@ -13,6 +13,7 @@
 html, body {
     overflow-x: hidden;
 }
+
 @-moz-document url-prefix() {
     /* Your specific styles for Firefox go here */
     .band h1 {
@@ -39,13 +40,27 @@ html, body {
             left: 0;
             font-size: 1.2vw;
             font-weight: 700;
-            background-color: rgb(255, 114, 114);
+            background-color:  rgb(31, 144, 215);
             color: rgb(20, 20, 20);
             border: none;
             cursor: pointer;
             z-index: 1000; /* Ensures the button is above other elements */
         }
 
+        .hero {
+        width: 100vw; /* 85% of the viewport width */
+        height: 120vh; /* 50% of the viewport height */
+        overflow: hidden; /* Hide any image overflow */
+        position: relative; /* Required for child positioning */
+        margin: 0;
+    }
+
+    .hero img {
+        width: 100%; /* Make the image width fill the figure */
+        height: 100%; /* Make the image height fill the figure */
+        object-fit: cover; /* Ensure the image covers the figure without distortion */
+        object-position: center; /* Center the image within the figure */
+    }
 
     .band {
         width: 100vw;
@@ -75,9 +90,12 @@ html, body {
         padding: 0.7vh 0 0 0;
         margin: 0;
         font-size: 3vh;
-        color:rgb(255, 114, 114);
+        color: rgb(215, 215, 31);
     }
+#blue h2 {
+    color: rgb(31, 144, 215);
 
+}
 
 .band a {
     margin: 0;
@@ -96,10 +114,10 @@ html, body {
         line-height: 2.5vw;
     }
 
-article h2 {
+article h1 {
     font-weight: 600;
+    font-size: 3vw;
 }
-
 
 .bodyimg {
     display: flex; /* Use flexbox for centering */
@@ -144,44 +162,53 @@ article h2 {
 <body>
     <button id="backButton" onclick="history.back();">&#x2190;</button>
 
-    <div class="band">
-        <h3>Speculative Design</h3>
-        <h1>Daily Metaverse</h1>
-        <h2>Accenture Ireland</h2>
 
-    </div>
+        <div class="band" id="blue">
+            <h3>Visual Identity</h3>
+            <h1>GAZE International LGBTQIA Film Festival</h1>
+            <a href="https://www.gaze.ie" target="_blank"><h2>+ Visit the GAZE website</h2></a>
+        </div>
 
-
-    <figure class="bodyimg">
-        <img src="img/newspaper1.jpg" alt="Gallery Image">
-    </figure>
+        <figure class="bodyimg">
+            <img src="img/gazefilm.gif" alt="Gallery Image">
+        </figure>
 
         <article>
-            <h2>Introduction</h2>
             <p>
-                This collaborative publication highlights a selection of articles on the theme of
-                utopian and dystopian futures. Deep diving into the future implications of the metaverse, the piece is a speculative newspaper describing 
-                the best and worst case scenarios for the future of work.
+                Building upon the identity I developed in 2022, this year I sought to fine tune the brand 
+                and bring it into the 21st Century. Simplifying the pixel motif, and highlighting accessibility across all outputs, especially the 
+                website and printed programme. The new identity feels fresh, dynamic and youthful whilst still retaining the early-digital-age 
+                aesthetic of previous years, albeit toned down.
             </p>
-
         </article>
 
         <figure class="bodyimg">
-            <img src="img/newspaper2.jpg" alt="Gallery Image">
+            <img src="img/gaze large format.png" alt="Gallery Image">
+        </figure>
+
+        <article>
+            <p>
+                In 2024 the festival grew significantly, which meant designing for new touchpoints and using new techniques. Most notably, we 
+                recieved EU funding for accessibility which meant overhauling the design system to meet the needs of diverse audiences.
+            </p>
+        </article>
+
+        <figure class="bodyimg">
+            <img src="img/unnamed-17.jpg" alt="Gallery Image">
         </figure>
 
 
+        <article>
+            <p>
+                Applying best practice in typography, colour, language, and digital formatting meant simplifying my approach to 
+                layouts, and getting comfortable with negative space.
+                I also upskilled on accessible web design practices, and was proud to deploy a fully WGA compliant site from scratch using HTML, CSS & Java.
+            </p>
+        </article>
 
-            <article>
-                <p>
-                    The publication is reversible, with two 'sister' covers which riff on the theme of 
-                    utopia and dytopia. The red cover utlises elements of glitch, and follows the design principles of a tabloid newspaper with a bold sans serif. 
-                    The purple cover emulates a broad-sheet, with opposing serif fonts and a more subdued colour pallete.
-                </p>
-            </article>
-
-
-
+        <figure class="bodyimg2">
+            <img src="img/37377337.png" alt="Gallery Image">
+        </figure>
 <!--
             <img src="img/37377337.png" alt="Gallery Image">
             <img src="img/gaze large format.png" alt="Gallery Image">
