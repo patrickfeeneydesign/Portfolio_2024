@@ -24,6 +24,47 @@ html, body {
     }
 }
 
+
+    /* MAIN HEADER */
+    header {
+    position: fixed;
+    text-align: left;
+     border-radius: 0 0 40px 40px;
+     background-color:    rgb(215, 215, 31);
+     right: -9vw;
+     top: -0.1vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+    /* MAIN HEADER */
+    header.firstpage {
+        position: fixed;
+        text-align: left;
+        margin: 0;
+        height: 3vw;
+        padding-left: 1vw;
+        padding-right: 10vw;
+        padding-top: 0.8vw;
+        padding-bottom: 0.8vw;
+        z-index: 4000;
+        align-content: center;
+    }
+
+
+header img {
+    height: 1vw;
+    width: auto;
+    filter: invert(100%);
+    padding: 0 0 0 1vw;
+    -moz-transition: all 0.3s; /* Mozilla specific transition */
+    transition: all 0.3s;
+}
+
+
+
+
         body {
             font-family: tt-commons-pro, sans-serif;
             margin: 0;
@@ -156,6 +197,50 @@ article h1 {
     object-fit: contain; /* Maintain aspect ratio and prevent distortion */
 }
 
+   /* Footer */
+   footer {
+        background-color: #1d1c1c;
+        height: 3.5vw;
+        width: 32vw;
+        position: fixed;
+        bottom: 0;
+       left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        color: #e0e0e0;
+        border-radius: 0px 30px 0 0;
+        
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 20px;
+
+    }
+    
+    .social-icons a img {
+        height: 1.2vw;
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        /* filter: invert(100%); */
+    }
+
+    
+
+    .footer-text {
+        color: #e0e0e0; /* Text color for readability on dark background */
+        font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
+        text-align: right; /* Text aligned to the left */
+        padding-left: 2vw;
+        font-weight: 300;
+    }
+    footer.black-background .footer-text {
+        color: #161717; /* Sets the text color to white when within a 'white-background' footer */
+    }
+
     </style>
 </head>
 <body>
@@ -204,6 +289,20 @@ article h1 {
                 <img src="img/GAZE-06___default_2000_1333.jpg" alt="Gallery Image">
             </figure>
             
+
+            <footer>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
+                        <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+                    </a>
+                    <a href="mailto:patfeeney1098@gmail.com" target="_blank" aria-label="Email" role="link">
+                        <img src="img/email.png" alt="Email Me" tabindex="0">
+                    </a>
+                </div>
+                <div class="footer-text">
+                    &copy; Patrick Feeney Design 2024 | All rights reserved
+                </div>
+            </footer>
 
 
 
