@@ -165,25 +165,13 @@ article h2 {
     height: 70%; /* Fixed height */
     width: auto; /* Automatically scale width relative to height */
     object-fit: contain; /* Maintain aspect ratio and prevent distortion */
+    transition: transform 3s ease; /* Smooth transition for transform property */
+
 }
 
-.bodyimg2 {
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    width: 100vw; /* Full viewport width */
-    height: 120vh; /* Fixed height */
-    overflow: hidden; /* Prevent overflow */
-    position: relative; /* Ensure proper positioning */
-    margin: 0; /* Remove margin */
-    padding: 5vw 0 5vw 0;
-    background-color: rgb(16, 16, 16);
-}
 
-.bodyimg2 img {
-    height: 100%; /* Fixed height */
-    width: auto; /* Automatically scale width relative to height */
-    object-fit: contain; /* Maintain aspect ratio and prevent distortion */
+.bodyimg img.zoom-effect {
+    transform: scale(1.1); /* Scale up to 120% */
 }
 
 
@@ -248,7 +236,7 @@ article h2 {
         </a>
     </header>
 
-    
+
     <div class="band">
         <h3>Speculative Design</h3>
         <h1>Daily Metaverse</h1>
@@ -307,5 +295,25 @@ article h2 {
             <img src="img/gazefilm.gif" alt="Gallery Image">
             <img src="img/IMG_7865cover-4-4.jpg" alt="Gallery Image">
              -->
+
+
+             <script>
+                document.addEventListener("scroll", function() {
+                    const images = document.querySelectorAll('.bodyimg img'); // Select all images within .bodyimg
+                    const windowHeight = window.innerHeight; // Get the viewport height
+                
+                    images.forEach(img => {
+                        const imgTop = img.getBoundingClientRect().top; // Get the top position of the image relative to the viewport
+                
+                        if (imgTop < windowHeight && imgTop > -img.height) {
+                            img.classList.add('zoom-effect'); // Add zoom effect if image is within the viewport
+                        } else {
+                            img.classList.remove('zoom-effect'); // Remove zoom effect if image is outside the viewport
+                        }
+                    });
+                });
+                </script>
+
+                
 </body>
 </html>
