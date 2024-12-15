@@ -232,21 +232,6 @@ background:linear-gradient(to bottom left, rgb(255, 255, 84) 10%, #0000ff00 70%)
                 height: 100%;
             }
 
-            #backButton {
-            position: fixed;
-            padding: 1vw 1.5vw;
-            top: 3vw;
-            left: 0;
-            font-size: 1.2vw;
-            font-weight: 600;
-            background-color: rgb(238, 238, 238);
-            border-radius: 0 30px 30px 0;
-            color: rgb(23, 23, 23);
-            border: none;
-            cursor: pointer;
-            z-index: 1000; /* Ensures the button is above other elements */
-        }
-
             .card-back{
                 width: 100%;
                 height: 100%;
@@ -278,11 +263,142 @@ background:linear-gradient(to bottom left, rgb(255, 255, 84) 10%, #0000ff00 70%)
       .white {
         fill: #f6f6f6;
       }
+
+
+
+
+
+
+
+
+
+      #backButton {
+            position: fixed;
+            padding: 1vw 1.5vw;
+            top: 3vw;
+            left: 0;
+            font-size: 1.2vw;
+            font-weight: 700;
+            background-color: rgb(23, 23, 23);
+            color: rgb(234, 234, 234);
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Ensures the button is above other elements */
+        }
+
+
+
+
+
+    /* MAIN HEADER */
+    header {
+    position: fixed;
+    text-align: left;
+     border-radius: 0 0 40px 40px;
+     background-color:   rgb(19, 19, 19);
+     right: -9vw;
+     top: -0.1vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+    /* MAIN HEADER */
+    header.firstpage {
+        position: fixed;
+        text-align: left;
+        margin: 0;
+        height: 3vw;
+        padding-left: 1vw;
+        padding-right: 10vw;
+        padding-top: 0.8vw;
+        padding-bottom: 0.8vw;
+        z-index: 4000;
+        align-content: center;
+    }
+
+
+header img {
+    height: 1vw;
+    width: auto;
+    padding: 0 0 0 1vw;
+    -moz-transition: all 0.3s; /* Mozilla specific transition */
+    transition: all 0.3s;
+}
+
+
+
+
+
+
+   /* Footer */
+   footer {
+        background-color: #1d1c1c;
+        height: 3.5vw;
+        width: 32vw;
+        position: fixed;
+        bottom: 0;
+       left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        color: #e0e0e0;
+        border-radius: 0px 30px 0 0;
+        
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 20px;
+
+    }
+    
+    .social-icons a img {
+        height: 1.2vw;
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        /* filter: invert(100%); */
+    }
+
+    
+
+    .footer-text {
+        color: #e0e0e0; /* Text color for readability on dark background */
+        font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
+        text-align: right; /* Text aligned to the left */
+        padding-left: 2vw;
+        font-weight: 300;
+    }
+    footer.black-background .footer-text {
+        color: #161717; /* Sets the text color to white when within a 'white-background' footer */
+    }
+
+
         </style>
     </head>
     <!--HTML-->
     <body onload="onPageLoad()">
-      <button id="backButton" onclick="history.back();">&#60; Exit</button>
+      <button id="backButton" onclick="history.back();">&#x2190;</button>
+      <header tabindex="0" aria-label="Home Button" class="firstpage">
+        <a href="index.html" style="display: inline-block; cursor: pointer;">
+            <img class="mobilehide" src="img/logo.png">
+        </a>
+    </header>
+      <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
+                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+            </a>
+            <a href="mailto:patfeeney1098@gmail.com" target="_blank" aria-label="Email" role="link">
+                <img src="img/email.png" alt="Email Me" tabindex="0">
+            </a>
+        </div>
+        <div class="footer-text">
+            &copy; Patrick Feeney Design 2024 | All rights reserved
+        </div>
+    </footer>
         <div class="perspective">
           <div id="cards-container-ID" class='card-container'>
             <!--Cards Generated Here Dynamically in onPageLoad() function-->
