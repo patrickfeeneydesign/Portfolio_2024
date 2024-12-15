@@ -11,18 +11,9 @@
     <style>
 html, body {
     overflow-x: hidden;
-    touch-action: manipulation; /* Helps prevent double-tap zoom on mobile */
-}
-@-moz-document url-prefix() {
-    .band h1 {
-        line-height: 65pt;
-    }
-    .band h3 {
-        line-height: 35pt;
-    }
+    touch-action: manipulation;
 }
 
-/* MAIN HEADER */
 header {
     position: fixed;
     text-align: left;
@@ -53,7 +44,6 @@ header img {
     width: auto;
     filter: invert(100%);
     padding: 0 0 0 1vw;
-    -moz-transition: all 0.3s;
     transition: all 0.3s;
 }
 
@@ -62,7 +52,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #eeeeee;
-    scrollbar-width: none; /* For Firefox */
+    scrollbar-width: none; 
 }
 
 #backButton {
@@ -76,7 +66,7 @@ body {
     color: rgb(20, 20, 20);
     border: none;
     cursor: pointer;
-    z-index: 1000; /* Ensures the button is above other elements */
+    z-index: 1000;
 }
 
 .band {
@@ -270,19 +260,6 @@ footer.black-background .footer-text {
     cursor: grabbing;
 }
 
-.page {
-    display: none; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.page.active {
-    display: block; 
-}
-
 .toggle-button2, .toggle-button1 {
     position: absolute;
     top: 0;
@@ -307,7 +284,7 @@ footer.black-background .footer-text {
     display: none;
 }
 
-/* Fade-in transition for progressive loading */
+/* Fade-in transition */
 .fade-in {
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -323,7 +300,7 @@ footer.black-background .footer-text {
     }
 
     body {
-        font-size: 4vw; /* scale text for mobile */
+        font-size: 4vw; 
         line-height: 1.4;
     }
 
@@ -378,7 +355,6 @@ footer.black-background .footer-text {
         line-height: 1.2;
     }
 
-    /* Ensure images fill at least 35% of viewport width */
     .draggable,
     .draggable img {
         width: 55vw !important;
@@ -390,7 +366,6 @@ footer.black-background .footer-text {
         padding: 2vw 9vw 2vw 4vw;
     }
 
-    /* Footer adjustments */
     footer {
         width: 100%;
         height: 5vh;
@@ -518,7 +493,7 @@ footer.black-background .footer-text {
     <footer>
         <div class="social-icons">
             <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
-                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+                <img src="img/instagram-icon.png" alt="Instagram" tabindex="0">
             </a>
             <a href="mailto:patfeeney1098@gmail.com" target="_blank" aria-label="Email" role="link">
                 <img src="img/email.png" alt="Email Me" tabindex="0">
@@ -531,32 +506,86 @@ footer.black-background .footer-text {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Global variables
     let activeContainerId = "container1";
     let isDragging = false;
     let activeElement = null, offsetX = 0, offsetY = 0;
     let velocityX = 0, velocityY = 0;
     const friction = 0.95;
 
+    const placedImagesData = { "container1": [], "container2": [] };
+
     function setupDraggable(containerId) {
         const container = document.getElementById(containerId);
         const containerRect = container.getBoundingClientRect();
+        const draggables = container.querySelectorAll('.draggable');
 
-        // Set positions and double-click logic
-        document.querySelectorAll('#' + containerId + ' .draggable').forEach(elem => {
-            const link = elem.querySelector('a');
+        // Clear previously stored data if re-initializing on a container
+        placedImagesData[containerId] = [];
+
+        draggables.forEach(elem => {
             const image = elem.querySelector('img');
 
             function setPosition() {
-                const maxX = containerRect.width - image.offsetWidth;
-                const maxY = containerRect.height - image.offsetHeight;
+                const elemWidth = image.offsetWidth;
+                const elemHeight = image.offsetHeight;
+                const maxX = containerRect.width - elemWidth;
+                const maxY = containerRect.height - elemHeight;
 
-                // Spread out images (10% to 90% range)
-                const randomX = Math.floor((0.1 + 0.8 * Math.random()) * maxX);
-                const randomY = Math.floor((0.1 + 0.8 * Math.random()) * maxY);
+                function overlapsForbiddenZone(testX, testY, testWidth, testHeight) {
+                    for (const data of placedImagesData[containerId]) {
+                        const A_left = testX;
+                        const A_right = testX + testWidth;
+                        const A_top = testY;
+                        const A_bottom = testY + testHeight;
+
+                        const B_left = data.forbiddenX1;
+                        const B_right = data.forbiddenX2;
+                        const B_top = data.forbiddenY1;
+                        const B_bottom = data.forbiddenY2;
+
+                        const overlap = (A_left < B_right && A_right > B_left && A_top < B_bottom && A_bottom > B_top);
+                        if (overlap) return true;
+                    }
+                    return false;
+                }
+
+                let attempts = 500; 
+                let positioned = false;
+                let randomX, randomY;
+
+                while (attempts > 0 && !positioned) {
+                    randomX = Math.floor(Math.random() * maxX);
+                    randomY = Math.floor(Math.random() * maxY);
+
+                    if (!overlapsForbiddenZone(randomX, randomY, elemWidth, elemHeight)) {
+                        positioned = true;
+                    }
+                    attempts--;
+                }
+
+                // If still not positioned after attempts, just place at the last tried position
+                if (!positioned) {
+                    randomX = Math.floor(maxX / 2);
+                    randomY = Math.floor(maxY / 2);
+                }
 
                 elem.style.left = `${randomX}px`;
                 elem.style.top = `${randomY}px`;
+
+                // Define forbidden zone as central 50% of this image
+                const forbiddenZoneWidth = elemWidth * 0.22; 
+                const forbiddenZoneHeight = elemHeight * 0.22; 
+                const fzX1 = randomX + (elemWidth - forbiddenZoneWidth) / 2;
+                const fzY1 = randomY + (elemHeight - forbiddenZoneHeight) / 2;
+                const fzX2 = fzX1 + forbiddenZoneWidth;
+                const fzY2 = fzY1 + forbiddenZoneHeight;
+
+                placedImagesData[containerId].push({
+                    forbiddenX1: fzX1,
+                    forbiddenY1: fzY1,
+                    forbiddenX2: fzX2,
+                    forbiddenY2: fzY2
+                });
             }
 
             if (image.complete && image.naturalHeight !== 0) {
@@ -565,13 +594,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 image.onload = setPosition;
             }
 
-            // Double-tap (mobile) and double-click (desktop) logic
+            // Double-click/tap logic
             let lastTapTime = 0;
+            const link = elem.querySelector('a');
             link.addEventListener('touchend', function(e) {
                 const currentTime = new Date().getTime();
                 const tapGap = currentTime - lastTapTime;
                 if (tapGap < 300 && tapGap > 0) {
-                    // double-tap detected
                     window.location.href = this.href;
                 }
                 lastTapTime = currentTime;
@@ -594,10 +623,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initialize the first page
+    // Initialize first container
     setupDraggable("container1");
 
-    // Add event listeners for drag on document level, including touch events
     function startDrag(e) {
         const container = document.getElementById(activeContainerId);
         const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
@@ -658,7 +686,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     activeElement.style.left = `${newX}px`;
                     activeElement.style.top = `${newY}px`;
 
-                    // Continue applying momentum while significant
                     if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
                         requestAnimationFrame(applyMomentum);
                     }
@@ -668,34 +695,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Mouse events
+    // Drag events
     document.addEventListener('mousedown', startDrag, false);
     document.addEventListener('mousemove', onMove, false);
     document.addEventListener('mouseup', endDrag, false);
-
-    // Touch events
     document.addEventListener('touchstart', startDrag, {passive: false});
     document.addEventListener('touchmove', onMove, {passive: false});
     document.addEventListener('touchend', endDrag, false);
 
-    const no1 = document.getElementById("no1");
-    const no2 = document.getElementById("no2");
-
     document.querySelector(".toggle-button1").addEventListener("click", () => {
-        no1.style.display = "none";
-        no2.style.display = "block";
+        document.getElementById("no1").style.display = "none";
+        document.getElementById("no2").style.display = "block";
         activeContainerId = "container2";
         setupDraggable("container2");
     });
 
     document.querySelector(".toggle-button2").addEventListener("click", () => {
-        no2.style.display = "none";
-        no1.style.display = "block";
+        document.getElementById("no2").style.display = "none";
+        document.getElementById("no1").style.display = "block";
         activeContainerId = "container1";
         setupDraggable("container1");
     });
 
-    // Progressive image loading with Intersection Observer
+    // Progressive image loading
     const images = document.querySelectorAll('img[data-fullsrc]');
     const loadHighResImage = (img) => {
         const highResSrc = img.getAttribute('data-fullsrc');
@@ -723,7 +745,6 @@ document.addEventListener("DOMContentLoaded", () => {
             observer.observe(img);
         });
     } else {
-        // Fallback: load all images if IntersectionObserver not supported
         images.forEach(img => loadHighResImage(img));
     }
 });
