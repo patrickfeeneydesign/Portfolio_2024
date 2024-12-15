@@ -92,6 +92,7 @@ body {
     margin: 0;
     color: #eeeeee;
 }
+
 .band h2 {
     font-weight: 400;
     padding: 0.7vh 0 0 0;
@@ -108,7 +109,7 @@ body {
 
 article {
     background-color: #eeeeee;
-    padding:  10vw 23vw;
+    padding: 10vw 23vw;
 }
 
 article p {
@@ -235,29 +236,37 @@ footer.black-background .footer-text {
     color: rgb(180, 114, 255);
 }
 
+/* Limit the size of the draggable elements to a max width */
 .draggable {
     position: absolute;
     cursor: grab;
     user-select: none;
-    width: 30vw; 
-    height: auto; 
-}
-
-.draggable a {
-    display: block; 
+    max-width: 500px;
     width: 100%; 
-    height: 100%;
-    text-decoration: none; 
+    height: auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .draggable img {
-    display: block;
-    width: 100%; 
+    width: 100%;
     height: auto;
+    display: block;
 }
 
-.draggable:active {
+/* Visual feedback classes */
+.draggable.dragging {
+    transform: scale(1.1) rotate(1deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.766);
     cursor: grabbing;
+}
+
+.draggable.dropped {
+    animation: bounce 2s ease;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(0); }
 }
 
 .toggle-button2, .toggle-button1 {
@@ -355,17 +364,6 @@ footer.black-background .footer-text {
         line-height: 1.2;
     }
 
-    .draggable,
-    .draggable img {
-        width: 55vw !important;
-        height: auto !important;
-    }
-
-    .toggle-button1, .toggle-button2 {
-        font-size: 3vw;
-        padding: 2vw 9vw 2vw 4vw;
-    }
-
     footer {
         width: 100%;
         height: 5vh;
@@ -392,6 +390,15 @@ footer.black-background .footer-text {
     #mobilehide {
         display: none;
     }
+
+    .toggle-button1, .toggle-button2 {
+        font-size: 3vw;
+        padding: 2vw 9vw 2vw 4vw;
+    }
+
+.draggable {
+    max-width: 50vw;
+}
 }
     </style>
 </head>
@@ -512,6 +519,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let velocityX = 0, velocityY = 0;
     const friction = 0.95;
 
+    // Keep track of highest z-index to ensure top-most element
+    let zIndexCounter = 1000;
+
     const placedImagesData = { "container1": [], "container2": [] };
 
     function setupDraggable(containerId) {
@@ -519,7 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const containerRect = container.getBoundingClientRect();
         const draggables = container.querySelectorAll('.draggable');
 
-        // Clear previously stored data if re-initializing on a container
         placedImagesData[containerId] = [];
 
         draggables.forEach(elem => {
@@ -543,8 +552,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         const B_top = data.forbiddenY1;
                         const B_bottom = data.forbiddenY2;
 
-                        const overlap = (A_left < B_right && A_right > B_left && A_top < B_bottom && A_bottom > B_top);
-                        if (overlap) return true;
+                        if (A_left < B_right && A_right > B_left && A_top < B_bottom && A_bottom > B_top) {
+                            return true;
+                        }
                     }
                     return false;
                 }
@@ -563,7 +573,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     attempts--;
                 }
 
-                // If still not positioned after attempts, just place at the last tried position
                 if (!positioned) {
                     randomX = Math.floor(maxX / 2);
                     randomY = Math.floor(maxY / 2);
@@ -572,7 +581,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 elem.style.left = `${randomX}px`;
                 elem.style.top = `${randomY}px`;
 
-                // Define forbidden zone as central 50% of this image
                 const forbiddenZoneWidth = elemWidth * 0.22; 
                 const forbiddenZoneHeight = elemHeight * 0.22; 
                 const fzX1 = randomX + (elemWidth - forbiddenZoneWidth) / 2;
@@ -594,7 +602,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 image.onload = setPosition;
             }
 
-            // Double-click/tap logic
             let lastTapTime = 0;
             const link = elem.querySelector('a');
             link.addEventListener('touchend', function(e) {
@@ -623,7 +630,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initialize first container
     setupDraggable("container1");
 
     function startDrag(e) {
@@ -641,6 +647,12 @@ document.addEventListener("DOMContentLoaded", () => {
             isDragging = true;
             velocityX = 0;
             velocityY = 0;
+
+            // Bring this element to top
+            zIndexCounter++;
+            activeElement.style.zIndex = zIndexCounter;
+
+            activeElement.classList.add('dragging');
             e.preventDefault();
         }
     }
@@ -667,6 +679,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isDragging) {
             isDragging = false;
 
+            if (activeElement) {
+                activeElement.classList.remove('dragging');
+                activeElement.classList.add('dropped');
+                activeElement.addEventListener('animationend', function handleAnimationEnd() {
+                    activeElement.classList.remove('dropped');
+                    activeElement.removeEventListener('animationend', handleAnimationEnd);
+                });
+            }
+
             function applyMomentum() {
                 if (!isDragging && activeElement) {
                     const container = document.getElementById(activeContainerId);
@@ -675,11 +696,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     let newX = parseFloat(activeElement.style.left || 0) + velocityX;
                     let newY = parseFloat(activeElement.style.top || 0) + velocityY;
 
-                    // Apply friction
                     velocityX *= friction;
                     velocityY *= friction;
 
-                    // Constrain within bounds
                     newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
                     newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
 
@@ -695,7 +714,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Drag events
     document.addEventListener('mousedown', startDrag, false);
     document.addEventListener('mousemove', onMove, false);
     document.addEventListener('mouseup', endDrag, false);
@@ -717,7 +735,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setupDraggable("container1");
     });
 
-    // Progressive image loading
     const images = document.querySelectorAll('img[data-fullsrc]');
     const loadHighResImage = (img) => {
         const highResSrc = img.getAttribute('data-fullsrc');
