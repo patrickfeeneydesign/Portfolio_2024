@@ -11,6 +11,7 @@
     <style>
 html, body {
     overflow-x: hidden;
+    touch-action: manipulation; /* Helps prevent double-tap zoom on mobile */
 }
 @-moz-document url-prefix() {
     .band h1 {
@@ -533,8 +534,10 @@ document.addEventListener("DOMContentLoaded", () => {
             function setPosition() {
                 const maxX = containerRect.width - image.offsetWidth;
                 const maxY = containerRect.height - image.offsetHeight;
-                const randomX = Math.floor(Math.random() * Math.max(0, maxX));
-                const randomY = Math.floor(Math.random() * Math.max(0, maxY));
+
+                // Spread out images (10% to 90% range)
+                const randomX = Math.floor((0.1 + 0.8 * Math.random()) * maxX);
+                const randomY = Math.floor((0.1 + 0.8 * Math.random()) * maxY);
 
                 elem.style.left = `${randomX}px`;
                 elem.style.top = `${randomY}px`;
@@ -545,6 +548,19 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 image.onload = setPosition;
             }
+
+            // Double-tap (mobile) and double-click (desktop) logic
+            let lastTapTime = 0;
+            link.addEventListener('touchend', function(e) {
+                const currentTime = new Date().getTime();
+                const tapGap = currentTime - lastTapTime;
+                if (tapGap < 300 && tapGap > 0) {
+                    // double-tap detected
+                    window.location.href = this.href;
+                }
+                lastTapTime = currentTime;
+                e.preventDefault();
+            }, false);
 
             let clickTimeout = null;
             link.addEventListener('click', function(e) {
