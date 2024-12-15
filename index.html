@@ -8,721 +8,496 @@
     <link rel="icon" href="img/black_circle.png" type="image/png">
     <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
     <link rel="stylesheet" href="https://use.typekit.net/kyu3tgb.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Add Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-XXXXX-Y');
-    </script>
+    <style>
+html, body {
+    overflow-x: hidden;
+}
+@-moz-document url-prefix() {
+    .band h1 {
+        line-height: 65pt;
+    }
+    .band h3 {
+        line-height: 35pt;
+    }
+}
+
+/* MAIN HEADER */
+header {
+    position: fixed;
+    text-align: left;
+    border-radius: 0 0 40px 40px;
+    background-color: rgb(180, 114, 255);
+    right: -9vw;
+    top: -0.1vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+header.firstpage {
+    position: fixed;
+    text-align: left;
+    margin: 0;
+    height: 3vw;
+    padding-left: 1vw;
+    padding-right: 10vw;
+    padding-top: 0.8vw;
+    padding-bottom: 0.8vw;
+    z-index: 4000;
+    align-content: center;
+}
+
+header img {
+    height: 1vw;
+    width: auto;
+    filter: invert(100%);
+    padding: 0 0 0 1vw;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+body {
+    font-family: tt-commons-pro, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eeeeee;
+    scrollbar-width: none; /* For Firefox */
+}
+
+#backButton {
+    position: fixed;
+    padding: 1vw 1.5vw;
+    top: 0;
+    left: 0;
+    font-size: 1.2vw;
+    font-weight: 700;
+    background-color:  rgb(180, 114, 255);
+    color: rgb(20, 20, 20);
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensures the button is above other elements */
+}
+
+.band {
+    width: 100vw;
+    height: 7vw;
+    background-color: rgb(27, 27, 27);
+    margin: 0;
+    padding: 8vh 15vh 15vh 25vh;
+}
+
+.band h3 {
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+    font-size: 3vh;
+    color: #eeeeee;
+}
+
+.band h1 {
+    font-weight: 500;
+    font-size: 6vh;
+    padding: 0;
+    margin: 0;
+    color: #eeeeee;
+}
+.band h2 {
+    font-weight: 400;
+    padding: 0.7vh 0 0 0;
+    margin: 0;
+    font-size: 3vh;
+    color:rgb(236, 236, 236);
+}
+
+.band a {
+    margin: 0;
+    text-decoration: none;
+    color: #706700;
+}
+
+article {
+    background-color: #eeeeee;
+    padding:  10vw 23vw;
+}
+
+article p {
+    font-size: 1.3vw;
+    line-height: 2.5vw;
+}
+
+article h2 {
+    font-weight: 600;
+}
+
+.splash {
+   background-color: rgb(27, 27, 27);
+   padding: 8vw;
+   color: #eeeeee;
+}
+
+.splash h1 {
+   font-weight: 500;
+   font-size: 3.8vw;
+   line-height: 5vw;
+}
+
+.splash p {
+   font-weight: 300;
+   font-size: 2vw;
+   line-height: 0;
+   color:  rgb(180, 114, 255);
+}
+
+.bodyimg {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100vw; 
+    height: 120vh; 
+    overflow: hidden; 
+    position: relative; 
+    margin: 0; 
+    padding: 5vw 0 5vw 0;
+    background-color: rgb(16, 16, 16);
+}
+
+.bodyimg img {
+    height: 70%; 
+    width: auto; 
+    object-fit: contain; 
+    transition: transform 3s ease; 
+}
+
+.bodyimg img.zoom-effect {
+    transform: scale(1.1); 
+}
+
+/* Footer */
+footer {
+    background-color: #1d1c1c;
+    height: 3.5vw;
+    width: 32vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: #e0e0e0;
+    border-radius: 0px 30px 0 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a img {
+    height: 1.2vw;
+    width: auto;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.footer-text {
+    color: #e0e0e0;
+    font-size: 0.7vw;
+    text-align: right;
+    padding-left: 2vw;
+    font-weight: 300;
+}
+
+footer.black-background .footer-text {
+    color: #161717;
+}
+
+#container1, #container2 {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(16, 16, 16);
+}
+
+.info-text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color:rgb(234, 234, 234);
+    background-color:  rgb(27, 27, 27);
+    padding: 10px 15px;
+    font-weight: 300;
+    font-size: 1.2rem;
+    z-index: 100;
+    display: flex;
+    align-items: center; 
+}
+
+.info-text p {
+    padding: 0;
+    margin: 0;
+}
+
+.info-text span {
+    font-weight: 500;
+    color: rgb(180, 114, 255);
+}
+
+.draggable {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    width: 30vw; 
+    height: auto; 
+}
+
+.draggable a {
+    display: block; 
+    width: 100%; 
+    height: 100%;
+    text-decoration: none; 
+}
+
+.draggable img {
+    display: block;
+    width: 100%; 
+    height: auto;
+}
+
+.draggable:active {
+    cursor: grabbing;
+}
+
+.page {
+    display: none; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page.active {
+    display: block; 
+}
+
+.toggle-button2, .toggle-button1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(234, 234, 234);
+    color: rgb(19, 19, 19);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.7rem;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button2:hover, .toggle-button1:hover {
+    background-color: rgb(180, 114, 255);
+    color: rgb(12, 12, 12);
+}
+
+#no2 {
+    display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    body {
+        font-size: 4vw; /* scale text for mobile */
+        line-height: 1.4;
+    }
+
+    header.firstpage {
+        height: auto;
+        padding: 2vw;
+        right: 0;
+        top: 0;
+        border-radius: 0;
+    }
+
+    header img {
+        height: 3vw; 
+        width: auto;
+    }
+
+    #backButton {
+        font-size: 4vw;
+        padding: 2vw;
+    }
+
+    .band {
+        padding: 10vw 5vw;
+        height: auto;
+    }
+    .band h1 {
+        font-size: 5vw;
+        line-height: 1.2;
+    }
+    .band h2, .band h3 {
+        font-size: 4vw;
+    }
+
+    article {
+        padding: 10vw 5vw;
+    }
+
+    article p {
+        font-size: 4vw;
+        line-height: 1.5;
+    }
+
+    .splash {
+        padding: 10vw 5vw;
+    }
+    .splash h1 {
+        font-size: 5vw;
+        line-height: 1.3;
+    }
+    .splash p {
+        font-size: 4vw;
+        line-height: 1.2;
+    }
+
+    /* Ensure images fill at least 35% of viewport width */
+    .draggable,
+    .draggable img {
+        width: 55vw !important;
+        height: auto !important;
+    }
+
+    .toggle-button1, .toggle-button2 {
+        font-size: 3vw;
+        padding: 2vw 9vw 2vw 4vw;
+    }
+
+    /* Footer adjustments */
+    footer {
+        width: 100%;
+        height: 5vh;
+        border-radius: 0;
+        padding: 3vw;
+        gap: 2vw;
+    }
+
+    .social-icons a img {
+        height: 3vw;
+    }
+
+    .footer-text {
+        font-size: 2vw;
+    }
+
+    .info-text {
+        font-size: 2.5vw;
+        padding: 2.3vw;
+        z-index: 1000;
+    }
+
+    #mobilehide {
+        display: none;
+    }
+}
+    </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <div class="spinner"></div>
-    </div>
-    <div id="content" style="display: none;">
-   <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="link" tabindex="0" class="skip-link">Skip to main content.</a>
-    <!-- Main Title -->
+    <button id="backButton" onclick="history.back();">&#8734;</button>
+
     <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img class="mobilehide" src="img/logo.png">
-            <img class="desktophide" src="img/title.gif">
+            <img class="mobilehide" src="img/logo.png" alt="Logo">
         </a>
     </header>
 
-    <!-- Desktop menu -->
-    <div class="mobilehide">
-    <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
-    <!-- Menu -->
-    <nav>
-        <ul>
-            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="desktophide">☰</a>
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="mobilehide">About</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="aidiversity.html">Article</a></li>
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="resume.pdf" target="_blank">Resume</a></li>
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="mailto:patfeeney1098@gmail.com">Contact Me</a></li>
-                </ul>
-            </li>
-    </div>
+    <article class="splash">
+        <p>Patrick Feeney</p>
+        <h1>I'm a visual designer working across branding, technology ethics, science communication, and interaction design.
+        </h1>
+    </article>
 
+    <div id="no1">
+        <div id="container1">
+            <div class="info-text">
+                <p><span>Drag</span> an image to move it around, or <span>double click</span> to learn more</p>
+            </div>
 
-       <!-- Mobile menu -->
-       <div class="desktophide">
-        <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
-        <!-- Menu -->
-        <nav>
-            <ul>
-                <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
-                    <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="desktophide">☰</a>
-                    <a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="mobilehide">About</a>
-                    <ul class="dropdown-content">
-                        <li tabindex="0" aria-label=" Who are we?" role="button"><a class="tooltip-trigger" data-tooltip="My name is Patrick Feeney, I'm a visual designer currently working for Accenture at the Human Sciences Studio. 
-                            The HSS is a humanities research studio, doing qualitative research on the future of sustainable and ethical 
-                            technology, and exploring the human impact. The Studio is client facing and lives in The Dock, Accenture's global 
-                            innovation hub. We regularly host a wide variety of industry leading clients across fashion, aerospace, pharmaceuticals, 
-                            media, technology and more! Additionally, I've been working with GAZE International LGBTQIA
-                            Film Festival since 2021, developing their visual identity and handling all aspects of their visual outputs. 
-                            I specialise in: Visual Design • Tech Ethics • Sustainability • Speculative Design • Workshop Design">Who am I?</a></li>
-                        <li tabindex="0" aria-label=" Who are we?" role="button"><a class="tooltip-trigger" data-tooltip="If you'd like to work together you can email me at patfeeney1098@gmail.com or message
-                            me on instagram @patrickfeeneydesigner">Contact Me</a></li>
-                    </ul>
-                </li>
+            <button class="toggle-button1">Next Page > </button>
+
+            <div class="draggable">
+                <a href="spec.html">
+                    <img src="img/newspaper1.jpg" alt="Placeholder Image">
+                </a>
+            </div>
+            
+            <div class="draggable">
+                <a href="pol.html">
+                    <img src="img/BLUE-jpeg-4.jpg" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="gaze.html">
+                    <img src="img/GAZE_01.png" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="trust.html">
+                    <img src="img/Slide10.jpeg" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="newtennant.html">
+                    <img src="img/catu02.png" alt="Placeholder Image">
+                </a>
+            </div>
         </div>
-
-
-
-
-                <!--            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">Digital</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Sunday the 5th of August" role="button"><a href="index.html">Alan Turing Institute</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 2nd of August" role="button"><a href="fat.html">Fat Of The Land</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">Print</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">GAZE Film Fest</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 2nd of August" role="button"><a href="Thursday.html">CATU</a></li>
-                </ul>
-            </li>        
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">Experience</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Friday the 3rd of August" role="button"><a href="index.html">Trust Fall</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Saturday the 4th of August" role="button"><a href="index.html">Political Material</a></li>
-                </ul>
-            </li>  -->
-  
-        </ul>
-    </nav>
-    <!-- Main Body -->
-     
-        <section class="pink">
-            <div class="mobilehide">
-            <p role="heading"><a tabindex="0" class="tooltip-trigger" data-tooltip="From a giant game of Kerplunk to a futuristic photo booth, and from a 
-                moving wall of fabric to a deck of tarot cards, I've collaborated with my team on a wide range of creative outputs—spanning print, 
-                interaction design, web development, art direction, exhibitions, branding, copywriting, motion graphics, illustration, 
-                and more.">creative</a>, <a tabindex="0" class="tooltip-trigger" data-tooltip="Working in Accenture's global innovation hub has helped me 
-                develop the skills to adapt to novel challenges and make an impact. I pride myself on building robust, 
-                compelling narratives through design, backed up with rigorous academic and strategic 
-                thinking."> research</a>, <br><a tabindex="0" class="tooltip-trigger" data-tooltip="My work is also focused on human centred technology. 
-                As part of my practice I use speculative design techniques to unravel potential futures, and their positive or negative 
-                implications. "> futures</a>, <a tabindex="0" class="tooltip-trigger" data-tooltip="Developing vibrant visual identities which are rooted in deep 
-                research and coherent thinking."> identity.</a></p>
-            </div>
-        </section>
-
-    <main id="maincontent">
-        <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
-        </section>
-
-<br><br><br>
-                <!--
-DESKTOP VERSION OF GALLERY!!!!!
--->
-<div class="mobilehide">
-
-
-
-    <div class="gallery">
-        <!-- Example with 25 linked images (5x5 grid) -->
-
-        <a class="txt">Gaze Film Fest</a>
-
-        <div tabindex="0" class="keydown">
-            <a role="link" class="image-container" href="gaze.html">
-                <img src="img/low/GAZE_01.png" data-src="img/GAZE_01.png" alt="Gaze Film Fest" class="progressive-image">
-
-            </a>
-        </div> 
-
-        <a class="txt" >Political Material</a>
-        <div tabindex="0" class="keydown">
-            <a href="pol.html">
-                <img src="img/low/BLUE-jpeg-4.jpg" data-src="img/BLUE-jpeg-4.jpg" alt="Political Material" class="progressive-image">
-
-            </a>
-        </div>  
-
-        <a class="txt">Trust Fall</a>
-        <div tabindex="0" class="keydown">
-            <a  role="link"  class="image-container" href="trust.html">
-                <img src="img/low/Slide10.jpeg" data-src="img/Slide10.jpeg" alt="Trust Fall" class="progressive-image">
-            </a>
-        </div>  
-
-        <a class="txt">The New Tennant</a>
-        <div tabindex="0" class="keydown">
-            <a href="newtennant.html" >
-                <img src="img/low/catu02.png" data-src="img/catu02.png" alt="The New Tennant" class="progressive-image">
-            </a>
-        </div>  
-
-    </div> 
-
-</div>
-
-        <section class="pink2">
-            <div class="mobilehide">
-            <p role="heading">
-                <a tabindex="0" id="blue" href="gaze.html">Visual Identity &#10132;</a>
-                <br>
-                <a tabindex="0" id="lilac" href="trust.html">Interactive Exhibition &#10132;</a>
-                <br>
-                <a tabindex="0" id="purple" href="newtennant.html">Broad Sheet Publication &#10132;</a>
-                <br>
-                <a tabindex="0" id="cherry" href="pol.html">Cultural Analysis &#10132;</a>
-                <br>
-                <a tabindex="0" id="pink" href="cardgame.html">Digital Interaction &#10132;</a>
-            </p>
-            </div>
-        </section>
-
-<br><br>
-
-
-
-
-                <!--
-DESKTOP VERSION OF GALLERY!!!!!
--->
-        <div class="mobilehide">
-
-
-
-        <div class="gallery">
-            <!-- Example with 25 linked images (5x5 grid) -->
-
-
-
-            <a class="txt" >Interactive Card Game | Alan Turing Institute</a>
-            <div tabindex="0" class="keydown">
-                <a role="link" href="cardgame.html">
-                    <img src="img/low/Toolkits_02.png" data-src="img/Toolkits_02.gif" alt="Interactive Card Game" class="progressive-image">
-                </a>
-            </div> 
-
-            <a class="txt" >Pathfinder</a>
-            <div tabindex="0" class="keydown">
-                <a role="link"  class="image-container" href="path.html">
-                    <img src="img/low/Pathfinder_Background_V1.png" data-src="img/Pathfinder_Background_V1.png" alt="Pathfinder" class="progressive-image">
-
-                </a>
-            </div>  
-
-
-
-
-            <!--
-            <a class="txt">Trust Fall</a>
-
-                <div tabindex="0" class="keydown">
-                    <a class="tooltip-trigger" data-tooltip="What does it mean for technology to deserve our trust? And what do clients need to do to build it?
-
-                    These are the driving question behind the interactive game Trust Fall. Trust Fall is about pinpointing a company's strengths and identifying any vulnerabilities when it comes to establishing and maintaining organizational trust.
-                    
-                    Inspired by KerPlunk, a game of dexterity in which a collection of marbles is held in place by a nest of straws, this giant version asks players to consider a piece of technology, such as a product or service, and explore the gravity of earning or losing trust. 
-                                        
-                    
-                    At the game's conclusion, you get a review of your processes to help fortify success or address issues. Because, in real life, you rarely get a second go." role="link" class="image-container" href="https://www.100archive.com/projects/trust-fall" target="_blank">
-                        <img src="img/low/Slide1.jpeg" data-src="img/Slide1.jpeg" alt="Backspot" class="progressive-image">
-
-                    </a>
- 
-                </div> 
-              
-
-
-
-
-                <a class="txt">Gaze Film Fest</a>
-                <div tabindex="0" class="keydown">
-                    <a class="tooltip-trigger" data-tooltip="GAZE poster design 2021." role="link"  class="image-container">
-                        <img src="img/low/GAZE-Poster-2021-81.png" data-src="img/GAZE-Poster-2021-81.png" alt="Backspot" class="progressive-image">
-
-                    </a>
-                </div> 
-                  -->
-
-            
-                
-
-
-
-
-
-
-                <!--!!
-                <a class="txt">AI In The Gloabl South Report</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link"  href="care.html">
-                        <img src="img/low/care.png" data-src="img/CARE_03.png" alt="AI In The Gloabl South Report" class="progressive-image">
-                    </a>
-                </div> 
-
--->
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- COLUMN BREAK!!-->
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-                <a class="txt">The Lightbox</a>
-                <div tabindex="0" class="keydown">
-                    <a href="light.html" >
-                        <img src="img/low/lightboxlow.png" data-src="img/6_Lightbox_Video_EDIT_5.gif" alt="The Lightbox" class="progressive-image">
-                    </a>
-                </div> 
--->
-
-
-
-                <a class="txt">Speculative Newspaper</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link" href="spec.html">
-                        <img src="img/low/newspaper1.jpg" data-src="img/newspaper1.jpg" alt="Speculative Newspaper" class="progressive-image">
-                    </a>
-                </div>  
-
-
-<br><br><br><br><br><br>
-                <a class="txt">Creative Foresight</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link" href="for.html">
-                        <img src="img/low/foresightcreative.png" data-src="img/foresightcreative.gif" alt="Creative Foresight" class="progressive-image">
-                    </a>
-                </div>  
-
-
-
-
-                <a class="txt">Flag Design | DCC</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link" href="flag.html">
-                        <img src="img/low/Final-render-New-Flag-2draft-2.png" data-src="img/Final-render-New-Flag-2draft-2.png" alt="Flag Design | DCC" class="progressive-image">
-                    </a>
-                </div> 
-
-
-
-                <a class="txt">Alan Turing Institute</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link"  href="https://learn.turing.ac.uk" target="_blank">
-                        <img src="img/low/alan.png" data-src="img/alan.png" alt="Alan Turing Institute" class="progressive-image">
-                    </a>
-                </div> 
-
-
-                <!--
-                <a class="txt">Speculative Newspaper</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link" class="tooltip-trigger" data-tooltip="This collaborative publication highlights a selection of articles on the theme of
-                     utopian and dystopian futures. Deep diving into the future implications of the metaverse, the piece is a speculative newspaper describing 
-                     the best and worst case scenarios for the future of work.The publication is reversible, with two 'sister' covers which riff on the theme of 
-                     utopia and dytopia. The red cover utlises elements of glitch, and follows the design principles of a tabloid newspaper with a bold sans serif. 
-                     The purple cover emulates a broad-sheet, with opposing serif fonts and a more subdued colour pallete.">
-                        <img src="img/low/newspaper2.jpg" data-src="img/newspaper2.jpg" alt="Backspot" class="progressive-image">
-                    </a>
-                </div> 
-
-  -->
-
-
-
-
-                <!--
-                <a class="txt">Gaze Film Fest</a>
-                <div tabindex="0" class="keydown">
-                    <a role="link"  >
-                        <img src="img/low/IMG_8530-3.JPG" data-src="img/IMG_8530-3.JPG" alt="Backspot" class="progressive-image">
-                    </a>
-                </div> 
--->
-                <a class="txt">Game Design</a>
-                <div tabindex="0" class="keydown">
-                    <a>
-                        <img src="img/low/fat.png" data-src="img/fat.png" alt="Game Design" class="progressive-image">
-                    </a>
-                </div> 
-
-
-        </div> 
-
     </div>
 
+    <div id="no2">
+        <div id="container2">
+            <div class="info-text">
+                <p><span>Drag</span> an image to move it around, or <span>double click</span> to learn more</p>
+            </div>
+
+            <button class="toggle-button2">< Prevuous Page</button>
+
+            <div class="draggable" id="mobilehide">
+                <a href="cardgame.html">
+                    <img src="img/Toolkits_02.gif" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="path.html">
+                    <img src="img/Pathfinder_Background_V1.png" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="for.html">
+                    <img src="img/foresightcreative.gif" alt="Placeholder Image">
+                </a>
+            </div>
+
+            <div class="draggable">
+                <a href="flag.html">
+                    <img src="img/Final-render-New-Flag-2draft-2.png" alt="Placeholder Image">
+                </a>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!--
-MOBILE VERSION OF GALLERY!!!!!
--->
-
-
-<div class="desktophide">
-    
-    
-    
-    <div class="gallery" id="newt">
-    <!-- Example with 25 linked images (5x5 grid) -->
-
-    <a class="txt">Gaze Film Fest</a>
-
-    <div tabindex="0" class="keydown">
-        <a class="tooltip-trigger" data-tooltip="GAZE is a queer film festival hosted in the Light House Cinema and Irish Film Institute every summer. Initially formed in 1992 as an underground film club, the festival itself predates the legalisation of homosexuality in Ireland.
-
-        GAZE's visual identity is inspired by research into the history of queer resistance in Ireland, riffing on protest posters and underground nightclub leaflets. Rooted in our past but aiming its sights on the future, the design puts shape around that which cannot be contained or defined. Namely, queer joy.
-        
-        Each year champions a new colour, building a rainbow of programmes as the years progress. The powerful sunlight yellow of 2023 references the rebirth of summer, as we emerged from the pandemic together and set our sights on the future." role="link" class="image-container" href="gaze.html">
-            <img src="img/low/GAZE_01.png" data-src="img/GAZE_01.png" alt="Backspot" class="progressive-image">
-
-        </a>
-    </div> 
-
-    <a class="txt">The New Tennant</a>
-    <div tabindex="0" class="keydown">
-        <a class="tooltip-trigger" data-tooltip="The New Tenant is a 
-    broad sheet publication which features a selection of archival writings on the topic of renter activism and contrasts it with contemporary opinion pieces. Aiming 
-    to draw similarities between past struggled and today's difficult landscape. 
-    The project was launched by the Irish tenants union, CATU as part of their outreach initiative. The layout presents both archival and contemporary analysis side 
-    by side, which meant finding a balance between the old and new. The final design focused on clarity, with a minimal treatment of type and layout as a response 
-    to my research into CATU's archive of publications."   role="link" class="image-container" href="newtennant.html" >
-            <img src="img/low/newtennant.png" data-src="img/newtennant.png" alt="Backspot" class="progressive-image">
-        </a>
-    </div> 
-    <a class="txt" id="gaze">Gaze Film Fest 2024</a>
-    <div tabindex="0" class="keydown">
-        <a class="tooltip-trigger" data-tooltip="Building upon the identity I developed in 2022, this year I sought to fine tune the brand 
-        and bring it into the 21st Century. Simplifying the pixel motif, and highlighting accessibility across all outputs, especially the 
-        website and printed programme. The new identity feels fresh, dynamic and youthful whilst still retaining the early-digital-age 
-        aesthetic of previous years, albeit toned down."   role="link" class="image-container" href="gaze.html">
-            <img src="img/low/gazefilm.png" data-src="img/gazefilm.gif" alt="Backspot" class="progressive-image">
-
-        </a>
-    </div> 
-
-    <a class="txt" id="pol">Political Material</a>
-    <div tabindex="0" class="keydown">
-        <a class="tooltip-trigger" data-tooltip="Political Material' is a magazine about the nature of things. Inspired by the work of 
-        Harvard Design Magazine and MacGuffin, 'Political Material' is a publication following the story of a specific material and its 
-        relationship to the political world. Issue one explores the world of metal, deep-diving into the ways that metal acts as a mediator 
-        between us and broader systemic issues. From house keys and mobile phones to bronze statues and oil rigs, the metal objects of the 
-        world spell disaster and hope in equal measure." role="link"  class="image-container" href="pol.html">
-            <img src="img/low/BLUE-jpeg-4.jpg" data-src="img/BLUE-jpeg-4.jpg" alt="Backspot" class="progressive-image">
-
-        </a>
-    </div>  
-
-    <a class="txt" id="path">Pathfinder</a>
-    <div tabindex="0" class="keydown">
-        <a class="tooltip-trigger" data-tooltip="This short term creative project was initially briefed as a branded email, after researching the project background I decided to
-        squeeze the brief a little. These are real challenges with real solutions, so why not situate them in physical space. I relied on a wayfinding motif, printing a selection 
-        of signs which acted as a tangible prompt for the audience to engage. I made each sign a viewfinder, allowing the environment to peek through and communicate a sense of focus." role="link"  class="image-container" href="path.html">
-            <img src="img/low/Pathfinder_Background_V1.png" data-src="img/Pathfinder_Background_V1.png" alt="Backspot" class="progressive-image">
-
-        </a>
-    </div>  
-
-
-
-
-    <!--
-    <a class="txt">Trust Fall</a>
-
-        <div tabindex="0" class="keydown">
-            <a class="tooltip-trigger" data-tooltip="What does it mean for technology to deserve our trust? And what do clients need to do to build it?
-
-            These are the driving question behind the interactive game Trust Fall. Trust Fall is about pinpointing a company's strengths and identifying any vulnerabilities when it comes to establishing and maintaining organizational trust.
-            
-            Inspired by KerPlunk, a game of dexterity in which a collection of marbles is held in place by a nest of straws, this giant version asks players to consider a piece of technology, such as a product or service, and explore the gravity of earning or losing trust. 
-                                
-            
-            At the game's conclusion, you get a review of your processes to help fortify success or address issues. Because, in real life, you rarely get a second go." role="link" class="image-container" href="https://www.100archive.com/projects/trust-fall" target="_blank">
-                <img src="img/low/Slide1.jpeg" data-src="img/Slide1.jpeg" alt="Backspot" class="progressive-image">
-
-            </a>
-
-        </div> 
-      
-
-
-
-
-        <a class="txt">Gaze Film Fest</a>
-        <div tabindex="0" class="keydown">
-            <a class="tooltip-trigger" data-tooltip="GAZE poster design 2021." role="link"  class="image-container">
-                <img src="img/low/GAZE-Poster-2021-81.png" data-src="img/GAZE-Poster-2021-81.png" alt="Backspot" class="progressive-image">
-
-            </a>
-        </div> 
-          -->
-
-        
-        <a class="txt">Gaze Programme Design</a>
-        <div tabindex="0" class="keydown">
-            <a class="tooltip-trigger" data-tooltip="Print design for GAZE International LGBTQIA Film Festival."   role="link" class="image-container" href="gaze.html">
-                <img src="img/low/37377337.png" data-src="img/37377337.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-        <a class="txt">Publication Design</a>
-    
-         <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="Hand made publication design for a personal project">
-                <img src="img/low/Portfolio-test-spread3-2.jpg" data-src="img/Portfolio-test-spread3-2.jpg" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-        
-        <a class="txt">Political Material</a>
-
-        <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="
-            Silver Touch is a sculpture about interaction, built from alluminium sheets and fastened to a silver frame, the piece asks its 
-            audience to stand on either side and touch each other. On one hand, the task is impossible, with milimeters of metal preventing
-             any direct contact, instead the audience is forced to use the sculpture as a tool of interaction, pushing and pulling on the 
-             surface as they attempt to push their hands together. In the interaction that takes place, I hope to pose questions about the 
-             nature of metal as a mediating force for human contact." href="pol.html">
-             <img src="img/low/Silver-Touch--4.jpg" data-src="img/Silver-Touch--4.jpg" alt="Backspot" class="progressive-image">
-                                
-            </a>
-        </div> 
-
-        <a class="txt">Trust Fall</a>
-        <div tabindex="0" class="keydown">
-            <a class="tooltip-trigger" data-tooltip="What does it mean for technology to deserve our trust? And what do clients need to do to build it?
-
-            These are the driving question behind the interactive game Trust Fall. Trust Fall is about pinpointing a company's strengths and identifying any vulnerabilities when it comes to establishing and maintaining organizational trust.
-            
-            Inspired by KerPlunk, a game of dexterity in which a collection of marbles is held in place by a nest of straws, this giant version asks players to consider a piece of technology, such as a product or service, and explore the gravity of earning or losing trust. 
-                                
-            
-            At the game's conclusion, you get a review of your processes to help fortify success or address issues. Because, in real life, you rarely get a second go." role="link"  class="image-container" href="trust.html">
-                <img src="img/low/Slide10.jpeg" data-src="img/Slide10.jpeg" alt="Backspot" class="progressive-image">
-            </a>
-        </div>  
-
-        <a class="txt" id="newt">The New Tennant</a>
-        <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="The New Tenant is a 
-            broad sheet publication which features a selection of archival writings on the topic of renter activism and contrasts it with 
-            contemporary opinion pieces. Aiming 
-            to draw similarities between past struggled and today's difficult landscape. 
-            The project was launched by the Irish tenants union, CATU as part of their outreach initiative. The layout presents both archival
-             and contemporary analysis side 
-            by side, which meant finding a balance between the old and new. The final design focused on clarity, with a minimal treatment of type 
-            and layout as a response 
-            to my research into CATU's archive of publications." href="newtennant.html" >
-                <img src="img/low/catu02.png" data-src="img/catu02.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div>  
-
-        <a class="txt" id="for">Creative Foresight</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"  class="tooltip-trigger" data-tooltip="Nobody can predict the future. but you can always look for the signs. I developed this workshop 
-            series to help participants identify and visualise future technologies. 
-            The workshop introduces the tools needed to map critical uncertainties, brainstorm future states, 
-            identify the insights, and communicate these ideas in an engaging way. It also delves into the ethical and social implications of future innovations, and how to avoid 
-            any unintented consequences related to emerging technologies." href="for.html">
-                <img src="img/low/foresightcreative.png" data-src="img/foresightcreative.gif" alt="Creative Foresight" class="progressive-image">
-            </a>
-        </div>  
-
-                       <a class="txt" id="spec">Speculative Newspaper</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"  class="tooltip-trigger" data-tooltip="This collaborative publication highlights a selection of articles on the theme of
-            utopian and dystopian futures. Deep diving into the future implications of the metaverse, the piece is a speculative newspaper describing 
-            the best and worst case scenarios for the future of work.The publication is reversible, with two 'sister' covers which riff on the theme of 
-            utopia and dytopia. The red cover utlises elements of glitch, and follows the design principles of a tabloid newspaper with a bold sans serif. 
-            The purple cover emulates a broad-sheet, with opposing serif fonts and a more subdued colour pallete." href="spec.html">
-                <img src="img/low/newspaper1.jpg" data-src="img/newspaper1.jpg" alt="Backspot" class="progressive-image">
-            </a>
-        </div>  
-                       <a class="txt" id="card">Interactive Card Game</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"  class="tooltip-trigger" data-tooltip="Web development for a digital card deck for an online course. I illusrated and designed the cards, and collaborated with another developer who created the interactive web app." href="card.html">
-                <img src="img/low/Toolkits_02.png" data-src="img/Toolkits_02.gif" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-
-        <a class="txt" id="flag">Flag Design | DCC</a>
-        <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="In collaboration with Dublin City Council, the brief for this project was to design a flag to be displayed along The River Liffey that would encourage the public to adhere to public health advice. It was vital that the flag design maintain a positive message and be visually striking. My research centered on the AIDS crisis, and I found an academic that encouraged patients to draw their lived experience. While some were dark and disturbing, others had a bright sense of optimism.
-
-
-            Using these themes I narrowed down my designs into a mixture of traditional and more expressive designs. This was the final design selected by Dublin City Council, two copies were made, both are printed on 2m by 2m fabric and displayed outside the Dublin City Council offices." href="flag.html">
-                <img src="img/low/Final-render-New-Flag-2draft-2.png" data-src="img/Final-render-New-Flag-2draft-2.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-
-        <a class="txt">Alan Turing Institute</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"class="tooltip-trigger" data-tooltip="Identity for an educational course on responsible AI development."   href="https://learn.turing.ac.uk" target="_blank">
-                <img src="img/low/alan.png" data-src="img/alan.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-
-        <!--
-        <a class="txt">Speculative Newspaper</a>
-        <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="This collaborative publication highlights a selection of articles on the theme of
-             utopian and dystopian futures. Deep diving into the future implications of the metaverse, the piece is a speculative newspaper describing 
-             the best and worst case scenarios for the future of work.The publication is reversible, with two 'sister' covers which riff on the theme of 
-             utopia and dytopia. The red cover utlises elements of glitch, and follows the design principles of a tabloid newspaper with a bold sans serif. 
-             The purple cover emulates a broad-sheet, with opposing serif fonts and a more subdued colour pallete.">
-                <img src="img/low/newspaper2.jpg" data-src="img/newspaper2.jpg" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
--->
-
-
-
-        <a class="txt">Trust Fall</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"  href="trust.html">
-                <img src="img/low/top+down.png" data-src="img/top+down.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-
-        <!--
-        <a class="txt">Gaze Film Fest</a>
-        <div tabindex="0" class="keydown">
-            <a role="link"  >
-                <img src="img/low/IMG_8530-3.JPG" data-src="img/IMG_8530-3.JPG" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
--->
-        <a class="txt">Game Design</a>
-        <div tabindex="0" class="keydown">
-            <a role="link" class="tooltip-trigger" data-tooltip="Inspired by design from the late 90's and early 00's, 'Fat Of The Land' is a video game reflecting on the ground breaking album The Fat Of The Land by the Prodigy. A dance album through and through, I wanted to create an experience to mimic the feeling of a night out in a fictional city. With grime and atmosphere to boot. Each room is anchored by a map which leads the player around the experience. Inside each venue there is a hidden disk which the players must discover. Upon finding each disk it will appear in their home page available as a custom album design to purchase. ">
-                <img src="img/low/fat.png" data-src="img/fat.png" alt="Backspot" class="progressive-image">
-            </a>
-        </div> 
-
-
-</div> 
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide"><br class="mobilehide">
-        
-
-
-    </main>
-    <!-- Footer -->
     <footer>
         <div class="social-icons">
             <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
@@ -736,340 +511,160 @@ MOBILE VERSION OF GALLERY!!!!!
             &copy; Patrick Feeney Design 2024 | All rights reserved
         </div>
     </footer>
-    </div>
-   <script>
-    
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const images = document.querySelectorAll('.progressive-image');
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Global variables
+    let activeContainerId = "container1";
+    let isDragging = false;
+    let activeElement = null, offsetX = 0, offsetY = 0;
+    let velocityX = 0, velocityY = 0;
+    const friction = 0.95;
 
-    images.forEach(image => {
-        const highResImage = new Image();
-        highResImage.src = image.getAttribute('data-src'); // Get high-res image URL
+    function setupDraggable(containerId) {
+        const container = document.getElementById(containerId);
+        const containerRect = container.getBoundingClientRect();
 
-        highResImage.onload = () => {
-            image.src = highResImage.src; // Replace low-res with high-res image
-            image.classList.remove('loading'); // Remove any loading-specific styling
-        };
-    });
-});
+        // Set positions and double-click logic
+        document.querySelectorAll('#' + containerId + ' .draggable').forEach(elem => {
+            const link = elem.querySelector('a');
+            const image = elem.querySelector('img');
 
+            function setPosition() {
+                const maxX = containerRect.width - image.offsetWidth;
+                const maxY = containerRect.height - image.offsetHeight;
+                const randomX = Math.floor(Math.random() * Math.max(0, maxX));
+                const randomY = Math.floor(Math.random() * Math.max(0, maxY));
 
-    // scripts.js
-document.addEventListener("DOMContentLoaded", function() {
-    // Simulate a delay for loading content (e.g., fetching data from an API)
-    setTimeout(function() {
-        document.getElementById("loading-screen").style.display = "none";
-        document.getElementById("content").style.display = "block";
-    }, 3000); // Adjust the time as needed for your content loading duration
-});
+                elem.style.left = `${randomX}px`;
+                elem.style.top = `${randomY}px`;
+            }
 
-// scripts.js
-window.addEventListener("load", function() {
-    // Once everything is loaded, hide the loading screen and show the content
-    document.getElementById("loading-screen").style.display = "none";
-    document.getElementById("content").style.display = "block";
-});
-
-
-
-
-
-
-
-
-
-
-document.querySelectorAll('.tooltip-trigger').forEach(element => {
-    // Create tooltip once
-    let tooltipDiv = document.createElement('div');
-    tooltipDiv.className = 'tooltip';
-    tooltipDiv.style.opacity = '0'; // Start fully transparent
-    tooltipDiv.style.position = 'fixed'; // Position fixed to the viewport
-    tooltipDiv.style.display = 'none'; // Start hidden
-    tooltipDiv.style.transition = 'opacity 0.4s'; // Transition for opacity
-    document.body.appendChild(tooltipDiv);
-
-    // Function to position tooltip in the center for mobile
-    const positionTooltipInCenter = () => {
-        tooltipDiv.style.right = '2%';
-        tooltipDiv.style.bottom = '50%';
-        tooltipDiv.style.transform = 'translate(-2%, 50%)'; // Center the tooltip
-    };
-
-    // Detect if the viewport width suggests a mobile device
-    const isMobileDevice = () => window.innerWidth <= 768;
-
-    element.addEventListener('mouseenter', function(event) {
-        setTimeout(() => { // Introduce a delay before showing the tooltip
-            tooltipDiv.textContent = this.getAttribute('data-tooltip');
-            if (!isMobileDevice()) {
-                tooltipDiv.style.left = (event.clientX + 20) + 'px'; // Position slightly offset from mouse
-                tooltipDiv.style.top = (event.clientY + 20) + 'px';
+            if (image.complete && image.naturalHeight !== 0) {
+                setPosition();
             } else {
-                positionTooltipInCenter();
+                image.onload = setPosition;
             }
-            tooltipDiv.style.display = 'block'; // Display the tooltip
-            requestAnimationFrame(() => {
-                tooltipDiv.style.opacity = '0.95'; // Start fade in
-            });
-        }, 100); // Delay in milliseconds, adjust as needed for usability
-    });
 
-    if (!isMobileDevice()) {
-        element.addEventListener('mousemove', function(event) {
-            tooltipDiv.style.left = (event.clientX + 20) + 'px';
-            tooltipDiv.style.top = (event.clientY + 20) + 'px';
-        });
-    }
-
-    element.addEventListener('mouseleave', function() {
-        tooltipDiv.style.opacity = '0'; // Start fade out
-        tooltipDiv.addEventListener('transitionend', () => tooltipDiv.style.display = 'none', { once: true });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('a');
-    const isMobileDevice = window.innerWidth <= 768;
-
-    if (isMobileDevice) {
-        links.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent navigation, typically for SPA or complex interactions
-            });
-        });
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('nav, nav.li');
-    const toggleButton = document.querySelector('.menu-toggle');
-    const dropdowns = document.querySelectorAll('.dropdown');
-    const cursor = createCustomCursor();
-
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        const cursor = createCustomCursor();
-        setupCustomCursor(cursor);
-        setupDropdowns(dropdowns);
-        setupMenuToggle(document.querySelector('.menu-toggle'), document.querySelector('nav'));
-    }
-    setupDropdownZZ(dropdowns);
-    setupAccessibility();
-    initializeParallaxEffects();
-
-});
-
-function createCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-    return cursor;
-}
-
-function setupCustomCursor(cursor) {
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = `${e.clientX - 12}px`;
-        cursor.style.top = `${e.clientY - 15}px`;
-    });
-
-    document.querySelectorAll('a, button, input').forEach(element => {
-        element.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        element.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-    });
-}
-
-// NAV FOCUS SETUP
-function setupFocusWithinNav(nav) {
-    const focusableElements = nav.querySelectorAll('a, button, li, input'); // Extend this selector to include other focusable elements if needed
-    focusableElements.forEach(element => {
-        element.addEventListener('focus', openMenu);
-    });
-}
-
-function setupMenuToggle(toggleButton, nav) {
-    let closeMenuTimeout;
-
-    // Function to open the menu
-    function openMenu() {
-        clearTimeout(closeMenuTimeout); // Clear any pending close command
-        nav.style.left = '0vw';
-        nav.style.opacity = '1';
-        toggleButton.setAttribute('aria-expanded', 'true');
-        toggleButton.classList.add('expanded');
-    }
-
-    // Function to close the menu
-    function closeMenu() {
-        clearTimeout(closeMenuTimeout); // Clear any pending open command to prevent conflicts
-        closeMenuTimeout = setTimeout(() => {
-            nav.style.left = '-20vw';
-            nav.style.opacity = '0';
-            toggleButton.setAttribute('aria-expanded', 'false');
-            toggleButton.classList.remove('expanded');
-        }, 1500); // Correct delay to 2000 milliseconds
-    }
-
-    // Toggle menu on click
-     // toggleButton.addEventListener('click', function() {
-     //    let isOpen = toggleButton.getAttribute('aria-expanded') === 'true';
-     //    if (isOpen) {
-     //        closeMenu();
-     //    } else {
-     //        openMenu();
-     //    }
-     // });
-
-    // Open menu on focus
-    toggleButton.addEventListener('focus', openMenu);
-
-    // Hover events
-    toggleButton.addEventListener('mouseenter', openMenu);
-    // Only close the menu when leaving both button and nav area
-    toggleButton.addEventListener('mouseleave', function(event) {
-        if (!nav.contains(event.relatedTarget)) {
-            closeMenu();
-        }
-    });
-    nav.addEventListener('mouseleave', function(event) {
-        if (!toggleButton.contains(event.relatedTarget)) {
-            closeMenu();
-        }
-    });
-
-    // Ensure keyboard accessibility
-    toggleButton.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault(); // Stop default action
-            toggleButton.click(); // Simulate click for keyboard
-        }
-    });
-}
-
-function setupDropdowns(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const mainLink = dropdown.querySelector('a:first-child');
-        const dropdownContent = dropdown.querySelector('.dropdown-content');
-        const dropdownLinks = dropdown.querySelectorAll('li');
-
-        mainLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            const isExpanded = dropdownContent.style.maxHeight !== '';
-            mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-            dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                mainLink.setAttribute('aria-expanded', 'false');
-                dropdownContent.style.maxHeight = '';
-            }
-        });
-
-        // Adding key press event for dropdown items
-        dropdownLinks.forEach(item => {
-            item.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    const link = item.querySelector('a');
-                    if (link) {
-                        link.click();
-                    }
+            let clickTimeout = null;
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (clickTimeout !== null) {
+                    clearTimeout(clickTimeout);
+                    clickTimeout = null;
+                    window.location.href = this.href;
+                } else {
+                    clickTimeout = setTimeout(() => {
+                        clickTimeout = null;
+                    }, 300);
                 }
             });
         });
-        
-    });
-}
-
-
-// MOBILE
-function setupDropdownZZ(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const mainLink = dropdown.querySelector('a:first-child');
-        const dropdownContent = dropdown.querySelector('.dropdown-content');
-
-        mainLink.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault(); // Prevent navigation
-                const isExpanded = dropdownContent.style.maxHeight !== '';
-                mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-                dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
-            }
-        });
-
-        // Clicking outside to close dropdown
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                mainLink.setAttribute('aria-expanded', 'false');
-                dropdownContent.style.maxHeight = '';
-            }
-        });
-    });
-}
-
-function setupAccessibility() {
-    // Enhance accessibility for keyboard navigation
-    document.querySelector('header').addEventListener('keydown', (event) => {
-        if (event.key === "Enter" || event.keyCode === 13) {
-            const link = event.target.querySelector('a');
-            if (link) {
-                link.click();
-            }
-        }
-    });
-}
-
-function initializeParallaxEffects() {
-    if (window.innerWidth > 768) {
-        applyParallaxEffect();
     }
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            applyParallaxEffect();
-        } else {
-            resetParallaxEffect();
+
+    // Initialize the first page
+    setupDraggable("container1");
+
+    // Add event listeners for drag on document level, including touch events
+    function startDrag(e) {
+        const container = document.getElementById(activeContainerId);
+        const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
+        if (target.closest && target.closest('.draggable')) {
+            activeElement = target.closest('.draggable');
+            const rect = activeElement.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+            const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+
+            offsetX = clientX - rect.left;
+            offsetY = clientY - rect.top;
+            isDragging = true;
+            velocityX = 0;
+            velocityY = 0;
+            e.preventDefault();
         }
-    });
-}
+    }
 
-function applyParallaxEffect() {
-    document.addEventListener('scroll', () => {
-        const backgrounds = [
-            { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-            { element: document.querySelector('.animate'), startScroll: 0 },
-            { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
-            { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
-        ];
+    function onMove(e) {
+        if (isDragging && activeElement) {
+            const container = document.getElementById(activeContainerId);
+            const containerRect = container.getBoundingClientRect();
+            const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+            const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
 
-        backgrounds.forEach(bg => {
-            if (bg.element) {
-                const scrollPosition = window.pageYOffset;
-                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.00002 : 1;
-                bg.element.style.transform = `scale(${scale})`;
+            const newX = clientX - containerRect.left - offsetX;
+            const newY = clientY - containerRect.top - offsetY;
+
+            velocityX = newX - parseFloat(activeElement.style.left || 0);
+            velocityY = newY - parseFloat(activeElement.style.top || 0);
+
+            activeElement.style.left = `${newX}px`;
+            activeElement.style.top = `${newY}px`;
+        }
+    }
+
+    function endDrag(e) {
+        if (isDragging) {
+            isDragging = false;
+
+            function applyMomentum() {
+                if (!isDragging && activeElement) {
+                    const container = document.getElementById(activeContainerId);
+                    const containerRect = container.getBoundingClientRect();
+
+                    let newX = parseFloat(activeElement.style.left || 0) + velocityX;
+                    let newY = parseFloat(activeElement.style.top || 0) + velocityY;
+
+                    // Apply friction
+                    velocityX *= friction;
+                    velocityY *= friction;
+
+                    // Constrain within bounds
+                    newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
+                    newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
+
+                    activeElement.style.left = `${newX}px`;
+                    activeElement.style.top = `${newY}px`;
+
+                    // Continue applying momentum while significant
+                    if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
+                        requestAnimationFrame(applyMomentum);
+                    }
+                }
             }
-        });
-    });
-}
-
-function resetParallaxEffect() {
-    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.animate'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
-    backgrounds.forEach(bg => {
-        if (bg) {
-            bg.style.transform = 'scale(1)';
+            applyMomentum();
         }
+    }
+
+    // Mouse events
+    document.addEventListener('mousedown', startDrag, false);
+    document.addEventListener('mousemove', onMove, false);
+    document.addEventListener('mouseup', endDrag, false);
+
+    // Touch events
+    document.addEventListener('touchstart', startDrag, {passive: false});
+    document.addEventListener('touchmove', onMove, {passive: false});
+    document.addEventListener('touchend', endDrag, false);
+
+    const no1 = document.getElementById("no1");
+    const no2 = document.getElementById("no2");
+
+    document.querySelector(".toggle-button1").addEventListener("click", () => {
+        no1.style.display = "none";
+        no2.style.display = "block";
+        activeContainerId = "container2";
+        setupDraggable("container2");
     });
-}
+
+    document.querySelector(".toggle-button2").addEventListener("click", () => {
+        no2.style.display = "none";
+        no1.style.display = "block";
+        activeContainerId = "container1";
+        setupDraggable("container1");
+    });
+
+});
 </script>
+
 </body>
 </html>
