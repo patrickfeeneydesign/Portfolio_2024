@@ -307,6 +307,15 @@ footer.black-background .footer-text {
     display: none;
 }
 
+/* Fade-in transition for progressive loading */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.fade-in.loaded {
+    opacity: 1;
+}
+
 /* Mobile Styles */
 @media (max-width: 600px) {
     html, body {
@@ -436,31 +445,31 @@ footer.black-background .footer-text {
 
             <div class="draggable">
                 <a href="spec.html">
-                    <img src="img/newspaper1.jpg" alt="Placeholder Image">
+                    <img src="img/low/newspaper1.jpg" data-fullsrc="img/newspaper1.jpg" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
             
             <div class="draggable">
                 <a href="pol.html">
-                    <img src="img/BLUE-jpeg-4.jpg" alt="Placeholder Image">
+                    <img src="img/low/BLUE-jpeg-4.jpg" data-fullsrc="img/BLUE-jpeg-4.jpg" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="gaze.html">
-                    <img src="img/GAZE_01.png" alt="Placeholder Image">
+                    <img src="img/low/GAZE_01.png" data-fullsrc="img/GAZE_01.png" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="trust.html">
-                    <img src="img/Slide10.jpeg" alt="Placeholder Image">
+                    <img src="img/low/Slide10.jpeg" data-fullsrc="img/Slide10.jpeg" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="newtennant.html">
-                    <img src="img/catu02.png" alt="Placeholder Image">
+                    <img src="img/low/catu02.png" data-fullsrc="img/catu02.png" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
         </div>
@@ -476,25 +485,25 @@ footer.black-background .footer-text {
 
             <div class="draggable" id="mobilehide">
                 <a href="cardgame.html">
-                    <img src="img/Toolkits_02.gif" alt="Placeholder Image">
+                    <img src="img/low/Toolkits_02.gif" data-fullsrc="img/Toolkits_02.gif" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="path.html">
-                    <img src="img/Pathfinder_Background_V1.png" alt="Placeholder Image">
+                    <img src="img/low/Pathfinder_Background_V1.png" data-fullsrc="img/Pathfinder_Background_V1.png" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="for.html">
-                    <img src="img/foresightcreative.gif" alt="Placeholder Image">
+                    <img src="img/low/foresightcreative.gif" data-fullsrc="img/foresightcreative.gif" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
 
             <div class="draggable">
                 <a href="flag.html">
-                    <img src="img/Final-render-New-Flag-2draft-2.png" alt="Placeholder Image">
+                    <img src="img/low/Final-render-New-Flag-2draft-2.png" data-fullsrc="img/Final-render-New-Flag-2draft-2.png" alt="Placeholder Image" class="fade-in">
                 </a>
             </div>
         </div>
@@ -680,6 +689,37 @@ document.addEventListener("DOMContentLoaded", () => {
         setupDraggable("container1");
     });
 
+    // Progressive image loading with Intersection Observer
+    const images = document.querySelectorAll('img[data-fullsrc]');
+    const loadHighResImage = (img) => {
+        const highResSrc = img.getAttribute('data-fullsrc');
+        if (!highResSrc) return;
+        const highResImg = new Image();
+        highResImg.src = highResSrc;
+        highResImg.onload = () => {
+            img.src = highResSrc;
+            img.classList.add('loaded');
+        };
+    };
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    loadHighResImage(img);
+                    obs.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => {
+            observer.observe(img);
+        });
+    } else {
+        // Fallback: load all images if IntersectionObserver not supported
+        images.forEach(img => loadHighResImage(img));
+    }
 });
 </script>
 
