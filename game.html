@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gameified Page</title>
+<style>
+html, body {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #0c0c0c;
+  font-family: sans-serif;
+}
+
+/* Container for images and outlines */
+#container {
+  position: absolute;
+  top: 0; left: 0; 
+  width: 100vw; 
+  height: 100vh;
+  overflow: hidden;
+  background: #0e0e0e;
+}
+
+/* Draggable images */
+.draggable {
+  position: absolute;
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 270px;
+  max-height: 170px;
+  border-radius: 5px;
+}
+.draggable img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+.draggable.dragging {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Outlines */
+.outline {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+#outline1.correct {
+  border: 2px solid rgba(229, 229, 229, 0.873);
+  border-radius: 30px;
+}
+
+#outline1 {
+    border: 2px dashed rgba(229, 229, 229, 0.873);
+
+}
+#outline2.correct {
+    border: 2px solid rgba(97, 168, 255, 0.873);
+    border-radius: 30px;
+}
+
+#outline2 {
+    border: 2px dashed rgba(97, 168, 255, 0.873);
+
+}
+#outline3.correct {
+    border: 2px solid rgba(234, 255, 101, 0.873);
+    border-radius: 30px;
+}
+
+
+#outline3 {
+    border: 2px dashed rgba(234, 255, 101, 0.873);
+
+}
+
+#outline4.correct {
+    border: 2px solid rgba(141, 38, 169, 0.873);
+    border-radius: 30px;
+}
+
+
+#outline4 {
+    border: 2px dashed rgba(141, 38, 169, 0.873);
+
+}
+
+#outline5.correct {
+    border: 2px solid rgba(189, 151, 255, 0.873);
+    border-radius: 30px;
+}
+
+
+#outline5 {
+    border: 2px dashed rgba(189, 151, 255, 0.873);
+}
+/* Scoreboard and Timer remain hidden */
+#scoreboard {
+  display: none;
+}
+#timer {
+  display: none;
+}
+
+/* Restart button */
+#restartBtn {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: #b472ff;
+  color: #111;
+  padding: 0.5em 1em;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 10px;
+  z-index: 10000;
+}
+#restartBtn:hover {
+  background: #a35cf8;
+}
+
+/* Instructions and Success overlays */
+#gameInstructionOverlay,
+#successOverlay {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.instruction-content {
+  background: #1f1f1f;
+  color: #eee;
+  padding: 2rem;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 20px;
+}
+.instruction-content h2 {
+  margin-top: 0;
+}
+.instruction-content button {
+  margin-top: 1em;
+  padding: 0.7em 1.2em;
+  background: #b472ff;
+  color: #111;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.instruction-content button:hover {
+  background: #a35cf8;
+}
+
+#gameInstructionOverlay { display: flex; }
+</style>
+</head>
+<body>
+
+<button id="restartBtn">Restart</button>
+
+<!-- Hidden scoreboard and timer -->
+<div id="timer">Time: <span id="timerValue">0</span>s</div>
+<div id="scoreboard">Score: <span id="scoreValue">0</span></div>
+
+<div id="gameInstructionOverlay">
+  <div class="instruction-content">
+    <h2>How to Play</h2>
+    <p>Drag each image into its matching dotted outline. When correct, the outline will solidify and you'll earn a point. Arrange them all correctly to win!</p>
+    <button id="closeGameInstructionBtn">Got it!</button>
+  </div>
+</div>
+
+<div id="container"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById('container');
+  const scoreValueElem = document.getElementById('scoreValue');
+  const gameInstructionOverlay = document.getElementById('gameInstructionOverlay');
+  const closeGameInstructionBtn = document.getElementById('closeGameInstructionBtn');
+  const timerValueElem = document.getElementById('timerValue');
+  const restartBtn = document.getElementById('restartBtn');
+
+  let gameModeActive = false;
+  let score = 0;
+  let timer = 0;
+  let timerInterval = null;
+
+  // Define puzzle pairs
+  const puzzlePairs = [
+    { imgSrc: 'img/newspaper1.jpg', imgId: 'img1', outlineId: 'outline1' },
+    { imgSrc: 'img/BLUE-jpeg-4.jpg', imgId: 'img2', outlineId: 'outline2' },
+    { imgSrc: 'img/GAZE_01.png', imgId: 'img3', outlineId: 'outline3' },
+    { imgSrc: 'img/low/Slide10.jpeg', imgId: 'img4', outlineId: 'outline4' },
+    { imgSrc: 'img/low/catu02.png', imgId: 'img5', outlineId: 'outline5' }
+  ];
+
+  let imageElements = [];
+  let outlineElements = [];
+
+  function overlapsExisting(existing, x, y, w, h) {
+    for (let e of existing) {
+      if (x < e.x + e.w && x + w > e.x && y < e.y + e.h && y + h > e.y) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function placeNonOverlappingElement(width, height, existingElements, containerRect) {
+    const maxAttempts = 2000;
+    for (let i = 0; i < maxAttempts; i++) {
+      const randomX = Math.floor(Math.random() * (containerRect.width - width));
+      const randomY = Math.floor(Math.random() * (containerRect.height - height));
+      if (!overlapsExisting(existingElements, randomX, randomY, width, height)) {
+        return { x: randomX, y: randomY };
+      }
+    }
+    return null;
+  }
+
+  function placeElements() {
+    container.innerHTML = '';
+    imageElements = [];
+    outlineElements = [];
+
+    const containerRect = container.getBoundingClientRect();
+    let placedOutlines = [];
+    let placedImages = [];
+
+    // Place outlines
+    for (let pair of puzzlePairs) {
+      const outline = document.createElement('div');
+      outline.classList.add('outline');
+      outline.id = pair.outlineId;
+
+      const pos = placeNonOverlappingElement(300, 200, placedOutlines, containerRect);
+      if (pos) {
+        outline.style.left = pos.x + 'px';
+        outline.style.top = pos.y + 'px';
+        container.appendChild(outline);
+        placedOutlines.push({x: pos.x, y: pos.y, w:300, h:200, id: pair.outlineId});
+      } else {
+        console.warn("Couldn't find position for outline, retrying...");
+        location.reload();
+        return;
+      }
+
+      outlineElements.push(outline);
+    }
+
+    // Place images
+    for (let pair of puzzlePairs) {
+      const imgWrapper = document.createElement('div');
+      imgWrapper.classList.add('draggable');
+      imgWrapper.id = pair.imgId;
+      const img = document.createElement('img');
+      img.src = pair.imgSrc;
+      imgWrapper.appendChild(img);
+
+      const pos = placeNonOverlappingElement(270, 170, [...placedOutlines, ...placedImages], containerRect);
+      if (pos) {
+        imgWrapper.style.left = pos.x + 'px';
+        imgWrapper.style.top = pos.y + 'px';
+        container.appendChild(imgWrapper);
+        placedImages.push({x: pos.x, y: pos.y, w:270, h:170});
+      } else {
+        console.warn("Couldn't find position for image, retrying...");
+        location.reload();
+        return;
+      }
+
+      imageElements.push(imgWrapper);
+    }
+
+    setupDragging();
+    // Removed code that shows scoreboard or timer
+  }
+
+  let isDragging = false;
+  let activeElement = null;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  function startDrag(e) {
+    if (!gameModeActive) return;
+    const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
+    const draggable = target.closest('.draggable');
+    if (draggable) {
+      activeElement = draggable;
+      const rect = activeElement.getBoundingClientRect();
+      const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+      const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+
+      offsetX = clientX - rect.left;
+      offsetY = clientY - rect.top;
+      isDragging = true;
+      activeElement.classList.add('dragging');
+      e.preventDefault();
+    }
+  }
+
+  function onMove(e) {
+    if (isDragging && activeElement) {
+      const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+      const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+      const containerRect = container.getBoundingClientRect();
+
+      let newX = clientX - containerRect.left - offsetX;
+      let newY = clientY - containerRect.top - offsetY;
+
+      newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
+      newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
+
+      activeElement.style.left = `${newX}px`;
+      activeElement.style.top = `${newY}px`;
+    }
+  }
+
+  function endDrag() {
+    if (isDragging && activeElement) {
+      activeElement.classList.remove('dragging');
+      checkDrop(activeElement);
+      activeElement = null;
+    }
+    isDragging = false;
+  }
+
+  function checkDrop(imageElem) {
+    const pair = puzzlePairs.find(p => p.imgId === imageElem.id);
+    if (!pair) return;
+
+    const outlineElem = document.getElementById(pair.outlineId);
+    if (!outlineElem) return;
+
+    const imgRect = imageElem.getBoundingClientRect();
+    const outlineRect = outlineElem.getBoundingClientRect();
+
+    const imgCenterX = (imgRect.left + imgRect.right) / 2;
+    const imgCenterY = (imgRect.top + imgRect.bottom) / 2;
+
+    if (
+      imgCenterX > outlineRect.left &&
+      imgCenterX < outlineRect.right &&
+      imgCenterY > outlineRect.top &&
+      imgCenterY < outlineRect.bottom
+    ) {
+      outlineElem.classList.add('correct');
+      
+      const containerRect = container.getBoundingClientRect();
+      const outlineWidth = outlineElem.offsetWidth;
+      const outlineHeight = outlineElem.offsetHeight;
+      const imageWidth = imageElem.offsetWidth;
+      const imageHeight = imageElem.offsetHeight;
+
+      const newLeft = (outlineRect.left - containerRect.left) + (outlineWidth - imageWidth)/2;
+      const newTop = (outlineRect.top - containerRect.top) + (outlineHeight - imageHeight)/2;
+
+      imageElem.style.left = newLeft + 'px';
+      imageElem.style.top = newTop + 'px';
+
+      imageElem.style.pointerEvents = 'none';
+      incrementScore();
+    }
+  }
+
+  function incrementScore() {
+    score++;
+    scoreValueElem.textContent = score;
+    if (score === puzzlePairs.length) {
+      showSuccessOverlay();
+    }
+  }
+
+  function startTimer() {
+    timer = 0;
+    timerInterval = setInterval(() => {
+      timer++;
+    }, 1000);
+  }
+
+  function showSuccessOverlay() {
+    clearInterval(timerInterval);
+
+    const successOverlay = document.createElement('div');
+    successOverlay.id = 'successOverlay';
+    successOverlay.style.display = 'flex';
+
+    successOverlay.innerHTML = `
+      <div class="instruction-content">
+        <h2>Congratulations!</h2>
+        <p>You completed the puzzle.</p>
+        <button id="playAgainBtn">Play Again</button>
+        <button id="HomeBtn">Go Home</button>
+      </div>
+    `;
+
+    document.body.appendChild(successOverlay);
+
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    playAgainBtn.addEventListener('click', () => {
+      location.reload();
+    });
+
+    const HomeBtn = document.getElementById('HomeBtn');
+    HomeBtn.addEventListener('click', () => {
+  location.href = 'index.html'; // This will navigate to 'index.html'
+});
+  }
+
+  gameInstructionOverlay.style.display = 'flex';
+
+  closeGameInstructionBtn.addEventListener('click', () => {
+    gameInstructionOverlay.style.display = 'none';
+    gameModeActive = true;
+    score = 0;
+    scoreValueElem.textContent = score;
+    placeElements();
+    startTimer();
+  });
+
+  restartBtn.addEventListener('click', () => {
+    location.reload();
+  });
+
+  document.addEventListener('mousedown', startDrag, false);
+  document.addEventListener('mousemove', onMove, false);
+  document.addEventListener('mouseup', endDrag, false);
+
+  document.addEventListener('touchstart', startDrag, {passive: false});
+  document.addEventListener('touchmove', onMove, {passive: false});
+  document.addEventListener('touchend', endDrag, false);
+});
+</script>
+</body>
+</html>
