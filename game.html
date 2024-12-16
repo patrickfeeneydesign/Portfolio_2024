@@ -365,7 +365,6 @@ document.addEventListener("DOMContentLoaded", () => {
         placedImages.push({x: pos.x, y: pos.y, w:imageW, h:imageH});
       } else {
         console.warn("Couldn't find position for image, retrying...");
-        location.reload();
         return;
       }
 
