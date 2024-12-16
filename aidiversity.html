@@ -18,40 +18,37 @@
     <style>
         @media screen and (max-width: 768px) {
 
-               /* MAIN HEADER */
-   header {
+
+            header {
     position: fixed;
     text-align: left;
-     border-radius: 0 0 40px 40px;
-     background-color:   rgb(24, 24, 24);
-     right: -9vw;
-     top: -0.1vw;
+    border-radius: 0 0 40px 40px;
+    background-color: rgb(180, 114, 255);
+    right: -9vw;
+    top: -0.1vw;
     margin: 0;
     padding: 0;
     z-index: 1000;
 }
 
-    /* MAIN HEADER */
-    header.firstpage {
-        position: fixed;
-        text-align: left;
-        margin: 0;
-        height: 3vw;
-        padding-left: 1vw;
-        padding-right: 10vw;
-        padding-top: 0.8vw;
-        padding-bottom: 0.8vw;
-        z-index: 4000;
-        align-content: center;
-    }
-
+header.firstpage {
+    position: fixed;
+    text-align: left;
+    margin: 0;
+    height: 3vw;
+    padding-left: 1vw;
+    padding-right: 10vw;
+    padding-top: 0.8vw;
+    padding-bottom: 0.8vw;
+    z-index: 4000;
+    align-content: center;
+}
 
 header img {
     height: 1vw;
     width: auto;
     filter: invert(100%);
     padding: 0 0 0 1vw;
-    -moz-transition: all 0.3s; /* Mozilla specific transition */
     transition: all 0.3s;
 }
 
@@ -65,7 +62,7 @@ header img {
         #backButton {
             position: fixed;
             padding: 2vw 3vw 2vw 3vw;
-            top: 2vw;
+            top: 0;
             left: 0;
             font-size: 4vw;
             font-weight: 600;
@@ -323,13 +320,7 @@ figcaption {
     </style>
 </head>
 <body>
-    <button id="backButton" onclick="history.back();">&#60; Exit</button>
-
-    <header tabindex="0" aria-label="Home Button" class="firstpage">
-        <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img class="mobilehide" src="img/logo.png">
-        </a>
-    </header>
+    <button id="backButton" onclick="history.back();">&#x2190;</button>
 
 
     <div class="img">
