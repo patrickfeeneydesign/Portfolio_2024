@@ -404,6 +404,10 @@ footer.black-background .footer-text {
         display: none;
     }
 
+    .mobilehide {
+        display: none;
+    }
+
     .toggle-button1, .toggle-button2 {
         font-size: 3vw;
         padding: 3vw;
@@ -423,7 +427,7 @@ footer.black-background .footer-text {
 
     .instruction-content {
     width: 55vw !important;
-    padding: 10px !important;
+    padding: 60px 40px 60px 40px !important;
     border-radius: 20px;
 }
 
@@ -499,10 +503,17 @@ footer.black-background .footer-text {
 .close-overlay-btn:hover {
     background: #a35cf8;
 }
+@media (min-width: 600px) {
+    .desktophide {
+    display: none;
+}
+}
+
     </style>
 </head>
 <body>
-    <button id="backButton" onclick="location.href='game.html';">&#x1F47E;</button>
+    <button id="backButton" class="desktophide">&#x1F47E;</button>
+    <button id="backButton" onclick="location.href='game.html';" class="mobilehide">&#x1F47E;</button>
 
     <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
