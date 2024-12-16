@@ -163,6 +163,18 @@ html, body {
 }
 
 #gameInstructionOverlay { display: flex; }
+
+/* Reduce sizes on smaller screens */
+@media (max-width: 600px) {
+  .draggable {
+    max-width: 150px;
+    max-height: 100px;
+  }
+  .outline {
+    width: 170px;
+    height: 110px;
+  }
+}
 </style>
 </head>
 <body>
@@ -196,6 +208,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let score = 0;
   let timer = 0;
   let timerInterval = null;
+
+  // Determine sizes based on screen width for placing elements
+  let outlineW = 300;
+  let outlineH = 200;
+  let imageW = 270;
+  let imageH = 170;
+
+  if (window.innerWidth < 600) {
+    // Smaller sizes for mobile
+    outlineW = 170;
+    outlineH = 110;
+    imageW = 150;
+    imageH = 100;
+  }
 
   // Define puzzle pairs
   const puzzlePairs = [
@@ -245,12 +271,12 @@ document.addEventListener("DOMContentLoaded", () => {
       outline.classList.add('outline');
       outline.id = pair.outlineId;
 
-      const pos = placeNonOverlappingElement(300, 200, placedOutlines, containerRect);
+      const pos = placeNonOverlappingElement(outlineW, outlineH, placedOutlines, containerRect);
       if (pos) {
         outline.style.left = pos.x + 'px';
         outline.style.top = pos.y + 'px';
         container.appendChild(outline);
-        placedOutlines.push({x: pos.x, y: pos.y, w:300, h:200, id: pair.outlineId});
+        placedOutlines.push({x: pos.x, y: pos.y, w:outlineW, h:outlineH, id: pair.outlineId});
       } else {
         console.warn("Couldn't find position for outline, retrying...");
         location.reload();
@@ -269,12 +295,12 @@ document.addEventListener("DOMContentLoaded", () => {
       img.src = pair.imgSrc;
       imgWrapper.appendChild(img);
 
-      const pos = placeNonOverlappingElement(270, 170, [...placedOutlines, ...placedImages], containerRect);
+      const pos = placeNonOverlappingElement(imageW, imageH, [...placedOutlines, ...placedImages], containerRect);
       if (pos) {
         imgWrapper.style.left = pos.x + 'px';
         imgWrapper.style.top = pos.y + 'px';
         container.appendChild(imgWrapper);
-        placedImages.push({x: pos.x, y: pos.y, w:270, h:170});
+        placedImages.push({x: pos.x, y: pos.y, w:imageW, h:imageH});
       } else {
         console.warn("Couldn't find position for image, retrying...");
         location.reload();
@@ -285,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     setupDragging();
-    // Removed code that shows scoreboard or timer
   }
 
   let isDragging = false;
@@ -415,8 +440,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const HomeBtn = document.getElementById('HomeBtn');
     HomeBtn.addEventListener('click', () => {
-  location.href = 'index.html'; // This will navigate to 'index.html'
-});
+      location.href = 'index.html'; // This will navigate to 'index.html'
+    });
   }
 
   gameInstructionOverlay.style.display = 'flex';
