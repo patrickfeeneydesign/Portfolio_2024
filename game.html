@@ -13,6 +13,45 @@ html, body {
   font-family: sans-serif;
 }
 
+
+
+
+header {
+    position: fixed;
+    text-align: left;
+    border-radius: 0 0 40px 40px;
+    background-color: rgb(180, 114, 255);
+    right: -9vw;
+    top: -0.1vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+header.firstpage {
+    position: fixed;
+    text-align: left;
+    margin: 0;
+    height: 3vw;
+    padding-left: 1vw;
+    padding-right: 10vw;
+    padding-top: 0.8vw;
+    padding-bottom: 0.8vw;
+    z-index: 4000;
+    align-content: center;
+}
+
+header img {
+    height: 1vw;
+    width: auto;
+    filter: invert(100%);
+    padding: 0 0 0 1vw;
+    transition: all 0.3s;
+}
+
+
+
+
 /* Container for images and outlines */
 #container {
   position: absolute;
@@ -207,6 +246,12 @@ html, body {
 <body>
 
 <button id="restartBtn">Restart</button>
+
+<header tabindex="0" aria-label="Home Button" class="firstpage">
+  <a href="index.html" style="display: inline-block; cursor: pointer;">
+      <img src="img/logo.png" alt="Logo">
+  </a>
+</header>
 
 <!-- Hidden scoreboard and timer -->
 <div id="timer">Time: <span id="timerValue">0</span>s</div>
