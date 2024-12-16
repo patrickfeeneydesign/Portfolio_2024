@@ -13,9 +13,6 @@ html, body {
   font-family: sans-serif;
 }
 
-
-
-
 header {
     position: fixed;
     text-align: left;
@@ -49,9 +46,6 @@ header img {
     transition: all 0.3s;
 }
 
-
-
-
 /* Container for images and outlines */
 #container {
   position: absolute;
@@ -67,7 +61,8 @@ header img {
   position: absolute;
   cursor: grab;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  max-width: 270px;
+  max-width: 19vw;
+  width: 270px;
   max-height: 170px;
   border-radius: 5px;
 }
@@ -86,13 +81,15 @@ header img {
 .outline {
   position: absolute;
   width: 300px;
+  max-width: 18vw;
   height: 200px;
+  max-height: 11vw;
   box-sizing: border-box;
   transition: border 0.3s ease;
   color: #b4b4b4;
   border-radius: 10px;
   font-weight: 300;
-  font-size: 1.3rem;
+  font-size: 1rem;
   padding: 1vw;
 }
 
@@ -103,8 +100,8 @@ header img {
 
 #outline1 {
     border: 1px dashed rgba(229, 229, 229, 0.873);
-
 }
+
 #outline2.correct {
     border: 2px solid rgba(97, 168, 255, 0.873);
     border-radius: 30px;
@@ -112,8 +109,8 @@ header img {
 
 #outline2 {
     border: 1px dashed rgba(97, 168, 255, 0.873);
-
 }
+
 #outline3.correct {
     border: 2px solid rgba(234, 255, 101, 0.873);
     border-radius: 30px;
@@ -122,7 +119,6 @@ header img {
 
 #outline3 {
     border: 1px dashed rgba(234, 255, 101, 0.873);
-
 }
 
 #outline4.correct {
@@ -133,7 +129,6 @@ header img {
 
 #outline4 {
     border: 1px dashed rgba(141, 38, 169, 0.873);
-
 }
 
 #outline5.correct {
@@ -280,6 +275,9 @@ header img {
     let imageW = 270;
     let imageH = 170;
   
+    // Flag to determine if overlaps should be allowed
+    const allowOverlap = window.innerWidth < 600;
+  
     if (window.innerWidth < 600) {
       // Smaller sizes for mobile
       outlineW = 170;
@@ -335,6 +333,13 @@ header img {
     }
   
     function placeNonOverlappingElement(width, height, existingElements, containerRect) {
+      if (allowOverlap) {
+        // If overlapping is allowed, place the element without checking
+        const randomX = Math.floor(Math.random() * (containerRect.width - width));
+        const randomY = Math.floor(Math.random() * (containerRect.height - height));
+        return { x: randomX, y: randomY };
+      }
+  
       const maxAttempts = 2000;
       for (let i = 0; i < maxAttempts; i++) {
         const randomX = Math.floor(Math.random() * (containerRect.width - width));
@@ -343,7 +348,10 @@ header img {
           return { x: randomX, y: randomY };
         }
       }
-      return null;
+      // If no non-overlapping position is found, allow overlapping
+      const randomX = Math.floor(Math.random() * (containerRect.width - width));
+      const randomY = Math.floor(Math.random() * (containerRect.height - height));
+      return { x: randomX, y: randomY };
     }
   
     function placeElements() {
@@ -592,7 +600,7 @@ header img {
     document.addEventListener('touchmove', onMove, {passive: false});
     document.addEventListener('touchend', endDrag, false);
   });
-  </script>
-  
+</script>
+
 </body>
 </html>
