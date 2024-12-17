@@ -574,7 +574,7 @@ header img {
         <div class="instruction-content">
           <h2>Congratulations!</h2>
           <p>You completed the game.</p>
-          <button id="replayBtn">Replay Level 3</button>
+          <button id="replayBtn">Replay</button>
           <button id="HomeBtn">Go Home</button>
         </div>
       `;
@@ -583,7 +583,7 @@ header img {
   
       const replayBtn = document.getElementById('replayBtn');
       replayBtn.addEventListener('click', () => {
-        location.reload(); // Reload Level 3
+        location.href = 'game.html'; // Navigate to Home
       });
   
       const HomeBtn = document.getElementById('HomeBtn');
