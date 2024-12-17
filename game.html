@@ -62,8 +62,8 @@ header img {
   cursor: grab;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   max-width: 15vw;
-  min-width: 200px;
-  min-height: 140px;
+  min-width: 100px;
+  min-height: 70px;
   border-radius: 5px;
 }
 .draggable img {
@@ -81,15 +81,15 @@ header img {
 .outline {
   position: absolute;
   width: 18vw;
-  min-width: 200px;
-  min-height: 140px;
+  min-width: 100px;
+  min-height: 70px;
   height: 12vw;
   box-sizing: border-box;
   transition: border 0.3s ease;
   color: #b4b4b4;
   border-radius: 10px;
   font-weight: 300;
-  font-size: 1.1vw;
+  font-size: clamp(12px, 1.1vw, 30px); /* Ensures a min size of 16px and max of 24px */
   padding: 1.6vw;
 }
 
@@ -193,6 +193,7 @@ header img {
 .instruction-content h2 {
   margin-top: 0;
 }
+
 .instruction-content button {
   margin-top: 1em;
   padding: 0.7em 1.2em;
@@ -222,6 +223,9 @@ header img {
   .popup {
     width: 60vw !important;
   }
+  .instruction-content p {
+line-height: 5vw !important;
+}
 }
 
 </style>
