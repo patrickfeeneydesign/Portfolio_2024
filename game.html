@@ -61,9 +61,9 @@ header img {
   position: absolute;
   cursor: grab;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  max-width: 19vw;
-  width: 270px;
-  max-height: 170px;
+  max-width: 15vw;
+  min-width: 200px;
+  min-height: 140px;
   border-radius: 5px;
 }
 .draggable img {
@@ -80,65 +80,70 @@ header img {
 /* Outlines */
 .outline {
   position: absolute;
-  width: 300px;
-  max-width: 18vw;
-  height: 200px;
-  max-height: 11vw;
+  width: 18vw;
+  min-width: 200px;
+  min-height: 140px;
+  height: 12vw;
   box-sizing: border-box;
   transition: border 0.3s ease;
   color: #b4b4b4;
   border-radius: 10px;
   font-weight: 300;
-  font-size: 1rem;
-  padding: 1vw;
+  font-size: 1.1vw;
+  padding: 1.6vw;
 }
 
 #outline1.correct {
-  border: 2px solid rgba(229, 229, 229, 0.873);
+  border: 2px solid #e5e5e5df;
+  background-color: #e5e5e581;
   border-radius: 30px;
 }
 
 #outline1 {
-    border: 1px dashed rgba(229, 229, 229, 0.873);
+    border: 1px dashed #e5e5e5df;
 }
 
 #outline2.correct {
-    border: 2px solid rgba(97, 168, 255, 0.873);
+    border: 2px solid #61a8ffdf;
+    background-color: #61a8ff84;
     border-radius: 30px;
 }
 
 #outline2 {
-    border: 1px dashed rgba(97, 168, 255, 0.873);
+    border: 1px dashed #61a8ffdf;
 }
 
 #outline3.correct {
-    border: 2px solid rgba(234, 255, 101, 0.873);
+    border: 2px solid #eaff65df;
+    background-color: #eaff6583;
     border-radius: 30px;
 }
 
 
 #outline3 {
-    border: 1px dashed rgba(234, 255, 101, 0.873);
+    border: 1px dashed #eaff65df;
 }
 
 #outline4.correct {
-    border: 2px solid rgba(141, 38, 169, 0.873);
+    border: 2px solid #8d26a9df;
+    background-color: #8d26a981;
     border-radius: 30px;
 }
 
 
 #outline4 {
-    border: 1px dashed rgba(141, 38, 169, 0.873);
+    border: 1px dashed #8d26a9df;
 }
 
 #outline5.correct {
-    border: 2px solid rgba(189, 151, 255, 0.873);
+    border: 2px solid #bd97ffdf;
+    background-color: #bd97ff7e;
     border-radius: 30px;
 }
 
 
 #outline5 {
-    border: 1px dashed rgba(189, 151, 255, 0.873);
+    border: 1px dashed #bd97ffdf;
 }
 /* Scoreboard and Timer remain hidden */
 #scoreboard {
@@ -539,7 +544,7 @@ header img {
       successOverlay.innerHTML = `
         <div class="instruction-content">
           <h2>Congratulations!</h2>
-          <p>You completed the puzzle.</p>
+          <p>You matched the projects correctly.</p>
           <button id="playAgainBtn">Play Again</button>
           <button id="HomeBtn">Go Home</button>
         </div>
