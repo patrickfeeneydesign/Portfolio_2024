@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Playing The 'Port</title>
+<title>Playing The 'Port - Level 1</title>
 <style>
 html, body {
   margin: 0; padding: 0;
@@ -119,7 +119,6 @@ header img {
     border-radius: 30px;
 }
 
-
 #outline3 {
     border: 1px dashed #eaff65df;
 }
@@ -130,7 +129,6 @@ header img {
     border-radius: 30px;
 }
 
-
 #outline4 {
     border: 1px dashed #8d26a9df;
 }
@@ -140,7 +138,6 @@ header img {
     background-color: #bd97ff7e;
     border-radius: 30px;
 }
-
 
 #outline5 {
     border: 1px dashed #bd97ffdf;
@@ -224,10 +221,9 @@ header img {
     width: 60vw !important;
   }
   .instruction-content p {
-line-height: 5vw !important;
+    line-height: 5vw !important;
+  }
 }
-}
-
 </style>
 </head>
 <body>
@@ -278,16 +274,17 @@ line-height: 5vw !important;
     let timer = 0;
     let timerInterval = null;
   
-    // Determine sizes based on screen width for placing elements
+    // Define sizes based on screen width for placing elements
     let outlineW = 300;
     let outlineH = 200;
     let imageW = 270;
     let imageH = 170;
   
-    // Flag to determine if overlaps should be allowed
-    const allowOverlap = window.innerWidth < 600;
+    // Detect if the device is mobile
+    const isMobile = window.innerWidth < 600;
+    const allowOverlap = isMobile; // Allow overlaps on mobile as per original code
   
-    if (window.innerWidth < 600) {
+    if (isMobile) {
       // Smaller sizes for mobile
       outlineW = 170;
       outlineH = 110;
@@ -332,6 +329,25 @@ line-height: 5vw !important;
     let imageElements = [];
     let outlineElements = [];
   
+    // Predefined fixed positions for mobile devices
+    const fixedPositionsMobile = {
+      outlines: [
+        { left: '10%', top: '20%' },
+        { left: '60%', top: '20%' },
+        { left: '10%', top: '60%' },
+        { left: '60%', top: '60%' },
+        { left: '35%', top: '80%' }
+      ],
+      images: [
+        { left: '10%', top: '80%' },
+        { left: '60%', top: '80%' },
+        { left: '10%', top: '30%' },
+        { left: '60%', top: '30%' },
+        { left: '35%', top: '10%' }
+      ]
+    };
+  
+    // Function to check overlaps (used for non-mobile)
     function overlapsExisting(existing, x, y, w, h) {
       for (let e of existing) {
         if (x < e.x + e.w && x + w > e.x && y < e.y + e.h && y + h > e.y) {
@@ -341,6 +357,7 @@ line-height: 5vw !important;
       return false;
     }
   
+    // Function to place non-overlapping elements (used for non-mobile)
     function placeNonOverlappingElement(width, height, existingElements, containerRect) {
       if (allowOverlap) {
         // If overlapping is allowed, place the element without checking
@@ -373,7 +390,8 @@ line-height: 5vw !important;
       let placedImages = [];
   
       // Place outlines
-      for (let pair of puzzlePairs) {
+      for (let i = 0; i < puzzlePairs.length; i++) {
+        const pair = puzzlePairs[i];
         const outline = document.createElement('div');
         outline.classList.add('outline');
         outline.id = pair.outlineId;
@@ -384,16 +402,26 @@ line-height: 5vw !important;
         messageDiv.textContent = pair.message;
         outline.appendChild(messageDiv);
   
-        const pos = placeNonOverlappingElement(outlineW, outlineH, placedOutlines, containerRect);
-        if (pos) {
-          outline.style.left = pos.x + 'px';
-          outline.style.top = pos.y + 'px';
+        if (isMobile) {
+          // Assign fixed positions for mobile
+          const pos = fixedPositionsMobile.outlines[i];
+          outline.style.left = pos.left;
+          outline.style.top = pos.top;
           container.appendChild(outline);
-          placedOutlines.push({x: pos.x, y: pos.y, w:outlineW, h:outlineH, id: pair.outlineId});
+          // No need to track placedOutlines for overlapping on mobile
         } else {
-          console.warn("Couldn't find position for outline, retrying...");
-          location.reload();
-          return;
+          // Assign random positions for non-mobile
+          const pos = placeNonOverlappingElement(outlineW, outlineH, placedOutlines, containerRect);
+          if (pos) {
+            outline.style.left = pos.x + 'px';
+            outline.style.top = pos.y + 'px';
+            container.appendChild(outline);
+            placedOutlines.push({x: pos.x, y: pos.y, w:outlineW, h:outlineH, id: pair.outlineId});
+          } else {
+            console.warn("Couldn't find position for outline, retrying...");
+            location.reload();
+            return;
+          }
         }
   
         // Add 'visible' class to show the message
@@ -403,7 +431,8 @@ line-height: 5vw !important;
       }
   
       // Place images
-      for (let pair of puzzlePairs) {
+      for (let i = 0; i < puzzlePairs.length; i++) {
+        const pair = puzzlePairs[i];
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('draggable');
         imgWrapper.id = pair.imgId;
@@ -411,6 +440,7 @@ line-height: 5vw !important;
         img.src = pair.imgSrc;
         imgWrapper.appendChild(img);
   
+        // Assign random positions for images regardless of device
         const pos = placeNonOverlappingElement(imageW, imageH, [...placedOutlines, ...placedImages], containerRect);
         if (pos) {
           imgWrapper.style.left = pos.x + 'px';
@@ -558,7 +588,7 @@ line-height: 5vw !important;
   
       const playAgainBtn = document.getElementById('playAgainBtn');
       playAgainBtn.addEventListener('click', () => {
-        location.href = 'game2.html'; // This will navigate to 'index.html'
+        location.href = 'game2.html'; // This will navigate to 'game2.html'
       });
   
       const HomeBtn = document.getElementById('HomeBtn');
