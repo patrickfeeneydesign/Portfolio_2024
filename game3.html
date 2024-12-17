@@ -94,56 +94,56 @@ header img {
 }
 
 #outline1.correct {
-  border: 2px solid #e5e5e5df;
-  background-color: #e5e5e581;
+  border: 2px solid #61a8ffdf;
+  background-color: #61a8ff3b;
   border-radius: 30px;
 }
 
 #outline1 {
-    border: 1px dashed #e5e5e5df;
+    border: 1px dashed #61a8ffdf;
 }
 
 #outline2.correct {
-    border: 2px solid #61a8ffdf;
-    background-color: #61a8ff84;
+    border: 2px solid #bd97ffdf;
+    background-color: #bd97ff35;
     border-radius: 30px;
 }
 
 #outline2 {
-    border: 1px dashed #61a8ffdf;
+    border: 1px dashed #bd97ffdf;
 }
 
 #outline3.correct {
-    border: 2px solid #eaff65df;
-    background-color: #eaff6583;
+    border: 2px solid #f461ffdf;
+    background-color: #f461ff3c;
     border-radius: 30px;
 }
 
 
 #outline3 {
-    border: 1px dashed #eaff65df;
+    border: 1px dashed #f461ffdf;
 }
 
 #outline4.correct {
-    border: 2px solid #8d26a9df;
-    background-color: #8d26a981;
+    border: 2px solid #61a8ffdf;
+    background-color: #61a8ffdf;
     border-radius: 30px;
 }
 
 
 #outline4 {
-    border: 1px dashed #8d26a9df;
+    border: 1px dashed #61a8ffdf;
 }
 
 #outline5.correct {
-    border: 2px solid #bd97ffdf;
-    background-color: #bd97ff7e;
+    border: 2px solid #e3e3e3df;
+    background-color: #e3e3e32a;
     border-radius: 30px;
 }
 
 
 #outline5 {
-    border: 1px dashed #bd97ffdf;
+    border: 1px dashed #e3e3e3df;
 }
 /* Scoreboard and Timer remain hidden */
 #scoreboard {
@@ -242,7 +242,7 @@ header img {
 
 <div id="gameInstructionOverlay">
   <div class="instruction-content">
-    <h2>Level 1</h2>
+    <h2>Level 3</h2>
     <p style="line-height: 1.5vw;"><span style="color:#b472ff; font-weight: 800;">Drag</span> each image into its<br> matching <span style="color:#b472ff; font-weight: 800;">description</span> to win.</p>
     <button id="closeGameInstructionBtn">Got it!</button>
   </div>
@@ -294,34 +294,34 @@ header img {
     // Define puzzle pairs with associated messages
     const puzzlePairs = [
       { 
-        imgSrc: 'img/newspaper1.jpg', 
+        imgSrc: 'img/gallery2/AU7A8378.png', 
         imgId: 'img1', 
         outlineId: 'outline1',
-        message: "A piece of speculative ephemera from a dystopian future."
+        message: "I point without fingers, direct without words."
       },
       { 
-        imgSrc: 'img/BLUE-jpeg-4.jpg', 
+        imgSrc: 'img/Silver-Touch--4.jpg', 
         imgId: 'img2', 
         outlineId: 'outline2',
-        message: "You could do cross division on my cover."
+        message: "You see yourself through my eyes."
       },
       { 
-        imgSrc: 'img/GAZE_01.png', 
+        imgSrc: 'img/newspaper2.jpg', 
         imgId: 'img3', 
         outlineId: 'outline3',
-        message: "My cover shines like the ___."
+        message: "Something you'd wrap your chips in."
       },
       { 
-        imgSrc: 'img/low/Slide10.jpeg', 
+        imgSrc: 'img/top+down.png', 
         imgId: 'img4', 
         outlineId: 'outline4',
-        message: "It looks like I'd be fun to play with."
+        message: "I'm more at home in a children's play area."
       },
       { 
-        imgSrc: 'img/low/catu02.png', 
+        imgSrc: 'img/GAZE-06___default_2000_1333.jpg', 
         imgId: 'img5', 
         outlineId: 'outline5',
-        message: "A triptych without a lick of paint."
+        message: "I'm a spread, but you can't eat me."
       }
     ];
   
@@ -544,8 +544,8 @@ header img {
       successOverlay.innerHTML = `
         <div class="instruction-content">
           <h2>Congratulations!</h2>
-          <p>You matched the projects correctly.</p>
-          <button id="playAgainBtn">Level 2</button>
+          <p>You completed the game.</p>
+          <button id="playAgainBtn">Replay</button>
           <button id="HomeBtn">Go Home</button>
         </div>
       `;
@@ -554,7 +554,7 @@ header img {
   
       const playAgainBtn = document.getElementById('playAgainBtn');
       playAgainBtn.addEventListener('click', () => {
-        location.href = 'game2.html'; // This will navigate to 'index.html'
+        location.href = 'game.html'; // This will navigate to 'index.html'
       });
   
       const HomeBtn = document.getElementById('HomeBtn');
