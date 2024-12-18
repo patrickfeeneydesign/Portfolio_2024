@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaze 2023</title>
+    <meta name="description" content="Patrick Feeney Designer">
+    <link rel="icon" href="img/black_circle.png" type="image/png">
+    <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
+    <link rel="stylesheet" href="https://use.typekit.net/kyu3tgb.css">
+    <style>
+
+html, body {
+    overflow-x: hidden;
+}
+@-moz-document url-prefix() {
+    /* Your specific styles for Firefox go here */
+    .band h1 {
+        line-height: 65pt;
+    }
+    .band h3 {
+        line-height: 35pt;
+
+    }
+}
+
+
+
+    /* MAIN HEADER */
+    header {
+    position: fixed;
+    text-align: left;
+     border-radius: 0 0 40px 40px;
+     background-color: #000000;
+     right: -9vw;
+     top: -0.1vw;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+
+    /* MAIN HEADER */
+    header.firstpage {
+        position: fixed;
+        text-align: left;
+        margin: 0;
+        height: 3vw;
+        padding-left: 1vw;
+        padding-right: 10vw;
+        padding-top: 0.8vw;
+        padding-bottom: 0.8vw;
+        z-index: 4000;
+        align-content: center;
+    }
+
+
+header img {
+    height: 1vw;
+    width: auto;
+    padding: 0 0 0 1vw;
+    -moz-transition: all 0.3s; /* Mozilla specific transition */
+    transition: all 0.3s;
+}
+
+
+
+
+        body {
+            font-family: tt-commons-pro, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eeeeee;
+            scrollbar-width: none; /* For Firefox */
+        }
+
+        #backButton {
+            position: fixed;
+            padding: 1vw 1.5vw;
+            top: 0;
+            left: 0;
+            font-size: 1.2vw;
+            font-weight: 700;
+            background-color: #141414;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Ensures the button is above other elements */
+        }
+
+        .hero {
+        width: 100vw; /* 85% of the viewport width */
+        height: 120vh; /* 50% of the viewport height */
+        overflow: hidden; /* Hide any image overflow */
+        position: relative; /* Required for child positioning */
+        margin: 0;
+    }
+
+    .hero img {
+        width: 100%; /* Make the image width fill the figure */
+        height: 100%; /* Make the image height fill the figure */
+        object-fit: cover; /* Ensure the image covers the figure without distortion */
+        object-position: center; /* Center the image within the figure */
+    }
+
+    .band {
+        width: 100vw;
+        height: 7vw;
+        background-color: #e6e6e6;
+        margin: 0;
+        padding: 8vh 15vh 15vh 25vh;
+    }
+
+    .band h3 {
+        font-weight: 200;
+        margin: 0;
+        padding: 0;
+        font-size: 3vh;
+        color: #171717;
+    }
+
+    .band h1 {
+        font-weight: 500;
+        font-size: 6vh;
+        padding: 0;
+        margin: 0;
+        color: #171717;
+    }
+    .band h2 {
+        font-weight: 400;
+        padding: 0.7vh 0 0 0;
+        margin: 0;
+        font-size: 3vh;
+        color: #171717;
+    }
+
+.band a {
+    margin: 0;
+    text-decoration: none;
+    color: #222222;
+}
+
+
+    article {
+        background-color: #eeeeee;
+        padding:  10vw 23vw;
+    }
+
+    article p {
+        font-size: 1.3vw;
+        line-height: 2.5vw;
+    }
+
+article h1 {
+    font-weight: 600;
+    font-size: 3vw;
+}
+
+
+
+.splash {
+   
+   background-color: #e3e3e3;
+   padding: 8vw;
+   color: #171717;
+}
+
+.splash h1 {
+   font-weight: 500;
+   font-size: 3.8vw;
+   line-height: 5vw;
+}
+
+.splash p {
+
+   font-weight: 300;
+   font-size: 2vw;
+   line-height: 0;
+   color: #171717;
+}
+
+
+
+
+.bodyimg {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100vw; /* Full viewport width */
+    height: 140vh; /* Fixed height */
+    overflow: hidden; /* Prevent overflow */
+    position: relative; /* Ensure proper positioning */
+    margin: 0; /* Remove margin */
+    background-color: #000000;
+}
+
+.bodyimg img {
+    height: 50%; /* Fixed height */
+    margin: 5vw;
+    width: auto; /* Automatically scale width relative to height */
+    object-fit: contain; /* Maintain aspect ratio and prevent distortion */
+    transition: transform 3s ease; /* Smooth transition for transform property */
+}
+
+
+.bodyimg img.zoom-effect {
+    transform: scale(1.1); /* Scale up to 120% */
+}
+
+   /* Footer */
+   footer {
+        background-color: #1d1c1c;
+        height: 3.5vw;
+        width: 32vw;
+        position: fixed;
+        bottom: 0;
+       left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        color: #e0e0e0;
+        border-radius: 0px 30px 0 0;
+        
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 20px;
+
+    }
+    
+    .social-icons a img {
+        height: 1.2vw;
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        /* filter: invert(100%); */
+    }
+
+
+    .footer-text {
+        color: #e0e0e0; /* Text color for readability on dark background */
+        font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
+        text-align: right; /* Text aligned to the left */
+        padding-left: 2vw;
+        font-weight: 300;
+    }
+    footer.black-background .footer-text {
+        color: #161717; /* Sets the text color to white when within a 'white-background' footer */
+    }
+
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    body {
+        font-size: 4vw; /* scale text for mobile */
+        line-height: 1.4;
+    }
+
+    .bodyimg img {
+        width: 100vw;
+    }
+
+    .bodyimg {
+        height: 40vh;
+    }
+
+
+    header.firstpage {
+        height: auto;
+        padding: 2vw;
+        right: 0;
+        top: 0;
+        border-radius: 0;
+    }
+
+    header img {
+        height: 3vw; 
+        width: auto;
+    }
+
+    #backButton {
+        font-size: 4vw;
+        padding: 2vw;
+    }
+
+    .band {
+        padding: 10vw 15vw;
+        height: auto;
+    }
+    .band h1 {
+        font-size: 5vw;
+        line-height: 1.2;
+    }
+    .band h2, .band h3 {
+        font-size: 4vw;
+    }
+
+    article {
+        padding: 10vw;
+    }
+
+    article p {
+        font-size: 4vw;
+        line-height: 1.5;
+        font-weight: 300;
+    }
+
+    .splash {
+        padding: 10vw ;
+    }
+    .splash h1 {
+        font-size: 5vw;
+        line-height: 1.3;
+    }
+    .splash p {
+        font-size: 4vw;
+        line-height: 1.2;
+    }
+
+    /* Ensure images fill at least 35% of viewport width */
+    .draggable,
+    .draggable img {
+        width: 55vw !important;
+        height: auto !important;
+    }
+
+    .toggle-button1, .toggle-button2 {
+        font-size: 3vw;
+        padding: 2vw 9vw 2vw 4vw;
+    }
+
+    /* Footer adjustments */
+    footer {
+        width: 100%;
+        height: 5vh;
+        border-radius: 0;
+        padding: 3vw;
+        gap: 2vw;
+        position: relative;
+    }
+
+    .social-icons a img {
+        height: 3vw;
+    }
+
+    .footer-text {
+        font-size: 2vw;
+    }
+
+    .info-text {
+        font-size: 2.5vw;
+        padding: 2.3vw;
+        z-index: 1000;
+    }
+}
+    </style>
+</head>
+<body>
+    <button id="backButton" onclick="history.back();">&#x2190;</button>
+
+    <header tabindex="0" aria-label="Home Button" class="firstpage">
+        <a href="index.html" style="display: inline-block; cursor: pointer;">
+            <img class="mobilehide" src="img/logo.png">
+        </a>
+    </header>
+    
+
+    <article class="splash">
+        <p>Pulling Focus</p>
+        <h1>I researched a variety of materials before deciding on metal as a focal point.
+        </h1>
+    </article>
+
+
+    <figure class="bodyimg">
+        <img src="img/process/polmat/Political Material Spread 3.png">
+        <img src="img/process/polmat/Political Material Spread.png">
+    </figure>
+    <article class="splash">
+        <p>Outcomes</p>
+        <h1>I wrote a selection of articles during my research, from fracking to hostile architecture. These formed the basis of the final publication.
+        </h1>
+    </article>
+    <figure class="bodyimg">
+        <img src="img/process/polmat/polmat.jpeg">
+        <img src="img/process/polmat/polmat2.jpeg">
+    </figure>
+    <article class="splash">
+        <p>Iterations</p>
+        <h1>The sculptural outputs were fabricated by hand, and photographed in a make-shift studio.
+        </h1>
+    </article>
+    <figure class="bodyimg">
+        <img src="img/process/polmat/polmat3.png">
+        <img src="img/process/polmat/polmat5.png">
+    </figure>
+    <article class="splash">
+        <p>Process</p>
+        <h1>Ensuring the lighting, framing and position of the objects was especially challenging. As the surface of the sculptures were highly reflective.
+        </h1>
+    </article>
+    <figure class="bodyimg">
+        <img src="img/process/polmat/polmat6.png">
+    </figure>
+
+
+
+            <footer>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
+                        <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+                    </a>
+                    <a href="mailto:patfeeney1098@gmail.com" target="_blank" aria-label="Email" role="link">
+                        <img src="img/email.png" alt="Email Me" tabindex="0">
+                    </a>
+                </div>
+                <div class="footer-text">
+                    &copy; Patrick Feeney Design 2024 | All rights reserved
+                </div>
+            </footer>
+
+
+
+<!--
+            <img src="img/37377337.png" alt="Gallery Image">
+            <img src="img/gaze large format.png" alt="Gallery Image">
+            <img src="img/GAZE_01.png" alt="Gallery Image">
+            <img src="img/GAZE-Poster-2021-81.png" alt="Gallery Image">
+            <img src="img/gazefilm.gif" alt="Gallery Image">
+            <img src="img/IMG_7865cover-4-4.jpg" alt="Gallery Image">
+             -->
+
+
+
+             <script>
+                document.addEventListener("scroll", function() {
+                    const images = document.querySelectorAll('.bodyimg img'); // Select all images within .bodyimg
+                    const windowHeight = window.innerHeight; // Get the viewport height
+                
+                    images.forEach(img => {
+                        const imgTop = img.getBoundingClientRect().top; // Get the top position of the image relative to the viewport
+                
+                        if (imgTop < windowHeight && imgTop > -img.height) {
+                            img.classList.add('zoom-effect'); // Add zoom effect if image is within the viewport
+                        } else {
+                            img.classList.remove('zoom-effect'); // Remove zoom effect if image is outside the viewport
+                        }
+                    });
+                });
+                </script>
+</body>
+</html>
