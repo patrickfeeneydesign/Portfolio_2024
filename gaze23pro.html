@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Fall</title>
+    <title>Gaze 2023</title>
     <meta name="description" content="Patrick Feeney Designer">
     <link rel="icon" href="img/black_circle.png" type="image/png">
     <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
@@ -31,7 +31,7 @@ html, body {
     position: fixed;
     text-align: left;
      border-radius: 0 0 40px 40px;
-     background-color:  rgb(194, 88, 255);
+     background-color: #000000;
      right: -9vw;
      top: -0.1vw;
     margin: 0;
@@ -57,7 +57,6 @@ html, body {
 header img {
     height: 1vw;
     width: auto;
-    filter: invert(100%);
     padding: 0 0 0 1vw;
     -moz-transition: all 0.3s; /* Mozilla specific transition */
     transition: all 0.3s;
@@ -81,18 +80,32 @@ header img {
             left: 0;
             font-size: 1.2vw;
             font-weight: 700;
-            background-color: rgb(194, 88, 255);
-            color: rgb(20, 20, 20);
+            background-color: #141414;
+            color: #ffffff;
             border: none;
             cursor: pointer;
             z-index: 1000; /* Ensures the button is above other elements */
         }
 
+        .hero {
+        width: 100vw; /* 85% of the viewport width */
+        height: 120vh; /* 50% of the viewport height */
+        overflow: hidden; /* Hide any image overflow */
+        position: relative; /* Required for child positioning */
+        margin: 0;
+    }
+
+    .hero img {
+        width: 100%; /* Make the image width fill the figure */
+        height: 100%; /* Make the image height fill the figure */
+        object-fit: cover; /* Ensure the image covers the figure without distortion */
+        object-position: center; /* Center the image within the figure */
+    }
 
     .band {
         width: 100vw;
         height: 7vw;
-        background-color: rgb(18, 18, 18);
+        background-color: #e6e6e6;
         margin: 0;
         padding: 8vh 15vh 15vh 25vh;
     }
@@ -102,7 +115,7 @@ header img {
         margin: 0;
         padding: 0;
         font-size: 3vh;
-        color: #eeeeee;
+        color: #171717;
     }
 
     .band h1 {
@@ -110,24 +123,20 @@ header img {
         font-size: 6vh;
         padding: 0;
         margin: 0;
-        color: #eeeeee;
+        color: #171717;
     }
     .band h2 {
         font-weight: 400;
         padding: 0.7vh 0 0 0;
         margin: 0;
         font-size: 3vh;
-        color: rgb(194, 88, 255);
+        color: #171717;
     }
-#blue h2 {
-    color: rgb(194, 88, 255);
-
-}
 
 .band a {
     margin: 0;
     text-decoration: none;
-    color: #706700;
+    color: #222222;
 }
 
 
@@ -141,33 +150,32 @@ header img {
         line-height: 2.5vw;
     }
 
-article h2 {
+article h1 {
     font-weight: 600;
+    font-size: 3vw;
 }
-
-
 
 
 
 .splash {
    
-    background-color: rgb(18, 18, 18);
-    padding: 8vw;
-    color: #eeeeee;
+   background-color: #e3e3e3;
+   padding: 8vw;
+   color: #171717;
 }
 
 .splash h1 {
-    font-weight: 500;
-    font-size: 3.8vw;
-    line-height: 5vw;
+   font-weight: 500;
+   font-size: 3.8vw;
+   line-height: 5vw;
 }
 
 .splash p {
 
-    font-weight: 300;
-    font-size: 2vw;
-    line-height: 0;
-    color: rgb(194, 88, 255);
+   font-weight: 300;
+   font-size: 2vw;
+   line-height: 0;
+   color: #171717;
 }
 
 
@@ -178,29 +186,25 @@ article h2 {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     width: 100vw; /* Full viewport width */
-    height: 120vh; /* Fixed height */
+    height: 140vh; /* Fixed height */
     overflow: hidden; /* Prevent overflow */
     position: relative; /* Ensure proper positioning */
     margin: 0; /* Remove margin */
-    padding: 5vw 0 5vw 0;
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
 }
 
 .bodyimg img {
-    height: 70%; /* Fixed height */
+    height: 50%; /* Fixed height */
+    margin: 5vw;
     width: auto; /* Automatically scale width relative to height */
     object-fit: contain; /* Maintain aspect ratio and prevent distortion */
     transition: transform 3s ease; /* Smooth transition for transform property */
 }
 
+
 .bodyimg img.zoom-effect {
     transform: scale(1.1); /* Scale up to 120% */
 }
-
-
-
-
-
 
    /* Footer */
    footer {
@@ -233,7 +237,6 @@ article h2 {
         /* filter: invert(100%); */
     }
 
-    
 
     .footer-text {
         color: #e0e0e0; /* Text color for readability on dark background */
@@ -245,13 +248,6 @@ article h2 {
     footer.black-background .footer-text {
         color: #161717; /* Sets the text color to white when within a 'white-background' footer */
     }
-
-
-
-
-
-
-
 
 
 /* Mobile Styles */
@@ -362,10 +358,6 @@ article h2 {
         z-index: 1000;
     }
 }
-
-
-
-
     </style>
 </head>
 <body>
@@ -376,103 +368,37 @@ article h2 {
             <img class="mobilehide" src="img/logo.png">
         </a>
     </header>
-
-
-    <div class="band">
-        <h3>Interaction Design</h3>
-        <h1>Trust Fall | The Game</h1>
-        <a href="trustpro.html"><h2>&#x1F517; Explore The Design Process</h2></a>
-
-    </div>
-
-
-    <figure class="bodyimg">
-        <img src="img/Slide10.jpeg" alt="Gallery Image">
-    </figure>
-
-
+    
 
     <article class="splash">
-        <p>Outline</p>
-        <h1>What does it mean for technology to deserve our trust? How can clients build
-            it? These questions drive the interactive game, Trust Fall.</h1>
+        <p>Colour</p>
+        <h1>The identity was developed around the use of a bold hero colour.
+        </h1>
     </article>
 
 
-        <article>
-            <h2>Introduction</h2>
-            <p>
-                An exercise in self- reflection, Trust Fall asks industry professionals to place their organisation
-                under the microscope when it comes to building and maintaining trustworthy
-                practices. Inspired by KerPlunk, a game of dexterity in which a collection of
-                marbles is held in place by a nest of straws, this giant version asks players to
-                consider a piece of technology – such as a product or service – and explore
-                the importance of earning and maintaining trust.
-            </p>
-            <p>
-                <em>Official Selection | 100 Archive | 2023
-                    <br>
-                    Shortlisted | IDI Awards | 2024
-                </em>
-            </p>
-        </article>
-
-
-
             <figure class="bodyimg">
-                <img src="img/top+down.png" alt="Gallery Image">
-            </figure>
-
-
-            <article>
-                <p>
-                    The sticks represent some of the core foundations of trustworthy technology: Data Protection, Ethics,
-                    Inclusivity, and Transparency. The balls themselves symbolize the trust, precariously supported by these
-                    foundations. As players progress, they face rapid-fire questions about organizational policy, design, and
-                    public perception. For each pain point or unclear answer, players must remove three sticks, watching their
-                    trust fall in the process. At the game’s conclusion, you get a review of your processes to help fortify success
-                    or address issues. Because, in real life, you rarely get a second go.
-                </p>
-            </article>
-
-
-            <figure class="bodyimg">
-                <img src="img/Slide12.jpeg" alt="Gallery Image">
-            </figure>
-            
-            <article>
-                <h2>Creative Development</h2>
-                <p>
-                    The concept for Trust Fall emerged during a creative team sprint, where we explored innovative
-                    ways to represent both the fragility of trust, and how it can be built and supported over time.
-                    The visual identity I created was inspired by the game itself, riffing on the intersection between
-                    the foundations of trust and the gaps that inevitably occur. To enhance the game, we also
-                    developed a digital app that accompanies the physical setup. This app allows users to answer
-                    questions in real-time and receive a personalised printout of their results to take with them.
-                    This project was awarded a place in the 100 archive for its design excellence.
-                </p>
-            </article>
-
-            <figure class="bodyimg">
-                <img src="img/Slide8.jpeg" alt="Gallery Image">
-            </figure>
-
-            <article>
-                <h2>Engaging Audiences</h2>
-                <p>
-                    I ran this engagement with a variety of cross-industry Accenture clients to pinpoint their
-                    organisational weaknesses, potential threats to public trust & safety, and socialise the
-                    themes and methodologies of the Human Sciences Studio. Most notably, I ran a session
-                    with a C-Suite member of a Global South CSO. We used the game to analyse the potential
-                    harms of using AI chatbots to augment support for victims of gender based violence.
-                </p>
-            </article>
-
-            <figure class="bodyimg">
-                <img src="img/Slide1.jpeg" alt="Gallery Image" >
-            </figure>
-
-
+        <img src="img/process/gaze23/postergz05.webp">
+        <img src="img/process/gaze23/Final Design Output.webp">
+    </figure>
+    <article class="splash">
+        <p>Creating Balance</p>
+        <h1>Much of the work to refine 
+            the brand meant pairing back other elements in order to facilitate such an intense colour scheme.
+        </h1>
+    </article>
+    <figure class="bodyimg">
+        <img src="img/process/gaze23/Final Design Output Blue.webp">
+        <img src="img/process/gaze23/Final Design Output Multi.webp">
+    </figure>
+    <article class="splash">
+        <p>Blue Sky Thinking</p>
+        <h1>My initial inspiration for the style was a clear blue sky, I developed a variety of illustrations based around this theme.
+        </h1>
+    </article>
+    <figure class="bodyimg">
+        <img src="img/process/gaze23/postergz03.webp">
+    </figure>
 
             <footer>
                 <div class="social-icons">
@@ -489,7 +415,7 @@ article h2 {
             </footer>
 
 
-            
+
 <!--
             <img src="img/37377337.png" alt="Gallery Image">
             <img src="img/gaze large format.png" alt="Gallery Image">
@@ -498,7 +424,6 @@ article h2 {
             <img src="img/gazefilm.gif" alt="Gallery Image">
             <img src="img/IMG_7865cover-4-4.jpg" alt="Gallery Image">
              -->
-
 
 
 
@@ -518,7 +443,5 @@ article h2 {
                     });
                 });
                 </script>
-
-
 </body>
 </html>
