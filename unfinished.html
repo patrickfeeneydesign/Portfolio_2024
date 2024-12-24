@@ -58,6 +58,14 @@
       padding: 3vw;
     }
 
+    /* 1) Lock body scrolling when needed */
+body.lock-scroll {
+  overflow: hidden;
+  position: relative;
+  height: 100vh; 
+}
+
+
     #backButton {
       position: fixed;
       padding: 1vw 1.5vw;
@@ -409,8 +417,13 @@
     /* Hide this entire container on mobile */
     @media (max-width: 600px) {
       #submissionFormContainer {
-width: 100vw;     
-padding: 10px; }
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    overflow-y: auto; /* important for scrolling inside the form */
+  }
 
 #drawCanvas {
         height: 45vw;
@@ -418,7 +431,7 @@ padding: 10px; }
       }
       /* Existing mobile adjustments */
       body {
-        padding: 13vw 3vw;
+        padding: 15vw 3vw;
       }
       header {
         flex-direction: column;
@@ -1024,6 +1037,25 @@ padding: 10px; }
       currentPage++;
       renderPage(currentPage);
     });
+
+
+    // 3) Toggle scroll-lock only on mobile
+toggleFormButton.addEventListener('click', () => {
+  submissionFormContainer.classList.add('open');
+  
+  if (window.innerWidth <= 600) {
+    document.body.classList.add('lock-scroll');
+  }
+});
+
+closeFormButton.addEventListener('click', () => {
+  submissionFormContainer.classList.remove('open');
+
+  if (window.innerWidth <= 600) {
+    document.body.classList.remove('lock-scroll');
+  }
+});
+
 
     // Title Animation
     document.addEventListener("DOMContentLoaded", () => {
