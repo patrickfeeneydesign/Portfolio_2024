@@ -196,8 +196,8 @@
     #drawCanvas {
       background: #000;       /* Black background */
       border: 1px solid #ccc;
-      width: 400px;           /* 1:1 square */
-      height: 400px;          /* Adjust to your liking */
+      width: 400px;           /* Desktop size (1:1 square) */
+      height: 400px;
       cursor: crosshair;
       display: block;
     }
@@ -251,7 +251,7 @@
         padding: 2vw;
       }
 
-      /* Make canvas smaller on mobile if you want */
+      /* Make canvas smaller on mobile */
       #drawCanvas {
         width: 300px;
         height: 300px;
@@ -294,6 +294,7 @@
 
       <!-- Collapsible container with canvas -->
       <div id="drawContainer">
+        <!-- Keeping explicit width & height for internal resolution -->
         <canvas id="drawCanvas" width="400" height="400"></canvas>
       </div>
 
@@ -308,7 +309,7 @@
     <p>&copy; 2024 Unfinished Business</p>
   </footer>
 
-  <!-- Include the Supabase client and scripts (unchanged) -->
+  <!-- Include the Supabase client and scripts -->
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -333,28 +334,44 @@
 
     let drawing = false;
 
-// Ensure the drawContainer is hidden initially
-drawContainer.style.display = "none";
+    // Ensure the drawContainer is hidden initially
+    drawContainer.style.display = "none";
 
-drawToggleBtn.addEventListener("click", () => {
-  const isHidden = drawContainer.style.display === "none";
-  drawContainer.style.display = isHidden ? "block" : "none";
+    // Toggle the collapsible container
+    drawToggleBtn.addEventListener("click", () => {
+      const isHidden = drawContainer.style.display === "none";
+      drawContainer.style.display = isHidden ? "block" : "none";
+      drawToggleBtn.textContent = isHidden ? "Hide Draw Canvas" : "Draw";
+    });
 
-  // Optional: Update button text to indicate action
-  drawToggleBtn.textContent = isHidden ? "Hide Draw Canvas" : "Draw";
-});
+    /*
+      Because our canvas has fixed width/height (400, 300 on mobile), 
+      we scale the coordinates so the pointer matches the actual drawn point.
+    */
 
+    function getScaledCoords(clientX, clientY) {
+      const rect = drawCanvas.getBoundingClientRect();
+      const scaleX = drawCanvas.width / rect.width;
+      const scaleY = drawCanvas.height / rect.height;
+      const x = (clientX - rect.left) * scaleX;
+      const y = (clientY - rect.top) * scaleY;
+      return { x, y };
+    }
 
     // Mouse events for drawing
     drawCanvas.addEventListener("mousedown", (e) => {
+      e.preventDefault();
       drawing = true;
+      const { x, y } = getScaledCoords(e.clientX, e.clientY);
       ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
+      ctx.moveTo(x, y);
     });
 
     drawCanvas.addEventListener("mousemove", (e) => {
+      e.preventDefault();
       if (!drawing) return;
-      ctx.lineTo(e.offsetX, e.offsetY);
+      const { x, y } = getScaledCoords(e.clientX, e.clientY);
+      ctx.lineTo(x, y);
       ctx.stroke();
     });
 
@@ -366,28 +383,22 @@ drawToggleBtn.addEventListener("click", () => {
       drawing = false;
     });
 
-    // Touch events for mobile drawing (optional)
+    // Touch events for mobile drawing
     drawCanvas.addEventListener("touchstart", (e) => {
       e.preventDefault();
       if (e.touches.length > 0) {
         drawing = true;
-        const rect = drawCanvas.getBoundingClientRect();
+        const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
         ctx.beginPath();
-        ctx.moveTo(
-          e.touches[0].clientX - rect.left,
-          e.touches[0].clientY - rect.top
-        );
+        ctx.moveTo(x, y);
       }
     }, { passive: false });
 
     drawCanvas.addEventListener("touchmove", (e) => {
       e.preventDefault();
-      if (!drawing || e.touches.length == 0) return;
-      const rect = drawCanvas.getBoundingClientRect();
-      ctx.lineTo(
-        e.touches[0].clientX - rect.left,
-        e.touches[0].clientY - rect.top
-      );
+      if (!drawing || e.touches.length === 0) return;
+      const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
+      ctx.lineTo(x, y);
       ctx.stroke();
     }, { passive: false });
 
@@ -425,14 +436,11 @@ drawToggleBtn.addEventListener("click", () => {
       const tagsInput = document.getElementById("tags").value.trim();
       const tags = tagsInput ? tagsInput.split(",").map((tag) => tag.trim()) : [];
 
-      // Convert the drawing canvas to base64
+      // Convert the drawing canvas to base64 if visible
       let drawingBase64 = null;
       if (drawContainer.style.display === "block") {
         drawingBase64 = drawCanvas.toDataURL("image/png");
       }
-
-      // (Optional) If you still want to handle a file upload behind the scenes:
-      // const fileInput = document.getElementById("file").files[0];
 
       try {
         // Insert into 'projects' table
