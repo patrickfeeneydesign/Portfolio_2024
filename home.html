@@ -288,7 +288,7 @@
      ********************************************/
     @media (max-width: 600px) {
       body {
-        padding: 12vw 3vw;
+        padding: 13vw 3vw;
       }
       header {
         flex-direction: column;
@@ -302,30 +302,38 @@
         font-size: 2rem;
       }
       header a {
-        font-size: 0.9rem;
-        margin-top: 12vw;
+        font-size: 0.8rem;
+        background-color: #121212;
+        z-index: 10000;
+        top:0;
+        right: 0;
         height: fit-content;
-        padding: 4.1vw 4vw;
+        position: fixed;
+        padding: 3.3vw;
+        margin: 0;
         width: fit-content;
       }
       .project {
-        width: 240px;
+        max-width: 40vw !important;
+        max-height: 50vw !important;
+        padding: 30px;
       }
 
       .title {
-      font-size: 1rem;
+      font-size: 0.8rem;
+      line-height: 0.8rem;
       font-weight: bold;
       margin-bottom: 0.9rem;
       color: #121212;
     }
     .description {
-      font-size: 0.8rem;
-      line-height: 1.4rem;
+      font-size: 0.6rem;
+      line-height: 1rem;
       margin-bottom: 0.9rem;
       color: #121212;
     }
     .tags {
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       font-style: italic;
       color: #121212;
     }
