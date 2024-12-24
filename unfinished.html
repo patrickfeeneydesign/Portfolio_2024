@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unfinished Business - Home</title>
+  <style>
+    /*******************************************
+     * FONTS
+     ********************************************/
+    /* Louise Regular */
+    @font-face {
+      font-family: 'Louise-Regular';
+      src: url('fonts/VTF/otf/Louise-Regular.otf') format('opentype'),
+           url('fonts/VTF/ttf/Louise-Regular.ttf') format('truetype'),
+           url('fonts/VTF/webfonts/Louise-Regular.woff') format('woff'),
+           url('fonts/VTF/webfonts/Louise-Regular.woff2') format('woff2');
+      font-style: normal;
+    }
+    /* Latitude Regular */
+    @font-face {
+      font-family: 'Latitude-Regular';
+      src: url('fonts/VTF/otf/Latitude-Regular.otf') format('opentype'),
+           url('fonts/VTF/ttf/Latitude-Regular.ttf') format('truetype'),
+           url('fonts/VTF/webfonts/Latitude-Regular.woff') format('woff'),
+           url('fonts/VTF/webfonts/Latitude-Regular.woff2') format('woff2');
+      font-style: normal;
+    }
+    /* Director Regular */
+    @font-face {
+      font-family: 'Director-Regular';
+      src: url('fonts/VTF/otf/Director-Regular.otf') format('opentype'),
+           url('fonts/VTF/ttf/Director-Regular.ttf') format('truetype'),
+           url('fonts/VTF/webfonts/Director-Regular.woff') format('woff'),
+           url('fonts/VTF/webfonts/Director-Regular.woff2') format('woff2');
+      font-style: normal;
+    }
+
+    #backButton {
+      position: fixed;
+      padding: 1vw 1.5vw;
+      top: 0;
+      left: 0;
+      font-size: 1.2vw;
+      font-weight: 700;
+      background-color: #121212;
+      border: 1px solid #e6eeff;
+      color: #e6eeff;
+      cursor: pointer;
+      z-index: 1; 
+    }
+
+    /*******************************************
+     * GLOBAL RESET & BASE STYLES
+     ********************************************/
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: hidden;      
+      touch-action: manipulation;
+      min-height: 100vh;
+      background-color: #121212;
+    }
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      padding: 3vw;
+    }
+
+    /*******************************************
+     * HEADER
+     ********************************************/
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #ededed;
+    }
+    header h1 {
+      font-size: 6rem;
+      font-weight: 300;
+      padding: 2vw;
+      color: #e6eeff;
+      user-select: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    header a {
+      text-decoration: none;
+      padding: 4.5vw 2vw 4.5vw 2vw;
+      margin: 3vw;
+      background: #121212;
+      color: #e6eeff;
+      border: 1px solid white;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      font-weight: 200;
+      font-weight: bold;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 10.5vw;
+      width: 10.5vw;
+      text-align: center;
+    }
+    header a:hover {
+      background: #e6eeff;
+      color: black;
+      border: 1px solid white;
+    }
+
+    /* Animation for title */
+    .letter {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: inline-block;
+    }
+    .visible {
+      opacity: 1;
+    }
+
+    #about {
+      height: fit-content;
+      border: 1px solid #e6eeff;
+      color: #e6eeff;
+      padding: 2vw;
+      line-height: 2.2rem;
+      font-size: 1.7rem;
+      font-weight: 300;
+    }
+
+    /*******************************************
+     * PROJECT GALLERY WRAPPER
+     ********************************************/
+    #projectList {
+      position: relative;
+      width: 100%;
+      height: 150vh;       
+      overflow: hidden;    
+      border-left: 1px solid white; 
+      border-right: 1px solid white; 
+      border-bottom: 1px solid white; 
+    }
+
+    /*******************************************
+     * PROJECT CARD BASE STYLE
+     ********************************************/
+    .project {
+      position: absolute;
+      cursor: grab;
+      user-select: none;
+      width: 300px;
+      min-height: 300px; 
+      overflow: hidden;
+      border: 1px solid #e6eeff;
+      padding: 2rem;
+      background-color: #e6eeff;
+      color: #121212;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    .project:active {
+      cursor: grabbing;
+    }
+    .project:hover {
+      transform: scale(1.02);
+    }
+    .project-info {
+      position: relative;
+      z-index: 2;
+      color: #333;
+      pointer-events: none;
+      transition: opacity 0.4s ease-in-out, color 0.3s ease;
+      opacity: 1;
+    }
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.9rem;
+      color: #121212;
+    }
+    .description {
+      font-size: 1rem;
+      line-height: 1.4rem;
+      margin-bottom: 0.9rem;
+      color: #121212;
+    }
+    .tags {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #121212;
+    }
+
+    /*******************************************
+     * IMAGE OVERLAY
+     ********************************************/
+
+
+     .has-image {
+  background-color: #121212;
+  color: #e6eeff;
+}
+
+.has-image .title,
+.has-image .description,
+.has-image .tags {
+  color: #e6eeff;
+}
+
+
+
+    .has-image .image-overlay {
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #121212;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out;
+      z-index: 1;
+    }
+    .has-image:hover .image-overlay {
+      opacity: 0;
+    }
+    .has-image .project-info {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+    .has-image:hover .project-info {
+      opacity: 1;
+    }
+  
+
+    /*******************************************
+     * VISUAL FEEDBACK CLASSES
+     ********************************************/
+    .dragging {
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      cursor: grabbing;
+    }
+    .dropped {
+      animation: bounce 2s ease;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+      100% { transform: translateY(0); }
+    }
+
+    /*******************************************
+     * PAGINATION BUTTONS
+     ********************************************/
+    .pagination-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .pagination-buttons button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: 1px solid #e6eeff;
+      background: #121212;
+      color: #e6eeff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .pagination-buttons button:hover:enabled {
+      background: #e6eeff;
+      color: #121212;
+    }
+    .pagination-buttons button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /*******************************************
+     * MEDIA QUERIES
+     ********************************************/
+    @media (max-width: 600px) {
+      body {
+        padding: 13vw 3vw;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      #backButton {
+        font-size: 4vw;
+        padding: 2vw;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header a {
+        font-size: 0.8rem;
+        background-color: #121212;
+        z-index: 10000;
+        top:0;
+        right: 0;
+        height: fit-content;
+        position: fixed;
+        padding: 3.3vw;
+        margin: 0;
+        width: fit-content;
+      }
+      .project {
+        max-width: 55vw !important;
+        height: fit-content;
+        min-height: auto;
+        max-height: 45vw !important;
+        padding: 20px;
+      }
+.has-image {
+  min-height: 40vw;
+}
+      .title {
+      font-size: 0.8rem;
+      line-height: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.9rem;
+      color: #121212;
+    }
+    .description {
+      font-size: 0.6rem;
+      line-height: 1rem;
+      margin-bottom: 0.9rem;
+      color: #121212;
+    }
+    .tags {
+      font-size: 0.6rem;
+      font-style: italic;
+      color: #121212;
+    }
+
+      #about {
+        padding: 20px;
+        font-size: 1.3rem;
+        line-height: 2rem;
+      }
+      .pagination-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ----------- HEADER ----------- -->
+  <header>
+    <h1 id="animated-title">
+      <span class="letter hidden">U</span>
+      <span class="letter hidden">n</span>
+      <span class="letter hidden">f</span>
+      <span class="letter hidden">i</span>
+      <span class="letter hidden">n</span>
+      <span class="letter hidden">i</span>
+      <span class="letter hidden">s</span>
+      <span class="letter hidden">h</span>
+      <span class="letter hidden">e</span>
+      <span class="letter hidden">d</span>
+      <span class="letter hidden">&nbsp;</span>
+      <span class="letter hidden">B</span>
+      <span class="letter hidden">u</span>
+      <span class="letter hidden">s</span>
+      <span class="letter hidden">i</span>
+      <span class="letter hidden">n</span>
+      <span class="letter hidden">e</span>
+      <span class="letter hidden">s</span>
+      <span class="letter hidden">s</span>
+      <span class="letter hidden">.</span>
+      <span class="letter hidden">.</span>
+      <span class="letter hidden">.</span>
+    </h1>
+    <a href="upload.html">Submit</a>
+  </header>
+  <button id="backButton" onclick="history.back();">&#x2190;</button>
+
+  <div id="about">
+    <p>
+      Unfinished business is a home for half baked ideas. Submit a concept that isnt quite finished, 
+      upload a painting that isnt quite right, spitball a lyric that might sound stupid. This is not the place for polish.
+      This is a space that explores the journey, and not the destination.
+    </p>
+  </div>
+
+  <!-- Project List Container -->
+  <div id="projectList">Loading...</div>
+
+  <!-- Pagination Buttons: "Previous" & "Next" -->
+  <div class="pagination-buttons">
+    <button id="prevPageBtn" disabled>Previous Page</button>
+    <button id="nextPageBtn" disabled>Next Page</button>
+  </div>
+
+  <!-- ----------- Supabase & JS Logic ----------- -->
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    // Supabase details
+    const SUPABASE_URL = "https://dxvznqxwdbrcyyoadbgb.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dnpucXh3ZGJyY3l5b2FkYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjUzMzIsImV4cCI6MjA1MDU0MTMzMn0.FbSmgJ5KOGaSIY4150gOIbiYWQ86fbtZQk-fP50RkZk";
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Draggable tracking
+    let savedPositions = [];
+    let isDragging = false;
+    let activeElement = null;
+    let offsetX = 0,
+      offsetY = 0;
+    let velocityX = 0,
+      velocityY = 0;
+    const friction = 0.95;
+    let zIndexCounter = 1000;
+
+    // Page-based variables
+    let currentPage = 1;     // start on page 1
+    const PAGE_SIZE = 6;
+    let totalLastPage = 1;   // we'll track if we discover the last page
+
+    // DOM
+    const projectListEl = document.getElementById("projectList");
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+
+    /********************************************
+     * FETCH A SPECIFIC PAGE
+     ********************************************/
+    async function fetchProjects(page) {
+      // Calculate offset using currentPage
+      const offset = (page - 1) * PAGE_SIZE;
+      const { data, error } = await supabase
+        .from("projects")
+        .select("id, title, description, tags, image_data")
+        .order("id", { ascending: false })
+        .range(offset, offset + PAGE_SIZE - 1);
+
+      if (error) {
+        console.error("Error fetching projects:", error);
+        projectListEl.innerHTML = `<p style="padding:20px; color: #e6eeff;">Error loading projects: ${error.message}</p>`;
+        prevPageBtn.disabled = true;
+        nextPageBtn.disabled = true;
+        return [];
+      }
+
+      return data || [];
+    }
+
+    /********************************************
+     * RENDER PAGE
+     ********************************************/
+    async function renderPage(page) {
+      // 1) Fetch the data for this page
+      const projects = await fetchProjects(page);
+
+      // If no projects total and page=1, show a message
+      if (projects.length === 0 && page === 1) {
+        projectListEl.innerHTML = `<p style='padding:20px; color: #e6eeff;'>No projects uploaded yet.</p>`;
+        prevPageBtn.disabled = true;
+        nextPageBtn.disabled = true;
+        return;
+      }
+
+      // 2) Clear existing items
+      projectListEl.innerHTML = "";
+      savedPositions = [];
+
+      // 3) Create & position new items
+      if (projects.length > 0) {
+        appendProjects(projects);
+      } else {
+        // If we got 0 items but page > 1, user is beyond last page
+        // We can adjust currentPage to the last known page
+        currentPage--;
+      }
+
+      // 4) Check if it's the last page
+      // If fewer than PAGE_SIZE, there's no next page
+      if (projects.length < PAGE_SIZE) {
+        // This means we've reached the last page
+        totalLastPage = currentPage;
+        nextPageBtn.disabled = true;
+      } else {
+        nextPageBtn.disabled = false;
+      }
+
+      // 5) Check if page=1 => disable "Previous"
+      if (currentPage === 1) {
+        prevPageBtn.disabled = true;
+      } else {
+        prevPageBtn.disabled = false;
+      }
+    }
+
+    /********************************************
+     * APPEND & POSITION PROJECTS
+     ********************************************/
+    function appendProjects(projects) {
+      const newElems = [];
+
+      projects.forEach((project) => {
+        const projDiv = document.createElement("div");
+        projDiv.classList.add("project");
+
+        // "has-image" or "no-image"
+        if (project.image_data) {
+          projDiv.classList.add("has-image");
+          projDiv.innerHTML = `
+            <div
+              class="image-overlay"
+              style="background-image: url('${escapeURL(project.image_data)}');"
+            ></div>
+            <div class="project-info">
+              <h2 class="title">${escapeHTML(project.title)}</h2>
+              <p class="description">${escapeHTML(project.description)}</p>
+              ${
+                project.tags && project.tags.length
+                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags
+                      .map(escapeHTML)
+                      .join(", ")}</p>`
+                  : ""
+              }
+            </div>
+          `;
+        } else {
+          projDiv.classList.add("no-image");
+          projDiv.innerHTML = `
+            <div class="project-info">
+              <h2 class="title">${escapeHTML(project.title)}</h2>
+              <p class="description">${escapeHTML(project.description)}</p>
+              ${
+                project.tags && project.tags.length
+                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags
+                      .map(escapeHTML)
+                      .join(", ")}</p>`
+                  : ""
+              }
+            </div>
+          `;
+        }
+
+        projectListEl.appendChild(projDiv);
+        newElems.push(projDiv);
+      });
+
+      positionProjects(newElems);
+    }
+
+    function positionProjects(newElems) {
+      const containerRect = projectListEl.getBoundingClientRect();
+
+      newElems.forEach((proj) => {
+        const projWidth = proj.offsetWidth;
+        const projHeight = proj.offsetHeight;
+        const maxX = containerRect.width - projWidth;
+        const maxY = containerRect.height - projHeight;
+
+        // Random coords
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        proj.style.left = x + "px";
+        proj.style.top = y + "px";
+        proj.style.zIndex = zIndexCounter;
+
+        savedPositions.push({ left: x, top: y, zIndex: zIndexCounter });
+      });
+    }
+
+    /********************************************
+     * DRAG HANDLERS
+     ********************************************/
+    function startDrag(e) {
+      const target = e.target.closest(".project");
+      if (!target) return;
+
+      isDragging = true;
+      activeElement = target;
+
+      const containerRect = projectListEl.getBoundingClientRect();
+      const rect = activeElement.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      offsetX = clientX - rect.left;
+      offsetY = clientY - rect.top;
+
+      zIndexCounter++;
+      activeElement.style.zIndex = zIndexCounter;
+      activeElement.classList.add("dragging");
+      e.preventDefault();
+    }
+
+    function onMove(e) {
+      if (!isDragging || !activeElement) return;
+
+      const containerRect = projectListEl.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      let newX = clientX - containerRect.left - offsetX;
+      let newY = clientY - containerRect.top - offsetY;
+
+      // boundary checks
+      const projWidth = activeElement.offsetWidth;
+      const projHeight = activeElement.offsetHeight;
+      newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
+      newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
+
+      velocityX = newX - parseFloat(activeElement.style.left || 0);
+      velocityY = newY - parseFloat(activeElement.style.top || 0);
+
+      activeElement.style.left = newX + "px";
+      activeElement.style.top = newY + "px";
+    }
+
+    function endDrag() {
+      if (!isDragging || !activeElement) return;
+
+      isDragging = false;
+      activeElement.classList.remove("dragging");
+      activeElement.classList.add("dropped");
+      activeElement.addEventListener("animationend", function handleAnimationEnd() {
+        activeElement.classList.remove("dropped");
+        activeElement.removeEventListener("animationend", handleAnimationEnd);
+      });
+
+      const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
+      const index = allProjects.indexOf(activeElement);
+      if (index > -1 && savedPositions[index]) {
+        savedPositions[index].left = parseFloat(activeElement.style.left);
+        savedPositions[index].top = parseFloat(activeElement.style.top);
+        savedPositions[index].zIndex = parseInt(activeElement.style.zIndex);
+      }
+
+      requestAnimationFrame(applyMomentum);
+    }
+
+    function applyMomentum() {
+      if (isDragging || !activeElement) return;
+
+      const containerRect = projectListEl.getBoundingClientRect();
+
+      let newX = parseFloat(activeElement.style.left || 0) + velocityX;
+      let newY = parseFloat(activeElement.style.top || 0) + velocityY;
+
+      velocityX *= friction;
+      velocityY *= friction;
+
+      const projWidth = activeElement.offsetWidth;
+      const projHeight = activeElement.offsetHeight;
+      newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
+      newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
+
+      activeElement.style.left = newX + "px";
+      activeElement.style.top = newY + "px";
+
+      const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
+      const index = allProjects.indexOf(activeElement);
+      if (index > -1 && savedPositions[index]) {
+        savedPositions[index].left = newX;
+        savedPositions[index].top = newY;
+      }
+
+      if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
+        requestAnimationFrame(applyMomentum);
+      }
+    }
+
+    /********************************************
+     * UTILITIES
+     ********************************************/
+    function escapeHTML(str = "") {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeURL(url = "") {
+      return url.replace(/"/g, "%22").replace(/'/g, "%27");
+    }
+
+    /********************************************
+     * EVENT LISTENERS
+     ********************************************/
+    // Drag
+    document.addEventListener("mousedown", startDrag, false);
+    document.addEventListener("mousemove", onMove, false);
+    document.addEventListener("mouseup", endDrag, false);
+    document.addEventListener("touchstart", startDrag, { passive: false });
+    document.addEventListener("touchmove", onMove, { passive: false });
+    document.addEventListener("touchend", endDrag, false);
+
+    // Pagination
+    prevPageBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage(currentPage);
+      }
+    });
+
+    nextPageBtn.addEventListener("click", () => {
+      currentPage++;
+      renderPage(currentPage);
+    });
+
+    // Title Animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const title = document.getElementById("animated-title");
+      const letters = title.querySelectorAll(".letter");
+
+      letters.forEach((letter, index) => {
+        const delay = 500 + index * 100 + Math.random() * 100;
+        setTimeout(() => {
+          letter.classList.add("visible");
+        }, delay);
+      });
+    });
+
+    // Initial load: render page 1
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPage(currentPage);
+    });
+  </script>
+</body>
+</html>
