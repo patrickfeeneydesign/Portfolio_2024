@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial, viewport-fit=cover">
   <title>Unfinished Business - Home</title>
 
   <style>
@@ -76,7 +76,7 @@
       border: 1px solid #c4d8ff;
       color: #c4d8ff;
       cursor: pointer;
-      z-index: 1; 
+      z-index: 100000; 
     }
 
     /*******************************************
@@ -302,7 +302,7 @@
       /* Start hidden above the viewport */
       transform: translateY(-120%);
       transition: transform 0.5s ease;
-      z-index: 9999;
+      z-index: 9999999;
       padding: 2rem;
       overflow-y: auto;
     }
@@ -333,7 +333,6 @@
       background-color: #121212;
       color: #c4d8ff;
       padding: 2rem;
-      /* No rounded corners */
       border-radius: 0;
     }
     #uploadForm h2 {
@@ -356,7 +355,6 @@
       border: 1px solid #c4d8ff;
       background-color: #121212;
       color: #c4d8ff;
-      /* Remove border radius: */
       border-radius: 0;
       font-size: 1rem;
       font-family: inherit;
@@ -424,58 +422,123 @@
       font-weight: bold;
       color: #c4d8ff;
     }
+
     .privacy-checkbox-container {
-  margin: 1rem 0;
-  color: #c4d8ff; /* Text color */
-  font-size: 0.9rem;
-}
+      margin: 1rem 0;
+      color: #c4d8ff; 
+      font-size: 0.9rem;
+    }
 
-.privacy-checkbox-container input[type="checkbox"] {
-  width: 1rem; /* Checkbox size */
-  height: 1rem;
-  margin-right: 0.2rem;
-  margin-bottom: 0.3rem;
-  background-color: #121212; /* Background color */
-  border: 1px solid #c4d8ff; /* Border color */
-  cursor: pointer;
-  appearance: none; /* Remove default browser styles */
-  display: inline-block; /* Ensure it behaves like a box */
-  vertical-align: middle; /* Align with label text */
-  position: relative;
-}
+    .privacy-checkbox-container input[type="checkbox"] {
+      width: 1rem; 
+      height: 1rem;
+      margin-right: 0.2rem;
+      margin-bottom: 0.3rem;
+      background-color: #121212;
+      border: 1px solid #c4d8ff;
+      cursor: pointer;
+      appearance: none;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+    }
 
-.privacy-checkbox-container input[type="checkbox"]::after {
-  content: ''; /* Placeholder for the tick */
-  position: absolute;
-  top: 1px; /* Adjust tick position */
-  left: 5px;
-  width: 4px;
-  height: 8px;
-  border: solid #c4d8ff; /* Tick color */
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  display: none; /* Hidden by default */
-}
+    .privacy-checkbox-container input[type="checkbox"]::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 5px;
+      width: 4px;
+      height: 8px;
+      border: solid #c4d8ff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      display: none;
+    }
 
-.privacy-checkbox-container input[type="checkbox"]:checked::after {
-  display: block; /* Show the tick when checked */
-}
+    .privacy-checkbox-container input[type="checkbox"]:checked::after {
+      display: block;
+    }
 
-.privacy-checkbox-container input[type="checkbox"]:focus {
-  outline: none; /* Remove focus outline */
-}
+    .privacy-checkbox-container input[type="checkbox"]:focus {
+      outline: none;
+    }
 
-.privacy-checkbox-container label {
-  cursor: pointer;
-  line-height: 1.4rem;
-  font-weight: 500 !important; /* Ensure the font weight is applied */
-  font-style: italic;
-  font-family: inherit; /* Use the same font as the rest of the page */
-  color: inherit; /* Ensure it inherits the container's text color */
-}
+    .privacy-checkbox-container label {
+      cursor: pointer;
+      line-height: 1.4rem;
+      font-weight: 300 !important;
+      font-style: italic;
+      font-family: inherit;
+      color: inherit;
+    }
 
-
-
+    /* ---------- Collapsible Tags Panel Styles ---------- */
+    /* CHANGED/ADDED: Position the tags container in the top-left corner */
+    #tagsContainer {
+      position: absolute; /* ADDED: fixed instead of absolute */
+      top: 407px;        /* Adjust spacing as desired */
+      left: 3vw;       /* Adjust spacing as desired */
+      width: 150px; 
+      margin-bottom: 2rem;
+      z-index: 10000; /* Ensure it stays above other elements */
+    }
+    #tagsToggle {
+      background-color: #121212;
+      color: #c4d8ff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: 1px solid #c4d8ff;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+    #tagsToggle:hover {
+      background-color: #c4d8ff;
+      color: #121212;
+    }
+    #tagsList {
+      max-height: 0;
+      overflow: hidden;
+      background-color: #1e1e1e;
+      transition: max-height 0.3s ease;
+      border-left: 1px solid #c4d8ff;
+      border-right: 1px solid #c4d8ff;
+      border-bottom: 1px solid #c4d8ff;
+    }
+    #tagsList.expanded {
+      max-height: 500px; /* Adjust if needed */
+    }
+    .tag-item {
+      padding: 0.5rem 1rem;
+      color: #c4d8ff;
+      font-style: italic;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .tag-item:hover {
+      color: #888888; 
+    }
+    /* Arrow rotation when expanded */
+    #tagsToggle .arrow {
+      transition: transform 0.3s ease;
+    }
+    #tagsList.expanded + #tagsToggle .arrow {
+      transform: rotate(180deg);
+    }
+    /* Remove border-radius */
+    #tagsToggle, #tagsList {
+      border-radius: 0;
+    }
+    /* Highlight for the selected tag (ADDED) */
+    .tag-item.selected {
+      background-color: #c4d8ff;
+      color: #121212;
+      font-weight: bold;
+    }
+    /* ---------- End of Collapsible Tags Panel Styles ---------- */
 
     /* Hide this entire container on mobile */
     @media (max-width: 600px) {
@@ -485,17 +548,16 @@
         left: 0;
         width: 100vw; 
         height: 100vh;
-        overflow-y: auto; /* important for scrolling inside the form */
+        overflow-y: auto;
       }
       #projectList {
-        height: 210vw; /* Existing mobile height */
+        height: 210vw;
       }
 
       #drawCanvas {
         height: 45vw;
         width: 45vw;
       }
-      /* Existing mobile adjustments */
       body {
         padding: 15vw 3vw;
       }
@@ -558,6 +620,12 @@
       .pagination-buttons {
         flex-direction: column;
       }
+      /* Adjust tags panel for mobile */
+      #tagsContainer {
+        width: 70vw;
+        top: 66.5vw;
+
+      }
     }
   </style>
 </head>
@@ -604,6 +672,18 @@
     </p>
   </div>
 
+  <!-- ---------- Collapsible Tags Panel ---------- -->
+  <div id="tagsContainer">
+    <div id="tagsToggle">
+      Tags
+      <span class="arrow">&#x25BC;</span> <!-- Down arrow -->
+    </div>
+    <div id="tagsList">
+      <!-- Tag items will be dynamically added here -->
+    </div>
+  </div>
+  <!-- ---------- End of Collapsible Tags Panel ---------- -->
+
   <!-- Project List Container -->
   <div id="projectList">Loading...</div>
 
@@ -647,9 +727,9 @@
         <canvas id="drawCanvas" width="400" height="400"></canvas>
       </div>
 
-      <!-- Added/Updated: Privacy notice checkbox under the Draw button -->
-      <div class="privacy-checkbox-container"> <!-- Added/Updated -->
-        <label for="privacyCheck">               <!-- Added/Updated -->
+      <!-- Privacy notice checkbox -->
+      <div class="privacy-checkbox-container">
+        <label for="privacyCheck">
           <input 
             type="checkbox" 
             id="privacyCheck" 
@@ -692,10 +772,16 @@
     const PAGE_SIZE = 6;
     let totalLastPage = 1;   // we'll track if we discover the last page
 
+    // Filter state
+    let currentFilterTag = null; // null => no filter (i.e., "All")
+
     // DOM
     const projectListEl = document.getElementById("projectList");
     const prevPageBtn = document.getElementById("prevPageBtn");
     const nextPageBtn = document.getElementById("nextPageBtn");
+    const tagsContainer = document.getElementById("tagsContainer");
+    const tagsToggle = document.getElementById("tagsToggle");
+    const tagsList = document.getElementById("tagsList");
 
     // =========== SUBMISSION FORM ELEMENTS ===========
     const submissionFormContainer = document.getElementById('submissionFormContainer');
@@ -708,14 +794,20 @@
     const drawCanvas = document.getElementById('drawCanvas');
     const ctx = drawCanvas.getContext('2d');
 
-    // Toggle show/hide the form (desktop only)
+    // Toggle show/hide the form (desktop and mobile)
     toggleFormButton.addEventListener('click', () => {
-      // Slide down by adding the "open" class
       submissionFormContainer.classList.add('open');
+      
+      if (window.innerWidth <= 600) {
+        document.body.classList.add('lock-scroll');
+      }
     });
     closeFormButton.addEventListener('click', () => {
-      // Slide it back up
       submissionFormContainer.classList.remove('open');
+      
+      if (window.innerWidth <= 600) {
+        document.body.classList.remove('lock-scroll');
+      }
     });
 
     // Drawing defaults
@@ -728,11 +820,10 @@
     drawContainer.style.display = "none";
 
     drawToggleBtn.addEventListener("click", () => {
-  const isHidden = drawContainer.style.display === "none";
-  drawContainer.style.display = isHidden ? "block" : "none";
-  drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
-});
-
+      const isHidden = drawContainer.style.display === "none";
+      drawContainer.style.display = isHidden ? "block" : "none";
+      drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
+    });
 
     // Helper to get scaled coords for drawing
     function getScaledCoords(clientX, clientY) {
@@ -844,12 +935,14 @@
         ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
         drawContainer.style.display = "none";
 
-        // (Optional) Close the form or keep it open – your choice:
         submissionFormContainer.classList.remove('open');
 
-        // [ADDED] Force the gallery to reload and show the newly submitted project
-        currentPage = 1;                 // reset to first page so newest item (highest ID) is displayed
-        await renderPage(currentPage);   // re-fetch and re-render the page
+        // Force the gallery to reload and show the newly submitted project
+        currentPage = 1;
+        await renderPage(currentPage);
+
+        // Refresh tags in case new ones were added
+        await fetchAndDisplayTags();
 
       } catch (error) {
         console.error("Error:", error);
@@ -859,15 +952,133 @@
     });
 
     /********************************************
-     * FETCH A SPECIFIC PAGE
+     * FETCH UNIQUE TAGS AND DISPLAY TAGS IN COLLAPSIBLE PANEL
      ********************************************/
-    async function fetchProjects(page) {
-      const offset = (page - 1) * PAGE_SIZE;
+    async function fetchAndDisplayTags() {
+      // Fetch all projects' tags
       const { data, error } = await supabase
+        .from("projects")
+        .select("tags");
+
+      if (error) {
+        console.error("Error fetching tags:", error);
+        return;
+      }
+
+      // If 'tags' is stored as an array
+      const allTags = data.flatMap(project => project.tags);
+
+      // Deduplicate
+      let uniqueTags = Array.from(new Set(allTags));
+
+      // Sort tags alphabetically or however you prefer
+      uniqueTags.sort();
+
+      // Prepend "All" (represents no filter)
+      /* ADDED: Put "All" at the beginning */
+      uniqueTags.unshift("All");
+
+      // Clear existing tags
+      tagsList.innerHTML = '';
+
+      // If there are still no tags, display a message
+      if (uniqueTags.length === 0) {
+        const noTags = document.createElement('p');
+        noTags.classList.add('tag-item');
+        noTags.textContent = 'No tags available.';
+        tagsList.appendChild(noTags);
+        return;
+      }
+
+      // Create tag items
+      uniqueTags.forEach(tag => {
+        const tagElement = document.createElement('p');
+        tagElement.classList.add('tag-item');
+        tagElement.textContent = tag;
+        tagElement.dataset.tag = tag.toLowerCase(); /* store a lowercase version */
+
+        tagElement.addEventListener('click', () => {
+          // If user clicks on "All", set filter to null
+          if (tag.toLowerCase() === "all") {
+            currentFilterTag = null;
+          } else {
+            currentFilterTag = tag;
+          }
+          currentPage = 1; 
+          renderPage(currentPage);
+
+          // Highlight selected tag
+          highlightSelectedTag(currentFilterTag);
+
+          // Optionally close the tags panel
+          toggleTagsPanel(false);
+        });
+
+        tagsList.appendChild(tagElement);
+      });
+
+      // After building the list, highlight the currently selected tag
+      highlightSelectedTag(currentFilterTag);
+    }
+
+    /* ADDED: A helper to highlight the currently selected tag */
+    function highlightSelectedTag(selectedTag) {
+      const tagItems = document.querySelectorAll('.tag-item');
+      tagItems.forEach(item => {
+        const thisTag = item.dataset.tag; 
+        // Tag is 'all' if selectedTag is null
+        if (selectedTag === null && thisTag === 'all') {
+          item.classList.add('selected');
+        } else if (selectedTag && thisTag === selectedTag.toLowerCase()) {
+          item.classList.add('selected');
+        } else {
+          item.classList.remove('selected');
+        }
+      });
+    }
+
+    /********************************************
+     * END FETCH UNIQUE TAGS AND DISPLAY TAGS
+     ********************************************/
+
+    /********************************************
+     * TOGGLE TAGS PANEL
+     ********************************************/
+    tagsToggle.addEventListener('click', () => {
+      const isExpanded = tagsList.classList.contains('expanded');
+      toggleTagsPanel(!isExpanded);
+    });
+
+    function toggleTagsPanel(shouldExpand) {
+      if (shouldExpand) {
+        tagsList.classList.add('expanded');
+        tagsToggle.querySelector('.arrow').innerHTML = '&#x25B2;'; // Up arrow
+      } else {
+        tagsList.classList.remove('expanded');
+        tagsToggle.querySelector('.arrow').innerHTML = '&#x25BC;'; // Down arrow
+      }
+    }
+    /********************************************
+     * END TOGGLE TAGS PANEL
+     ********************************************/
+
+    /********************************************
+     * FETCH A SPECIFIC PAGE WITH OPTIONAL TAG FILTER
+     ********************************************/
+    async function fetchProjects(page, tag = null) {
+      const offset = (page - 1) * PAGE_SIZE;
+      let query = supabase
         .from("projects")
         .select("id, title, description, tags, image_data")
         .order("id", { ascending: false })
         .range(offset, offset + PAGE_SIZE - 1);
+
+      if (tag) {
+        // If 'tags' is stored as an array in the database
+        query = query.contains('tags', [tag]);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error("Error fetching projects:", error);
@@ -879,13 +1090,15 @@
 
       return data || [];
     }
+    /********************************************
+     * END FETCH A SPECIFIC PAGE
+     ********************************************/
 
     /********************************************
      * RENDER PAGE
      ********************************************/
     async function renderPage(page) {
-      // 1) Fetch the data for this page
-      const projects = await fetchProjects(page);
+      const projects = await fetchProjects(page, currentFilterTag);
 
       // If no projects total and page=1, show a message
       if (projects.length === 0 && page === 1) {
@@ -895,11 +1108,11 @@
         return;
       }
 
-      // 2) Clear existing items
+      // Clear existing items
       projectListEl.innerHTML = "";
       savedPositions = [];
 
-      // 3) Create & position new items
+      // If we have projects
       if (projects.length > 0) {
         appendProjects(projects);
       } else {
@@ -907,7 +1120,7 @@
         currentPage--;
       }
 
-      // 4) Check if it's the last page
+      // Check if it's the last page
       if (projects.length < PAGE_SIZE) {
         totalLastPage = currentPage;
         nextPageBtn.disabled = true;
@@ -915,13 +1128,10 @@
         nextPageBtn.disabled = false;
       }
 
-      // 5) Check if page=1 => disable "Previous"
-      prevPageBtn.disabled = currentPage === 1;
+      // Disable "Previous" if on page=1
+      prevPageBtn.disabled = (currentPage === 1);
     }
 
-    /********************************************
-     * APPEND & POSITION PROJECTS
-     ********************************************/
     function appendProjects(projects) {
       const newElems = [];
 
@@ -990,6 +1200,9 @@
         savedPositions.push({ left: x, top: y, zIndex: zIndexCounter });
       });
     }
+    /********************************************
+     * END RENDER PAGE
+     ********************************************/
 
     /********************************************
      * DRAG HANDLERS
@@ -1089,6 +1302,9 @@
         requestAnimationFrame(applyMomentum);
       }
     }
+    /********************************************
+     * END DRAG HANDLERS
+     ********************************************/
 
     /********************************************
      * UTILITIES
@@ -1104,6 +1320,9 @@
     function escapeURL(url = "") {
       return url.replace(/"/g, "%22").replace(/'/g, "%27");
     }
+    /********************************************
+     * END UTILITIES
+     ********************************************/
 
     /********************************************
      * EVENT LISTENERS FOR PAGINATION
@@ -1125,26 +1344,20 @@
       currentPage++;
       renderPage(currentPage);
     });
+    /********************************************
+     * END EVENT LISTENERS FOR PAGINATION
+     ********************************************/
 
-    // 3) Toggle scroll-lock only on mobile
-    toggleFormButton.addEventListener('click', () => {
-      submissionFormContainer.classList.add('open');
-      
-      if (window.innerWidth <= 600) {
-        document.body.classList.add('lock-scroll');
-      }
+    /********************************************
+     * INIT: TAGS + PAGE RENDER + TITLE ANIMATION
+     ********************************************/
+    document.addEventListener("DOMContentLoaded", async () => {
+      await fetchAndDisplayTags(); // build out the tag list
+      renderPage(currentPage);      // load projects
+      animateTitle();
     });
 
-    closeFormButton.addEventListener('click', () => {
-      submissionFormContainer.classList.remove('open');
-
-      if (window.innerWidth <= 600) {
-        document.body.classList.remove('lock-scroll');
-      }
-    });
-
-    // Title Animation
-    document.addEventListener("DOMContentLoaded", () => {
+    function animateTitle() {
       const title = document.getElementById("animated-title");
       const letters = title.querySelectorAll(".letter");
       letters.forEach((letter, index) => {
@@ -1153,12 +1366,7 @@
           letter.classList.add("visible");
         }, delay);
       });
-    });
-
-    // Initial load: render page 1
-    document.addEventListener("DOMContentLoaded", () => {
-      renderPage(currentPage);
-    });
+    }
   </script>
 </body>
 </html>
