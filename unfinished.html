@@ -377,18 +377,31 @@
     #drawToggleBtn,
     #uploadForm button[type="submit"] {
       cursor: pointer;
-      background-color: #121212;
-      color: #c4d8ff;
       border: 1px solid #c4d8ff;
       padding: 0.6rem 1.2rem;
       font-size: 0.9rem;
       transition: background-color 0.3s;
       margin-right: 1rem;
+      margin-bottom: 0.4rem;
     }
-    #drawToggleBtn:hover,
-    #uploadForm button[type="submit"]:hover {
+    #drawToggleBtn {
+      background-color: #121212;
+      color: #c4d8ff;
+    }
+    #uploadForm button[type="submit"] {
       background-color: #c4d8ff;
       color: #121212;
+    }
+
+    #drawToggleBtn:hover {
+      background-color: #c4d8ff;
+      color: #121212;
+    }
+
+    #uploadForm button[type="submit"]:hover {
+      background-color: #8797b7;
+      color: #121212;
+      border: 1px solid #8797b7;
     }
 
     #drawContainer {
@@ -411,6 +424,58 @@
       font-weight: bold;
       color: #c4d8ff;
     }
+    .privacy-checkbox-container {
+  margin: 1rem 0;
+  color: #c4d8ff; /* Text color */
+  font-size: 0.9rem;
+}
+
+.privacy-checkbox-container input[type="checkbox"] {
+  width: 1rem; /* Checkbox size */
+  height: 1rem;
+  margin-right: 0.2rem;
+  margin-bottom: 0.3rem;
+  background-color: #121212; /* Background color */
+  border: 1px solid #c4d8ff; /* Border color */
+  cursor: pointer;
+  appearance: none; /* Remove default browser styles */
+  display: inline-block; /* Ensure it behaves like a box */
+  vertical-align: middle; /* Align with label text */
+  position: relative;
+}
+
+.privacy-checkbox-container input[type="checkbox"]::after {
+  content: ''; /* Placeholder for the tick */
+  position: absolute;
+  top: 1px; /* Adjust tick position */
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #c4d8ff; /* Tick color */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none; /* Hidden by default */
+}
+
+.privacy-checkbox-container input[type="checkbox"]:checked::after {
+  display: block; /* Show the tick when checked */
+}
+
+.privacy-checkbox-container input[type="checkbox"]:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.privacy-checkbox-container label {
+  cursor: pointer;
+  line-height: 1.4rem;
+  font-weight: 500 !important; /* Ensure the font weight is applied */
+  font-style: italic;
+  font-family: inherit; /* Use the same font as the rest of the page */
+  color: inherit; /* Ensure it inherits the container's text color */
+}
+
+
+
 
     /* Hide this entire container on mobile */
     @media (max-width: 600px) {
@@ -423,9 +488,8 @@
         overflow-y: auto; /* important for scrolling inside the form */
       }
       #projectList {
-      height: 210vw;       
-
-    }
+        height: 210vw; /* Existing mobile height */
+      }
 
       #drawCanvas {
         height: 45vw;
@@ -576,11 +640,23 @@
       <input type="file" id="file" name="file" accept="image/*" />
 
       <!-- Collapsible draw canvas trigger -->
-      <button type="button" id="drawToggleBtn">Draw</button>
+      <button type="button" id="drawToggleBtn">Draw &#8595;</button>
 
       <!-- Collapsible container with canvas -->
       <div id="drawContainer">
         <canvas id="drawCanvas" width="400" height="400"></canvas>
+      </div>
+
+      <!-- Added/Updated: Privacy notice checkbox under the Draw button -->
+      <div class="privacy-checkbox-container"> <!-- Added/Updated -->
+        <label for="privacyCheck">               <!-- Added/Updated -->
+          <input 
+            type="checkbox" 
+            id="privacyCheck" 
+            required 
+          /> 
+          Unfinished Business is an anonymous public platform. No identifying information is stored unless you choose to disclose it. To request the removal of an upload, please reach out using the email link in the home page. By submitting, you agree to these terms.
+        </label>
       </div>
 
       <button type="submit">Submit</button>
@@ -651,12 +727,12 @@
     // Hide the drawing area by default
     drawContainer.style.display = "none";
 
-    // Toggle the drawing canvas
     drawToggleBtn.addEventListener("click", () => {
-      const isHidden = drawContainer.style.display === "none";
-      drawContainer.style.display = isHidden ? "block" : "none";
-      drawToggleBtn.textContent = isHidden ? "Hide Draw Canvas" : "Draw";
-    });
+  const isHidden = drawContainer.style.display === "none";
+  drawContainer.style.display = isHidden ? "block" : "none";
+  drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
+});
+
 
     // Helper to get scaled coords for drawing
     function getScaledCoords(clientX, clientY) {
