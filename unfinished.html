@@ -37,6 +37,11 @@
       font-style: normal;
     }
 
+
+
+
+
+
     /*******************************************
      * GLOBAL RESET & BASE STYLES
      ********************************************/
@@ -57,14 +62,11 @@
       flex-direction: column;
       padding: 3vw;
     }
-
-    /* 1) Lock body scrolling when needed */
     body.lock-scroll {
       overflow: hidden;
       position: relative;
       height: 100vh; 
     }
-
     #backButton {
       position: fixed;
       padding: 1vw 1.5vw;
@@ -78,6 +80,14 @@
       cursor: pointer;
       z-index: 100000; 
     }
+
+
+
+
+
+
+
+
 
     /*******************************************
      * HEADER
@@ -98,10 +108,9 @@
       display: flex;
       flex-wrap: wrap;
     }
-    /* Changed the old link to an anchor that triggers the form */
     header a {
       text-decoration: none;
-      padding: 4.5vw 2vw 4.5vw 2vw;
+      padding: 4.5vw 2vw;
       margin: 3vw;
       background: #121212;
       color: #c4d8ff;
@@ -122,8 +131,6 @@
       color: #121212;
       border: 1px solid #121212;
     }
-
-    /* Animation for title */
     .letter {
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -133,6 +140,18 @@
       opacity: 1;
     }
 
+
+
+
+
+
+
+
+
+
+    /*******************************************
+     * ABOUT SECTION
+     ********************************************/
     #about {
       height: fit-content;
       border: 1px solid #c4d8ff;
@@ -143,48 +162,226 @@
       font-weight: 300;
     }
 
+
+
+
+
+
+
+
+
+
+
+
     /*******************************************
-     * PROJECT GALLERY WRAPPER
+     * TOP MENU BAR
+     ********************************************/
+    #topMenuBar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #c4d8ff;
+      padding: 1rem;
+    }
+    #layoutToggleBtn, #searchInput {
+      font-size: 1rem;
+      border: 1px solid #c4d8ff;
+      background-color: #121212;
+      color: #c4d8ff;
+      padding: 0.5rem;
+      border-radius: 0;
+    }
+    #layoutToggleBtn:hover {
+      background-color: #c4d8ff;
+      color: #121212;
+    }
+    #searchInput {
+      flex: 1;
+      max-width: 300px;
+      color: #c4d8ff;
+    }
+
+
+
+
+/* Remove default appearance */
+#tagsDropdown {
+  width: fit-content;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Add space for custom arrow */
+  font-size: 1rem;
+  border: 1.1px solid #c4d8ff;
+  background-color: #121212;
+  color: #c4d8ff;
+  border-radius: 0 !important;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* Custom arrow */
+.custom-select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #c4d8ff;
+  font-size: 0.8rem;
+}
+
+/* Change arrow color on hover */
+#tagsDropdown:hover + .custom-select-wrapper::after {
+  color: #8797b7;
+}
+
+/* Optional: Focus state */
+#tagsDropdown:focus {
+  outline: none;
+  border-color: #8797b7;
+}
+
+
+
+
+    /*******************************************
+     * PROJECT LIST (grid vs scatter)
      ********************************************/
     #projectList {
-      position: relative;
+      /* For scatter, we'll size/position absolutely. For grid, we override. */
       width: 100%;
-      height: 120vh;       
-      overflow: hidden;    
+      height: 120vh;
+      overflow: hidden;
       border-left: 1px solid #c4d8ff; 
       border-right: 1px solid #c4d8ff; 
       border-bottom: 1px solid #c4d8ff; 
+      display: block; /* fallback for scatter */
+      position: relative; /* container context for scatter movement */
     }
+    #projectList.grid-mode {
+  padding: 5vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 4rem; /* Adjust spacing between projects */
+  height: auto; /* Let the container size adjust based on content */
+}
+
+#projectList.grid-mode .project {
+  width: 100%; /* Projects will automatically size based on the grid */
+  min-height: 26vw;
+  height: auto;
+  cursor: default;
+  transform: none !important;
+  border: 1px solid #c4d8ff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#projectList.grid-mode .project:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
 
     /*******************************************
-     * PROJECT CARD BASE STYLE
+     * PROJECT CARD
      ********************************************/
+    /* IMPORTANT: We set position: relative so .image-overlay can anchor properly. */
     .project {
-      position: absolute;
+      position: relative; /* anchors .image-overlay within each card */
       cursor: grab;
       user-select: none;
       width: 300px;
-      min-height: 300px; 
+      min-height: 300px;
       overflow: hidden;
       border: 1px solid #c4d8ff;
-      padding: 2rem;
       background-color: #c4d8ff;
       color: #121212;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      padding: 2rem;
       box-sizing: border-box;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
-    .project:active {
-      cursor: grabbing;
+    /* This class is added in scatter mode for absolute positioning inside #projectList */
+    .scattered {
+      position: absolute !important;
     }
+
+    /* In grid-mode, no scatter; we remove .scattered so they flow in normal layout */
+    #projectList.grid-mode .project {
+      cursor: default;
+      transform: none !important;
+    }
+
     .project:hover {
       transform: scale(1.02);
     }
+
+
+
+
+
+
+
+
+
+    /* Upvote container (top-right corner of the project card) */
+    .upvote-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #121212;
+      border-left: 1px solid #c4d8ff;
+      border-bottom: 1px solid #c4d8ff;
+      color: #c4d8ff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      z-index: 3; /* ensure upvote area is above overlay */
+    }
+    .upvoteBtn {
+      cursor: pointer;
+      color: #c4d8ff; /* Default color */
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .upvoteBtn:hover:not(:disabled) {
+      color: gold; /* Hover color for active buttons */
+    }
+
+    .upvoteBtn.clicked {
+      color: #ffd700; /* Color after clicking (gold) */
+      cursor: not-allowed;
+      pointer-events: none; /* Ensure it's not clickable */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Project info style */
     .project-info {
       position: relative;
       z-index: 2;
-      color: #333;
       pointer-events: none;
-      transition: opacity 0.4s ease-in-out, color 0.3s ease;
       opacity: 1;
     }
     .title {
@@ -205,6 +402,18 @@
       color: #121212;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     /*******************************************
      * IMAGE OVERLAY
      ********************************************/
@@ -219,7 +428,7 @@
     }
     .has-image .image-overlay {
       position: absolute;
-      top: 0; 
+      top: 0;
       left: 0;
       width: 100%;
       height: 100%;
@@ -242,8 +451,18 @@
       opacity: 1;
     }
 
+
+
+
+
+
+
+
+
+
+
     /*******************************************
-     * VISUAL FEEDBACK CLASSES
+     * VISUAL FEEDBACK (scatter mode)
      ********************************************/
     .dragging {
       transform: scale(1.1) rotate(1deg);
@@ -286,10 +505,20 @@
       cursor: not-allowed;
     }
 
+
+
+
+
+
+
+
+
+
+
+
     /*******************************************
      * SUBMISSION FORM (DESKTOP-ONLY SLIDE DOWN)
      ********************************************/
-    /* Container for the form in the top-right corner */
     #submissionFormContainer {
       position: fixed;
       top: 0;
@@ -299,19 +528,15 @@
       min-width: 350px;
       background-color: #121212;
       border: 1px solid #c4d8ff;
-      /* Start hidden above the viewport */
       transform: translateY(-120%);
       transition: transform 0.5s ease;
       z-index: 9999999;
       padding: 2rem;
       overflow-y: auto;
     }
-    /* When .open is added, it slides down into view */
     #submissionFormContainer.open {
       transform: translateY(0);
     }
-
-    /* "Close" (X) button in the same style */
     #closeFormButton {
       position: absolute;
       top: 0;
@@ -327,8 +552,6 @@
       background-color: #c4d8ff;
       color: #121212;
     }
-
-    /* The actual form styling */
     #uploadForm {
       background-color: #121212;
       color: #c4d8ff;
@@ -346,7 +569,6 @@
       margin-bottom: 0.5rem;
       color: #c4d8ff;
     }
-
     #uploadForm input[type="text"],
     #uploadForm textarea {
       width: 100%;
@@ -359,19 +581,20 @@
       font-size: 1rem;
       font-family: inherit;
     }
-
     #file {
       display: none; 
     }
 
+
+
+
     #toggleFormButton {
-      position: fixed; /* Ensure it's positioned relative to the viewport */
+      position: fixed;
       margin: 0;
       z-index: 100;
       top: 0;
       right: 0;
     }
-
     #drawToggleBtn,
     #uploadForm button[type="submit"] {
       cursor: pointer;
@@ -390,12 +613,10 @@
       background-color: #c4d8ff;
       color: #121212;
     }
-
     #drawToggleBtn:hover {
       background-color: #c4d8ff;
       color: #121212;
     }
-
     #uploadForm button[type="submit"]:hover {
       background-color: #8797b7;
       color: #121212;
@@ -423,12 +644,20 @@
       color: #c4d8ff;
     }
 
+
+
+
+
+
+
+
+
+
     .privacy-checkbox-container {
       margin: 1rem 0;
       color: #c4d8ff; 
       font-size: 0.9rem;
     }
-
     .privacy-checkbox-container input[type="checkbox"] {
       width: 1rem; 
       height: 1rem;
@@ -442,7 +671,6 @@
       vertical-align: middle;
       position: relative;
     }
-
     .privacy-checkbox-container input[type="checkbox"]::after {
       content: '';
       position: absolute;
@@ -455,15 +683,12 @@
       transform: rotate(45deg);
       display: none;
     }
-
     .privacy-checkbox-container input[type="checkbox"]:checked::after {
       display: block;
     }
-
     .privacy-checkbox-container input[type="checkbox"]:focus {
       outline: none;
     }
-
     .privacy-checkbox-container label {
       cursor: pointer;
       line-height: 1.4rem;
@@ -473,74 +698,16 @@
       color: inherit;
     }
 
-    /* ---------- Collapsible Tags Panel Styles ---------- */
-    /* CHANGED/ADDED: Position the tags container in the top-left corner */
-    #tagsContainer {
-      position: absolute; /* ADDED: fixed instead of absolute */
-      top: 407px;        /* Adjust spacing as desired */
-      left: 3vw;       /* Adjust spacing as desired */
-      width: 150px; 
-      margin-bottom: 2rem;
-      z-index: 10000; /* Ensure it stays above other elements */
-    }
-    #tagsToggle {
-      background-color: #121212;
-      color: #c4d8ff;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border: 1px solid #c4d8ff;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      user-select: none;
-    }
-    #tagsToggle:hover {
-      background-color: #c4d8ff;
-      color: #121212;
-    }
-    #tagsList {
-      max-height: 0;
-      overflow: hidden;
-      background-color: #1e1e1e;
-      transition: max-height 0.3s ease;
-      border-left: 1px solid #c4d8ff;
-      border-right: 1px solid #c4d8ff;
-      border-bottom: 1px solid #c4d8ff;
-    }
-    #tagsList.expanded {
-      max-height: 500px; /* Adjust if needed */
-    }
-    .tag-item {
-      padding: 0.5rem 1rem;
-      color: #c4d8ff;
-      font-style: italic;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-    .tag-item:hover {
-      color: #888888; 
-    }
-    /* Arrow rotation when expanded */
-    #tagsToggle .arrow {
-      transition: transform 0.3s ease;
-    }
-    #tagsList.expanded + #tagsToggle .arrow {
-      transform: rotate(180deg);
-    }
-    /* Remove border-radius */
-    #tagsToggle, #tagsList {
-      border-radius: 0;
-    }
-    /* Highlight for the selected tag (ADDED) */
-    .tag-item.selected {
-      background-color: #c4d8ff;
-      color: #121212;
-      font-weight: bold;
-    }
-    /* ---------- End of Collapsible Tags Panel Styles ---------- */
 
-    /* Hide this entire container on mobile */
+
+
+
+
+
+
+    /*******************************************
+     * RESPONSIVE TWEAKS FOR MOBILE
+     ********************************************/
     @media (max-width: 600px) {
       #submissionFormContainer {
         position: fixed; 
@@ -549,14 +716,6 @@
         width: 100vw; 
         height: 100vh;
         overflow-y: auto;
-      }
-      #projectList {
-        height: 210vw;
-      }
-
-      #drawCanvas {
-        height: 45vw;
-        width: 45vw;
       }
       body {
         padding: 15vw 3vw;
@@ -585,32 +744,25 @@
         width: fit-content;
       }
       .project {
-        max-width: 55vw !important;
-        height: fit-content;
-        min-height: auto;
-        max-height: auto !important;
-        padding: 20px;
+        width: 60vw !important;   /* single column on mobile */
+        height: 60vw !important;
+        margin: 1rem auto 5rem auto;     
       }
-      .has-image {
-        min-height: 40vw;
+      .has-image .image-overlay {
+        background-size: cover;
       }
       .title {
-        font-size: 0.8rem;
-        line-height: 0.8rem;
-        font-weight: bold;
-        margin-bottom: 0.9rem;
-        color: #121212;
+        font-size: 1rem;
       }
       .description {
-        font-size: 0.6rem;
-        line-height: 1rem;
-        margin-bottom: 0.9rem;
-        color: #121212;
+        font-size: 0.8rem;
       }
       .tags {
-        font-size: 0.6rem;
-        font-style: italic;
-        color: #121212;
+        font-size: 0.7rem;
+      }
+      #drawCanvas {
+        width: 45vw;
+        height: 45vw;
       }
       #about {
         padding: 20px;
@@ -620,11 +772,26 @@
       .pagination-buttons {
         flex-direction: column;
       }
-      /* Adjust tags panel for mobile */
-      #tagsContainer {
-display: none;
-
+      #topMenuBar {
+        flex-direction: column;
+        align-items: stretch;
       }
+      #searchInput {
+        max-width: 100%;
+        margin-top: 0.5rem;
+      }
+      
+      #projectList.grid-mode {
+  padding: 10vw;
+  display: inline-block;
+  height: auto; /* Let the container size adjust based on content */
+}
+
+
+#layoutToggleBtn {
+  display: none;
+}
+
     }
   </style>
 </head>
@@ -656,7 +823,6 @@ display: none;
       <span class="letter hidden">.</span>
       <span class="letter hidden">.</span>
     </h1>
-    <!-- This link now opens the form instead of going to upload.html -->
     <a id="toggleFormButton">Submit</a>
   </header>
 
@@ -671,17 +837,15 @@ display: none;
     </p>
   </div>
 
-  <!-- ---------- Collapsible Tags Panel ---------- -->
-  <div id="tagsContainer">
-    <div id="tagsToggle">
-      Tags
-      <span class="arrow">&#x25BC;</span> <!-- Down arrow -->
-    </div>
-    <div id="tagsList">
-      <!-- Tag items will be dynamically added here -->
-    </div>
+  <!-- =========== NEW MENU BAR =========== -->
+  <div id="topMenuBar">
+    <!-- Layout toggle -->
+    <button id="layoutToggleBtn">Switch to Scatter</button>
+    <!-- Search -->
+    <input type="text" id="searchInput" placeholder="Search projects..." />
+    <!-- Tags dropdown -->
+    <select id="tagsDropdown"></select>
   </div>
-  <!-- ---------- End of Collapsible Tags Panel ---------- -->
 
   <!-- Project List Container -->
   <div id="projectList">Loading...</div>
@@ -715,7 +879,7 @@ display: none;
         <input type="text" id="tags" name="tags" placeholder="e.g. art, WIP, concept" />
       </div>
 
-      <!-- Hidden file input (if needed) -->
+      <!-- Hidden file input (optional) -->
       <input type="file" id="file" name="file" accept="image/*" />
 
       <!-- Collapsible draw canvas trigger -->
@@ -755,34 +919,39 @@ display: none;
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dnpucXh3ZGJyY3l5b2FkYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjUzMzIsImV4cCI6MjA1MDU0MTMzMn0.FbSmgJ5KOGaSIY4150gOIbiYWQ86fbtZQk-fP50RkZk";
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Draggable tracking
+    // Layout mode: grid by default
+    let isGridView = true;
+
+    // Scatter (draggable) tracking
     let savedPositions = [];
     let isDragging = false;
     let activeElement = null;
     let offsetX = 0,
-      offsetY = 0;
+        offsetY = 0;
     let velocityX = 0,
-      velocityY = 0;
+        velocityY = 0;
     const friction = 0.95;
     let zIndexCounter = 1000;
 
-    // Page-based variables
-    let currentPage = 1;     // start on page 1
+    // Pagination
+    let currentPage = 1;  
     const PAGE_SIZE = 6;
-    let totalLastPage = 1;   // we'll track if we discover the last page
+    let totalLastPage = 1;   
 
     // Filter state
-    let currentFilterTag = null; // null => no filter (i.e., "All")
+    let currentFilterTag = null; // "All" => null
+    let searchTerm = "";         // used for text search
 
-    // DOM
+    // DOM references
     const projectListEl = document.getElementById("projectList");
     const prevPageBtn = document.getElementById("prevPageBtn");
     const nextPageBtn = document.getElementById("nextPageBtn");
-    const tagsContainer = document.getElementById("tagsContainer");
-    const tagsToggle = document.getElementById("tagsToggle");
-    const tagsList = document.getElementById("tagsList");
 
-    // =========== SUBMISSION FORM ELEMENTS ===========
+    const layoutToggleBtn = document.getElementById("layoutToggleBtn");
+    const searchInput = document.getElementById("searchInput");
+    const tagsDropdown = document.getElementById("tagsDropdown");
+
+    // Form references
     const submissionFormContainer = document.getElementById('submissionFormContainer');
     const toggleFormButton = document.getElementById('toggleFormButton');
     const closeFormButton = document.getElementById('closeFormButton');
@@ -793,29 +962,58 @@ display: none;
     const drawCanvas = document.getElementById('drawCanvas');
     const ctx = drawCanvas.getContext('2d');
 
-    // Toggle show/hide the form (desktop and mobile)
+    // ------------------ LAYOUT TOGGLE ------------------
+    layoutToggleBtn.addEventListener("click", () => {
+      isGridView = !isGridView;
+      if (isGridView) {
+        layoutToggleBtn.textContent = "Switch to Scatter";
+        projectListEl.classList.add("grid-mode");
+      } else {
+        layoutToggleBtn.textContent = "Switch to Grid";
+        projectListEl.classList.remove("grid-mode");
+      }
+      // Re-render the current page, re-randomize positions if scatter
+      renderPage(currentPage, true);
+    });
+
+    // ------------------ SEARCH BAR ------------------
+    searchInput.addEventListener("input", () => {
+      searchTerm = searchInput.value.trim();
+      currentPage = 1;
+      renderPage(currentPage);
+    });
+
+    // ------------------ TAGS DROPDOWN ------------------
+    tagsDropdown.addEventListener("change", () => {
+      const val = tagsDropdown.value;
+      if (val === "All") {
+        currentFilterTag = null;
+      } else {
+        currentFilterTag = val;
+      }
+      currentPage = 1;
+      renderPage(currentPage);
+    });
+
+    // ------------------ FORM TOGGLE ------------------
     toggleFormButton.addEventListener('click', () => {
       submissionFormContainer.classList.add('open');
-      
       if (window.innerWidth <= 600) {
         document.body.classList.add('lock-scroll');
       }
     });
     closeFormButton.addEventListener('click', () => {
       submissionFormContainer.classList.remove('open');
-      
       if (window.innerWidth <= 600) {
         document.body.classList.remove('lock-scroll');
       }
     });
 
-    // Drawing defaults
+    // ------------------ DRAWING SETUP ------------------
     ctx.strokeStyle = "#c4d8ff";
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
     let drawing = false;
-
-    // Hide the drawing area by default
     drawContainer.style.display = "none";
 
     drawToggleBtn.addEventListener("click", () => {
@@ -824,17 +1022,16 @@ display: none;
       drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
     });
 
-    // Helper to get scaled coords for drawing
     function getScaledCoords(clientX, clientY) {
       const rect = drawCanvas.getBoundingClientRect();
       const scaleX = drawCanvas.width / rect.width;
       const scaleY = drawCanvas.height / rect.height;
-      const x = (clientX - rect.left) * scaleX;
-      const y = (clientY - rect.top) * scaleY;
-      return { x, y };
+      return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+      };
     }
 
-    // Mouse events
     drawCanvas.addEventListener("mousedown", (e) => {
       e.preventDefault();
       drawing = true;
@@ -849,12 +1046,8 @@ display: none;
       ctx.lineTo(x, y);
       ctx.stroke();
     });
-    drawCanvas.addEventListener("mouseup", () => {
-      drawing = false;
-    });
-    drawCanvas.addEventListener("mouseleave", () => {
-      drawing = false;
-    });
+    drawCanvas.addEventListener("mouseup", () => { drawing = false; });
+    drawCanvas.addEventListener("mouseleave", () => { drawing = false; });
 
     // Touch events
     drawCanvas.addEventListener("touchstart", (e) => {
@@ -878,15 +1071,13 @@ display: none;
       drawing = false;
     });
 
-    // Word limit logic
+    // ------------------ WORD LIMIT ------------------
     document.getElementById("description").addEventListener("input", (e) => {
-      const descriptionField = e.target;
-      const words = descriptionField.value.trim().split(/\s+/).filter(word => word.length > 0);
-      const wordCount = words.length;
+      const desc = e.target.value.trim();
+      const words = desc.split(/\s+/).filter(w => w.length > 0);
       const maxWords = 150;
-
-      if (wordCount > maxWords) {
-        descriptionField.value = words.slice(0, maxWords).join(" ");
+      if (words.length > maxWords) {
+        e.target.value = words.slice(0, maxWords).join(" ");
         statusMessage.textContent = `Description trimmed to ${maxWords} words.`;
         statusMessage.style.color = "red";
       } else {
@@ -895,7 +1086,7 @@ display: none;
       }
     });
 
-    // Handle submission
+    // ------------------ FORM SUBMIT ------------------
     uploadForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       statusMessage.textContent = "Submitting...";
@@ -906,14 +1097,13 @@ display: none;
       const tagsInput = document.getElementById("tags").value.trim();
       const tags = tagsInput ? tagsInput.split(",").map(tag => tag.trim()) : [];
 
-      // Convert canvas to base64 if visible
       let drawingBase64 = null;
       if (drawContainer.style.display === "block") {
         drawingBase64 = drawCanvas.toDataURL("image/png");
       }
 
       try {
-        const { data: newRecord, error: dbError } = await supabase
+        const { data, error } = await supabase
           .from("projects")
           .insert([
             {
@@ -921,164 +1111,103 @@ display: none;
               description,
               tags,
               image_data: drawingBase64,
+              upvotes: 0
             },
-          ]);
+          ])
+          .select();
 
-        if (dbError) throw dbError;
+        if (error) throw error;
 
         statusMessage.textContent = "Submission successful!";
         statusMessage.style.color = "#c4d8ff";
 
-        // Reset the form and clear the canvas
+        // Reset form
         uploadForm.reset();
         ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
         drawContainer.style.display = "none";
-
         submissionFormContainer.classList.remove('open');
+        if (window.innerWidth <= 600) {
+          document.body.classList.remove('lock-scroll');
+        }
 
-        // Force the gallery to reload and show the newly submitted project
+        // Reload projects and tags
         currentPage = 1;
         await renderPage(currentPage);
+        await fetchAndPopulateTags();
 
-        // Refresh tags in case new ones were added
-        await fetchAndDisplayTags();
-
-      } catch (error) {
-        console.error("Error:", error);
-        statusMessage.textContent = `Submission failed: ${error.message}`;
+      } catch (err) {
+        console.error("Error:", err);
+        statusMessage.textContent = `Submission failed: ${err.message}`;
         statusMessage.style.color = "red";
       }
     });
 
-    /********************************************
-     * FETCH UNIQUE TAGS AND DISPLAY TAGS IN COLLAPSIBLE PANEL
-     ********************************************/
-    async function fetchAndDisplayTags() {
-      // Fetch all projects' tags
-      const { data, error } = await supabase
-        .from("projects")
-        .select("tags");
+    async function fetchAndPopulateTags() {
+  const { data, error } = await supabase.from("projects").select("tags");
 
-      if (error) {
-        console.error("Error fetching tags:", error);
-        return;
-      }
+  if (error) {
+    console.error("Error fetching tags:", error);
+    return;
+  }
 
-      // If 'tags' is stored as an array
-      const allTags = data.flatMap(project => project.tags);
+  const allTags = data.flatMap((proj) => proj.tags || []);
+  const uniqueTags = Array.from(new Set(allTags)).sort();
 
-      // Deduplicate
-      let uniqueTags = Array.from(new Set(allTags));
+  // Clear existing options
+  tagsDropdown.innerHTML = "";
 
-      // Sort tags alphabetically or however you prefer
-      uniqueTags.sort();
+  // Add default "Search Tags" option as a placeholder
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Filter ▼";
+  defaultOption.disabled = true; // Prevent selection
+  defaultOption.selected = true; // Show as default
+  tagsDropdown.appendChild(defaultOption);
 
-      // Prepend "All" (represents no filter)
-      /* ADDED: Put "All" at the beginning */
-      uniqueTags.unshift("All");
+  // Add "All" option
+  const allOption = document.createElement("option");
+  allOption.value = "All";
+  allOption.textContent = "All";
+  tagsDropdown.appendChild(allOption);
 
-      // Clear existing tags
-      tagsList.innerHTML = '';
+  // Add unique tags
+  uniqueTags.forEach((tag) => {
+    const option = document.createElement("option");
+    option.value = tag;
+    option.textContent = tag;
+    tagsDropdown.appendChild(option);
+  });
+}
 
-      // If there are still no tags, display a message
-      if (uniqueTags.length === 0) {
-        const noTags = document.createElement('p');
-        noTags.classList.add('tag-item');
-        noTags.textContent = 'No tags available.';
-        tagsList.appendChild(noTags);
-        return;
-      }
+// Update the event listener for dropdown change
+tagsDropdown.addEventListener("change", () => {
+  const val = tagsDropdown.value;
+  if (val === "All") {
+    currentFilterTag = null; // Reset to show all projects
+  } else {
+    currentFilterTag = val;
+  }
+  currentPage = 1;
+  renderPage(currentPage);
+});
 
-      // Create tag items
-      uniqueTags.forEach(tag => {
-        const tagElement = document.createElement('p');
-        tagElement.classList.add('tag-item');
-        tagElement.textContent = tag;
-        tagElement.dataset.tag = tag.toLowerCase(); /* store a lowercase version */
 
-        tagElement.addEventListener('click', () => {
-          // If user clicks on "All", set filter to null
-          if (tag.toLowerCase() === "all") {
-            currentFilterTag = null;
-          } else {
-            currentFilterTag = tag;
-          }
-          currentPage = 1; 
-          renderPage(currentPage);
-
-          // Highlight selected tag
-          highlightSelectedTag(currentFilterTag);
-
-          // Optionally close the tags panel
-          toggleTagsPanel(false);
-        });
-
-        tagsList.appendChild(tagElement);
-      });
-
-      // After building the list, highlight the currently selected tag
-      highlightSelectedTag(currentFilterTag);
-    }
-
-    /* ADDED: A helper to highlight the currently selected tag */
-    function highlightSelectedTag(selectedTag) {
-      const tagItems = document.querySelectorAll('.tag-item');
-      tagItems.forEach(item => {
-        const thisTag = item.dataset.tag; 
-        // Tag is 'all' if selectedTag is null
-        if (selectedTag === null && thisTag === 'all') {
-          item.classList.add('selected');
-        } else if (selectedTag && thisTag === selectedTag.toLowerCase()) {
-          item.classList.add('selected');
-        } else {
-          item.classList.remove('selected');
-        }
-      });
-    }
-
-    /********************************************
-     * END FETCH UNIQUE TAGS AND DISPLAY TAGS
-     ********************************************/
-
-    /********************************************
-     * TOGGLE TAGS PANEL
-     ********************************************/
-    tagsToggle.addEventListener('click', () => {
-      const isExpanded = tagsList.classList.contains('expanded');
-      toggleTagsPanel(!isExpanded);
-    });
-
-    function toggleTagsPanel(shouldExpand) {
-      if (shouldExpand) {
-        tagsList.classList.add('expanded');
-        tagsToggle.querySelector('.arrow').innerHTML = '&#x25B2;'; // Up arrow
-      } else {
-        tagsList.classList.remove('expanded');
-        tagsToggle.querySelector('.arrow').innerHTML = '&#x25BC;'; // Down arrow
-      }
-    }
-    /********************************************
-     * END TOGGLE TAGS PANEL
-     ********************************************/
-
-    /********************************************
-     * FETCH A SPECIFIC PAGE WITH OPTIONAL TAG FILTER
-     ********************************************/
-    async function fetchProjects(page, tag = null) {
+    // ------------------ FETCH PROJECTS ------------------
+    async function fetchProjects(page, tag = null, search = "") {
       const offset = (page - 1) * PAGE_SIZE;
       let query = supabase
         .from("projects")
-        .select("id, title, description, tags, image_data")
+        .select("id, title, description, tags, image_data, upvotes")
         .order("id", { ascending: false })
         .range(offset, offset + PAGE_SIZE - 1);
 
       if (tag) {
-        // If 'tags' is stored as an array in the database
         query = query.contains('tags', [tag]);
       }
-
+      if (search.length > 0) {
+        query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
+      }
       const { data, error } = await query;
-
       if (error) {
         console.error("Error fetching projects:", error);
         projectListEl.innerHTML = `<p style="padding:20px; color: #c4d8ff;">Error loading projects: ${error.message}</p>`;
@@ -1086,127 +1215,175 @@ display: none;
         nextPageBtn.disabled = true;
         return [];
       }
-
       return data || [];
     }
-    /********************************************
-     * END FETCH A SPECIFIC PAGE
-     ********************************************/
 
-    /********************************************
-     * RENDER PAGE
-     ********************************************/
-    async function renderPage(page) {
-      const projects = await fetchProjects(page, currentFilterTag);
-
-      // If no projects total and page=1, show a message
+    // ------------------ RENDER PAGE ------------------
+    async function renderPage(page, forceReload = false) {
+      const projects = await fetchProjects(page, currentFilterTag, searchTerm);
       if (projects.length === 0 && page === 1) {
         projectListEl.innerHTML = `<p style='padding:20px; color: #c4d8ff;'>No projects uploaded yet.</p>`;
         prevPageBtn.disabled = true;
         nextPageBtn.disabled = true;
         return;
       }
-
-      // Clear existing items
-      projectListEl.innerHTML = "";
-      savedPositions = [];
-
-      // If we have projects
-      if (projects.length > 0) {
-        appendProjects(projects);
-      } else {
-        // If we got 0 items but page > 1, user is beyond last page
+      if (projects.length === 0 && page > 1) {
         currentPage--;
+        return;
       }
 
-      // Check if it's the last page
+      projectListEl.innerHTML = "";
+      // If scatter mode, give #projectList a big space (height: 120vh).
+      // If grid mode, let it auto-size.
+      if (isGridView) {
+        projectListEl.style.height = "auto";
+      } else {
+        projectListEl.style.height = "120vh";
+      }
+      if (forceReload) {
+        savedPositions = [];
+      }
+
+      appendProjects(projects);
+
+      // Check pagination
       if (projects.length < PAGE_SIZE) {
         totalLastPage = currentPage;
         nextPageBtn.disabled = true;
       } else {
         nextPageBtn.disabled = false;
       }
-
-      // Disable "Previous" if on page=1
       prevPageBtn.disabled = (currentPage === 1);
     }
 
     function appendProjects(projects) {
       const newElems = [];
-
       projects.forEach((project) => {
         const projDiv = document.createElement("div");
         projDiv.classList.add("project");
 
+        // For upvotes
+        const upvoteHTML = `
+          <div class="upvote-container">
+            <button class="upvoteBtn" data-id="${project.id}">↑</button>
+            <span class="upvoteCount">${project.upvotes ?? 0}</span>
+          </div>
+        `;
+
+        let contentHTML = "";
         if (project.image_data) {
           projDiv.classList.add("has-image");
-          projDiv.innerHTML = `
-            <div
-              class="image-overlay"
-              style="background-image: url('${escapeURL(project.image_data)}');"
-            ></div>
+          contentHTML = `
+            <div class="image-overlay" style="background-image: url('${escapeURL(project.image_data)}');"></div>
             <div class="project-info">
               <h2 class="title">${escapeHTML(project.title)}</h2>
               <p class="description">${escapeHTML(project.description)}</p>
               ${
                 project.tags && project.tags.length
-                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags
-                      .map(escapeHTML)
-                      .join(", ")}</p>`
+                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
                   : ""
               }
             </div>
           `;
         } else {
-          projDiv.classList.add("no-image");
-          projDiv.innerHTML = `
+          contentHTML = `
             <div class="project-info">
               <h2 class="title">${escapeHTML(project.title)}</h2>
               <p class="description">${escapeHTML(project.description)}</p>
               ${
                 project.tags && project.tags.length
-                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags
-                      .map(escapeHTML)
-                      .join(", ")}</p>`
+                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
                   : ""
               }
             </div>
           `;
         }
-
+        projDiv.innerHTML = upvoteHTML + contentHTML;
         projectListEl.appendChild(projDiv);
-        newElems.push(projDiv);
+        newElems.push({ element: projDiv, data: project });
       });
 
-      positionProjects(newElems);
+      // If in scatter mode, absolutely position them via .scattered
+      if (!isGridView) {
+        positionProjects(newElems);
+      }
+      // Upvote button logic
+      newElems.forEach(({ element, data }) => {
+        const upvoteBtn = element.querySelector(".upvoteBtn");
+        if (upvoteBtn) {
+          upvoteBtn.addEventListener("click", () => handleUpvote(data.id, element));
+        }
+      });
     }
 
     function positionProjects(newElems) {
       const containerRect = projectListEl.getBoundingClientRect();
 
-      newElems.forEach((proj) => {
-        const projWidth = proj.offsetWidth;
-        const projHeight = proj.offsetHeight;
+      newElems.forEach(({ element, data }, index) => {
+        // Switch from default relative -> absolute
+        element.classList.add("scattered");
+
+        // Randomize positions within container
+        const projWidth = element.offsetWidth;
+        const projHeight = element.offsetHeight;
         const maxX = containerRect.width - projWidth;
         const maxY = containerRect.height - projHeight;
-
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
 
-        proj.style.left = x + "px";
-        proj.style.top = y + "px";
-        proj.style.zIndex = zIndexCounter;
+        element.style.left = x + "px";
+        element.style.top = y + "px";
+        element.style.zIndex = zIndexCounter;
+
         savedPositions.push({ left: x, top: y, zIndex: zIndexCounter });
       });
     }
-    /********************************************
-     * END RENDER PAGE
-     ********************************************/
 
-    /********************************************
-     * DRAG HANDLERS
-     ********************************************/
+    async function handleUpvote(projectId, projectEl) {
+  try {
+    // Fetch the current upvotes for the project
+    const { data: existing } = await supabase
+      .from("projects")
+      .select("upvotes")
+      .eq("id", projectId)
+      .single();
+
+    // Get the current upvote count, default to 0 if NULL
+    const currentUpvotes = existing.upvotes || 0;
+
+    // Increment the upvote count
+    const updatedUpvotes = currentUpvotes + 1;
+
+    // Update the upvote count in the database
+    await supabase
+      .from("projects")
+      .update({ upvotes: updatedUpvotes })
+      .eq("id", projectId);
+
+    // Update the UI with the new upvote count
+    const upvoteCountEl = projectEl.querySelector(".upvoteCount");
+    if (upvoteCountEl) {
+      upvoteCountEl.textContent = updatedUpvotes;
+    }
+
+    // Disable the upvote button and mark it as "clicked"
+    const upvoteBtn = projectEl.querySelector(".upvoteBtn");
+    if (upvoteBtn) {
+      upvoteBtn.disabled = true;
+      upvoteBtn.classList.add("clicked"); // Add a class to style the button as active
+    }
+  } catch (err) {
+    console.error("Error updating upvote:", err);
+  }
+}
+
+
+
+
+    // ------------------ DRAG HANDLERS (Scatter Mode) ------------------
     function startDrag(e) {
+      // If grid, ignore drag.
+      if (isGridView) return;
       const target = e.target.closest(".project");
       if (!target) return;
 
@@ -1228,7 +1405,7 @@ display: none;
     }
 
     function onMove(e) {
-      if (!isDragging || !activeElement) return;
+      if (isGridView || !isDragging || !activeElement) return;
 
       const containerRect = projectListEl.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -1250,8 +1427,7 @@ display: none;
     }
 
     function endDrag() {
-      if (!isDragging || !activeElement) return;
-
+      if (isGridView || !isDragging || !activeElement) return;
       isDragging = false;
       activeElement.classList.remove("dragging");
       activeElement.classList.add("dropped");
@@ -1259,7 +1435,6 @@ display: none;
         activeElement.classList.remove("dropped");
         activeElement.removeEventListener("animationend", handleAnimationEnd);
       });
-
       const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
       const index = allProjects.indexOf(activeElement);
       if (index > -1 && savedPositions[index]) {
@@ -1267,15 +1442,12 @@ display: none;
         savedPositions[index].top = parseFloat(activeElement.style.top);
         savedPositions[index].zIndex = parseInt(activeElement.style.zIndex);
       }
-
       requestAnimationFrame(applyMomentum);
     }
 
     function applyMomentum() {
-      if (isDragging || !activeElement) return;
-
+      if (isGridView || isDragging || !activeElement) return;
       const containerRect = projectListEl.getBoundingClientRect();
-
       let newX = parseFloat(activeElement.style.left || 0) + velocityX;
       let newY = parseFloat(activeElement.style.top || 0) + velocityY;
 
@@ -1296,18 +1468,12 @@ display: none;
         savedPositions[index].left = newX;
         savedPositions[index].top = newY;
       }
-
       if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
         requestAnimationFrame(applyMomentum);
       }
     }
-    /********************************************
-     * END DRAG HANDLERS
-     ********************************************/
 
-    /********************************************
-     * UTILITIES
-     ********************************************/
+    // ------------------ UTILITIES ------------------
     function escapeHTML(str = "") {
       return str
         .replace(/&/g, "&amp;")
@@ -1319,20 +1485,8 @@ display: none;
     function escapeURL(url = "") {
       return url.replace(/"/g, "%22").replace(/'/g, "%27");
     }
-    /********************************************
-     * END UTILITIES
-     ********************************************/
 
-    /********************************************
-     * EVENT LISTENERS FOR PAGINATION
-     ********************************************/
-    document.addEventListener("mousedown", startDrag, false);
-    document.addEventListener("mousemove", onMove, false);
-    document.addEventListener("mouseup", endDrag, false);
-    document.addEventListener("touchstart", startDrag, { passive: false });
-    document.addEventListener("touchmove", onMove, { passive: false });
-    document.addEventListener("touchend", endDrag, false);
-
+    // ------------------ PAGINATION ------------------
     prevPageBtn.addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
@@ -1343,16 +1497,14 @@ display: none;
       currentPage++;
       renderPage(currentPage);
     });
-    /********************************************
-     * END EVENT LISTENERS FOR PAGINATION
-     ********************************************/
 
-    /********************************************
-     * INIT: TAGS + PAGE RENDER + TITLE ANIMATION
-     ********************************************/
+    // ------------------ INIT ------------------
     document.addEventListener("DOMContentLoaded", async () => {
-      await fetchAndDisplayTags(); // build out the tag list
-      renderPage(currentPage);      // load projects
+      projectListEl.classList.add("grid-mode"); // Start in grid mode
+      layoutToggleBtn.textContent = "Switch to Scatter";
+
+      await fetchAndPopulateTags();
+      renderPage(currentPage);
       animateTitle();
     });
 
@@ -1366,6 +1518,14 @@ display: none;
         }, delay);
       });
     }
+
+    // Global drag events
+    document.addEventListener("mousedown", startDrag, false);
+    document.addEventListener("mousemove", onMove, false);
+    document.addEventListener("mouseup", endDrag, false);
+    document.addEventListener("touchstart", startDrag, { passive: false });
+    document.addEventListener("touchmove", onMove, { passive: false });
+    document.addEventListener("touchend", endDrag, false);
   </script>
 </body>
 </html>
