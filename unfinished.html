@@ -204,36 +204,67 @@
 
 
 
-/* Remove default appearance */
+
+    /*******************************************
+     * FILTER RESULTS
+     ********************************************/
+/* Wrapper for custom select */
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  border-radius: 0;
+  max-width: 300px; /* Adjust the width as needed */
+}
+
+/* Style the dropdown */
 #tagsDropdown {
-  width: fit-content;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Add space for custom arrow */
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Space for arrow */
   font-size: 1rem;
-  border: 1.1px solid #c4d8ff;
+  border: 1px solid #c4d8ff;
   background-color: #121212;
   color: #c4d8ff;
-  border-radius: 0 !important;
-  appearance: none; /* Remove default arrow */
+  border-radius: 0;
+  appearance: none; /* Remove native arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Custom arrow */
+/* Add the down arrow */
 .custom-select-wrapper::after {
-  content: '▼';
+  content: '▼'; /* Down arrow symbol */
   position: absolute;
   top: 50%;
+  border-radius: 0;
   right: 1rem;
   transform: translateY(-50%);
-  pointer-events: none;
+  pointer-events: none; /* Allows clicks to pass through */
   color: #c4d8ff;
   font-size: 0.8rem;
 }
 
 /* Change arrow color on hover */
-#tagsDropdown:hover + .custom-select-wrapper::after {
-  color: #8797b7;
+.custom-select-wrapper::after {
+  color: #7c89a4; /* Lighter blue on hover */
+}
+
+/* Style for placeholder (disabled option) */
+#tagsDropdown option:disabled {
+  color: #7c89a4; /* Gray color for placeholder text */
+}
+
+/* Change background and text color when a valid option is selected */
+#tagsDropdown:invalid {
+  background-color: #121212;
+  color: #c4d8ff;
+}
+
+#tagsDropdown:valid {
+  background-color: #c4d8ff; /* Pale blue */
+  color: #121212; /* Dark text */
 }
 
 /* Optional: Focus state */
@@ -241,6 +272,17 @@
   outline: none;
   border-color: #8797b7;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,6 +323,10 @@
 #projectList.grid-mode .project:hover {
   transform: scale(1.05);
 }
+
+
+
+
 
 
 
@@ -330,6 +376,12 @@
 
 
 
+
+
+    /*******************************************
+     * UPVOTE
+     ********************************************/
+
     /* Upvote container (top-right corner of the project card) */
     .upvote-container {
       position: absolute;
@@ -377,7 +429,9 @@
 
 
 
-    /* Project info style */
+    /**************************
+     Project info style 
+     *************************/
     .project-info {
       position: relative;
       z-index: 2;
@@ -401,6 +455,7 @@
       font-style: italic;
       color: #121212;
     }
+
 
 
 
@@ -477,6 +532,16 @@
       50% { transform: translateY(-2px); }
       100% { transform: translateY(0); }
     }
+
+
+
+
+
+
+
+
+
+
 
     /*******************************************
      * PAGINATION BUTTONS
@@ -650,7 +715,9 @@
 
 
 
-
+/*************************
+Privay Check box
+***************************/
 
 
     .privacy-checkbox-container {
@@ -837,15 +904,23 @@
     </p>
   </div>
 
-  <!-- =========== NEW MENU BAR =========== -->
-  <div id="topMenuBar">
-    <!-- Layout toggle -->
-    <button id="layoutToggleBtn">Switch to Scatter</button>
-    <!-- Search -->
-    <input type="text" id="searchInput" placeholder="Search projects..." />
-    <!-- Tags dropdown -->
-    <select id="tagsDropdown"></select>
+<!-- =========== NEW MENU BAR =========== -->
+<div id="topMenuBar">
+  <!-- Layout toggle -->
+  <button id="layoutToggleBtn">Switch to Scatter</button>
+  
+  <!-- Search -->
+  <input type="text" id="searchInput" placeholder="Search projects..." />
+  
+  <!-- Tags dropdown with custom styling -->
+  <div class="custom-select-wrapper">
+    <select id="tagsDropdown" required>
+      <option value="" disabled selected>Search Tags</option>
+      <option value="All">All</option>
+      <!-- Dynamically populated options will be inserted here -->
+    </select>
   </div>
+</div>
 
   <!-- Project List Container -->
   <div id="projectList">Loading...</div>
@@ -962,6 +1037,11 @@
     const drawCanvas = document.getElementById('drawCanvas');
     const ctx = drawCanvas.getContext('2d');
 
+
+
+
+
+
     // ------------------ LAYOUT TOGGLE ------------------
     layoutToggleBtn.addEventListener("click", () => {
       isGridView = !isGridView;
@@ -976,12 +1056,22 @@
       renderPage(currentPage, true);
     });
 
+
+
+
+
     // ------------------ SEARCH BAR ------------------
     searchInput.addEventListener("input", () => {
       searchTerm = searchInput.value.trim();
       currentPage = 1;
       renderPage(currentPage);
     });
+
+
+
+
+
+
 
     // ------------------ TAGS DROPDOWN ------------------
     tagsDropdown.addEventListener("change", () => {
@@ -994,6 +1084,13 @@
       currentPage = 1;
       renderPage(currentPage);
     });
+
+
+
+
+
+
+
 
     // ------------------ FORM TOGGLE ------------------
     toggleFormButton.addEventListener('click', () => {
@@ -1008,6 +1105,11 @@
         document.body.classList.remove('lock-scroll');
       }
     });
+
+
+
+
+
 
     // ------------------ DRAWING SETUP ------------------
     ctx.strokeStyle = "#c4d8ff";
@@ -1071,6 +1173,18 @@
       drawing = false;
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
     // ------------------ WORD LIMIT ------------------
     document.getElementById("description").addEventListener("input", (e) => {
       const desc = e.target.value.trim();
@@ -1085,6 +1199,10 @@
         statusMessage.style.color = "#c4d8ff";
       }
     });
+
+
+
+    
 
     // ------------------ FORM SUBMIT ------------------
     uploadForm.addEventListener("submit", async (e) => {
@@ -1159,7 +1277,7 @@
   // Add default "Search Tags" option as a placeholder
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
-  defaultOption.textContent = "Filter ▼";
+  defaultOption.textContent = "Filter";
   defaultOption.disabled = true; // Prevent selection
   defaultOption.selected = true; // Show as default
   tagsDropdown.appendChild(defaultOption);
