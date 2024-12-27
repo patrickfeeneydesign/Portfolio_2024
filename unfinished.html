@@ -54,7 +54,7 @@
       overflow-x: hidden;      
       touch-action: manipulation;
       min-height: 100%;
-      background-color: #ebebeb;
+      background-color: #d0baff;
     }
     body {
       font-family: sans-serif;
@@ -75,10 +75,9 @@
       font-size: 1.2vw;
       border-radius: 0 0 20px 0;
       font-weight: 700;
-      background-color: #6a47dd;
-      border-left: none;
-      border-top: none;
-      color: #ebebeb;
+      background-color: #c4ea3a;
+      border: none;
+      color: #541c47;
       cursor: pointer;
       z-index: 100000; 
     }
@@ -98,7 +97,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 3px solid #121212;
+      background-color: #0b443c;
       position: relative;
       border-radius: 90px;
       margin: 0 0 3vw 0;
@@ -107,7 +106,7 @@
       font-size: 6rem;
       font-weight: 300;
       padding: 2vw 4vw 2vw 4vw;
-      color: #121212;
+      color: #d0baff;
       user-select: none;
       display: flex;
       flex-wrap: wrap;
@@ -117,8 +116,8 @@
       text-decoration: none;
       padding: 2vw;
       margin: 3vw;
-      background: #6a47dd;
-      color: #ebebeb;
+      background: #c4ea3a;
+      color: #541c47;
 
       transition: background-color 0.3s ease;
       font-size: 1rem;
@@ -132,7 +131,7 @@
       cursor: pointer;
     }
     header a:hover {
-      background: #121212;
+      background: #1c171b;
       color: #ebebeb;
     }
     .letter {
@@ -158,8 +157,8 @@
      ********************************************/
     #about {
       height: fit-content;
-      color: #ebebeb;
-      background-color: #6a47dd;
+      color: #0b443c;
+      background-color: #c4ea3a;
       padding: 2vw 3vw 1vw 3vw;
       line-height: 2.2rem;
       font-size: 1.7rem;
@@ -186,25 +185,26 @@
       align-items: center;
       gap: 1rem;
       padding: 1vw 3vw 2.5vw 3vw;
-      color: #121212;
-      background-color: #6a47dd;
+      color: #0b443c;
+      background-color: #c4ea3a;
+      border-radius: 0 0 40px 40px;
     }
     #layoutToggleBtn, #searchInput {
       font-size: 1rem;
       border: none;
-      background-color: #ebebeb;
-      color: #121212;
+      background-color: #0b443c;
+      color: #d0baff;
       padding: 0.9rem 1.4rem;
       border-radius: 30px;
     }
     #layoutToggleBtn:hover {
-      background-color: #121212;
+      background-color: #291528;
       color: #ebebeb;
     }
     #searchInput {
       flex: 1;
       max-width: 300px;
-      color: #121212;
+      color: #541c47;
     }
 
 
@@ -231,8 +231,8 @@
   border: none;
   padding: 0.9rem 2.9rem 0.9rem 0.9rem; /* Space for arrow */
   font-size: 1rem;
-  background-color: #ebebeb;
-  color: #121212;
+  background-color: #0b443c;
+  color: #541c47;
   appearance: none; /* Remove native arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -268,13 +268,13 @@
 
 /* Change background and text color when a valid option is selected */
 #tagsDropdown:invalid {
-  background-color: #ebebeb;
-  color: #121212;
+  background-color: #0b443c;
+  color: #d0baff;
   border: none;
 }
 
 #tagsDropdown:valid {
-  background-color: #121212; /* Pale blue */
+  background-color: #291528; /* Pale blue */
   color: #ebebeb; /* Dark text */
   border: none;
 }
@@ -307,7 +307,7 @@
       height: 120vh;
       overflow: hidden;
       border-radius: 0 0 40px 40px;
-background-color: #121212;
+background-color: #d0baff;
       display: block; /* fallback for scatter */
       position: relative; /* container context for scatter movement */
     }
@@ -356,8 +356,8 @@ background-color: #121212;
       width: 300px;
       min-height: 300px;
       overflow: hidden;
-      background-color: #ebebeb;
-      color: #121212;
+      background-color: #e8ddff;
+      color: #0b443c;
       padding: 2rem;
       box-sizing: border-box;
       transition: transform 0.3s ease, background-color 0.3s ease;
@@ -396,9 +396,9 @@ background-color: #121212;
       position: absolute;
       top: 0;
       right: 0;
-      background-color: #6a47dd;
+      background-color: #c4ea3a;
       border-radius: 0 20px 0 20px;
-      color: #ebebeb;
+      color: #541c47;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -407,7 +407,7 @@ background-color: #121212;
     }
     .upvoteBtn {
       cursor: pointer;
-      color: #ebebeb; /* Default color */
+      color: #541c47; /* Default color */
       background: none;
       border: none;
       font-size: 1.2rem;
@@ -416,11 +416,11 @@ background-color: #121212;
     }
 
     .upvoteBtn:hover:not(:disabled) {
-      color: gold; /* Hover color for active buttons */
+      color: #ee7f00; /* Hover color for active buttons */
     }
 
     .upvoteBtn.clicked {
-      color: #ffd700; /* Color after clicking (gold) */
+      color: #ee7f00; /* Color after clicking (gold) */
       cursor: not-allowed;
       pointer-events: none; /* Ensure it's not clickable */
     }
@@ -450,18 +450,18 @@ background-color: #121212;
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 0.9rem;
-      color: #121212;
+      color: #0b443c;
     }
     .description {
       font-size: 1rem;
       line-height: 1.4rem;
       margin-bottom: 0.9rem;
-      color: #121212;
+      color: #0b443c;
     }
     .tags {
       font-size: 0.9rem;
       font-style: italic;
-      color: #121212;
+      color: #0b443c;
     }
 
 
@@ -481,24 +481,10 @@ background-color: #121212;
      * IMAGE OVERLAY
      ********************************************/
     .has-image {
-      background-color: #121212;
-      color: #fffac4;
+      background-color: #291528;
+      color: #d0baff;
     }
 
-    .has-image:hover {
-      border: 1px solid #ebebeb;
-
-    }
-
-    .has-image:hover .upvote-container {
-      border-left: 1px solid #ebebeb;
-      border-bottom: 1px solid #ebebeb;
-
-    }
-
-    .has-image .upvote-container {
-      background-color: #121212;
-    }
   
     .has-image .title,
     .has-image .description,
@@ -514,7 +500,7 @@ background-color: #121212;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: #6a47dd;
+      background-color: #291528;
       opacity: 1;
       transition: opacity 0.4s ease-in-out;
       z-index: 1;
@@ -580,15 +566,15 @@ background-color: #121212;
     .pagination-buttons button {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
-      border: 1.2px solid #121212;
+      border: none;
       background-color: #ebebeb;
       border-radius: 30px;
-      color: #121212;
+      color: #1c171b;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
     .pagination-buttons button:hover:enabled {
-      background: #6a47dd;
+      background: #0b443c;
       color: #ebebeb;
     }
     .pagination-buttons button:disabled {
@@ -617,7 +603,7 @@ background-color: #121212;
       width: 40vw;
       height: 100%;
       min-width: 350px;
-      background-color: #6a47dd;
+      background-color: #0b443c;
       transform: translateY(-120%);
       transition: transform 0.5s ease;
       z-index: 9999999;
@@ -632,7 +618,7 @@ background-color: #121212;
       top: 0;
       right: 0;
       border: none;
-      background-color: #121212;
+      background-color: #0b443c;
       border-radius: 0 0 0 30px;
       color: #ebebeb;
       cursor: pointer;
@@ -641,7 +627,7 @@ background-color: #121212;
     }
     #closeFormButton:hover {
       background-color: #ebebeb;
-      color: #121212;
+      color: #1c171b;
     }
     #uploadForm {
       color: #ebebeb;
@@ -663,8 +649,8 @@ background-color: #121212;
       width: 100%;
       padding: 0.7rem;
       margin-bottom: 1.5rem;
-      border: 1px solid #ebebeb;
-      background-color: #121212;
+      border: none;
+      background-color: #1c171b;
       color: #ebebeb;
       border-radius: 0;
       font-size: 1rem;
@@ -688,7 +674,7 @@ background-color: #121212;
     #drawToggleBtn,
     #uploadForm button[type="submit"] {
       cursor: pointer;
-      border: 1px solid #fffac4;
+      border: none;
       padding: 0.6rem 1.2rem;
       font-size: 0.9rem;
       transition: background-color 0.3s;
@@ -697,20 +683,20 @@ background-color: #121212;
       border-radius: 20px;
     }
     #drawToggleBtn {
-      background-color: #121212;
+      background-color: #1c171b;
       color: #fffac4;
     }
     #uploadForm button[type="submit"] {
       background-color: #fffac4;
-      color: #121212;
+      color: #1c171b;
     }
     #drawToggleBtn:hover {
       background-color: #fffac4;
-      color: #121212;
+      color: #1c171b;
     }
     #uploadForm button[type="submit"]:hover {
       background-color: #8797b7;
-      color: #121212;
+      color: #1c171b;
       border: 1px solid #8797b7;
     }
 
@@ -720,7 +706,7 @@ background-color: #121212;
     }
     #drawCanvas {
       background: #000;
-      border: 1px solid #fffac4;
+      border: none;
       width: 300px;
       border-radius: 20px;
       height: 300px;
@@ -757,8 +743,8 @@ Privay Check box
       height: 1rem;
       margin-right: 0.2rem;
       margin-bottom: 0.3rem;
-      background-color: #121212;
-      border: 1px solid #fffac4;
+      background-color: #1c171b;
+      color: #fffac4; 
       cursor: pointer;
       appearance: none;
       display: inline-block;
@@ -772,7 +758,7 @@ Privay Check box
       left: 5px;
       width: 4px;
       height: 8px;
-      border: solid #fffac4;
+      border: solid #fffac4; /* Use the desired color */
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       display: none;
@@ -785,6 +771,7 @@ Privay Check box
     }
     .privacy-checkbox-container label {
       cursor: pointer;
+      color: #fffac4; 
       line-height: 1.4rem;
       font-weight: 300 !important;
       font-style: italic;
@@ -827,7 +814,8 @@ Privay Check box
       }
       header a {
         font-size: 1rem;
-        background-color: #121212;
+        background-color: #c4ea3a;
+        color: #541c47;
         z-index: 10000;
         top:0;
         right: 0;
