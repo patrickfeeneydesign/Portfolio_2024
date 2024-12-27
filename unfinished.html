@@ -54,7 +54,7 @@
       overflow-x: hidden;      
       touch-action: manipulation;
       min-height: 100%;
-      background-color: #121212;
+      background-color: #ebebeb;
     }
     body {
       font-family: sans-serif;
@@ -75,12 +75,10 @@
       font-size: 1.2vw;
       border-radius: 0 0 20px 0;
       font-weight: 700;
-      background-color: #121212;
-      border-right: 1px solid #fffac4;
-      border-bottom: 1px solid #fffac4;
+      background-color: #6a47dd;
       border-left: none;
       border-top: none;
-      color: #fffac4;
+      color: #ebebeb;
       cursor: pointer;
       z-index: 100000; 
     }
@@ -100,16 +98,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #fffac4;
+      border: 3px solid #121212;
       position: relative;
-      border-radius: 20px;
+      border-radius: 90px;
       margin: 0 0 3vw 0;
     }
     header h1 {
       font-size: 6rem;
       font-weight: 300;
-      padding: 2vw;
-      color: #c4d8ff;
+      padding: 2vw 4vw 2vw 4vw;
+      color: #121212;
       user-select: none;
       display: flex;
       flex-wrap: wrap;
@@ -119,10 +117,9 @@
       text-decoration: none;
       padding: 2vw;
       margin: 3vw;
-      background: #121212;
-      color: #fffac4;
-      border-bottom: 1px solid #fffac4;
-      border-left: 1px solid #fffac4;
+      background: #6a47dd;
+      color: #ebebeb;
+
       transition: background-color 0.3s ease;
       font-size: 1rem;
       font-weight: bold;
@@ -135,9 +132,8 @@
       cursor: pointer;
     }
     header a:hover {
-      background: #fffac4;
-      color: #121212;
-      border: 1px solid #121212;
+      background: #121212;
+      color: #ebebeb;
     }
     .letter {
       opacity: 0;
@@ -162,9 +158,9 @@
      ********************************************/
     #about {
       height: fit-content;
-      border: 1px solid #fffac4;
-      color: #c4d8ff;
-      padding: 2vw;
+      color: #ebebeb;
+      background-color: #6a47dd;
+      padding: 2vw 3vw 1vw 3vw;
       line-height: 2.2rem;
       font-size: 1.7rem;
       font-weight: 300;
@@ -189,25 +185,26 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      border: 1px solid #fffac4;
-      padding: 1rem;
+      padding: 1vw 3vw 2.5vw 3vw;
+      color: #121212;
+      background-color: #6a47dd;
     }
     #layoutToggleBtn, #searchInput {
       font-size: 1rem;
-      border: 1px solid #fffac4;
-      background-color: #121212;
-      color: #c4d8ff;
-      padding: 0.5rem;
-      border-radius: 10px;
+      border: none;
+      background-color: #ebebeb;
+      color: #121212;
+      padding: 0.9rem 1.4rem;
+      border-radius: 30px;
     }
     #layoutToggleBtn:hover {
-      background-color: #fffac4;
-      color: #121212;
+      background-color: #121212;
+      color: #ebebeb;
     }
     #searchInput {
       flex: 1;
       max-width: 300px;
-      color: #c4d8ff;
+      color: #121212;
     }
 
 
@@ -224,17 +221,18 @@
   width: 100%;
   border-radius: 0;
   max-width: 300px; /* Adjust the width as needed */
+  border: none;
 }
 
 /* Style the dropdown */
 #tagsDropdown {
-  border-radius: 10px;
+  border-radius: 40px;
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Space for arrow */
+  border: none;
+  padding: 0.9rem 2.9rem 0.9rem 0.9rem; /* Space for arrow */
   font-size: 1rem;
-  border: 1px solid #fffac4;
-  background-color: #121212;
-  color: #c4d8ff;
+  background-color: #ebebeb;
+  color: #121212;
   appearance: none; /* Remove native arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -247,39 +245,43 @@
   content: '▼'; /* Down arrow symbol */
   position: absolute;
   top: 50%;
+  border: none;
   border-radius: 0;
   right: 1rem;
   transform: translateY(-50%);
   pointer-events: none; /* Allows clicks to pass through */
-  color: #fffac4;
+  color: #ebebeb;
   font-size: 0.8rem;
 }
 
 /* Change arrow color on hover */
 .custom-select-wrapper::after {
-  color: #7c89a4; /* Lighter blue on hover */
+  color: #4b4b4b; /* Lighter blue on hover */
+  border: none;
 }
 
 /* Style for placeholder (disabled option) */
 #tagsDropdown option:disabled {
-  color: #7c89a4; /* Gray color for placeholder text */
+  color: #4b4b4b; /* Gray color for placeholder text */
+  border: none;
 }
 
 /* Change background and text color when a valid option is selected */
 #tagsDropdown:invalid {
-  background-color: #121212;
-  color: #c4d8ff;
+  background-color: #ebebeb;
+  color: #121212;
+  border: none;
 }
 
 #tagsDropdown:valid {
-  background-color: #fffac4; /* Pale blue */
-  color: #121212; /* Dark text */
+  background-color: #121212; /* Pale blue */
+  color: #ebebeb; /* Dark text */
+  border: none;
 }
 
 /* Optional: Focus state */
 #tagsDropdown:focus {
   outline: none;
-  border-color: #8797b7;
 }
 
 
@@ -305,9 +307,7 @@
       height: 120vh;
       overflow: hidden;
       border-radius: 0 0 40px 40px;
-      border-left: 1px solid #fffac4; 
-      border-right: 1px solid #fffac4; 
-      border-bottom: 1px solid #fffac4; 
+background-color: #121212;
       display: block; /* fallback for scatter */
       position: relative; /* container context for scatter movement */
     }
@@ -326,7 +326,6 @@
   height: auto;
   cursor: default;
   transform: none !important;
-  border: 1px solid #fffac4;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -353,12 +352,11 @@
       position: relative; /* anchors .image-overlay within each card */
       cursor: grab;
       user-select: none;
-      border-radius: 20px;
+      border-radius: 22px;
       width: 300px;
       min-height: 300px;
       overflow: hidden;
-      border: 1px solid #fffac4;
-      background-color: #fffac4;
+      background-color: #ebebeb;
       color: #121212;
       padding: 2rem;
       box-sizing: border-box;
@@ -398,11 +396,9 @@
       position: absolute;
       top: 0;
       right: 0;
-      background-color: #121212;
-      border-left: 1px solid #fffac4;
-      border-bottom: 1px solid #fffac4;
+      background-color: #6a47dd;
       border-radius: 0 20px 0 20px;
-      color: #fffac4;
+      color: #ebebeb;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -411,7 +407,7 @@
     }
     .upvoteBtn {
       cursor: pointer;
-      color: #52f097; /* Default color */
+      color: #ebebeb; /* Default color */
       background: none;
       border: none;
       font-size: 1.2rem;
@@ -488,6 +484,22 @@
       background-color: #121212;
       color: #fffac4;
     }
+
+    .has-image:hover {
+      border: 1px solid #ebebeb;
+
+    }
+
+    .has-image:hover .upvote-container {
+      border-left: 1px solid #ebebeb;
+      border-bottom: 1px solid #ebebeb;
+
+    }
+
+    .has-image .upvote-container {
+      background-color: #121212;
+    }
+  
     .has-image .title,
     .has-image .description,
     .has-image .tags {
@@ -502,11 +514,12 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: #121212;
+      background-color: #6a47dd;
       opacity: 1;
       transition: opacity 0.4s ease-in-out;
       z-index: 1;
     }
+
     .has-image:hover .image-overlay {
       opacity: 0;
     }
@@ -567,15 +580,16 @@
     .pagination-buttons button {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
-      border: 1px solid #fffac4;
-      background: #121212;
-      color: #fffac4;
+      border: 1.2px solid #121212;
+      background-color: #ebebeb;
+      border-radius: 30px;
+      color: #121212;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
     .pagination-buttons button:hover:enabled {
-      background: #fffac4;
-      color: #121212;
+      background: #6a47dd;
+      color: #ebebeb;
     }
     .pagination-buttons button:disabled {
       opacity: 0.3;
@@ -603,8 +617,7 @@
       width: 40vw;
       height: 100%;
       min-width: 350px;
-      background-color: #121212;
-      border: 1px solid #fffac4;
+      background-color: #6a47dd;
       transform: translateY(-120%);
       transition: transform 0.5s ease;
       z-index: 9999999;
@@ -618,41 +631,41 @@
       position: absolute;
       top: 0;
       right: 0;
-      border: 1px solid #fffac4;
+      border: none;
       background-color: #121212;
-      color: #fffac4;
+      border-radius: 0 0 0 30px;
+      color: #ebebeb;
       cursor: pointer;
       font-size: 1rem;
-      padding: 0.8rem 1rem;
+      padding: 1.3rem 1.3rem 1.5rem 1.5rem;
     }
     #closeFormButton:hover {
-      background-color: #fffac4;
+      background-color: #ebebeb;
       color: #121212;
     }
     #uploadForm {
-      background-color: #121212;
-      color: #fffac4;
+      color: #ebebeb;
       padding: 2rem;
     }
     #uploadForm h2 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      color: #fffac4;
+      color: #ebebeb;
     }
     #uploadForm label {
       font-weight: 600;
       display: inline-block;
       margin-bottom: 0.5rem;
-      color: #fffac4;
+      color: #ebebeb;
     }
     #uploadForm input[type="text"],
     #uploadForm textarea {
       width: 100%;
       padding: 0.7rem;
       margin-bottom: 1.5rem;
-      border: 1px solid #fffac4;
+      border: 1px solid #ebebeb;
       background-color: #121212;
-      color: #fffac4;
+      color: #ebebeb;
       border-radius: 0;
       font-size: 1rem;
       font-family: inherit;
