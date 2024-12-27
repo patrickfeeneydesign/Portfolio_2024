@@ -73,10 +73,14 @@
       top: 0;
       left: 0;
       font-size: 1.2vw;
+      border-radius: 0 0 20px 0;
       font-weight: 700;
       background-color: #121212;
-      border: 1px solid #c4d8ff;
-      color: #c4d8ff;
+      border-right: 1px solid #fffac4;
+      border-bottom: 1px solid #fffac4;
+      border-left: none;
+      border-top: none;
+      color: #fffac4;
       cursor: pointer;
       z-index: 100000; 
     }
@@ -96,8 +100,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       position: relative;
+      border-radius: 20px;
+      margin: 0 0 3vw 0;
     }
     header h1 {
       font-size: 6rem;
@@ -109,25 +115,27 @@
       flex-wrap: wrap;
     }
     header a {
+      border-radius: 0 0 0 20px;
       text-decoration: none;
-      padding: 4.5vw 2vw;
+      padding: 2vw;
       margin: 3vw;
       background: #121212;
-      color: #c4d8ff;
-      border: 1px solid #c4d8ff;
+      color: #fffac4;
+      border-bottom: 1px solid #fffac4;
+      border-left: 1px solid #fffac4;
       transition: background-color 0.3s ease;
       font-size: 1rem;
       font-weight: bold;
       position: absolute;
       right: 0;
       top: 0;
-      height: 10.5vw;
-      width: 10.5vw;
+      height: auto;
+      width: auto;
       text-align: center;
       cursor: pointer;
     }
     header a:hover {
-      background: #c4d8ff;
+      background: #fffac4;
       color: #121212;
       border: 1px solid #121212;
     }
@@ -154,12 +162,13 @@
      ********************************************/
     #about {
       height: fit-content;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       color: #c4d8ff;
       padding: 2vw;
       line-height: 2.2rem;
       font-size: 1.7rem;
       font-weight: 300;
+      border-radius: 40px 40px 0 0;
     }
 
 
@@ -180,19 +189,19 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       padding: 1rem;
     }
     #layoutToggleBtn, #searchInput {
       font-size: 1rem;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       background-color: #121212;
       color: #c4d8ff;
       padding: 0.5rem;
-      border-radius: 0;
+      border-radius: 10px;
     }
     #layoutToggleBtn:hover {
-      background-color: #c4d8ff;
+      background-color: #fffac4;
       color: #121212;
     }
     #searchInput {
@@ -219,13 +228,13 @@
 
 /* Style the dropdown */
 #tagsDropdown {
+  border-radius: 10px;
   width: 100%;
   padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Space for arrow */
   font-size: 1rem;
-  border: 1px solid #c4d8ff;
+  border: 1px solid #fffac4;
   background-color: #121212;
   color: #c4d8ff;
-  border-radius: 0;
   appearance: none; /* Remove native arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -242,7 +251,7 @@
   right: 1rem;
   transform: translateY(-50%);
   pointer-events: none; /* Allows clicks to pass through */
-  color: #c4d8ff;
+  color: #fffac4;
   font-size: 0.8rem;
 }
 
@@ -263,7 +272,7 @@
 }
 
 #tagsDropdown:valid {
-  background-color: #c4d8ff; /* Pale blue */
+  background-color: #fffac4; /* Pale blue */
   color: #121212; /* Dark text */
 }
 
@@ -295,9 +304,10 @@
       width: 100%;
       height: 120vh;
       overflow: hidden;
-      border-left: 1px solid #c4d8ff; 
-      border-right: 1px solid #c4d8ff; 
-      border-bottom: 1px solid #c4d8ff; 
+      border-radius: 0 0 40px 40px;
+      border-left: 1px solid #fffac4; 
+      border-right: 1px solid #fffac4; 
+      border-bottom: 1px solid #fffac4; 
       display: block; /* fallback for scatter */
       position: relative; /* container context for scatter movement */
     }
@@ -316,7 +326,7 @@
   height: auto;
   cursor: default;
   transform: none !important;
-  border: 1px solid #c4d8ff;
+  border: 1px solid #fffac4;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -343,11 +353,12 @@
       position: relative; /* anchors .image-overlay within each card */
       cursor: grab;
       user-select: none;
+      border-radius: 20px;
       width: 300px;
       min-height: 300px;
       overflow: hidden;
-      border: 1px solid #c4d8ff;
-      background-color: #c4d8ff;
+      border: 1px solid #fffac4;
+      background-color: #fffac4;
       color: #121212;
       padding: 2rem;
       box-sizing: border-box;
@@ -388,18 +399,19 @@
       top: 0;
       right: 0;
       background-color: #121212;
-      border-left: 1px solid #c4d8ff;
-      border-bottom: 1px solid #c4d8ff;
-      color: #c4d8ff;
+      border-left: 1px solid #fffac4;
+      border-bottom: 1px solid #fffac4;
+      border-radius: 0 20px 0 20px;
+      color: #fffac4;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.3rem 0.6rem;
+      padding: 0.5rem 0.8rem;
       z-index: 3; /* ensure upvote area is above overlay */
     }
     .upvoteBtn {
       cursor: pointer;
-      color: #c4d8ff; /* Default color */
+      color: #52f097; /* Default color */
       background: none;
       border: none;
       font-size: 1.2rem;
@@ -474,7 +486,7 @@
      ********************************************/
     .has-image {
       background-color: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
     }
     .has-image .title,
     .has-image .description,
@@ -555,14 +567,14 @@
     .pagination-buttons button {
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       background: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
     .pagination-buttons button:hover:enabled {
-      background: #c4d8ff;
+      background: #fffac4;
       color: #121212;
     }
     .pagination-buttons button:disabled {
@@ -592,7 +604,7 @@
       height: 100%;
       min-width: 350px;
       background-color: #121212;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       transform: translateY(-120%);
       transition: transform 0.5s ease;
       z-index: 9999999;
@@ -606,45 +618,45 @@
       position: absolute;
       top: 0;
       right: 0;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       background-color: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
       cursor: pointer;
       font-size: 1rem;
       padding: 0.8rem 1rem;
     }
     #closeFormButton:hover {
-      background-color: #c4d8ff;
+      background-color: #fffac4;
       color: #121212;
     }
     #uploadForm {
       background-color: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
       padding: 2rem;
-      border-radius: 0;
     }
     #uploadForm h2 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      color: #c4d8ff;
+      color: #fffac4;
     }
     #uploadForm label {
       font-weight: 600;
       display: inline-block;
       margin-bottom: 0.5rem;
-      color: #c4d8ff;
+      color: #fffac4;
     }
     #uploadForm input[type="text"],
     #uploadForm textarea {
       width: 100%;
       padding: 0.7rem;
       margin-bottom: 1.5rem;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       background-color: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
       border-radius: 0;
       font-size: 1rem;
       font-family: inherit;
+      border-radius: 10px;
     }
     #file {
       display: none; 
@@ -663,23 +675,24 @@
     #drawToggleBtn,
     #uploadForm button[type="submit"] {
       cursor: pointer;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       padding: 0.6rem 1.2rem;
       font-size: 0.9rem;
       transition: background-color 0.3s;
       margin-right: 1rem;
       margin-bottom: 0.4rem;
+      border-radius: 20px;
     }
     #drawToggleBtn {
       background-color: #121212;
-      color: #c4d8ff;
+      color: #fffac4;
     }
     #uploadForm button[type="submit"] {
-      background-color: #c4d8ff;
+      background-color: #fffac4;
       color: #121212;
     }
     #drawToggleBtn:hover {
-      background-color: #c4d8ff;
+      background-color: #fffac4;
       color: #121212;
     }
     #uploadForm button[type="submit"]:hover {
@@ -694,8 +707,9 @@
     }
     #drawCanvas {
       background: #000;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       width: 300px;
+      border-radius: 20px;
       height: 300px;
       display: block;
       margin-top: 1rem;
@@ -706,7 +720,7 @@
       margin-top: 1rem;
       text-align: center;
       font-weight: bold;
-      color: #c4d8ff;
+      color: #fffac4;
     }
 
 
@@ -722,7 +736,7 @@ Privay Check box
 
     .privacy-checkbox-container {
       margin: 1rem 0;
-      color: #c4d8ff; 
+      color: #fffac4; 
       font-size: 0.9rem;
     }
     .privacy-checkbox-container input[type="checkbox"] {
@@ -731,7 +745,7 @@ Privay Check box
       margin-right: 0.2rem;
       margin-bottom: 0.3rem;
       background-color: #121212;
-      border: 1px solid #c4d8ff;
+      border: 1px solid #fffac4;
       cursor: pointer;
       appearance: none;
       display: inline-block;
@@ -745,7 +759,7 @@ Privay Check box
       left: 5px;
       width: 4px;
       height: 8px;
-      border: solid #c4d8ff;
+      border: solid #fffac4;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       display: none;
@@ -1196,7 +1210,7 @@ Privay Check box
         statusMessage.style.color = "red";
       } else {
         statusMessage.textContent = "";
-        statusMessage.style.color = "#c4d8ff";
+        statusMessage.style.color = "#fffac4";
       }
     });
 
@@ -1208,7 +1222,7 @@ Privay Check box
     uploadForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       statusMessage.textContent = "Submitting...";
-      statusMessage.style.color = "#c4d8ff";
+      statusMessage.style.color = "#fffac4";
 
       const title = document.getElementById("title").value.trim();
       const description = document.getElementById("description").value.trim();
@@ -1237,7 +1251,7 @@ Privay Check box
         if (error) throw error;
 
         statusMessage.textContent = "Submission successful!";
-        statusMessage.style.color = "#c4d8ff";
+        statusMessage.style.color = "#fffac4";
 
         // Reset form
         uploadForm.reset();
@@ -1328,7 +1342,7 @@ tagsDropdown.addEventListener("change", () => {
       const { data, error } = await query;
       if (error) {
         console.error("Error fetching projects:", error);
-        projectListEl.innerHTML = `<p style="padding:20px; color: #c4d8ff;">Error loading projects: ${error.message}</p>`;
+        projectListEl.innerHTML = `<p style="padding:20px; color: #fffac4;">Error loading projects: ${error.message}</p>`;
         prevPageBtn.disabled = true;
         nextPageBtn.disabled = true;
         return [];
@@ -1340,7 +1354,7 @@ tagsDropdown.addEventListener("change", () => {
     async function renderPage(page, forceReload = false) {
       const projects = await fetchProjects(page, currentFilterTag, searchTerm);
       if (projects.length === 0 && page === 1) {
-        projectListEl.innerHTML = `<p style='padding:20px; color: #c4d8ff;'>No projects uploaded yet.</p>`;
+        projectListEl.innerHTML = `<p style='padding:20px; color: #fffac4;'>No projects uploaded yet.</p>`;
         prevPageBtn.disabled = true;
         nextPageBtn.disabled = true;
         return;
