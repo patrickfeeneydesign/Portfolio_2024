@@ -1076,281 +1076,239 @@ Privay Check box
 
   <!-- ----------- Supabase & JS Logic ----------- -->
   <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-    // Supabase details
-    const SUPABASE_URL = "https://dxvznqxwdbrcyyoadbgb.supabase.co";
-    const SUPABASE_ANON_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dnpucXh3ZGJyY3l5b2FkYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjUzMzIsImV4cCI6MjA1MDU0MTMzMn0.FbSmgJ5KOGaSIY4150gOIbiYWQ86fbtZQk-fP50RkZk";
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Supabase details
+const SUPABASE_URL = "https://dxvznqxwdbrcyyoadbgb.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dnpucXh3ZGJyY3l5b2FkYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjUzMzIsImV4cCI6MjA1MDU0MTMzMn0.FbSmgJ5KOGaSIY4150gOIbiYWQ86fbtZQk-fP50RkZk";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Layout mode: grid by default
-    let isGridView = true;
+// Layout mode: grid by default
+let isGridView = true;
 
-    // Scatter (draggable) tracking
-    let savedPositions = [];
-    let isDragging = false;
-    let activeElement = null;
-    let offsetX = 0,
-        offsetY = 0;
-    let velocityX = 0,
-        velocityY = 0;
-    const friction = 0.95;
-    let zIndexCounter = 1000;
+// Scatter (draggable) tracking
+let savedPositions = [];
+let isDragging = false;
+let activeElement = null;
+let offsetX = 0,
+  offsetY = 0;
+let velocityX = 0,
+  velocityY = 0;
+const friction = 0.95;
+let zIndexCounter = 1000;
 
-    // Pagination
-    let currentPage = 1;  
-    const PAGE_SIZE = 6;
-    let totalLastPage = 1;   
+// Pagination
+let currentPage = 1;  
+const PAGE_SIZE = 6;
+let totalLastPage = 1;   
 
-    // Filter state
-    let currentFilterTag = null; // "All" => null
-    let searchTerm = "";         // used for text search
+// Filter state
+let currentFilterTag = null; // "All" => null
+let searchTerm = "";         // used for text search
 
-    // DOM references
-    const projectListEl = document.getElementById("projectList");
-    const prevPageBtn = document.getElementById("prevPageBtn");
-    const nextPageBtn = document.getElementById("nextPageBtn");
+// DOM references
+const projectListEl = document.getElementById("projectList");
+const prevPageBtn = document.getElementById("prevPageBtn");
+const nextPageBtn = document.getElementById("nextPageBtn");
 
-    const layoutToggleBtn = document.getElementById("layoutToggleBtn");
-    const searchInput = document.getElementById("searchInput");
-    const tagsDropdown = document.getElementById("tagsDropdown");
+const layoutToggleBtn = document.getElementById("layoutToggleBtn");
+const searchInput = document.getElementById("searchInput");
+const tagsDropdown = document.getElementById("tagsDropdown");
 
-    // Form references
-    const submissionFormContainer = document.getElementById('submissionFormContainer');
-    const toggleFormButton = document.getElementById('toggleFormButton');
-    const closeFormButton = document.getElementById('closeFormButton');
-    const uploadForm = document.getElementById('uploadForm');
-    const drawToggleBtn = document.getElementById('drawToggleBtn');
-    const drawContainer = document.getElementById('drawContainer');
-    const statusMessage = document.getElementById('statusMessage');
-    const drawCanvas = document.getElementById('drawCanvas');
-    const ctx = drawCanvas.getContext('2d');
+// Form references
+const submissionFormContainer = document.getElementById('submissionFormContainer');
+const toggleFormButton = document.getElementById('toggleFormButton');
+const closeFormButton = document.getElementById('closeFormButton');
+const uploadForm = document.getElementById('uploadForm');
+const drawToggleBtn = document.getElementById('drawToggleBtn');
+const drawContainer = document.getElementById('drawContainer');
+const statusMessage = document.getElementById('statusMessage');
+const drawCanvas = document.getElementById('drawCanvas');
+const ctx = drawCanvas.getContext('2d');
 
+// ------------------ LAYOUT TOGGLE ------------------
+layoutToggleBtn.addEventListener("click", () => {
+  isGridView = !isGridView;
+  if (isGridView) {
+    layoutToggleBtn.textContent = "Switch to Scatter";
+    projectListEl.classList.add("grid-mode");
+  } else {
+    layoutToggleBtn.textContent = "Switch to Grid";
+    projectListEl.classList.remove("grid-mode");
+  }
+  // Re-render the current page, re-randomize positions if scatter
+  renderPage(currentPage, true);
+});
 
+// ------------------ SEARCH BAR ------------------
+searchInput.addEventListener("input", () => {
+  searchTerm = searchInput.value.trim();
+  currentPage = 1;
+  renderPage(currentPage);
+});
 
+// ------------------ TAGS DROPDOWN ------------------
+tagsDropdown.addEventListener("change", () => {
+  const val = tagsDropdown.value;
+  if (val === "All") {
+    currentFilterTag = null;
+  } else {
+    currentFilterTag = val;
+  }
+  currentPage = 1;
+  renderPage(currentPage);
+});
 
+// ------------------ FORM TOGGLE ------------------
+toggleFormButton.addEventListener('click', () => {
+  submissionFormContainer.classList.add('open');
+  if (window.innerWidth <= 600) {
+    document.body.classList.add('lock-scroll');
+  }
+});
+closeFormButton.addEventListener('click', () => {
+  submissionFormContainer.classList.remove('open');
+  if (window.innerWidth <= 600) {
+    document.body.classList.remove('lock-scroll');
+  }
+});
 
+// ------------------ DRAWING SETUP ------------------
+ctx.strokeStyle = "#c4d8ff";
+ctx.lineWidth = 1;
+ctx.lineCap = "round";
+let drawing = false;
+drawContainer.style.display = "none";
 
-    // ------------------ LAYOUT TOGGLE ------------------
-    layoutToggleBtn.addEventListener("click", () => {
-      isGridView = !isGridView;
-      if (isGridView) {
-        layoutToggleBtn.textContent = "Switch to Scatter";
-        projectListEl.classList.add("grid-mode");
-      } else {
-        layoutToggleBtn.textContent = "Switch to Grid";
-        projectListEl.classList.remove("grid-mode");
-      }
-      // Re-render the current page, re-randomize positions if scatter
-      renderPage(currentPage, true);
-    });
+drawToggleBtn.addEventListener("click", () => {
+  const isHidden = drawContainer.style.display === "none";
+  drawContainer.style.display = isHidden ? "block" : "none";
+  drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
+});
 
+function getScaledCoords(clientX, clientY) {
+  const rect = drawCanvas.getBoundingClientRect();
+  const scaleX = drawCanvas.width / rect.width;
+  const scaleY = drawCanvas.height / rect.height;
+  return {
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top) * scaleY
+  };
+}
 
+drawCanvas.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+  drawing = true;
+  const { x, y } = getScaledCoords(e.clientX, e.clientY);
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+});
+drawCanvas.addEventListener("mousemove", (e) => {
+  e.preventDefault();
+  if (!drawing) return;
+  const { x, y } = getScaledCoords(e.clientX, e.clientY);
+  ctx.lineTo(x, y);
+  ctx.stroke();
+});
+drawCanvas.addEventListener("mouseup", () => { drawing = false; });
+drawCanvas.addEventListener("mouseleave", () => { drawing = false; });
 
+// Touch events
+drawCanvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  if (e.touches.length > 0) {
+    drawing = true;
+    const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+}, { passive: false });
+drawCanvas.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  if (!drawing || e.touches.length === 0) return;
+  const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}, { passive: false });
+drawCanvas.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  drawing = false;
+});
 
+// ------------------ WORD LIMIT ------------------
+document.getElementById("description").addEventListener("input", (e) => {
+  const desc = e.target.value.trim();
+  const words = desc.split(/\s+/).filter(w => w.length > 0);
+  const maxWords = 150;
+  if (words.length > maxWords) {
+    e.target.value = words.slice(0, maxWords).join(" ");
+    statusMessage.textContent = `Description trimmed to ${maxWords} words.`;
+    statusMessage.style.color = "red";
+  } else {
+    statusMessage.textContent = "";
+    statusMessage.style.color = "#fffac4";
+  }
+});
 
-    // ------------------ SEARCH BAR ------------------
-    searchInput.addEventListener("input", () => {
-      searchTerm = searchInput.value.trim();
-      currentPage = 1;
-      renderPage(currentPage);
-    });
+// ------------------ FORM SUBMIT ------------------
+uploadForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  statusMessage.textContent = "Submitting...";
+  statusMessage.style.color = "#fffac4";
 
+  const title = document.getElementById("title").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const tagsInput = document.getElementById("tags").value.trim();
+  const tags = tagsInput ? tagsInput.split(",").map(tag => tag.trim()) : [];
 
+  let drawingBase64 = null;
+  if (drawContainer.style.display === "block") {
+    drawingBase64 = drawCanvas.toDataURL("image/png");
+  }
 
+  try {
+    const { data, error } = await supabase
+      .from("projects")
+      .insert([
+        {
+          title,
+          description,
+          tags,
+          image_data: drawingBase64,
+          upvotes: 0
+        },
+      ])
+      .select();
 
+    if (error) throw error;
 
+    statusMessage.textContent = "Submission successful!";
+    statusMessage.style.color = "#fffac4";
 
-
-    // ------------------ TAGS DROPDOWN ------------------
-    tagsDropdown.addEventListener("change", () => {
-      const val = tagsDropdown.value;
-      if (val === "All") {
-        currentFilterTag = null;
-      } else {
-        currentFilterTag = val;
-      }
-      currentPage = 1;
-      renderPage(currentPage);
-    });
-
-
-
-
-
-
-
-
-    // ------------------ FORM TOGGLE ------------------
-    toggleFormButton.addEventListener('click', () => {
-      submissionFormContainer.classList.add('open');
-      if (window.innerWidth <= 600) {
-        document.body.classList.add('lock-scroll');
-      }
-    });
-    closeFormButton.addEventListener('click', () => {
-      submissionFormContainer.classList.remove('open');
-      if (window.innerWidth <= 600) {
-        document.body.classList.remove('lock-scroll');
-      }
-    });
-
-
-
-
-
-
-    // ------------------ DRAWING SETUP ------------------
-    ctx.strokeStyle = "#c4d8ff";
-    ctx.lineWidth = 1;
-    ctx.lineCap = "round";
-    let drawing = false;
+    // Reset form
+    uploadForm.reset();
+    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
     drawContainer.style.display = "none";
-
-    drawToggleBtn.addEventListener("click", () => {
-      const isHidden = drawContainer.style.display === "none";
-      drawContainer.style.display = isHidden ? "block" : "none";
-      drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
-    });
-
-    function getScaledCoords(clientX, clientY) {
-      const rect = drawCanvas.getBoundingClientRect();
-      const scaleX = drawCanvas.width / rect.width;
-      const scaleY = drawCanvas.height / rect.height;
-      return {
-        x: (clientX - rect.left) * scaleX,
-        y: (clientY - rect.top) * scaleY
-      };
+    submissionFormContainer.classList.remove('open');
+    if (window.innerWidth <= 600) {
+      document.body.classList.remove('lock-scroll');
     }
 
-    drawCanvas.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      drawing = true;
-      const { x, y } = getScaledCoords(e.clientX, e.clientY);
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-    });
-    drawCanvas.addEventListener("mousemove", (e) => {
-      e.preventDefault();
-      if (!drawing) return;
-      const { x, y } = getScaledCoords(e.clientX, e.clientY);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    });
-    drawCanvas.addEventListener("mouseup", () => { drawing = false; });
-    drawCanvas.addEventListener("mouseleave", () => { drawing = false; });
+    // Reload projects and tags
+    currentPage = 1;
+    await renderPage(currentPage);
+    await fetchAndPopulateTags();
 
-    // Touch events
-    drawCanvas.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      if (e.touches.length > 0) {
-        drawing = true;
-        const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-      }
-    }, { passive: false });
-    drawCanvas.addEventListener("touchmove", (e) => {
-      e.preventDefault();
-      if (!drawing || e.touches.length === 0) return;
-      const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-    }, { passive: false });
-    drawCanvas.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      drawing = false;
-    });
+  } catch (err) {
+    console.error("Error:", err);
+    statusMessage.textContent = `Submission failed: ${err.message}`;
+    statusMessage.style.color = "red";
+  }
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // ------------------ WORD LIMIT ------------------
-    document.getElementById("description").addEventListener("input", (e) => {
-      const desc = e.target.value.trim();
-      const words = desc.split(/\s+/).filter(w => w.length > 0);
-      const maxWords = 150;
-      if (words.length > maxWords) {
-        e.target.value = words.slice(0, maxWords).join(" ");
-        statusMessage.textContent = `Description trimmed to ${maxWords} words.`;
-        statusMessage.style.color = "red";
-      } else {
-        statusMessage.textContent = "";
-        statusMessage.style.color = "#fffac4";
-      }
-    });
-
-
-
-    
-
-    // ------------------ FORM SUBMIT ------------------
-    uploadForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      statusMessage.textContent = "Submitting...";
-      statusMessage.style.color = "#fffac4";
-
-      const title = document.getElementById("title").value.trim();
-      const description = document.getElementById("description").value.trim();
-      const tagsInput = document.getElementById("tags").value.trim();
-      const tags = tagsInput ? tagsInput.split(",").map(tag => tag.trim()) : [];
-
-      let drawingBase64 = null;
-      if (drawContainer.style.display === "block") {
-        drawingBase64 = drawCanvas.toDataURL("image/png");
-      }
-
-      try {
-        const { data, error } = await supabase
-          .from("projects")
-          .insert([
-            {
-              title,
-              description,
-              tags,
-              image_data: drawingBase64,
-              upvotes: 0
-            },
-          ])
-          .select();
-
-        if (error) throw error;
-
-        statusMessage.textContent = "Submission successful!";
-        statusMessage.style.color = "#fffac4";
-
-        // Reset form
-        uploadForm.reset();
-        ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-        drawContainer.style.display = "none";
-        submissionFormContainer.classList.remove('open');
-        if (window.innerWidth <= 600) {
-          document.body.classList.remove('lock-scroll');
-        }
-
-        // Reload projects and tags
-        currentPage = 1;
-        await renderPage(currentPage);
-        await fetchAndPopulateTags();
-
-      } catch (err) {
-        console.error("Error:", err);
-        statusMessage.textContent = `Submission failed: ${err.message}`;
-        statusMessage.style.color = "red";
-      }
-    });
-
-    async function fetchAndPopulateTags() {
+// ------------------ FETCH AND POPULATE TAGS ------------------
+async function fetchAndPopulateTags() {
   const { data, error } = await supabase.from("projects").select("tags");
 
   if (error) {
@@ -1364,7 +1322,7 @@ Privay Check box
   // Clear existing options
   tagsDropdown.innerHTML = "";
 
-  // Add default "Search Tags" option as a placeholder
+  // Add default "Filter" option as a placeholder
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "Filter";
@@ -1399,155 +1357,165 @@ tagsDropdown.addEventListener("change", () => {
   renderPage(currentPage);
 });
 
+// ------------------ FETCH PROJECTS ------------------
+async function fetchProjects(page, tag = null, search = "") {
+  const offset = (page - 1) * PAGE_SIZE;
+  let query = supabase
+    .from("projects")
+    .select("id, title, description, tags, image_data, upvotes")
+    .order("id", { ascending: false })
+    .range(offset, offset + PAGE_SIZE - 1);
 
-    // ------------------ FETCH PROJECTS ------------------
-    async function fetchProjects(page, tag = null, search = "") {
-      const offset = (page - 1) * PAGE_SIZE;
-      let query = supabase
-        .from("projects")
-        .select("id, title, description, tags, image_data, upvotes")
-        .order("id", { ascending: false })
-        .range(offset, offset + PAGE_SIZE - 1);
+  if (tag) {
+    query = query.contains('tags', [tag]);
+  }
+  if (search.length > 0) {
+    query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
+  }
+  const { data, error } = await query;
+  if (error) {
+    console.error("Error fetching projects:", error);
+    projectListEl.innerHTML = `<p style="padding:20px; color: #fffac4;">Error loading projects: ${error.message}</p>`;
+    prevPageBtn.disabled = true;
+    nextPageBtn.disabled = true;
+    return [];
+  }
+  return data || [];
+}
 
-      if (tag) {
-        query = query.contains('tags', [tag]);
-      }
-      if (search.length > 0) {
-        query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
-      }
-      const { data, error } = await query;
-      if (error) {
-        console.error("Error fetching projects:", error);
-        projectListEl.innerHTML = `<p style="padding:20px; color: #fffac4;">Error loading projects: ${error.message}</p>`;
-        prevPageBtn.disabled = true;
-        nextPageBtn.disabled = true;
-        return [];
-      }
-      return data || [];
+// ------------------ RENDER PAGE ------------------
+async function renderPage(page, forceReload = false) {
+  const projects = await fetchProjects(page, currentFilterTag, searchTerm);
+  if (projects.length === 0 && page === 1) {
+    projectListEl.innerHTML = `<p style='padding:20px; color: #fffac4;'>No projects uploaded yet.</p>`;
+    prevPageBtn.disabled = true;
+    nextPageBtn.disabled = true;
+    return;
+  }
+  if (projects.length === 0 && page > 1) {
+    currentPage--;
+    return;
+  }
+
+  projectListEl.innerHTML = "";
+  // If scatter mode, give #projectList a big space (height: 120vh).
+  // If grid mode, let it auto-size.
+  if (isGridView) {
+    projectListEl.style.height = "auto";
+  } else {
+    projectListEl.style.height = "120vh";
+  }
+  if (forceReload) {
+    savedPositions = [];
+  }
+
+  appendProjects(projects);
+
+  // Check pagination
+  if (projects.length < PAGE_SIZE) {
+    totalLastPage = currentPage;
+    nextPageBtn.disabled = true;
+  } else {
+    nextPageBtn.disabled = false;
+  }
+  prevPageBtn.disabled = (currentPage === 1);
+}
+
+// ------------------ APPEND PROJECTS ------------------
+function appendProjects(projects) {
+  const upvotedProjects = JSON.parse(localStorage.getItem('upvotedProjects')) || [];
+  const newElems = [];
+  projects.forEach((project) => {
+    const projDiv = document.createElement("div");
+    projDiv.classList.add("project");
+
+    // For upvotes
+    const upvoteHTML = `
+      <div class="upvote-container">
+        <button class="upvoteBtn" data-id="${project.id}">↑</button>
+        <span class="upvoteCount">${project.upvotes ?? 0}</span>
+      </div>
+    `;
+
+    let contentHTML = "";
+    if (project.image_data) {
+      projDiv.classList.add("has-image");
+      contentHTML = `
+        <div class="image-overlay" style="background-image: url('${escapeURL(project.image_data)}');"></div>
+        <div class="project-info">
+          <h2 class="title">${escapeHTML(project.title)}</h2>
+          <p class="description">${escapeHTML(project.description)}</p>
+          ${
+            project.tags && project.tags.length
+              ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
+              : ""
+          }
+        </div>
+      `;
+    } else {
+      contentHTML = `
+        <div class="project-info">
+          <h2 class="title">${escapeHTML(project.title)}</h2>
+          <p class="description">${escapeHTML(project.description)}</p>
+          ${
+            project.tags && project.tags.length
+              ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
+              : ""
+          }
+        </div>
+      `;
     }
+    projDiv.innerHTML = upvoteHTML + contentHTML;
+    projectListEl.appendChild(projDiv);
+    newElems.push({ element: projDiv, data: project });
+  });
 
-    // ------------------ RENDER PAGE ------------------
-    async function renderPage(page, forceReload = false) {
-      const projects = await fetchProjects(page, currentFilterTag, searchTerm);
-      if (projects.length === 0 && page === 1) {
-        projectListEl.innerHTML = `<p style='padding:20px; color: #fffac4;'>No projects uploaded yet.</p>`;
-        prevPageBtn.disabled = true;
-        nextPageBtn.disabled = true;
-        return;
-      }
-      if (projects.length === 0 && page > 1) {
-        currentPage--;
-        return;
-      }
+  // If in scatter mode, absolutely position them via .scattered
+  if (!isGridView) {
+    positionProjects(newElems);
+  }
 
-      projectListEl.innerHTML = "";
-      // If scatter mode, give #projectList a big space (height: 120vh).
-      // If grid mode, let it auto-size.
-      if (isGridView) {
-        projectListEl.style.height = "auto";
-      } else {
-        projectListEl.style.height = "120vh";
-      }
-      if (forceReload) {
-        savedPositions = [];
+  // Upvote button logic
+  newElems.forEach(({ element, data }) => {
+    const upvoteBtn = element.querySelector(".upvoteBtn");
+    if (upvoteBtn) {
+      // Check if the project has already been upvoted
+      if (upvotedProjects.includes(data.id)) {
+        upvoteBtn.disabled = true;
+        upvoteBtn.classList.add("clicked");
       }
 
-      appendProjects(projects);
-
-      // Check pagination
-      if (projects.length < PAGE_SIZE) {
-        totalLastPage = currentPage;
-        nextPageBtn.disabled = true;
-      } else {
-        nextPageBtn.disabled = false;
-      }
-      prevPageBtn.disabled = (currentPage === 1);
+      upvoteBtn.addEventListener("click", () => handleUpvote(data.id, element));
     }
+  });
+}
 
-    function appendProjects(projects) {
-      const newElems = [];
-      projects.forEach((project) => {
-        const projDiv = document.createElement("div");
-        projDiv.classList.add("project");
+// ------------------ POSITION PROJECTS (Scatter Mode) ------------------
+function positionProjects(newElems) {
+  const containerRect = projectListEl.getBoundingClientRect();
 
-        // For upvotes
-        const upvoteHTML = `
-          <div class="upvote-container">
-            <button class="upvoteBtn" data-id="${project.id}">↑</button>
-            <span class="upvoteCount">${project.upvotes ?? 0}</span>
-          </div>
-        `;
+  newElems.forEach(({ element, data }, index) => {
+    // Switch from default relative -> absolute
+    element.classList.add("scattered");
 
-        let contentHTML = "";
-        if (project.image_data) {
-          projDiv.classList.add("has-image");
-          contentHTML = `
-            <div class="image-overlay" style="background-image: url('${escapeURL(project.image_data)}');"></div>
-            <div class="project-info">
-              <h2 class="title">${escapeHTML(project.title)}</h2>
-              <p class="description">${escapeHTML(project.description)}</p>
-              ${
-                project.tags && project.tags.length
-                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
-                  : ""
-              }
-            </div>
-          `;
-        } else {
-          contentHTML = `
-            <div class="project-info">
-              <h2 class="title">${escapeHTML(project.title)}</h2>
-              <p class="description">${escapeHTML(project.description)}</p>
-              ${
-                project.tags && project.tags.length
-                  ? `<p class="tags"><strong>Tags:</strong> ${project.tags.map(escapeHTML).join(", ")}</p>`
-                  : ""
-              }
-            </div>
-          `;
-        }
-        projDiv.innerHTML = upvoteHTML + contentHTML;
-        projectListEl.appendChild(projDiv);
-        newElems.push({ element: projDiv, data: project });
-      });
+    // Randomize positions within container
+    const projWidth = element.offsetWidth;
+    const projHeight = element.offsetHeight;
+    const maxX = containerRect.width - projWidth;
+    const maxY = containerRect.height - projHeight;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-      // If in scatter mode, absolutely position them via .scattered
-      if (!isGridView) {
-        positionProjects(newElems);
-      }
-      // Upvote button logic
-      newElems.forEach(({ element, data }) => {
-        const upvoteBtn = element.querySelector(".upvoteBtn");
-        if (upvoteBtn) {
-          upvoteBtn.addEventListener("click", () => handleUpvote(data.id, element));
-        }
-      });
-    }
+    element.style.left = x + "px";
+    element.style.top = y + "px";
+    element.style.zIndex = zIndexCounter;
 
-    function positionProjects(newElems) {
-      const containerRect = projectListEl.getBoundingClientRect();
+    savedPositions.push({ left: x, top: y, zIndex: zIndexCounter });
+  });
+}
 
-      newElems.forEach(({ element, data }, index) => {
-        // Switch from default relative -> absolute
-        element.classList.add("scattered");
-
-        // Randomize positions within container
-        const projWidth = element.offsetWidth;
-        const projHeight = element.offsetHeight;
-        const maxX = containerRect.width - projWidth;
-        const maxY = containerRect.height - projHeight;
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-
-        element.style.left = x + "px";
-        element.style.top = y + "px";
-        element.style.zIndex = zIndexCounter;
-
-        savedPositions.push({ left: x, top: y, zIndex: zIndexCounter });
-      });
-    }
-
-    async function handleUpvote(projectId, projectEl) {
+// ------------------ HANDLE UPVOTE ------------------
+async function handleUpvote(projectId, projectEl) {
   try {
     // Fetch the current upvotes for the project
     const { data: existing } = await supabase
@@ -1580,160 +1548,166 @@ tagsDropdown.addEventListener("change", () => {
       upvoteBtn.disabled = true;
       upvoteBtn.classList.add("clicked"); // Add a class to style the button as active
     }
+
+    // Store the upvoted project ID in localStorage
+    let upvotedProjects = JSON.parse(localStorage.getItem('upvotedProjects')) || [];
+    if (!upvotedProjects.includes(projectId)) {
+      upvotedProjects.push(projectId);
+      localStorage.setItem('upvotedProjects', JSON.stringify(upvotedProjects));
+    }
+
   } catch (err) {
     console.error("Error updating upvote:", err);
   }
 }
 
+// ------------------ DRAG HANDLERS (Scatter Mode) ------------------
+function startDrag(e) {
+  // If grid, ignore drag.
+  if (isGridView) return;
+  const target = e.target.closest(".project");
+  if (!target) return;
 
+  isDragging = true;
+  activeElement = target;
 
+  const containerRect = projectListEl.getBoundingClientRect();
+  const rect = activeElement.getBoundingClientRect();
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-    // ------------------ DRAG HANDLERS (Scatter Mode) ------------------
-    function startDrag(e) {
-      // If grid, ignore drag.
-      if (isGridView) return;
-      const target = e.target.closest(".project");
-      if (!target) return;
+  offsetX = clientX - rect.left;
+  offsetY = clientY - rect.top;
 
-      isDragging = true;
-      activeElement = target;
+  zIndexCounter++;
+  activeElement.style.zIndex = zIndexCounter;
+  activeElement.classList.add("dragging");
+  e.preventDefault();
+}
 
-      const containerRect = projectListEl.getBoundingClientRect();
-      const rect = activeElement.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+function onMove(e) {
+  if (isGridView || !isDragging || !activeElement) return;
 
-      offsetX = clientX - rect.left;
-      offsetY = clientY - rect.top;
+  const containerRect = projectListEl.getBoundingClientRect();
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-      zIndexCounter++;
-      activeElement.style.zIndex = zIndexCounter;
-      activeElement.classList.add("dragging");
-      e.preventDefault();
-    }
+  let newX = clientX - containerRect.left - offsetX;
+  let newY = clientY - containerRect.top - offsetY;
 
-    function onMove(e) {
-      if (isGridView || !isDragging || !activeElement) return;
+  const projWidth = activeElement.offsetWidth;
+  const projHeight = activeElement.offsetHeight;
+  newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
+  newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
 
-      const containerRect = projectListEl.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  velocityX = newX - parseFloat(activeElement.style.left || 0);
+  velocityY = newY - parseFloat(activeElement.style.top || 0);
 
-      let newX = clientX - containerRect.left - offsetX;
-      let newY = clientY - containerRect.top - offsetY;
+  activeElement.style.left = `${newX}px`;
+  activeElement.style.top = `${newY}px`;
+}
 
-      const projWidth = activeElement.offsetWidth;
-      const projHeight = activeElement.offsetHeight;
-      newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
-      newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
+function endDrag() {
+  if (isGridView || !isDragging || !activeElement) return;
+  isDragging = false;
+  activeElement.classList.remove("dragging");
+  activeElement.classList.add("dropped");
+  activeElement.addEventListener("animationend", function handleAnimationEnd() {
+    activeElement.classList.remove("dropped");
+    activeElement.removeEventListener("animationend", handleAnimationEnd);
+  });
+  const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
+  const index = allProjects.indexOf(activeElement);
+  if (index > -1 && savedPositions[index]) {
+    savedPositions[index].left = parseFloat(activeElement.style.left);
+    savedPositions[index].top = parseFloat(activeElement.style.top);
+    savedPositions[index].zIndex = parseInt(activeElement.style.zIndex);
+  }
+  requestAnimationFrame(applyMomentum);
+}
 
-      velocityX = newX - parseFloat(activeElement.style.left || 0);
-      velocityY = newY - parseFloat(activeElement.style.top || 0);
+function applyMomentum() {
+  if (isGridView || isDragging || !activeElement) return;
+  const containerRect = projectListEl.getBoundingClientRect();
+  let newX = parseFloat(activeElement.style.left || 0) + velocityX;
+  let newY = parseFloat(activeElement.style.top || 0) + velocityY;
 
-      activeElement.style.left = `${newX}px`;
-      activeElement.style.top = `${newY}px`;
-    }
+  velocityX *= friction;
+  velocityY *= friction;
 
-    function endDrag() {
-      if (isGridView || !isDragging || !activeElement) return;
-      isDragging = false;
-      activeElement.classList.remove("dragging");
-      activeElement.classList.add("dropped");
-      activeElement.addEventListener("animationend", function handleAnimationEnd() {
-        activeElement.classList.remove("dropped");
-        activeElement.removeEventListener("animationend", handleAnimationEnd);
-      });
-      const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
-      const index = allProjects.indexOf(activeElement);
-      if (index > -1 && savedPositions[index]) {
-        savedPositions[index].left = parseFloat(activeElement.style.left);
-        savedPositions[index].top = parseFloat(activeElement.style.top);
-        savedPositions[index].zIndex = parseInt(activeElement.style.zIndex);
-      }
-      requestAnimationFrame(applyMomentum);
-    }
+  const projWidth = activeElement.offsetWidth;
+  const projHeight = activeElement.offsetHeight;
+  newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
+  newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
 
-    function applyMomentum() {
-      if (isGridView || isDragging || !activeElement) return;
-      const containerRect = projectListEl.getBoundingClientRect();
-      let newX = parseFloat(activeElement.style.left || 0) + velocityX;
-      let newY = parseFloat(activeElement.style.top || 0) + velocityY;
+  activeElement.style.left = `${newX}px`;
+  activeElement.style.top = `${newY}px`;
 
-      velocityX *= friction;
-      velocityY *= friction;
+  const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
+  const index = allProjects.indexOf(activeElement);
+  if (index > -1 && savedPositions[index]) {
+    savedPositions[index].left = newX;
+    savedPositions[index].top = newY;
+  }
+  if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
+    requestAnimationFrame(applyMomentum);
+  }
+}
 
-      const projWidth = activeElement.offsetWidth;
-      const projHeight = activeElement.offsetHeight;
-      newX = Math.max(0, Math.min(containerRect.width - projWidth, newX));
-      newY = Math.max(0, Math.min(containerRect.height - projHeight, newY));
+// ------------------ UTILITIES ------------------
+function escapeHTML(str = "") {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+function escapeURL(url = "") {
+  return url.replace(/"/g, "%22").replace(/'/g, "%27");
+}
 
-      activeElement.style.left = `${newX}px`;
-      activeElement.style.top = `${newY}px`;
+// ------------------ PAGINATION ------------------
+prevPageBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage(currentPage);
+  }
+});
+nextPageBtn.addEventListener("click", () => {
+  currentPage++;
+  renderPage(currentPage);
+});
 
-      const allProjects = Array.from(projectListEl.querySelectorAll(".project"));
-      const index = allProjects.indexOf(activeElement);
-      if (index > -1 && savedPositions[index]) {
-        savedPositions[index].left = newX;
-        savedPositions[index].top = newY;
-      }
-      if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
-        requestAnimationFrame(applyMomentum);
-      }
-    }
+// ------------------ INIT ------------------
+document.addEventListener("DOMContentLoaded", async () => {
+  projectListEl.classList.add("grid-mode"); // Start in grid mode
+  layoutToggleBtn.textContent = "Switch to Scatter";
 
-    // ------------------ UTILITIES ------------------
-    function escapeHTML(str = "") {
-      return str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-    function escapeURL(url = "") {
-      return url.replace(/"/g, "%22").replace(/'/g, "%27");
-    }
+  await fetchAndPopulateTags();
+  renderPage(currentPage);
+  animateTitle();
+});
 
-    // ------------------ PAGINATION ------------------
-    prevPageBtn.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderPage(currentPage);
-      }
-    });
-    nextPageBtn.addEventListener("click", () => {
-      currentPage++;
-      renderPage(currentPage);
-    });
+function animateTitle() {
+  const title = document.getElementById("animated-title");
+  const letters = title.querySelectorAll(".letter");
+  letters.forEach((letter, index) => {
+    const delay = 500 + index * 100 + Math.random() * 100;
+    setTimeout(() => {
+      letter.classList.add("visible");
+    }, delay);
+  });
+}
 
-    // ------------------ INIT ------------------
-    document.addEventListener("DOMContentLoaded", async () => {
-      projectListEl.classList.add("grid-mode"); // Start in grid mode
-      layoutToggleBtn.textContent = "Switch to Scatter";
+// Global drag events
+document.addEventListener("mousedown", startDrag, false);
+document.addEventListener("mousemove", onMove, false);
+document.addEventListener("mouseup", endDrag, false);
+document.addEventListener("touchstart", startDrag, { passive: false });
+document.addEventListener("touchmove", onMove, { passive: false });
+document.addEventListener("touchend", endDrag, false);
 
-      await fetchAndPopulateTags();
-      renderPage(currentPage);
-      animateTitle();
-    });
-
-    function animateTitle() {
-      const title = document.getElementById("animated-title");
-      const letters = title.querySelectorAll(".letter");
-      letters.forEach((letter, index) => {
-        const delay = 500 + index * 100 + Math.random() * 100;
-        setTimeout(() => {
-          letter.classList.add("visible");
-        }, delay);
-      });
-    }
-
-    // Global drag events
-    document.addEventListener("mousedown", startDrag, false);
-    document.addEventListener("mousemove", onMove, false);
-    document.addEventListener("mouseup", endDrag, false);
-    document.addEventListener("touchstart", startDrag, { passive: false });
-    document.addEventListener("touchmove", onMove, { passive: false });
-    document.addEventListener("touchend", endDrag, false);
   </script>
 </body>
 </html>
