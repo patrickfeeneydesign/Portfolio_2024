@@ -357,11 +357,11 @@ header img {
     // Predefined fixed positions for mobile devices for Level 3
     const fixedPositionsMobile = {
       outlines: [
-        { left: '5%', top: '25%' },
-        { left: '55%', top: '20%' },
-        { left: '5%', top: '60%' },
-        { left: '48%', top: '50%' },
-        { left: '45%', top: '80%' }
+      { left: '10%', top: '10%' },
+        { left: '60%', top: '20%' },
+        { left: '10%', top: '45%' },
+        { left: '60%', top: '50%' },
+        { left: '35%', top: '70%' }
       ],
       // Note: Images will be randomly placed on all devices
     };
@@ -400,82 +400,115 @@ header img {
     }
   
     function placeElements() {
-      container.innerHTML = '';
-      imageElements = [];
-      outlineElements = [];
-  
-      const containerRect = container.getBoundingClientRect();
-      let placedOutlines = [];
-      let placedImages = [];
-  
-      // Place outlines
-      for (let i = 0; i < puzzlePairs.length; i++) {
-        const pair = puzzlePairs[i];
-        const outline = document.createElement('div');
-        outline.classList.add('outline');
-        outline.id = pair.outlineId;
-  
-        // Insert the message inside the outline
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('outline-message');
-        messageDiv.textContent = pair.message;
-        outline.appendChild(messageDiv);
-  
-        if (isMobile) {
-          // Assign fixed positions for mobile
-          const pos = fixedPositionsMobile.outlines[i];
-          outline.style.left = pos.left;
-          outline.style.top = pos.top;
-          container.appendChild(outline);
-          // No need to track placedOutlines for overlapping on mobile
-        } else {
-          // Assign random positions for non-mobile
-          const pos = placeNonOverlappingElement(outlineW, outlineH, placedOutlines, containerRect);
-          if (pos) {
-            outline.style.left = pos.x + 'px';
-            outline.style.top = pos.y + 'px';
-            container.appendChild(outline);
-            placedOutlines.push({x: pos.x, y: pos.y, w:outlineW, h:outlineH, id: pair.outlineId});
-          } else {
-            console.warn("Couldn't find position for outline, retrying...");
-            location.reload();
-            return;
-          }
-        }
-  
-        // Add 'visible' class to show the message
-        outline.classList.add('visible');
-  
-        outlineElements.push(outline);
+  container.innerHTML = '';
+  imageElements = [];
+  outlineElements = [];
+
+  const containerRect = container.getBoundingClientRect();
+  let placedOutlines = [];
+  let placedImages = [];
+
+  // Place outlines
+  for (let i = 0; i < puzzlePairs.length; i++) {
+    const pair = puzzlePairs[i];
+    const outline = document.createElement('div');
+    outline.classList.add('outline');
+    outline.id = pair.outlineId;
+
+    // Insert message
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('outline-message');
+    messageDiv.textContent = pair.message;
+    outline.appendChild(messageDiv);
+
+    if (isMobile) {
+      // Instead of directly assigning "outline.style.left = '60%';"
+      // 1) Parse your fixedPositionsMobile.outlines[i].left/top -> (e.g. "60%")
+      // 2) Convert to px relative to containerRect width/height
+      const rawLeft = fixedPositionsMobile.outlines[i].left;  // e.g. "60%"
+      const rawTop  = fixedPositionsMobile.outlines[i].top;   // e.g. "20%"
+
+      // Remove the "%" sign and convert to a number
+      const leftPercent = parseFloat(rawLeft);
+      const topPercent  = parseFloat(rawTop);
+
+      // Convert to px. E.g. 60% of containerRect.width
+      let leftPx = (leftPercent / 100) * containerRect.width;
+      let topPx  = (topPercent / 100) * containerRect.height;
+
+      // 1) Temporarily place at (leftPx, topPx)
+      outline.style.left = leftPx + 'px';
+      outline.style.top  = topPx + 'px';
+      container.appendChild(outline);
+
+      // 2) Measure the actual outline width & height *after* appending
+      const outlineWidth  = outline.offsetWidth;
+      const outlineHeight = outline.offsetHeight;
+
+      // 3) Clamp so it stays fully visible
+      if (leftPx + outlineWidth > containerRect.width) {
+        leftPx = containerRect.width - outlineWidth;
       }
-  
-      // Place images
-      for (let i = 0; i < puzzlePairs.length; i++) {
-        const pair = puzzlePairs[i];
-        const imgWrapper = document.createElement('div');
-        imgWrapper.classList.add('draggable');
-        imgWrapper.id = pair.imgId;
-        const img = document.createElement('img');
-        img.src = pair.imgSrc;
-        imgWrapper.appendChild(img);
-  
-        // Assign random positions for images regardless of device
-        const pos = placeNonOverlappingElement(imageW, imageH, [...placedOutlines, ...placedImages], containerRect);
-        if (pos) {
-          imgWrapper.style.left = pos.x + 'px';
-          imgWrapper.style.top = pos.y + 'px';
-          container.appendChild(imgWrapper);
-          placedImages.push({x: pos.x, y: pos.y, w:imageW, h:imageH});
-        } else {
-          console.warn("Couldn't find position for image, retrying...");
-          return;
-        }
-  
-        imageElements.push(imgWrapper);
+      if (topPx + outlineHeight > containerRect.height) {
+        topPx = containerRect.height - outlineHeight;
       }
-  
-      setupDragging();
+      // Re-assign the clamped positions
+      outline.style.left = leftPx + 'px';
+      outline.style.top  = topPx + 'px';
+
+    } else {
+      // Desktop / non-mobile => random or non-overlapping
+      const pos = placeNonOverlappingElement(
+        outlineW, outlineH, placedOutlines, containerRect
+      );
+      if (pos) {
+        outline.style.left = pos.x + 'px';
+        outline.style.top = pos.y + 'px';
+        container.appendChild(outline);
+        placedOutlines.push({
+          x: pos.x, y: pos.y, w: outlineW, h: outlineH, id: pair.outlineId
+        });
+      } else {
+        console.warn("Couldn't find position for outline, retrying...");
+        location.reload();
+        return;
+      }
     }
+
+    // Make outline message visible
+    outline.classList.add('visible');
+    outlineElements.push(outline);
+  }
+
+  // Place images (same as your original logic)
+  for (let i = 0; i < puzzlePairs.length; i++) {
+    const pair = puzzlePairs[i];
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('draggable');
+    imgWrapper.id = pair.imgId;
+    const img = document.createElement('img');
+    img.src = pair.imgSrc;
+    imgWrapper.appendChild(img);
+
+    // Desktop or mobile (images are random in your code)
+    const pos = placeNonOverlappingElement(
+      imageW, imageH, [...placedOutlines, ...placedImages], containerRect
+    );
+    if (pos) {
+      imgWrapper.style.left = pos.x + 'px';
+      imgWrapper.style.top = pos.y + 'px';
+      container.appendChild(imgWrapper);
+      placedImages.push({ x: pos.x, y: pos.y, w: imageW, h: imageH });
+    } else {
+      console.warn("Couldn't find position for image, retrying...");
+      return;
+    }
+    imageElements.push(imgWrapper);
+  }
+
+  setupDragging();
+}
+
   
     function setupDragging() {
       // Dragging functionality is already handled by event listeners below

@@ -719,336 +719,355 @@
             &copy; Patrick Feeney Design 2024 | All rights reserved
         </div>
     </footer>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            let activeContainerId = "container1";
-            let isDragging = false;
-            let activeElement = null, offsetX = 0, offsetY = 0;
-            let velocityX = 0, velocityY = 0;
-            const friction = 0.95;
-        
-            // Keep track of highest z-index to ensure top-most element
-            let zIndexCounter = 1000;
-        
-            const placedImagesData = { "container1": [], "container2": [] };
-        
-            // This object will store the final positions and z-index of each image.
-            // Format: savedPositions[containerId] = [{left, top, zIndex}, ...] for each draggable.
-            let savedPositions = {
-                "container1": [],
-                "container2": []
-            };
-        
-            function setupDraggable(containerId) {
-                const container = document.getElementById(containerId);
-                const containerRect = container.getBoundingClientRect();
-                const draggables = container.querySelectorAll('.draggable');
-        
-                // If we have saved positions for this container and they match the number of images,
-                // just apply them without repositioning.
-                if (savedPositions[containerId].length === draggables.length) {
-                    draggables.forEach((elem, index) => {
-                        const { left, top, zIndex: storedZIndex } = savedPositions[containerId][index];
-                        elem.style.left = `${left}px`;
-                        elem.style.top = `${top}px`;
-                        if (storedZIndex) {
-                            elem.style.zIndex = storedZIndex;
-                            if (storedZIndex > zIndexCounter) {
-                                zIndexCounter = storedZIndex;
-                            }
-                        }
-                    });
-                    return;
+          let activeContainerId = "container1";
+          let isDragging = false;
+          let activeElement = null, offsetX = 0, offsetY = 0;
+          let velocityX = 0, velocityY = 0;
+          const friction = 0.95;
+          let zIndexCounter = 1000;
+      
+          // Keep track of positions
+          const placedImagesData = { "container1": [], "container2": [] };
+          let savedPositions = { "container1": [], "container2": [] };
+      
+          // --- NEW CODE: 1-Day Timer Check ---
+          // Get stored data from localStorage
+          const overlayShown = localStorage.getItem("overlayShown") === "true";
+          const overlayClosedAt = localStorage.getItem("overlayClosedAt");
+          const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
+          const now = Date.now();
+      
+          // If overlay was never shown OR more than 24h have passed since last close,
+          // we show it again; otherwise we hide it.
+          if (
+            !overlayShown ||
+            !overlayClosedAt ||
+            (now - parseInt(overlayClosedAt)) > oneDay
+          ) {
+            document.getElementById('instructionOverlay').style.display = 'flex';
+          } else {
+            document.getElementById('instructionOverlay').style.display = 'none';
+          }
+          // --- END NEW CODE ---
+      
+          function setupDraggable(containerId) {
+            const container = document.getElementById(containerId);
+            const containerRect = container.getBoundingClientRect();
+            const draggables = container.querySelectorAll('.draggable');
+      
+            // If we have saved positions for this container and they match the number of images,
+            // just apply them without repositioning.
+            if (savedPositions[containerId].length === draggables.length) {
+              draggables.forEach((elem, index) => {
+                const { left, top, zIndex: storedZIndex } = savedPositions[containerId][index];
+                elem.style.left = `${left}px`;
+                elem.style.top = `${top}px`;
+                if (storedZIndex) {
+                  elem.style.zIndex = storedZIndex;
+                  if (storedZIndex > zIndexCounter) {
+                    zIndexCounter = storedZIndex;
+                  }
                 }
-        
-                // If no saved positions, we must randomize now and then save them.
-                placedImagesData[containerId] = [];
-        
-                draggables.forEach((elem, index) => {
-                    const lowResImage = elem.querySelector('img.low-res');
-                    const highResImage = elem.querySelector('img.high-res');
-        
-                    function setPosition() {
-                        const elemWidth = elem.offsetWidth;
-                        const elemHeight = elem.offsetHeight;
-                        const maxX = containerRect.width - elemWidth;
-                        const maxY = containerRect.height - elemHeight;
-        
-                        function overlapsForbiddenZone(testX, testY, testWidth, testHeight) {
-                            for (const data of placedImagesData[containerId]) {
-                                const A_left = testX;
-                                const A_right = testX + testWidth;
-                                const A_top = testY;
-                                const A_bottom = testY + testHeight;
-        
-                                const B_left = data.forbiddenX1;
-                                const B_right = data.forbiddenX2;
-                                const B_top = data.forbiddenY1;
-                                const B_bottom = data.forbiddenY2;
-        
-                                if (A_left < B_right && A_right > B_left && A_top < B_bottom && A_bottom > B_top) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        }
-        
-                        let attempts = 500; 
-                        let positioned = false;
-                        let randomX, randomY;
-        
-                        while (attempts > 0 && !positioned) {
-                            randomX = Math.floor(Math.random() * maxX);
-                            randomY = Math.floor(Math.random() * maxY);
-        
-                            if (!overlapsForbiddenZone(randomX, randomY, elemWidth, elemHeight)) {
-                                positioned = true;
-                            }
-                            attempts--;
-                        }
-        
-                        if (!positioned) {
-                            // If we ran out of attempts, just place it in the middle
-                            randomX = Math.floor(maxX / 2);
-                            randomY = Math.floor(maxY / 2);
-                        }
-        
-                        elem.style.left = `${randomX}px`;
-                        elem.style.top = `${randomY}px`;
-        
-                        const forbiddenZoneWidth = elemWidth * 0.22; 
-                        const forbiddenZoneHeight = elemHeight * 0.22; 
-                        const fzX1 = randomX + (elemWidth - forbiddenZoneWidth) / 2;
-                        const fzY1 = randomY + (elemHeight - forbiddenZoneHeight) / 2;
-                        const fzX2 = fzX1 + forbiddenZoneWidth;
-                        const fzY2 = fzY1 + forbiddenZoneHeight;
-        
-                        placedImagesData[containerId].push({
-                            forbiddenX1: fzX1,
-                            forbiddenY1: fzY1,
-                            forbiddenX2: fzX2,
-                            forbiddenY2: fzY2
-                        });
-        
-                        // Save the initial position and zIndex for this image
-                        savedPositions[containerId][index] = {
-                            left: randomX,
-                            top: randomY,
-                            zIndex: parseInt(elem.style.zIndex) || 1000
-                        };
+              });
+              return;
+            }
+      
+            // Otherwise, randomize positions now and save them
+            placedImagesData[containerId] = [];
+      
+            draggables.forEach((elem, index) => {
+              const lowResImage = elem.querySelector('img.low-res');
+      
+              function setPosition() {
+                const elemWidth = elem.offsetWidth;
+                const elemHeight = elem.offsetHeight;
+                const maxX = containerRect.width - elemWidth;
+                const maxY = containerRect.height - elemHeight;
+      
+                function overlapsForbiddenZone(testX, testY, testWidth, testHeight) {
+                  for (const data of placedImagesData[containerId]) {
+                    const A_left = testX;
+                    const A_right = testX + testWidth;
+                    const A_top = testY;
+                    const A_bottom = testY + testHeight;
+      
+                    const B_left = data.forbiddenX1;
+                    const B_right = data.forbiddenX2;
+                    const B_top = data.forbiddenY1;
+                    const B_bottom = data.forbiddenY2;
+      
+                    if (A_left < B_right && A_right > B_left && A_top < B_bottom && A_bottom > B_top) {
+                      return true;
                     }
-        
-                    if (lowResImage.complete && lowResImage.naturalHeight !== 0) {
-                        setPosition();
-                    } else {
-                        lowResImage.onload = setPosition;
-                    }
-        
-                    // Double click detection on links (for both desktop and mobile)
-                    let lastTapTime = 0;
-                    const link = elem.querySelector('a');
-                    link.addEventListener('touchend', function(e) {
-                        const currentTime = new Date().getTime();
-                        const tapGap = currentTime - lastTapTime;
-                        if (tapGap < 300 && tapGap > 0) {
-                            window.location.href = this.href;
-                        }
-                        lastTapTime = currentTime;
-                        e.preventDefault();
-                    }, false);
-        
-                    let clickTimeout = null;
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        if (clickTimeout !== null) {
-                            clearTimeout(clickTimeout);
-                            clickTimeout = null;
-                            window.location.href = this.href;
-                        } else {
-                            clickTimeout = setTimeout(() => {
-                                clickTimeout = null;
-                            }, 300);
-                        }
-                    });
+                  }
+                  return false;
+                }
+      
+                let attempts = 500; 
+                let positioned = false;
+                let randomX, randomY;
+      
+                while (attempts > 0 && !positioned) {
+                  randomX = Math.floor(Math.random() * maxX);
+                  randomY = Math.floor(Math.random() * maxY);
+      
+                  if (!overlapsForbiddenZone(randomX, randomY, elemWidth, elemHeight)) {
+                    positioned = true;
+                  }
+                  attempts--;
+                }
+      
+                if (!positioned) {
+                  // If we ran out of attempts, just place it in the middle
+                  randomX = Math.floor(maxX / 2);
+                  randomY = Math.floor(maxY / 2);
+                }
+      
+                elem.style.left = `${randomX}px`;
+                elem.style.top = `${randomY}px`;
+      
+                // Create a "forbidden zone" so that other items don't overlap the center
+                const forbiddenZoneWidth = elemWidth * 0.22; 
+                const forbiddenZoneHeight = elemHeight * 0.22; 
+                const fzX1 = randomX + (elemWidth - forbiddenZoneWidth) / 2;
+                const fzY1 = randomY + (elemHeight - forbiddenZoneHeight) / 2;
+                const fzX2 = fzX1 + forbiddenZoneWidth;
+                const fzY2 = fzY1 + forbiddenZoneHeight;
+      
+                placedImagesData[containerId].push({
+                  forbiddenX1: fzX1,
+                  forbiddenY1: fzY1,
+                  forbiddenX2: fzX2,
+                  forbiddenY2: fzY2
                 });
-            }
-        
-            setupDraggable("container1");
-        
-            function startDrag(e) {
-                const container = document.getElementById(activeContainerId);
-                const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
-                if (target.closest && target.closest('.draggable')) {
-                    activeElement = target.closest('.draggable');
-                    const rect = activeElement.getBoundingClientRect();
-                    const containerRect = container.getBoundingClientRect();
-                    const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
-                    const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
-        
-                    offsetX = clientX - rect.left;
-                    offsetY = clientY - rect.top;
-                    isDragging = true;
-                    velocityX = 0;
-                    velocityY = 0;
-        
-                    zIndexCounter++;
-                    activeElement.style.zIndex = zIndexCounter;
-        
-                    activeElement.classList.add('dragging');
-                    e.preventDefault();
-                }
-            }
-        
-            function onMove(e) {
-                if (isDragging && activeElement) {
-                    const container = document.getElementById(activeContainerId);
-                    const containerRect = container.getBoundingClientRect();
-                    const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
-                    const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
-        
-                    const newX = clientX - containerRect.left - offsetX;
-                    const newY = clientY - containerRect.top - offsetY;
-        
-                    velocityX = newX - parseFloat(activeElement.style.left || 0);
-                    velocityY = newY - parseFloat(activeElement.style.top || 0);
-        
-                    activeElement.style.left = `${newX}px`;
-                    activeElement.style.top = `${newY}px`;
-                }
-            }
-        
-            function endDrag() {
-                if (isDragging) {
-                    isDragging = false;
-        
-                    if (activeElement) {
-                        activeElement.classList.remove('dragging');
-                        activeElement.classList.add('dropped');
-                        activeElement.addEventListener('animationend', function handleAnimationEnd() {
-                            activeElement.classList.remove('dropped');
-                            activeElement.removeEventListener('animationend', handleAnimationEnd);
-                        });
-        
-                        // Update saved position after user stops dragging
-                        const container = document.getElementById(activeContainerId);
-                        const draggables = Array.from(container.querySelectorAll('.draggable'));
-                        const index = draggables.indexOf(activeElement);
-                        if (index > -1) {
-                            savedPositions[activeContainerId][index].left = parseFloat(activeElement.style.left);
-                            savedPositions[activeContainerId][index].top = parseFloat(activeElement.style.top);
-                            savedPositions[activeContainerId][index].zIndex = parseInt(activeElement.style.zIndex);
-                        }
-                    }
-        
-                    // Apply momentum
-                    function applyMomentum() {
-                        if (!isDragging && activeElement) {
-                            const container = document.getElementById(activeContainerId);
-                            const containerRect = container.getBoundingClientRect();
-        
-                            let newX = parseFloat(activeElement.style.left || 0) + velocityX;
-                            let newY = parseFloat(activeElement.style.top || 0) + velocityY;
-        
-                            velocityX *= friction;
-                            velocityY *= friction;
-        
-                            newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
-                            newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
-        
-                            activeElement.style.left = `${newX}px`;
-                            activeElement.style.top = `${newY}px`;
-        
-                            // Update saved position after momentum movement
-                            const draggables = Array.from(container.querySelectorAll('.draggable'));
-                            const index = draggables.indexOf(activeElement);
-                            if (index > -1) {
-                                savedPositions[activeContainerId][index].left = newX;
-                                savedPositions[activeContainerId][index].top = newY;
-                            }
-        
-                            if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
-                                requestAnimationFrame(applyMomentum);
-                            }
-                        }
-                    }
-                    applyMomentum();
-                }
-            }
-        
-            document.addEventListener('mousedown', startDrag, false);
-            document.addEventListener('mousemove', onMove, false);
-            document.addEventListener('mouseup', endDrag, false);
-            document.addEventListener('touchstart', startDrag, {passive: false});
-            document.addEventListener('touchmove', onMove, {passive: false});
-            document.addEventListener('touchend', endDrag, false);
-        
-            // Toggle between pages without re-randomizing.
-            document.querySelector(".toggle-button1").addEventListener("click", () => {
-                document.getElementById("no1").style.display = "none";
-                document.getElementById("no2").style.display = "block";
-                activeContainerId = "container2";
-                setupDraggable("container2");
-            });
-        
-            document.querySelector(".toggle-button2").addEventListener("click", () => {
-                document.getElementById("no2").style.display = "none";
-                document.getElementById("no1").style.display = "block";
-                activeContainerId = "container1";
-                setupDraggable("container1");
-            });
-        
-            // Lazy load high-resolution images
-            const highResImages = document.querySelectorAll('img.high-res');
-            const loadHighResImage = (img) => {
-                const highResSrc = img.src;
-                if (!highResSrc) return;
-                const highResImg = new Image();
-                highResImg.src = highResSrc;
-                highResImg.onload = () => {
-                    img.classList.add('loaded');
-                    // Remove blur from low-res image
-                    const lowResImg = img.previousElementSibling;
-                    if (lowResImg && lowResImg.classList.contains('loading')) {
-                        lowResImg.classList.remove('loading');
-                    }
+      
+                // Save the initial position and zIndex for this image
+                savedPositions[containerId][index] = {
+                  left: randomX,
+                  top: randomY,
+                  zIndex: parseInt(elem.style.zIndex) || 1000
                 };
-            };
-        
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            loadHighResImage(img);
-                            obs.unobserve(img);
-                        }
-                    });
-                }, {
-                    rootMargin: "50px",
-                    threshold: 0.1
-                });
-        
-                highResImages.forEach(img => {
-                    observer.observe(img);
-                });
-            } else {
-                highResImages.forEach(img => loadHighResImage(img));
+              }
+      
+              if (lowResImage.complete && lowResImage.naturalHeight !== 0) {
+                setPosition();
+              } else {
+                lowResImage.onload = setPosition;
+              }
+      
+              // Double click detection on links (mobile/desktop quick double click)
+              let lastTapTime = 0;
+              const link = elem.querySelector('a');
+              link.addEventListener('touchend', function(e) {
+                const currentTime = new Date().getTime();
+                const tapGap = currentTime - lastTapTime;
+                if (tapGap < 300 && tapGap > 0) {
+                  window.location.href = this.href;
+                }
+                lastTapTime = currentTime;
+                e.preventDefault();
+              }, false);
+      
+              let clickTimeout = null;
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (clickTimeout !== null) {
+                  clearTimeout(clickTimeout);
+                  clickTimeout = null;
+                  window.location.href = this.href;
+                } else {
+                  clickTimeout = setTimeout(() => {
+                    clickTimeout = null;
+                  }, 300);
+                }
+              });
+            });
+          }
+      
+          setupDraggable("container1");
+      
+          function startDrag(e) {
+            const container = document.getElementById(activeContainerId);
+            const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
+            if (target.closest && target.closest('.draggable')) {
+              activeElement = target.closest('.draggable');
+              const rect = activeElement.getBoundingClientRect();
+              const containerRect = container.getBoundingClientRect();
+              const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+              const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+      
+              offsetX = clientX - rect.left;
+              offsetY = clientY - rect.top;
+              isDragging = true;
+              velocityX = 0;
+              velocityY = 0;
+      
+              zIndexCounter++;
+              activeElement.style.zIndex = zIndexCounter;
+      
+              activeElement.classList.add('dragging');
+              e.preventDefault();
             }
-        
-            // Close the overlay when "Got it!" is clicked
-            document.getElementById('closeInstructionBtn').addEventListener('click', () => {
-                document.getElementById('instructionOverlay').style.display = 'none';
-            });
-        
-            // Show overlay again when info-text is clicked
-            const infoTexts = document.querySelectorAll('.info-text');
-            infoTexts.forEach(infoText => {
-                infoText.addEventListener('click', () => {
-                    document.getElementById('instructionOverlay').style.display = 'flex';
+          }
+      
+          function onMove(e) {
+            if (isDragging && activeElement) {
+              const container = document.getElementById(activeContainerId);
+              const containerRect = container.getBoundingClientRect();
+              const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+              const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+      
+              const newX = clientX - containerRect.left - offsetX;
+              const newY = clientY - containerRect.top - offsetY;
+      
+              velocityX = newX - parseFloat(activeElement.style.left || 0);
+              velocityY = newY - parseFloat(activeElement.style.top || 0);
+      
+              activeElement.style.left = `${newX}px`;
+              activeElement.style.top = `${newY}px`;
+            }
+          }
+      
+          function endDrag() {
+            if (isDragging) {
+              isDragging = false;
+      
+              if (activeElement) {
+                activeElement.classList.remove('dragging');
+                activeElement.classList.add('dropped');
+                activeElement.addEventListener('animationend', function handleAnimationEnd() {
+                  activeElement.classList.remove('dropped');
+                  activeElement.removeEventListener('animationend', handleAnimationEnd);
                 });
+      
+                // Update saved position after user stops dragging
+                const container = document.getElementById(activeContainerId);
+                const draggables = Array.from(container.querySelectorAll('.draggable'));
+                const index = draggables.indexOf(activeElement);
+                if (index > -1) {
+                  savedPositions[activeContainerId][index].left = parseFloat(activeElement.style.left);
+                  savedPositions[activeContainerId][index].top = parseFloat(activeElement.style.top);
+                  savedPositions[activeContainerId][index].zIndex = parseInt(activeElement.style.zIndex);
+                }
+              }
+      
+              // Momentum effect
+              function applyMomentum() {
+                if (!isDragging && activeElement) {
+                  const container = document.getElementById(activeContainerId);
+                  const containerRect = container.getBoundingClientRect();
+      
+                  let newX = parseFloat(activeElement.style.left || 0) + velocityX;
+                  let newY = parseFloat(activeElement.style.top || 0) + velocityY;
+      
+                  velocityX *= friction;
+                  velocityY *= friction;
+      
+                  newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
+                  newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
+      
+                  activeElement.style.left = `${newX}px`;
+                  activeElement.style.top = `${newY}px`;
+      
+                  // Update saved position after momentum
+                  const draggables = Array.from(container.querySelectorAll('.draggable'));
+                  const index = draggables.indexOf(activeElement);
+                  if (index > -1) {
+                    savedPositions[activeContainerId][index].left = newX;
+                    savedPositions[activeContainerId][index].top = newY;
+                  }
+      
+                  if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
+                    requestAnimationFrame(applyMomentum);
+                  }
+                }
+              }
+              applyMomentum();
+            }
+          }
+      
+          document.addEventListener('mousedown', startDrag, false);
+          document.addEventListener('mousemove', onMove, false);
+          document.addEventListener('mouseup', endDrag, false);
+      
+          document.addEventListener('touchstart', startDrag, {passive: false});
+          document.addEventListener('touchmove', onMove, {passive: false});
+          document.addEventListener('touchend', endDrag, false);
+      
+          // Toggle between pages without re-randomizing
+          document.querySelector(".toggle-button1").addEventListener("click", () => {
+            document.getElementById("no1").style.display = "none";
+            document.getElementById("no2").style.display = "block";
+            activeContainerId = "container2";
+            setupDraggable("container2");
+          });
+      
+          document.querySelector(".toggle-button2").addEventListener("click", () => {
+            document.getElementById("no2").style.display = "none";
+            document.getElementById("no1").style.display = "block";
+            activeContainerId = "container1";
+            setupDraggable("container1");
+          });
+      
+          // Lazy load high-resolution images
+          const highResImages = document.querySelectorAll('img.high-res');
+          const loadHighResImage = (img) => {
+            const highResSrc = img.src;
+            if (!highResSrc) return;
+            const highResImg = new Image();
+            highResImg.src = highResSrc;
+            highResImg.onload = () => {
+              img.classList.add('loaded');
+              // Remove blur from low-res image
+              const lowResImg = img.previousElementSibling;
+              if (lowResImg && lowResImg.classList.contains('loading')) {
+                lowResImg.classList.remove('loading');
+              }
+            };
+          };
+      
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  const img = entry.target;
+                  loadHighResImage(img);
+                  obs.unobserve(img);
+                }
+              });
+            }, {
+              rootMargin: "50px",
+              threshold: 0.1
             });
+      
+            highResImages.forEach(img => {
+              observer.observe(img);
+            });
+          } else {
+            highResImages.forEach(img => loadHighResImage(img));
+          }
+      
+          // Close the overlay: store both a "shown" flag and a timestamp
+          document.getElementById('closeInstructionBtn').addEventListener('click', () => {
+            document.getElementById('instructionOverlay').style.display = 'none';
+      
+            // Mark overlay as shown
+            localStorage.setItem("overlayShown", "true");
+            // Save the time we closed the overlay
+            localStorage.setItem("overlayClosedAt", Date.now().toString());
+          });
+      
+          // Show overlay again when info-text is clicked
+          const infoTexts = document.querySelectorAll('.info-text');
+          infoTexts.forEach(infoText => {
+            infoText.addEventListener('click', () => {
+              document.getElementById('instructionOverlay').style.display = 'flex';
+            });
+          });
         });
-    </script>
+      </script>
+      
 </body>
 </html>
