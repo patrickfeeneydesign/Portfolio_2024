@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device, initial, viewport-fit=cover">
+  <title>Profile - Unfinished Business</title>
+
+  <style>
+    /*******************************************
+     * GLOBAL RESET & BASE STYLES
+     ********************************************/
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Desktop Default: Use 100% for full screen, hide overflow so columns can scroll internally */
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: sans-serif;
+      background-color: #F6F8FF;
+      touch-action: manipulation;
+      overflow: hidden; /* hide main scrollbar on desktop by default */
+    }
+
+    /*******************************************
+     * MAIN 3-COLUMN LAYOUT
+     ********************************************/
+    .container-row {
+      display: flex;
+      justify-content: center;    /* horizontally centers columns */
+      align-items: flex-start;    /* columns start at the top */
+      width: 100%;
+      height: 100%;  /* on desktop, the container is 100% tall */
+    }
+
+    .column {
+      width: 30vw;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin: 5vh 1vh 1vh 1vh;  /* small vertical/horizontal gap between columns */
+      background-color: #272D2D; 
+      color: #F6F8FF; 
+      /* On desktop, we set height/overflow in the media query */
+    }
+
+    /* Desktop (≥901px) preserves original "sub-scrolling" columns */
+    @media (min-width: 901px) {
+      .column {
+        height: 90vh;       /* each column is 90% of viewport height */
+        overflow-y: auto;   /* sub-scroll within each column */
+        overflow-x: hidden;
+      }
+    }
+
+    /* MOBILE (≤900px) - remove sub-scrolling, let full page scroll */
+    @media (max-width: 900px) {
+      /* Let HTML/BODY scroll normally on mobile */
+      html, body {
+        height: auto;        /* auto-height so page grows with content */
+        overflow: auto;      /* show main scrollbar on mobile */
+      }
+      .container-row {
+        flex-direction: column;   /* stack columns */
+        align-items: flex-start;
+        height: auto;             /* auto height so content flows vertically */
+      }
+      .column {
+        width: 95vw;
+        height: auto;            /* remove fixed 90vh so columns auto-size */
+        margin: 2vh auto;        /* center them with some margin */
+        overflow: visible;       /* no sub-scroll in each column */
+      }
+        /* Adjust back button */
+  #backButton {
+    font-size: 6.6vw !important;
+    padding: 2.6vw !important;
+    background-color: #b099fa !important;
+  }
+
+    }
+
+
+    /*******************************************
+     * BACK BUTTON (Top-left corner)
+     ********************************************/
+    #backButton {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1vw 1.5vw;
+      font-size: 1.2vw;
+      border-radius: 0 0 20px 0;
+      font-weight: 700;
+      background-color: #bdec58;
+      border: none;
+      color: #272D2D;
+      cursor: pointer;
+      z-index: 9999; 
+    }
+
+    /*******************************************
+     * ABOUT SECTION
+     ********************************************/
+    #about {
+      background-color: #afeb2f;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 300;
+      font-size: 1.7rem;
+      line-height: 2.2rem;
+      color: #272D2D;
+    }
+
+    /*******************************************
+     * AUTH CONTAINER (Sign Up / Log In)
+     ********************************************/
+    #authContainer {
+      background-color: #1a1c1c;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      color: #F6F8FF;
+    }
+    #authContainer h2 {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+    #authContainer form {
+      margin-bottom: 2rem;
+    }
+    #authContainer label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    #authContainer input[type="email"],
+    #authContainer input[type="password"] {
+      all: unset;
+      border-bottom: 2px solid #F6F8FF;
+      width: 100%;
+      margin-bottom: 1rem;
+      background: #272D2D;
+      color: #F6F8FF;
+      padding: 0.4rem 0;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    #authContainer button {
+      background-color: #b099fa;
+      color: #272D2D;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #authContainer button:hover {
+      background-color: #afeb2f;
+      color: #272D2D;
+    }
+    #logoutSection {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* NEW BOX (User Details) */
+    #userDetailsSection {
+      background-color: #333333;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 2vw;
+      text-align: center;
+      color: #F6F8FF;
+    }
+    #userDetailsSection p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    #userDetailsSection button {
+      background-color: #b099fa;
+      color: #272D2D;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-bottom: 0.5rem; /* Add some spacing between buttons */
+    }
+    #userDetailsSection button:hover {
+      background-color: #afeb2f;
+      color: #272D2D;
+    }
+
+    /* Delete Account Button - Red Style */
+    #deleteAccountButton {
+      background-color: #e74c3c; /* Red background */
+      color: #F6F8FF; /* White text */
+    }
+    #deleteAccountButton:hover {
+      background-color: #c0392b; /* Darker red on hover */
+      color: #F6F8FF;
+    }
+
+    .agreement-container {
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.3rem;
+    }
+    .agreement-container label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      font-weight: normal;
+      cursor: pointer;
+    }
+    .agreement-container input[type="checkbox"] {
+      width: 1rem;
+      height: 1rem;
+      cursor: pointer;
+    }
+
+    .forgot-pass-link {
+      margin-bottom: 1vw;
+      font-size: 0.9rem;
+      display: inline-block;
+      color: #b099fa;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .forgot-pass-link:hover {
+      color: #afeb2f;
+    }
+
+    /*******************************************
+     * SUBMISSION FORM
+     ********************************************/
+    #submissionFormContainer {
+      background-color: #1a1c1c;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      display: none;
+      color: #F6F8FF;
+    }
+    #submissionFormContainer h2 {
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: #F6F8FF;
+    }
+    #submissionFormContainer label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #F6F8FF;
+    }
+    #submissionFormContainer input[type="text"],
+    #submissionFormContainer textarea {
+      all: unset;
+      border-bottom: 2px solid #F6F8FF;
+      width: 100%;
+      margin-bottom: 1rem;
+      background: #272D2D;
+      color: #F6F8FF;
+      padding: 0.4rem 0;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    #submissionFormContainer button[type="submit"] {
+      background-color: #b099fa;
+      color: #272D2D;
+      border: none;
+      border-radius: 20px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #submissionFormContainer button[type="submit"]:hover {
+      background-color: #afeb2f;
+      color: #272D2D;
+    }
+    #drawToggleBtn {
+      background-color: #272D2D;
+      color: #F6F8FF;
+      border: 1px solid #F6F8FF;
+      border-radius: 20px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    #drawToggleBtn:hover {
+      background-color: #F6F8FF;
+      color: #272D2D;
+    }
+    #drawContainer {
+      display: none;
+      margin-bottom: 1.5rem;
+    }
+    #drawCanvas {
+      background: #272D2D;
+      border: 1px solid #F6F8FF;
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+      display: block;
+      margin-top: 1rem;
+      cursor: crosshair;
+    }
+    #statusMessage {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bold;
+      color: #F6F8FF;
+    }
+
+    /*******************************************
+     * MY UPLOADS
+     ********************************************/
+    #myUploadsContainer {
+      background-color: #1a1c1c;
+      border-radius: 20px;
+      padding: 2rem;
+      display: none;
+      color: #F6F8FF;
+    }
+    #myUploadsContainer h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    #myUploadsList {
+      border-radius: 20px;
+      background-color: #F6F8FF;
+      color: #000;
+      padding: 2rem;
+      margin-top: 1rem;
+      gap: 2rem;
+    }
+
+    /*******************************************
+     * PROJECT CARD (.project)
+     ********************************************/
+    .project {
+      position: relative;
+      cursor: grab;
+      user-select: none;
+      border-radius: 20px;
+      border: none;
+      width: 100%;
+      min-width: 18vw;
+      margin-bottom: 2vw;
+      min-height: 18vw;
+      background-color: #e9ebf0;
+      color: #272D2D;
+      padding: 2rem;
+      box-sizing: border-box;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .project:hover {
+      transform: scale(1.02);
+    }
+
+    .has-image {
+      background-color: #272D2D;
+      color: #F6F8FF;
+    }
+    .has-image .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out;
+      z-index: 1;
+    }
+    .has-image:hover .image-overlay {
+      opacity: 0;
+    }
+    .has-image .project-info {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+    .has-image:hover .project-info {
+      opacity: 1;
+    }
+
+    .upvote-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #bdec58;
+      border-radius: 5px 13px 5px 5px;
+      color: #272D2D;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.9rem;
+      z-index: 3;
+    }
+    .upvoteBtn {
+      cursor: pointer;
+      color: #272D2D;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .upvoteBtn:hover:not(:disabled) {
+      color: #ea37b7;
+    }
+    .upvoteBtn.clicked {
+      color: #ea37b7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .project-info .title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .project-info .description {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .project-info .tags {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .deleteBtn {
+      background: #b099fa;
+      color: #272D2D;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .deleteBtn:hover {
+      background: #afeb2f;
+      color: #272D2D;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Back button -->
+  <button id="backButton" onclick="window.location.href='unfinished.html';">&#x2190;</button>
+
+  <!-- Three-column layout wrapper -->
+  <div class="container-row">
+    <!-- COLUMN #1: Profile/About + Auth -->
+    <div class="column" id="profileColumn">
+      <!-- "Your Profile" heading -->
+      <div id="about">Your Profile</div>
+
+      <!-- AUTH CONTAINER -->
+      <div id="authContainer">
+        <!-- LOGIN -->
+        <div id="loginSection">
+          <h2>Log In</h2>
+          <form id="loginForm">
+            <label>Email</label>
+            <input type="email" id="loginEmail" required />
+            <label>Password</label>
+            <input type="password" id="loginPassword" required />
+            <br><br>
+            <button type="submit">Log In</button>
+          </form>
+
+          <!-- FORGOT PASSWORD LINK -->
+          <span class="forgot-pass-link" id="forgotPasswordLink">Forgot Password?</span>
+          <br><br>
+
+          <!-- SIGN UP -->
+          <div id="signupSection">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+              <label>Email</label>
+              <input type="email" id="signupEmail" required />
+
+              <label>Password</label>
+              <input type="password" id="signupPassword" required />
+
+              <label>Confirm Password</label>
+              <input type="password" id="signupPassword2" required />
+
+              <div class="agreement-container">
+                <p><strong>User Agreement:</strong> Unfinished business is an anonymous public platform; no identifying information is stored unless you choose to disclose it. By creating an account, you agree not to share inappropriate or copyrighted material. Doing so may result in a permanent ban.</p>
+                <label>
+                  <input type="checkbox" id="agreementCheckbox" />
+                  I Agree
+                </label>
+              </div>
+
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- LOGGED IN MESSAGE -->
+        <div id="logoutSection" style="display:none;">
+          <button id="logoutButton">Log Out</button>
+          <br><br>
+        </div>
+
+        <!-- NEW BOX (User Details) -->
+        <div id="userDetailsSection" style="display:none; padding: 2vw;">
+          <!-- We'll fill this in with the user's email via JS -->
+          <p id="userEmail"></p>
+          <button id="changePasswordButton">Change Password</button>
+          <button id="deleteAccountButton" style="background-color: #c0392b; color: #F6F8FF; margin-left: 0.7vw;">Erase Account</button>
+        </div>
+      </div>
+      <!-- END AUTH CONTAINER -->
+    </div> 
+    <!-- END COLUMN #1 -->
+
+    <!-- COLUMN #2: Submission Form -->
+    <div class="column" id="submissionColumn">
+      <!-- SUBMISSION FORM (Shown only if user is logged in) -->
+      <div id="submissionFormContainer" style="display:none;">
+        <h2>Submit a half baked idea...</h2>
+        <form id="uploadForm">
+          <label for="title">Title</label>
+          <input type="text" id="title" required />
+
+          <label for="description">Description</label>
+          <textarea id="description" rows="4" required></textarea>
+
+          <label for="tags">Tags (comma separated)</label>
+          <input type="text" id="tags" placeholder="e.g. art, WIP, concept" />
+
+          <br>
+          <!-- (Optional) Draw Canvas Toggle -->
+          <button type="button" id="drawToggleBtn">Draw &#8595;</button>
+          <div id="drawContainer">
+            <canvas id="drawCanvas" width="400" height="400"></canvas>
+          </div>
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+        <p id="statusMessage"></p>
+      </div>
+      <!-- END SUBMISSION FORM -->
+    </div>
+    <!-- END COLUMN #2 -->
+
+    <!-- COLUMN #3: My Uploads -->
+    <div class="column" id="uploadsColumn">
+      <!-- MY UPLOADS (Shown only if user is logged in) -->
+      <div id="myUploadsContainer" style="display:none;">
+        <h3>My Uploads</h3>
+        <div id="myUploadsList">Loading...</div>
+      </div>
+    </div>
+    <!-- END COLUMN #3 -->
+  </div> 
+  <!-- END container-row -->
+
+  <!-- Supabase & JS Logic -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    // Supabase credentials
+    const SUPABASE_URL = 'https://dxvznqxwdbrcyyoadbgb.supabase.co';
+    const SUPABASE_ANON_KEY =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dnpucXh3ZGJyY3l5b2FkYmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjUzMzIsImV4cCI6MjA1MDU0MTMzMn0.FbSmgJ5KOGaSIY4150gOIbiYWQ86fbtZQk-fP50RkZk';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // DOM References
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.getElementById('loginForm');
+    const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+    const logoutSection = document.getElementById('logoutSection');
+    const logoutButton = document.getElementById('logoutButton');
+
+    const signupSection = document.getElementById('signupSection');
+    const loginSection = document.getElementById('loginSection');
+
+    const userDetailsSection = document.getElementById('userDetailsSection');
+    const userEmail = document.getElementById('userEmail');
+    const changePasswordButton = document.getElementById('changePasswordButton');
+    const deleteAccountButton = document.getElementById('deleteAccountButton'); // New Button
+
+    const submissionFormContainer = document.getElementById('submissionFormContainer');
+    const uploadForm = document.getElementById('uploadForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    const myUploadsContainer = document.getElementById('myUploadsContainer');
+    const myUploadsList = document.getElementById('myUploadsList');
+
+    const drawToggleBtn = document.getElementById('drawToggleBtn');
+    const drawContainer = document.getElementById('drawContainer');
+    const drawCanvas = document.getElementById('drawCanvas');
+    const ctx = drawCanvas.getContext('2d');
+
+    // For current user
+    let currentUser = null;
+
+    // ========== SIGN UP (With password confirm & user agreement) ==========
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const signupEmail = document.getElementById('signupEmail').value.trim();
+      const signupPassword = document.getElementById('signupPassword').value;
+      const signupPassword2 = document.getElementById('signupPassword2').value;
+      const agreementCheckbox = document.getElementById('agreementCheckbox');
+
+      // Check that passwords match
+      if (signupPassword !== signupPassword2) {
+        alert('Passwords do not match!');
+        return;
+      }
+      // Check user agreement
+      if (!agreementCheckbox.checked) {
+        alert('You must agree to the User Agreement before signing up.');
+        return;
+      }
+
+      // Attempt sign-up
+      const { error } = await supabase.auth.signUp({
+        email: signupEmail,
+        password: signupPassword
+      });
+      if (error) {
+        alert('Sign-up error: ' + error.message);
+      } else {
+        alert('Sign-up success! Check your email (if confirmations are enabled).');
+      }
+    });
+
+    // ========== FORGOT PASSWORD ==========
+    forgotPasswordLink.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const emailPrompt = prompt('Enter your email to reset your password:');
+      if (!emailPrompt) {
+        alert('No email entered, reset cancelled.');
+        return;
+      }
+      // Send reset email
+      const { data, error } = await supabase.auth.resetPasswordForEmail(emailPrompt, {
+        // Optional redirect URL after they reset their password
+        redirectTo: 'https://your-redirect-url.com/reset-success.html'
+      });
+      if (error) {
+        alert('Error resetting password: ' + error.message);
+      } else {
+        alert('Check your email for a reset link!');
+      }
+    });
+
+    // ========== LOG IN ==========
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const loginEmail = document.getElementById('loginEmail').value.trim();
+      const loginPassword = document.getElementById('loginPassword').value;
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: loginPassword
+      });
+      if (error) {
+        alert('Login error: ' + error.message);
+      } else {
+        alert('Logged in successfully!');
+      }
+    });
+
+    // ========== LOG OUT ==========
+    logoutButton.addEventListener('click', async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        alert('Logout error: ' + error.message);
+      } else {
+        // Return to home or reload
+        window.location.href = 'unfinished.html';
+      }
+    });
+
+    // ========== AUTH STATE CHANGES ==========
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session && session.user) {
+        currentUser = session.user;
+
+        // Hide sign-up & login, show logout & user details
+        signupSection.style.display = 'none';
+        loginSection.style.display = 'none';
+        logoutSection.style.display = 'block';
+        userDetailsSection.style.display = 'block';
+        userEmail.textContent = `Logged in as: ${session.user.email}`;
+
+        // Show submission form & uploads
+        submissionFormContainer.style.display = 'block';
+        myUploadsContainer.style.display = 'block';
+
+        fetchMyUploads();
+      } else {
+        currentUser = null;
+        // Show sign-up & login, hide logout & user details
+        signupSection.style.display = 'block';
+        loginSection.style.display = 'block';
+        logoutSection.style.display = 'none';
+        userDetailsSection.style.display = 'none';
+
+        // Hide submission form & uploads
+        submissionFormContainer.style.display = 'none';
+        myUploadsContainer.style.display = 'none';
+      }
+    });
+
+    // ========== CHANGE PASSWORD HANDLER =========
+    changePasswordButton.addEventListener('click', async () => {
+      if (!currentUser) {
+        alert('No user is currently logged in.');
+        return;
+      }
+
+      const newPassword = prompt('Enter your new password:');
+      if (!newPassword) {
+        alert('Password change cancelled or empty.');
+        return;
+      }
+
+      // Call supabase.auth.updateUser to change the password
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) {
+        alert('Password change error: ' + error.message);
+      } else {
+        alert('Password changed successfully!');
+      }
+    });
+
+    // ========== DELETE ACCOUNT HANDLER =========
+    deleteAccountButton.addEventListener('click', async () => {
+      if (!currentUser) {
+        alert('No user is currently logged in.');
+        return;
+      }
+
+      const confirmDelete = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      try {
+        // Step 1: Delete all user-related data from 'projects' table
+        const { error: deleteProjectsError } = await supabase
+          .from('projects')
+          .delete()
+          .eq('user_id', currentUser.id);
+
+        if (deleteProjectsError) {
+          throw deleteProjectsError;
+        }
+
+        // Step 2: Delete the user from Supabase Auth
+        // Note: Deleting a user from Supabase Auth requires server-side operations with admin privileges.
+        // The following code assumes you have set up a secure server-side endpoint to handle the deletion.
+        // Replace 'https://your-server-endpoint.com/delete-user' with your actual endpoint URL.
+
+        const response = await fetch('https://your-server-endpoint.com/delete-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId: currentUser.id })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to delete account.');
+        }
+
+        alert('Your account has been deleted successfully.');
+
+        // Step 3: Sign out the user
+        const { error: signOutError } = await supabase.auth.signOut();
+        if (signOutError) {
+          console.error('Error signing out:', signOutError);
+        }
+
+        // Redirect to home or login page
+        window.location.href = 'unfinished.html';
+      } catch (err) {
+        console.error('Error deleting account:', err);
+        alert('Failed to delete account: ' + err.message);
+      }
+    });
+
+    // ========== DRAWING SETUP ==========
+    let drawing = false;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#c4d8ff';
+    ctx.lineWidth = 1;
+    drawContainer.style.display = 'none';
+
+    drawToggleBtn.addEventListener('click', () => {
+      const isHidden = drawContainer.style.display === 'none';
+      drawContainer.style.display = isHidden ? 'block' : 'none';
+      drawToggleBtn.innerHTML = isHidden ? 'Hide &#8593;' : 'Draw &#8595;';
+    });
+
+    function getScaledCoords(clientX, clientY) {
+      const rect = drawCanvas.getBoundingClientRect();
+      const scaleX = drawCanvas.width / rect.width;
+      const scaleY = drawCanvas.height / rect.height;
+      return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+      };
+    }
+
+    drawCanvas.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      drawing = true;
+      const { x, y } = getScaledCoords(e.clientX, e.clientY);
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    });
+    drawCanvas.addEventListener('mousemove', (e) => {
+      e.preventDefault();
+      if (!drawing) return;
+      const { x, y } = getScaledCoords(e.clientX, e.clientY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    });
+    drawCanvas.addEventListener('mouseup', () => { drawing = false; });
+    drawCanvas.addEventListener('mouseleave', () => { drawing = false; });
+
+    // Touch events
+    drawCanvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (e.touches.length > 0) {
+        drawing = true;
+        const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      }
+    }, { passive: false });
+    drawCanvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (!drawing || e.touches.length === 0) return;
+      const { x, y } = getScaledCoords(e.touches[0].clientX, e.touches[0].clientY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }, { passive: false });
+    drawCanvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      drawing = false;
+    }, { passive: false });
+
+    // ========== UPLOAD FORM HANDLER ==========
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusMessage.textContent = 'Submitting...';
+      statusMessage.style.color = '#fffac4';
+
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const tagsInput = document.getElementById('tags').value.trim();
+      const tags = tagsInput ? tagsInput.split(',').map(tag => tag.trim()) : [];
+
+      // If the draw canvas is open, get the base64 image
+      let drawingBase64 = null;
+      if (drawContainer.style.display === 'block') {
+        drawingBase64 = drawCanvas.toDataURL('image/png');
+      }
+
+      const user_id = currentUser ? currentUser.id : null;
+
+      try {
+        const { error } = await supabase
+          .from('projects')
+          .insert([
+            {
+              user_id,
+              title,
+              description,
+              tags,
+              image_data: drawingBase64,
+              upvotes: 0
+            }
+          ]);
+        if (error) throw error;
+
+        statusMessage.textContent = 'Submission successful!';
+        statusMessage.style.color = '#fffac4';
+
+        // Reset form
+        uploadForm.reset();
+        ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        drawContainer.style.display = 'none';
+
+        if (currentUser) {
+          fetchMyUploads();
+        }
+      } catch (err) {
+        console.error('Error inserting project:', err);
+        statusMessage.textContent = `Submission failed: ${err.message}`;
+        statusMessage.style.color = 'red';
+      }
+    });
+
+    // ========== FETCH & RENDER MY UPLOADS ==========
+    async function fetchMyUploads() {
+      if (!currentUser) return;
+      myUploadsList.innerHTML = 'Loading...';
+
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('user_id', currentUser.id)
+        .order('id', { ascending: false });
+
+      if (error) {
+        myUploadsList.innerHTML = `Error: ${error.message}`;
+        return;
+      }
+      if (!data || data.length === 0) {
+        myUploadsList.innerHTML = '<p>No uploads yet.</p>';
+        return;
+      }
+
+      let html = '';
+      data.forEach((proj) => {
+        html += `
+          <div class="project ${proj.image_data ? 'has-image' : ''}">
+            <div class="upvote-container">
+              <button class="upvoteBtn" data-id="${proj.id}">↑</button>
+              <span class="upvoteCount">${proj.upvotes || 0}</span>
+            </div>
+            ${
+              proj.image_data
+                ? `<div class="image-overlay" style="background-image: url('${escapeURL(proj.image_data)}');"></div>`
+                : ''
+            }
+            <div class="project-info">
+              <h2 class="title">${escapeHTML(proj.title)}</h2>
+              <p class="description">${escapeHTML(proj.description)}</p>
+              ${
+                proj.tags && proj.tags.length
+                  ? `<p class="tags"><strong>Tags:</strong> ${proj.tags.map(t => escapeHTML(t)).join(', ')}</p>`
+                  : ''
+              }
+              <button class="deleteBtn" onclick="deleteProject('${proj.id}')">Delete</button>
+            </div>
+          </div>
+        `;
+      });
+      myUploadsList.innerHTML = html;
+
+      // Initialize upvote buttons
+      initializeUpvoteButtons();
+    }
+
+    // ========== UTILS (UPVOTE & DELETE) ==========
+    function escapeHTML(str = '') {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+    function escapeURL(url = '') {
+      return url.replace(/"/g, '%22').replace(/'/g, '%27');
+    }
+
+    function initializeUpvoteButtons() {
+      const upvoteButtons = document.querySelectorAll('.upvoteBtn');
+      const upvotedProjects = JSON.parse(localStorage.getItem('upvotedProjects')) || [];
+
+      upvoteButtons.forEach(btn => {
+        const projectId = btn.getAttribute('data-id');
+        if (upvotedProjects.includes(projectId)) {
+          btn.disabled = true;
+          btn.classList.add('clicked');
+        }
+        btn.addEventListener('click', () => handleUpvote(projectId, btn));
+      });
+    }
+
+    async function handleUpvote(projectId, upvoteBtn) {
+      try {
+        const { data: existing } = await supabase
+          .from('projects')
+          .select('upvotes')
+          .eq('id', projectId)
+          .single();
+        const currentUpvotes = existing.upvotes || 0;
+        const updatedUpvotes = currentUpvotes + 1;
+
+        await supabase
+          .from('projects')
+          .update({ upvotes: updatedUpvotes })
+          .eq('id', projectId);
+
+        const upvoteCountEl = upvoteBtn.nextElementSibling;
+        if (upvoteCountEl) {
+          upvoteCountEl.textContent = updatedUpvotes;
+        }
+        upvoteBtn.disabled = true;
+        upvoteBtn.classList.add('clicked');
+
+        let stored = JSON.parse(localStorage.getItem('upvotedProjects')) || [];
+        if (!stored.includes(projectId)) {
+          stored.push(projectId);
+          localStorage.setItem('upvotedProjects', JSON.stringify(stored));
+        }
+      } catch (err) {
+        console.error('Error updating upvote:', err);
+      }
+    }
+
+    window.deleteProject = async function (projectId) {
+      if (!currentUser) {
+        alert('You must be logged in to delete your uploads.');
+        return;
+      }
+      const confirmDel = confirm('Are you sure you want to delete this?');
+      if (!confirmDel) return;
+
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', projectId);
+      if (error) {
+        alert('Error deleting: ' + error.message);
+      } else {
+        alert('Deleted successfully!');
+        fetchMyUploads();
+      }
+    };
+
+    // ========== DELETE ACCOUNT HANDLER =========
+    // This function assumes you have set up a server-side endpoint to handle user deletion.
+    // Replace 'https://your-server-endpoint.com/delete-user' with your actual endpoint URL.
+    deleteAccountButton.addEventListener('click', async () => {
+      if (!currentUser) {
+        alert('No user is currently logged in.');
+        return;
+      }
+
+      const confirmDelete = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      try {
+        // Step 1: Delete all user-related data from 'projects' table
+        const { error: deleteProjectsError } = await supabase
+          .from('projects')
+          .delete()
+          .eq('user_id', currentUser.id);
+
+        if (deleteProjectsError) {
+          throw deleteProjectsError;
+        }
+
+        // Step 2: Delete the user from Supabase Auth
+        // This requires a secure server-side function with admin privileges.
+        // You need to implement this endpoint separately.
+        const response = await fetch('https://your-server-endpoint.com/delete-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId: currentUser.id })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to delete account.');
+        }
+
+        alert('Your account has been deleted successfully.');
+
+        // Step 3: Sign out the user
+        const { error: signOutError } = await supabase.auth.signOut();
+        if (signOutError) {
+          console.error('Error signing out:', signOutError);
+        }
+
+        // Redirect to home or login page
+        window.location.href = 'unfinished.html';
+      } catch (err) {
+        console.error('Error deleting account:', err);
+        alert('Failed to delete account: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

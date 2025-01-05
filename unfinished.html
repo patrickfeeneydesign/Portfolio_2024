@@ -1058,7 +1058,7 @@ Privay Check box
       <span class="letter hidden">.</span>
       <span class="letter hidden">.</span>
     </h1>
-    <a id="toggleFormButton">Submit</a>
+    <a id="toggleFormButton">Post</a>
   </header>
 
   <button id="backButton" onclick="window.location.href='index.html';">&#x2190;</button>
@@ -1109,7 +1109,22 @@ Privay Check box
     <button id="closeFormButton">X</button>
 
     <form id="uploadForm">
-      <h2>Submit a half baked idea...</h2>
+      <button 
+      type="button"
+      style="
+        background-color: #afeb2f;
+        color: #272D2D;
+        border: none;
+        border-radius: 20px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        margin-right: 1rem;
+        margin-bottom: 2rem;
+        cursor: pointer;"
+      onclick="window.location.href='profile.html';">
+      Log In/ Sign Up
+    </button>
+      <h2>Public Post</h2>
 
       <div>
         <label for="title">Title</label><br />
@@ -1145,7 +1160,7 @@ Privay Check box
             id="privacyCheck" 
             required 
           /> 
-          Unfinished Business is an anonymous public platform. No identifying information is stored unless you choose to disclose it. For now, uploads can only be removed upon request. By submitting, you agree to these terms.
+          Public posts are anonymous and cannot be deleted. To manage your submissions, create an account and upload via your profile page. By confirming you agree to these terms.
         </label>
       </div>
 
@@ -1606,6 +1621,7 @@ function appendProjects(projects) {
     const upvoteBtn = element.querySelector(".upvoteBtn");
     if (upvoteBtn) {
       // Check if the project has already been upvoted
+      const upvotedProjects = JSON.parse(localStorage.getItem('upvotedProjects')) || [];
       if (upvotedProjects.includes(data.id)) {
         upvoteBtn.disabled = true;
         upvoteBtn.classList.add("clicked");
@@ -1672,7 +1688,7 @@ async function handleUpvote(projectId, projectEl) {
     const upvoteBtn = projectEl.querySelector(".upvoteBtn");
     if (upvoteBtn) {
       upvoteBtn.disabled = true;
-      upvoteBtn.classList.add("clicked"); // Add a class to style the button as active
+      upvoteBtn.classList.add("clicked"); 
     }
 
     // Store the upvoted project ID in localStorage
@@ -1689,7 +1705,6 @@ async function handleUpvote(projectId, projectEl) {
 
 // ------------------ DRAG HANDLERS (Scatter Mode) ------------------
 function startDrag(e) {
-  // If grid, ignore drag.
   if (isGridView) return;
   const target = e.target.closest(".project");
   if (!target) return;
