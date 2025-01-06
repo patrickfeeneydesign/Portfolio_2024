@@ -47,14 +47,6 @@
       /* On desktop, we set height/overflow in the media query */
     }
 
-    /* Desktop (≥901px) preserves original "sub-scrolling" columns */
-    @media (min-width: 601px) {
-      .column {
-        height: 90vh;       /* each column is 90% of viewport height */
-        overflow-y: auto;   /* sub-scroll within each column */
-        overflow-x: hidden;
-      }
-    }
 
     /* MOBILE (≤900px) - remove sub-scrolling, let full page scroll */
     @media (max-width: 600px) {
