@@ -47,7 +47,7 @@
       /* On desktop, we set height/overflow in the media query */
     }
 
-    /* Desktop (≥901px) preserves original "sub-scrolling" columns */
+    /* Desktop (≥601px) preserves original "sub-scrolling" columns */
     @media (min-width: 601px) {
       .column {
         height: 90vh;       /* each column is 90% of viewport height */
@@ -56,7 +56,7 @@
       }
     }
 
-    /* MOBILE (≤900px) - remove sub-scrolling, let full page scroll */
+    /* MOBILE (≤600px) - remove sub-scrolling, let full page scroll */
     @media (max-width: 600px) {
       /* Let HTML/BODY scroll normally on mobile */
       html, body {
@@ -75,14 +75,13 @@
         overflow: visible;       /* no sub-scroll in each column */
       }
         /* Adjust back button */
-  #backButton {
-    font-size: 6.6vw !important;
-    padding: 2.6vw !important;
-    background-color: #b099fa !important;
-  }
-
+    #backButton {
+      font-size: 6.6vw !important;
+      padding: 2.6vw !important;
+      background-color: #b099fa !important;
     }
 
+    }
 
     /*******************************************
      * BACK BUTTON (Top-left corner)
@@ -469,6 +468,66 @@
     .deleteBtn:hover {
       background: #afeb2f;
       color: #272D2D;
+    }
+
+    /* NEW STYLES FOR RESPONSIVENESS */
+
+    /* Hide the mobile delete button on desktop */
+    @media (min-width: 601px) {
+      .mobileDeleteBtn {
+        display: none;
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 600px) {
+      /* Disable hover effects on mobile */
+      .project:hover {
+        transform: none;
+      }
+      
+      .project {
+        min-height: 60vw;
+      }
+      .has-image:hover .image-overlay {
+        opacity: 1;
+      }
+      
+      .has-image:hover .project-info {
+        opacity: 1;
+      }
+
+      /* Always show project-info on mobile */
+      .project-info {
+        opacity: 1;
+        transition: none;
+      }
+
+      /* Hide the desktop delete button on mobile */
+      .desktopDeleteBtn {
+        display: none;
+      }
+
+      /* Style the mobile delete button */
+      .mobileDeleteBtn {
+        display: block;
+        width: auto; /* Match the column width */
+        margin: 0 auto 6vw auto; /* Center and add bottom margin */
+        background: #e74c3c; /* Different background for mobile */
+        color: #F6F8FF;
+        border: none;
+        border-radius: 20px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .mobileDeleteBtn:hover {
+        background: #c0392b; /* Darker red on hover */
+        color: #F6F8FF;
+      }
     }
   </style>
 </head>
@@ -975,9 +1034,12 @@
                   ? `<p class="tags"><strong>Tags:</strong> ${proj.tags.map(t => escapeHTML(t)).join(', ')}</p>`
                   : ''
               }
-              <button class="deleteBtn" onclick="deleteProject('${proj.id}')">Delete</button>
+              <!-- Desktop Delete Button -->
+              <button class="deleteBtn desktopDeleteBtn" onclick="deleteProject('${proj.id}')">Delete</button>
             </div>
           </div>
+          <!-- Mobile Delete Button -->
+          <button class="deleteBtn mobileDeleteBtn" onclick="deleteProject('${proj.id}')">Delete</button>
         `;
       });
       myUploadsList.innerHTML = html;
