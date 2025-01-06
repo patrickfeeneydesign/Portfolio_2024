@@ -48,7 +48,7 @@
     }
 
     /* Desktop (≥901px) preserves original "sub-scrolling" columns */
-    @media (min-width: 901px) {
+    @media (min-width: 601px) {
       .column {
         height: 90vh;       /* each column is 90% of viewport height */
         overflow-y: auto;   /* sub-scroll within each column */
@@ -57,7 +57,7 @@
     }
 
     /* MOBILE (≤900px) - remove sub-scrolling, let full page scroll */
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
       /* Let HTML/BODY scroll normally on mobile */
       html, body {
         height: auto;        /* auto-height so page grows with content */
