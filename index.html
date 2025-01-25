@@ -268,12 +268,42 @@
         .draggable {
             position: absolute;
             cursor: grab;
+            text-decoration:none;
             user-select: none;
             max-width: 30vw;
             width: 100%; 
             height: auto;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: #161717;
         }
+.draggable a {
+    text-decoration:none;
+
+}
+        .draggable h1 {
+
+            opacity: 0;
+            height: 0;
+            text-decoration:none;
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            padding: 0;
+            margin: 0;
+            transition:all ease-in-out 0.1s;
+        }
+
+        .draggable:hover h1 {
+            opacity: 1;
+            height: fit-content;
+            text-decoration:none;
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            padding: 1vw;
+            margin: 0;
+        }
+
 
         .draggable img.low-res {
             width: 100%;
@@ -558,7 +588,7 @@
         <div id="instructionOverlay">
             <div class="instruction-content">
                 <h2>How to Navigate</h2>
-                <p><span>Drag</span> an image to move it around,<br> or <span>double click</span> to learn more. <br> To see more projects, click<br> the <span>next</span> button.</p>
+                <p><span>Drag</span> an image to move it around,<br> or <span>double click</span> to learn more. <br> To see more projects, click<br> the <span>next</span> button on the left.</p>
                 <button class="close-overlay-btn" id="closeInstructionBtn">Got it!</button>
             </div>
         </div>
@@ -574,10 +604,11 @@
 
                 <!-- Draggable Items with Low-res and High-res Images -->
 
-                <div class="draggable" style="  border-radius: 20px;" >
-                    <a href="un.html" style="  border-radius: 20px;" >
-                        <img style="  border-radius: 20px;" src="img/low/unfinished.jpeg" alt="Low-Res Image" class="low-res loading">
-                        <img style="  border-radius: 20px;" src="img/unfinished.webp" alt="High-Res Image" class="high-res fade-in">
+                <div class="draggable">
+                    <a href="un.html" >
+                        <img  src="img/low/unfinished.jpeg" alt="Low-Res Image" class="low-res loading">
+                        <img  src="img/unfinished.webp" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >Unfinished Business</h1>
                     </a>
                 </div>
                 
@@ -585,6 +616,7 @@
                     <a href="spec.html">
                         <img src="img/low/newspaper1.jpg" alt="Low-Res Image" class="low-res loading">
                         <img src="img/newspaper1.webp" alt="High-Res Image" class="high-res fade-in">
+                        <h1>The Daily Metaverse</h1>
                     </a>
                 </div>
                 
@@ -592,13 +624,15 @@
                     <a href="path.html">
                         <img src="img/low/Pathfinder_Background_V1.png" alt="Low-Res Image" class="low-res loading">
                         <img src="img/Pathfinder_Background_V1.png" alt="High-Res Image" class="high-res fade-in">
+                        <h1>Pathfinder</h1>
                     </a>
                 </div>
                 
-                <div class="draggable" id="mobilehide" style="border-radius: 20px; max-width: 27vw;">
-                    <a href="card.html" style="border-radius: 20px;">
-                        <img style="border-radius: 20px;" src="img/low/Toolkits_02.png" alt="Low-Res Image" class="low-res loading">
-                        <img style="border-radius: 20px;" src="img/Toolkits_02.gif" alt="High-Res Image" class="high-res fade-in">
+                <div class="draggable" id="mobilehide" style=" max-width: 27vw;">
+                    <a href="card.html" >
+                        <img  src="img/low/Toolkits_02.png" alt="Low-Res Image" class="low-res loading">
+                        <img  src="img/Toolkits_02.gif" alt="High-Res Image" class="high-res fade-in">
+                        <h1>Cast of Characters</h1>
                     </a>
                 </div>
                 
@@ -607,13 +641,15 @@
                     <a href="trust.html">
                         <img src="img/low/Slide10.jpeg" alt="Low-Res Image" class="low-res loading">
                         <img src="img/Slide10.webp" alt="High-Res Image" class="high-res fade-in">
+                        <h1>Trust Fall</h1>
                     </a>
                 </div>
 
-                <div class="draggable" style="border-radius: 20px;">
-                    <a href="tech.html" style="border-radius: 20px;">
-                        <img style="  border-radius: 20px;" src="img/low/techad.jpg" alt="Low-Res Image" class="low-res loading">
-                        <img style="  border-radius: 20px;" src="img/techadoption.gif" alt="High-Res Image" class="high-res fade-in">
+                <div class="draggable">
+                    <a href="tech.html">
+                        <img src="img/low/techad.jpg" alt="Low-Res Image" class="low-res loading">
+                        <img src="img/techadoption.gif" alt="High-Res Image" class="high-res fade-in">
+                        <h1>Tech Adoption</h1>
                     </a>
                 </div>
 
@@ -634,6 +670,7 @@
                     <a href="gaze23.html">
                         <img src="img/low/GAZE_01.png" alt="Low-Res Image" class="low-res loading">
                         <img src="img/GAZE_01.webp" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >GAZE Film Fest 2023</h1>
                     </a>
                 </div>
 
@@ -641,6 +678,7 @@
                     <a href="gaze24.html">
                         <img src="img/low/gazefilm.jpg" alt="Low-Res Image" class="low-res loading">
                         <img src="img/gazefilm.gif" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >GAZE Film Fest 2024</h1>
                     </a>
                 </div>
 
@@ -648,6 +686,7 @@
                     <a href="pol.html">
                         <img src="img/low/BLUE-jpeg-4.jpg" alt="Low-Res Image" class="low-res loading">
                         <img src="img/BLUE-jpeg-4.webp" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >Political Material</h1>
                     </a>
                 </div>
 
@@ -655,6 +694,7 @@
                     <a href="newtennant.html">
                         <img src="img/low/catu02.png" alt="Low-Res Image" class="low-res loading">
                         <img src="img/catu02.png" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >The New Tenant</h1>
                     </a>
                 </div>
 
@@ -662,6 +702,7 @@
                     <a href="for.html">
                         <img src="img/low/foresightcreative.png" alt="Low-Res Image" class="low-res loading">
                         <img src="img/low/foresightcreative.png" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >Creative Foresight</h1>
                     </a>
                 </div>
 
@@ -669,6 +710,7 @@
                     <a href="flag.html">
                         <img src="img/low/Final-render-New-Flag-2draft-2.png" alt="Low-Res Image" class="low-res loading">
                         <img src="img/Final-render-New-Flag-2draft-2.png" alt="High-Res Image" class="high-res fade-in">
+                        <h1 >Just To Flag</h1>
                     </a>
                 </div>
             </div>
