@@ -74,11 +74,13 @@
         }
 
         .band {
-            width: 100vw;
-            height: 3vw;
+            width: 100%;
+            height: fit-content;
             background-color: rgb(18, 18, 18);
             margin: 0;
-            padding: 5vh 15vh 17vh 25vh;
+            padding: 5vh 30vh 5vh 25vh;
+            word-wrap: break-word; /* Breaks long words if needed */
+  overflow-wrap: break-word; /* Ensures text wraps in modern browsers */
         }
 
         .band h3 {
@@ -91,7 +93,7 @@
 
         .band h1 {
             font-weight: 500;
-            font-size: 6vh;
+            font-size: 5vh;
             padding: 0;
             margin: 0;
             color: #eeeeee;
@@ -101,7 +103,7 @@
             font-weight: 400;
             padding: 1vh 1.6vh 1vh 2vh;
             margin: 2vh 0 0 0;
-            width: 3.6vw;
+            width: fit-content;
             border-radius: 40px;
             font-size: 2vh;
         }
@@ -276,6 +278,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             background-color: #161717;
         }
+        
 .draggable a {
     text-decoration:none;
 
@@ -726,11 +729,7 @@
         <h1>AI Advertising & The Simulation of Diversity | Opinion</h1>
         <a href="aidiversity.html" ><h2 style="color:#885ab9;  border: 1px solid #885ab9;">Explore</h2></a>
     </div>
-    <div class="band">
-        <h1>Unfinished Business | A Home for Half-Baked Ideas</h1>
-        <a href="unfinished.html" ><h2 style="color:#885ab9;  border: 1px solid #885ab9;">Explore</h2></a>
-    </div>
-    <div class="band" style=" height: 2vh !important; padding: 2vw !important; background-color: #171717;">
+    <div class="band" style=" height: 2vh !important; padding: 2vw !important;">
     </div>
 <!-- 
     <div class="band" >
