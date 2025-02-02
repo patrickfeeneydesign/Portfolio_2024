@@ -22,12 +22,17 @@
             position: fixed;
             text-align: left;
             border-radius: 0 0 40px 40px;
-            background-color: rgb(180, 114, 255);
+            background-color: #afeb2f;
             right: -9vw;
             top: -0.1vw;
             margin: 0;
             padding: 0;
             z-index: 1000;
+        }
+
+        header:hover {
+            background-color: #acacac;
+
         }
 
         header.firstpage {
@@ -66,7 +71,7 @@
             left: 0;
             font-size: 1.2vw;
             font-weight: 700;
-            background-color:  rgb(180, 114, 255);
+            background-color:  #afeb2f;
             color: rgb(20, 20, 20);
             border: none;
             cursor: pointer;
@@ -134,24 +139,63 @@
             font-weight: 600;
         }
 
+
+
+
+
+
+
         .splash {
            background-color: rgb(18, 18, 18);
-           padding: 8vw;
-           color: #eeeeee;
+           padding: 6vw 7vw 7vw 8vw;
+           color: #d9d9d9;
         }
 
         .splash h1 {
-           font-weight: 500;
-           font-size: 3.8vw;
-           line-height: 5vw;
+           font-weight: 100;
+           font-size: 3vw;
+           letter-spacing: 1.1px;
+           line-height: 4.7vw;
+           color: #acacac;
         }
 
         .splash p {
            font-weight: 300;
            font-size: 2vw;
+           letter-spacing: 1.2px;
            line-height: 0;
-           color:  rgb(180, 114, 255);
         }
+
+        .splash a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #eeeeee;
+        }
+
+
+.splash #gaze:hover {
+    color: #1f90d7;
+}
+
+.splash #gaze2:hover {
+    color: #d7d71f;
+}
+
+.splash #trust:hover {
+    color: #c258ff;
+}
+
+.splash #tech:hover {
+    color: #ffb158;
+}
+
+.splash #un:hover {
+    color: #afeb2f;
+}
+
+.splash #me:hover {
+    color: #ff5860;
+}
 
         .bodyimg {
             display: flex; 
@@ -248,7 +292,7 @@
         }
 
         .info-text:hover {
-            background-color: #a35cf8;
+            background-color: #afeb2f;
             color: #161717;
         }
 
@@ -258,7 +302,7 @@
 
         .info-text span {
             font-weight: 500;
-            color: rgb(180, 114, 255);
+            color: #afeb2f;
             margin: 0;
             padding-right: 10px;
             font-size: 1.4rem; /* slightly larger for icon look */
@@ -362,7 +406,7 @@
         }
 
         .toggle-button2:hover, .toggle-button1:hover {
-            background-color: rgb(180, 114, 255);
+            background-color: #afeb2f;
             color: rgb(12, 12, 12);
         }
 
@@ -528,7 +572,7 @@
             max-width: 80%;
             background: #1f1f1f;
             color: #eee;
-            padding: 4rem;
+            padding: 3.6rem 3.4rem;
             text-align: center;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             border-radius: 20px;
@@ -549,14 +593,14 @@
 
         .instruction-content span {
             font-weight: 500;
-            color: rgb(180, 114, 255);
+            color: #afeb2f;
         }
 
         .close-overlay-btn {
             font-size: 1rem;
             padding: 0.7em 1.2em;
             margin-top: 0.5rem;
-            background: #b472ff;
+            background: #afeb2f;
             color: #111;
             border: none;
             border-radius: 20px;
@@ -565,24 +609,26 @@
         }
 
         .close-overlay-btn:hover {
-            background: #a35cf8;
+            background: #acacac;
         }
 
     </style>
 </head>
 <body>
-    <button id="backButton" class="desktophide">&#x1F47E;</button>
-    <button id="backButton" onclick="location.href='game.html';" class="mobilehide"></button>
 
     <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
             <img src="img/logo.png" alt="Logo">
         </a>
     </header>
+    <button id="backButton"></button>
 
     <article class="splash">
-        <p>Patrick Feeney</p>
-        <h1>I'm an integrated designer working across branding, technology ethics, science communication, and interaction design.
+        <h1>Hi there, I'm <a id="me" href="resume.pdf" target="_blank">(Patrick)</a>! I'm an <a id="gaze2" href="gaze23.html">(integrated designer)</a> 
+            <br>
+            working across <a id="gaze" href="gaze24.html">(branding)</a>, <a id="trust" href="trust.html">(technology ethics)</a>, 
+            <br>
+            <a id="tech" href="tech.html">(science communication)</a>, and <a id="un" href="un.html">(interaction design)</a>.
         </h1>
     </article>
 
@@ -722,12 +768,12 @@
 
     <div class="band">
         <h1>Playing The 'Port | Interactive Portfolio</h1>
-        <a href="game.html" ><h2 style="color:#885ab9;  border: 1px solid #885ab9;">Explore</h2></a>
+        <a href="game.html" ><h2 style="color:#afeb2f;  border: 1px solid #afeb2f;">Explore</h2></a>
     </div>
 
     <div class="band" style="background-color: #171717;">
         <h1>AI Advertising & The Simulation of Diversity | Opinion</h1>
-        <a href="aidiversity.html" ><h2 style="color:#885ab9;  border: 1px solid #885ab9;">Explore</h2></a>
+        <a href="aidiversity.html" ><h2 style="color:#afeb2f;  border: 1px solid #afeb2f;">Explore</h2></a>
     </div>
     <div class="band" style=" height: 2vh !important; padding: 2vw !important;">
     </div>
