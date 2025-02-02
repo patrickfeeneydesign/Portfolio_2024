@@ -145,6 +145,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         .splash {
            background-color: rgb(18, 18, 18);
            padding: 6vw 7vw 7vw 8vw;
@@ -173,29 +187,69 @@
         }
 
 
-.splash #gaze:hover {
+#gaze .fill {
     color: #1f90d7;
 }
 
-.splash #gaze2:hover {
+#gaze2 .fill {
     color: #d7d71f;
 }
 
-.splash #trust:hover {
+#trust .fill {
     color: #c258ff;
 }
 
-.splash #tech:hover {
+#tech .fill {
     color: #ffb158;
 }
 
-.splash #un:hover {
+#un .fill {
     color: #afeb2f;
 }
 
-.splash #me:hover {
+#me .fill {
     color: #ff5860;
 }
+
+.hover-text {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* The base text that is visible initially */
+    .hover-text .base {
+      color: white; /* Original text color */
+    }
+
+    /* The overlay text that will be revealed (fill color) */
+    .hover-text .fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* Initially hide it with a tiny circle clip-path */
+      clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+      transition: clip-path 0.5s ease;
+      pointer-events: none; /* Let mouse events pass through */
+    }
+
+    /* On hover, expand the clip-path so the entire text is revealed */
+    .hover-text:hover .fill {
+      clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         .bodyimg {
             display: flex; 
@@ -612,6 +666,8 @@
             background: #acacac;
         }
 
+
+
     </style>
 </head>
 <body>
@@ -624,11 +680,47 @@
     <button id="backButton"></button>
 
     <article class="splash">
-        <h1>Hi there, I'm <a id="me" href="resume.pdf" target="_blank">(Patrick)</a>! I'm an <a id="gaze2" href="gaze23.html">(integrated designer)</a> 
+        <h1>Hi there, I'm
+            
+            <a id="me" href="resume.pdf" target="_blank">
+                <div class="hover-text">
+                    <span class="base">(Patrick)</span>
+                    <span class="fill">(Patrick)</span>
+                </div>
+            </a>— I'm an 
+            <a id="gaze2" href="gaze23.html">
+                <div class="hover-text">
+                    <span class="base">(integrated designer)</span>
+                    <span class="fill">(integrated designer)</span>
+                </div>
+            </a> 
             <br>
-            working across <a id="gaze" href="gaze24.html">(branding)</a>, <a id="trust" href="trust.html">(technology ethics)</a>, 
+            working across 
+            <a id="gaze" href="gaze24.html">
+                <div class="hover-text">
+                    <span class="base">(branding)</span>
+                    <span class="fill">(branding)</span>
+                </div>
+            </a>, 
+            
+            <a id="trust" href="trust.html">
+                <div class="hover-text">
+                    <span class="base">(technology ethics)</span>
+                    <span class="fill">(technology ethics)</span>
+                </div>
+            </a>, 
             <br>
-            <a id="tech" href="tech.html">(science communication)</a>, and <a id="un" href="un.html">(interaction design)</a>.
+            <a id="tech" href="tech.html">
+                <div class="hover-text">
+                    <span class="base">(science communication)</span>
+                    <span class="fill">(science communication)</span>
+                </div>
+            </a>, and <a id="un" href="un.html">
+                <div class="hover-text">
+                    <span class="base">(interaction design)</span>
+                    <span class="fill">(interaction design)</span>
+                </div>
+            </a>.
         </h1>
     </article>
 
@@ -1160,6 +1252,18 @@
             });
           });
         });
+
+
+         // Update the clip-path center variables based on mouse position
+    const hoverText = document.querySelector('.hover-text');
+
+hoverText.addEventListener('mousemove', (e) => {
+  const rect = hoverText.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100 + '%';
+  const y = ((e.clientY - rect.top) / rect.height) * 100 + '%';
+  hoverText.style.setProperty('--x', x);
+  hoverText.style.setProperty('--y', y);
+});
       </script>
       
 </body>
