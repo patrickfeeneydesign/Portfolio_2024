@@ -167,9 +167,9 @@
 
         .splash h1 {
            font-weight: 100;
-           font-size: 3vw;
+           font-size: 4vw;
            letter-spacing: 1.1px;
-           line-height: 4.7vw;
+           line-height: 5.7vw;
            color: #acacac;
         }
 
@@ -210,7 +210,7 @@
       left: 0;
       /* Initially hide it with a tiny circle clip-path */
       clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
-      transition: clip-path 0.5s ease;
+      transition: clip-path 0.7s ease;
       pointer-events: none; /* Let mouse events pass through */
     }
 
@@ -361,7 +361,7 @@
             color: #afeb2f;
             margin: 0;
             padding-right: 10px;
-            font-size: 1.4rem; /* slightly larger for icon look */
+            font-size: 1.4rem; 
             line-height: 1;
             display: inline-block;
         }
@@ -684,7 +684,7 @@
     <article class="splash">
         <h1>Hi there, I'm
             
-            <a id="me" href="resume.pdf" target="_blank">
+            <a id="me" href="https://www.linkedin.com/in/patrick-feeney-89920a258" target="_blank">
                 <div class="hover-text">
                     <span class="base">(Patrick)</span>
                     <span class="fill">(Patrick)</span>
@@ -696,28 +696,31 @@
                     <span class="fill">(integrated designer)</span>
                 </div>
             </a> 
-            <br>
             working across 
             <a id="gaze" href="gaze24.html">
                 <div class="hover-text">
                     <span class="base">(branding)</span>
                     <span class="fill">(branding)</span>
                 </div>
-            </a>, 
+            </a> and technology
             
             <a id="trust" href="trust.html">
                 <div class="hover-text">
-                    <span class="base">(technology ethics)</span>
-                    <span class="fill">(technology ethics)</span>
+                    <span class="base">(ethics)</span>
+                    <span class="fill">(ethics)</span>
                 </div>
-            </a>, 
+            </a>.
             <br>
+            I also specialise in
             <a id="tech" href="tech.html">
                 <div class="hover-text">
-                    <span class="base">(science communication)</span>
-                    <span class="fill">(science communication)</span>
+                    <span class="base">(science)</span>
+                    <span class="fill">(science)</span>
                 </div>
-            </a>, and <a id="un" href="un.html">
+            </a>communication , 
+            <br>
+            and 
+            <a id="un" href="un.html">
                 <div class="hover-text">
                     <span class="base">(interaction design)</span>
                     <span class="fill">(interaction design)</span>
@@ -919,7 +922,6 @@
           const placedImagesData = { "container1": [], "container2": [] };
           let savedPositions = { "container1": [], "container2": [] };
       
-          // --- NEW CODE: 1-Day Timer Check ---
           // Get stored data from localStorage
           const overlayShown = localStorage.getItem("overlayShown") === "true";
           const overlayClosedAt = localStorage.getItem("overlayClosedAt");
@@ -937,7 +939,6 @@
           } else {
             document.getElementById('instructionOverlay').style.display = 'none';
           }
-          // --- END NEW CODE ---
       
           function setupDraggable(containerId) {
             const container = document.getElementById(containerId);
@@ -961,7 +962,7 @@
               return;
             }
       
-            // Otherwise, randomize positions now and save them
+            // Otherwise, randomize positions now and save 
             placedImagesData[containerId] = [];
       
             draggables.forEach((elem, index) => {
@@ -1007,7 +1008,7 @@
                 }
       
                 if (!positioned) {
-                  // If we ran out of attempts, just place it in the middle
+                  // If ran out of attempts, place object in the middle
                   randomX = Math.floor(maxX / 2);
                   randomY = Math.floor(maxY / 2);
                 }
@@ -1015,7 +1016,7 @@
                 elem.style.left = `${randomX}px`;
                 elem.style.top = `${randomY}px`;
       
-                // Create a "forbidden zone" so that other items don't overlap the center
+                // "forbidden zone" so that other items don't overlap the center
                 const forbiddenZoneWidth = elemWidth * 0.22; 
                 const forbiddenZoneHeight = elemHeight * 0.22; 
                 const fzX1 = randomX + (elemWidth - forbiddenZoneWidth) / 2;
@@ -1256,16 +1257,24 @@
         });
 
 
-         // Update the clip-path center variables based on mouse position
-    const hoverText = document.querySelector('.hover-text');
+        document.querySelectorAll('.hover-text').forEach((hoverText) => {
+  hoverText.addEventListener('mousemove', (e) => {
+    const rect = hoverText.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100 + '%';
+    const y = ((e.clientY - rect.top) / rect.height) * 100 + '%';
+    hoverText.style.setProperty('--x', x);
+    hoverText.style.setProperty('--y', y);
+  });
 
-hoverText.addEventListener('mousemove', (e) => {
-  const rect = hoverText.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100 + '%';
-  const y = ((e.clientY - rect.top) / rect.height) * 100 + '%';
-  hoverText.style.setProperty('--x', x);
-  hoverText.style.setProperty('--y', y);
+  hoverText.addEventListener('mouseenter', () => {
+    hoverText.classList.add('active');
+  });
+
+  hoverText.addEventListener('mouseleave', () => {
+    hoverText.classList.remove('active');
+  });
 });
+
       </script>
       
 </body>
