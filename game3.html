@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Playing The 'Port - Level 3</title>
+<title>Playing The 'Port - Level 1</title>
 <style>
 html, body {
   margin: 0; padding: 0;
@@ -94,65 +94,59 @@ header img {
 }
 
 #outline1.correct {
-  border: 2px solid #61a8ffdf;
-  background-color: #61a8ff3b;
+  border: 2px solid #e5e5e5df;
+  background-color: #e5e5e581;
   border-radius: 30px;
   color: #b4b4b400;
-
 }
 
 #outline1 {
-    border: 1px dashed #61a8ffdf;
+    border: 1px dashed #e5e5e5df;
 }
 
 #outline2.correct {
-    border: 2px solid #bd97ffdf;
-    background-color: #bd97ff35;
+    border: 2px solid #61a8ffdf;
+    background-color: #61a8ff84;
     border-radius: 30px;
     color: #b4b4b400;
-
 }
 
 #outline2 {
-    border: 1px dashed #bd97ffdf;
-}
-
-#outline3.correct {
-    border: 2px solid #f461ffdf;
-    background-color: #f461ff3c;
-    border-radius: 30px;
-    color: #b4b4b400;
-
-}
-
-#outline3 {
-    border: 1px dashed #f461ffdf;
-}
-
-#outline4.correct {
-    border: 2px solid #61a8ffdf;
-    background-color: #61a8ff35;
-    border-radius: 30px;
-    color: #b4b4b400;
-
-}
-
-#outline4 {
     border: 1px dashed #61a8ffdf;
 }
 
-#outline5.correct {
-    border: 2px solid #e3e3e3df;
-    background-color: #e3e3e32a;
+#outline3.correct {
+    border: 2px solid #eaff65df;
+    background-color: #eaff6583;
     border-radius: 30px;
     color: #b4b4b400;
+}
 
+#outline3 {
+    border: 1px dashed #eaff65df;
+}
+
+#outline4.correct {
+    border: 2px solid #8d26a9df;
+    background-color: #8d26a981;
+    border-radius: 30px;
+    color: #b4b4b400;
+}
+
+#outline4 {
+    border: 1px dashed #8d26a9df;
+}
+
+#outline5.correct {
+    border: 2px solid #bd97ffdf;
+    background-color: #bd97ff7e;
+    border-radius: 30px;
+    color: #b4b4b400;
 }
 
 #outline5 {
-    border: 1px dashed #e3e3e3df;
+    border: 1px dashed #bd97ffdf;
 }
-
 /* Scoreboard and Timer remain hidden */
 #scoreboard {
   display: none;
@@ -193,7 +187,7 @@ header img {
 .instruction-content {
   background: #1f1f1f;
   color: #eee;
-  padding: 2rem;
+  padding: 4rem 0rem;
   max-width: 600px;
   text-align: center;
   border-radius: 20px;
@@ -201,14 +195,18 @@ header img {
 .instruction-content h2 {
   margin-top: 0;
 }
+.instruction-content p {
+  font-size:large;
+}
 
 .instruction-content button {
   margin-top: 1em;
   padding: 0.7em 1.2em;
   background: #5266ff;
   color: #111;
+  font-size: 1.3rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 70px;
   cursor: pointer;
   font-weight: 600;
 }
@@ -216,7 +214,13 @@ header img {
   background: #8b99ff;
 }
 
+.instruction-content img {
+  width: 70%;
+  margin-bottom: 0.4vw;
+}
+
 #gameInstructionOverlay { display: flex; }
+
 
 /* Reduce sizes on smaller screens */
 @media (max-width: 600px) {
@@ -268,7 +272,8 @@ header img {
 <div id="gameInstructionOverlay">
   <div class="instruction-content">
     <h2>Level 3</h2>
-    <p style="line-height: 1.5vw;"><span style="color:#5266ff; font-weight: 800;">Drag</span> each image into its<br> matching <span style="color:#5266ff; font-weight: 800;">description</span> to win.</p>
+    <img src="img/playinglogo.png">
+    <p style="line-height: 1.5vw;"><span style="color:#5266ff; font-weight: 800;">Drag</span> each image into its matching <span style="color:#5266ff; font-weight: 800;">description</span> to win.</p>
     <button id="closeGameInstructionBtn">Got it!</button>
   </div>
 </div>
@@ -628,7 +633,7 @@ header img {
       successOverlay.style.display = 'flex';
   
       successOverlay.innerHTML = `
-        <div class="instruction-content">
+        <div class="instruction-content" style="padding: 4rem;">
           <h2>Congratulations!</h2>
           <p>You completed the game.</p>
           <button id="replayBtn">Replay</button>

@@ -187,7 +187,7 @@ header img {
 .instruction-content {
   background: #1f1f1f;
   color: #eee;
-  padding: 2rem;
+  padding: 4rem 0rem;
   max-width: 600px;
   text-align: center;
   border-radius: 20px;
@@ -195,14 +195,18 @@ header img {
 .instruction-content h2 {
   margin-top: 0;
 }
+.instruction-content p {
+  font-size:large;
+}
 
 .instruction-content button {
   margin-top: 1em;
   padding: 0.7em 1.2em;
   background: #5266ff;
   color: #111;
+  font-size: 1.3rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 70px;
   cursor: pointer;
   font-weight: 600;
 }
@@ -210,7 +214,13 @@ header img {
   background: #8b99ff;
 }
 
+.instruction-content img {
+  width: 70%;
+  margin-bottom: 0.4vw;
+}
+
 #gameInstructionOverlay { display: flex; }
+
 
 /* Reduce sizes on smaller screens */
 @media (max-width: 600px) {
@@ -261,8 +271,8 @@ header img {
 
 <div id="gameInstructionOverlay">
   <div class="instruction-content">
-    <h2>Playing the Port | Level 1</h2>
-    <p style="line-height: 1.5vw;">Playing the Port is a <span style="color:#5266ff; font-weight: 800;">riddle-based </span>mini game, <br> based around my favourite creative projects.<br>To win,<span style="color:#5266ff; font-weight: 800;"> drag</span> each image into its<br> matching <span style="color:#5266ff; font-weight: 800;">description</span>.</p>
+    <img src="img/playinglogo.png">
+    <p style="line-height: 1.5vw;">Playing the Port is a <span style="color:#5266ff; font-weight: 800;">riddle-based </span>mini game, based<br> around my favourite creative projects. To win,<span style="color:#5266ff; font-weight: 800;"> drag</span> each<br> image into its matching <span style="color:#5266ff; font-weight: 800;">description</span>.</p>
     <button id="closeGameInstructionBtn">Got it!</button>
   </div>
 </div>
@@ -628,7 +638,7 @@ header img {
       successOverlay.style.display = 'flex';
   
       successOverlay.innerHTML = `
-        <div class="instruction-content">
+        <div class="instruction-content" style="padding: 4rem;">
           <h2>Congratulations!</h2>
           <p>You matched the projects correctly.</p>
           <button id="playAgainBtn">Level 2</button>
