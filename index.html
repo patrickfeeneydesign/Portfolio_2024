@@ -26,7 +26,7 @@
       top: -0.1vw;
       margin: 0;
       padding: 0;
-      z-index: 1000;
+      z-index: 90000 !important;
     }
     header:hover {
       background-color: #acacac;
@@ -40,7 +40,7 @@
       padding-right: 10vw;
       padding-top: 0.8vw;
       padding-bottom: 0.8vw;
-      z-index: 4000;
+      z-index: 90000 !important;
       align-content: center;
     }
     header img {
@@ -123,6 +123,13 @@
     article h2 {
       font-weight: 600;
     }
+
+
+/* This is for the grey text that changes opacity, the logic is in js */
+    .fade-me {
+  transition: opacity 1.3s ease;
+}
+
     .splash {
       background-color: rgb(18, 18, 18);
       padding: 6vw 7vw 7vw 8vw;
@@ -133,7 +140,7 @@
       font-size: 4vw;
       letter-spacing: 1.1px;
       line-height: 5.7vw;
-      color: #acacac;
+      color: #acacac7c;
     }
     .splash p {
       font-weight: 300;
@@ -541,8 +548,12 @@
     </a>
   </header>
   <button id="backButton"></button>
+  
+  
+  
   <article class="splash">
-    <h1>Hi there, I'm
+    <h1>
+      <span class="fade-me">Hi there, I'm </span>
       <a id="me" href="https://www.linkedin.com/in/patrick-feeney-89920a258" target="_blank">
         <div class="hover-text">
           <span class="base">(Patrick)</span>
@@ -550,9 +561,8 @@
         </div>
         <img src="img/Silver-Touch--4.jpg" />
       </a>
-      — 
-      <br class="mobilehide">
-      An integrated
+      <span class="fade-me">— </span>
+      <span class="fade-me"><br class="mobilehide">An integrated </span>
       <a id="gaze2" href="game.html">
         <div class="hover-text">
           <span class="base">(designer)</span>
@@ -560,8 +570,7 @@
         </div>
         <img src="img/playing.webp" />
       </a>
-      working across 
-      <br class="mobilehide">
+      <span class="fade-me"> working across <br class="mobilehide"> </span>
       <a id="gaze" href="gaze24.html">
         <div class="hover-text">
           <span class="base">(branding)</span>
@@ -569,34 +578,39 @@
         </div>
         <img src="img/gaze large format.png" />
       </a> 
-      and technology
+      <span class="fade-me"> and technology </span>
       <a id="trust" href="trust.html">
         <div class="hover-text">
           <span class="base">(ethics)</span>
           <span class="fill">(ethics)</span>
         </div>
         <img src="img/Slide8.jpeg" />
-      </a>, where
-      <br class="mobilehide">
-      I specialise in
+      </a>
+      <span class="fade-me">, where <br class="mobilehide"> I specialise in </span>
       <a id="tech" href="tech.html">
         <div class="hover-text">
           <span class="base">(science)</span>
           <span class="fill">(science)</span>
         </div>
         <img src="img/techad.png" />
-      </a>communication , 
-      <br class="mobilehide">
-      and 
+      </a>
+      <span class="fade-me"> communication , <br class="mobilehide"> and </span>
       <a id="un" href="un.html">
         <div class="hover-text">
           <span class="base">(interaction)</span>
           <span class="fill">(interaction)</span>
         </div>
         <img src="img/unfinished.webp" />
-      </a>design .
+      </a>
+      <span class="fade-me"> design .</span>
     </h1>
   </article>
+  
+ 
+ 
+ 
+ 
+ 
   <div class="interactive-wrapper">
     <!-- Instruction Overlay -->
     <div id="instructionOverlay">
@@ -1071,6 +1085,28 @@
         hoverText.classList.remove('active');
       });
     });
+
+
+        // Animating the text on the landing page
+
+        window.addEventListener('scroll', function() {
+  // How far the page has scrolled
+  const scrollY = window.scrollY || document.documentElement.scrollTop;
+  
+  // Example: fade from 1 to 0.2 between 0 and 300px of scrolling
+  let newOpacity = 1 - (scrollY / 300);
+  
+  // Clamp so it never goes below 0.2
+  if (newOpacity < 0.3) {
+    newOpacity = 0.3;
+  }
+  
+  // Apply to all .fade-me spans
+  document.querySelectorAll('.fade-me').forEach(span => {
+    span.style.opacity = newOpacity;
+  });
+});
+
   </script>
 </body>
 </html>
