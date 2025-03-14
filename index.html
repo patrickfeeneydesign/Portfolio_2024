@@ -1158,8 +1158,8 @@
       window.addEventListener('scroll', function() {
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         let newOpacity = 1 - (scrollY / 300);
-        if (newOpacity < 0.3) {
-          newOpacity = 0.3;
+        if (newOpacity < 0.6) {
+          newOpacity = 0.6;
         }
         document.querySelectorAll('.fade-me').forEach(span => {
           span.style.opacity = newOpacity;
