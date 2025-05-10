@@ -245,7 +245,7 @@
     footer.black-background .footer-text {
       color: #161717;
     }
-    #container1, #container2 {
+    #container1, #container2, #container3 {
       width: 100vw;
       height: 160vh;
       position: relative;
@@ -347,8 +347,8 @@
       0% { transform: translateY(0); }
       100% { transform: translateY(0); }
     }
-    .toggle-button2, .toggle-button1 {
-      position: absolute;
+    .toggle-next, .toggle-back {
+      position: sticky;
       top: 0;
       left: 0;
       background-color: rgb(234, 234, 234);
@@ -362,7 +362,7 @@
       z-index: 10000 !important;
       transition: background-color 0.3s ease;
     }
-    .toggle-button2:hover, .toggle-button1:hover {
+    .toggle-next:hover, .toggle-back:hover {
       background-color: #afeb2f;
       color: rgb(12, 12, 12);
     }
@@ -626,7 +626,7 @@
         <div class="info-text" role="button" tabindex="0">
           <p><span>&#9432;</span> How to Navigate</p>
         </div>
-        <button class="toggle-button1">Next &#x27A1;</button>
+        <button class="toggle-next">Next &#x27A1;</button>
         <!-- Draggable Items with Low-res and High-res Images -->
         <div class="draggable">
           <a href="un.html">
@@ -635,21 +635,22 @@
             <h1>Unfinished Business <span style="opacity: 40%;">| Platform Development</span></h1>
           </a>
         </div>
+
         <div class="draggable">
-          <a href="spec.html">
-            <img src="img/low/newspaper1.jpg" alt="Low-Res Image" class="low-res loading" />
-            <img src="img/newspaper1.webp" alt="High-Res Image" class="high-res fade-in" />
-            <h1>The Daily Metaverse <span style="opacity: 40%;">| Speculative Design</span></h1>
+          <a href="52.html">
+            <img src="img/Main_Header_52Insights_MainChar.gif" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Main_Header_52Insights_MainChar.gif" alt="High-Res Image" class="high-res fade-in" />
+            <h1>52 Insights <span style="opacity: 40%;">| Youth Marketing</span></h1>
           </a>
         </div>
-        <div class="draggable" style="max-width: 27vw;">
+        <div class="draggable" >
           <a href="path.html">
             <img src="img/low/Pathfinder_Background_V1.png" alt="Low-Res Image" class="low-res loading" />
             <img src="img/Pathfinder_Background_V1.png" alt="High-Res Image" class="high-res fade-in" />
             <h1>Pathfinder <span style="opacity: 40%;">| A Brief Worth Breaking</span></h1>
           </a>
         </div>
-        <div class="draggable" id="mobilehide" style="max-width: 27vw;">
+        <div class="draggable" id="mobilehide">
           <a href="card.html">
             <img src="img/Cast Of Characters.png" alt="Low-Res Image" class="low-res loading" />
             <img src="img/Cast Of Characters.png" alt="High-Res Image" class="high-res fade-in" />
@@ -663,13 +664,7 @@
             <h1>Trust Fall <span style="opacity: 40%;">| Interaction Design</span></h1>
           </a>
         </div>
-        <div class="draggable">
-          <a href="tech.html">
-            <img src="img/low/techad.jpg" alt="Low-Res Image" class="low-res loading" />
-            <img src="img/techadoption.gif" alt="High-Res Image" class="high-res fade-in" />
-            <h1>Tech Adoption <span style="opacity: 40%;">| Science Communication</span></h1>
-          </a>
-        </div>
+
       </div>
     </div>
     <div id="no2">
@@ -678,7 +673,8 @@
         <div class="info-text" role="button" tabindex="0">
           <p><span>&#9432;</span> How to Navigate</p>
         </div>
-        <button class="toggle-button2">&#x2B05; Back</button>
+        <button class="toggle-back">&#x2B05; Back</button>
+        <button class="toggle-next">Next &#x27A1;</button>
         <!-- Draggable Items with Low-res and High-res Images -->
         <div class="draggable">
           <a href="gaze23.html">
@@ -687,6 +683,15 @@
             <h1>GAZE Film Fest 2023 <span style="opacity: 40%;">| Brand Identity</span></h1>
           </a>
         </div>
+
+        <div class="draggable">
+          <a href="tech.html">
+            <img src="img/low/techad.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/techadoption.gif" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Tech Adoption <span style="opacity: 40%;">| Science Communication</span></h1>
+          </a>
+        </div>
+
         <div class="draggable">
           <a href="game.html">
             <img src="img/playing.webp" alt="Low-Res Image" class="low-res loading" />
@@ -701,13 +706,7 @@
             <h1>GAZE Film Fest 2024 <span style="opacity: 40%;">| Accessible Ecosystem</span></h1>
           </a>
         </div>
-        <div class="draggable">
-          <a href="pol.html">
-            <img src="img/low/BLUE-jpeg-4.jpg" alt="Low-Res Image" class="low-res loading" />
-            <img src="img/BLUE-jpeg-4.webp" alt="High-Res Image" class="high-res fade-in" />
-            <h1>Political Material <span style="opacity: 40%;">| Material Culture</span></h1>
-          </a>
-        </div>
+
         <div class="draggable">
           <a href="newtennant.html">
             <img src="img/low/catu02.png" alt="Low-Res Image" class="low-res loading" />
@@ -715,13 +714,21 @@
             <h1>The New Tenant <span style="opacity: 40%;">| Activism</span></h1>
           </a>
         </div>
-        <div class="draggable">
-          <a href="for.html">
-            <img src="img/low/foresightcreative.png" alt="Low-Res Image" class="low-res loading" />
-            <img src="img/low/foresightcreative.png" alt="High-Res Image" class="high-res fade-in" />
-            <h1>Creative Foresight <span style="opacity: 40%;">| Speculative Workshop</span></h1>
-          </a>
+
+
+      </div>
+    </div>
+
+    <div id="no3" style="display:none;">
+      <div id="container3">
+        <!-- Info text -->
+        <div class="info-text" role="button" tabindex="0">
+          <p><span>&#9432;</span> How to Navigate</p>
         </div>
+    
+        <!-- BACK button (goes to page-2) -->
+        <button class="toggle-back">&#x2B05; Back</button>
+    
         <div class="draggable">
           <a href="flag.html">
             <img src="img/low/Final-render-New-Flag-2draft-2.png" alt="Low-Res Image" class="low-res loading" />
@@ -729,8 +736,35 @@
             <h1>Just To Flag <span style="opacity: 40%;">| Public Installation</span></h1>
           </a>
         </div>
+
+        <div class="draggable">
+          <a href="pol.html">
+            <img src="img/low/BLUE-jpeg-4.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/BLUE-jpeg-4.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Political Material <span style="opacity: 40%;">| Material Culture</span></h1>
+          </a>
+        </div>
+
+
+        <div class="draggable">
+          <a href="spec.html">
+            <img src="img/low/newspaper1.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/newspaper1.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>The Daily Metaverse <span style="opacity: 40%;">| Speculative Design</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="for.html">
+            <img src="img/low/foresightcreative.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/low/foresightcreative.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Creative Foresight <span style="opacity: 40%;">| Speculative Workshop</span></h1>
+          </a>
+        </div>
+    
       </div>
     </div>
+
   </div>
   <div class="band">
     <h1>Playing The 'Port | Interactive Portfolio</h1>
@@ -763,8 +797,12 @@
       const friction = 0.95;
       let zIndexCounter = 1000;
   
-      // Draggable positions
-      const savedPositions = { container1: [], container2: [] };
+      const savedPositions = {
+  container1: [],
+  container2: [],
+  container3: []   // ← new
+};
+
   
       // Grab references to Next & Back buttons
       const nextBtn = document.querySelector(".toggle-button1");
@@ -1070,68 +1108,51 @@
         highResImages.forEach(img => loadHighResImage(img));
       }
   
-      // ----------------------------------------------------------
-      // 5) PAGE-SWITCHING (Next / Back)
-      // ----------------------------------------------------------
-      nextBtn.addEventListener("click", () => {
-        // Hide #no1, show #no2
-        container1.style.display = "none";
-        container2.style.display = "block";
-  
-        activeContainerId = "container2";
-        setupDraggable("container2");
-  
-        // Recalculate the Back button’s offset for sticky logic
-        backBtn.dataset.originalOffset = backBtn.getBoundingClientRect().top + window.scrollY;
-        handleScroll();  // Immediately check if we should pin
-      });
-  
-      backBtn.addEventListener("click", () => {
-        container2.style.display = "none";
-        container1.style.display = "block";
-  
-        activeContainerId = "container1";
-        setupDraggable("container1");
-  
-        // Recalculate the Next button’s offset for sticky logic
-        nextBtn.dataset.originalOffset = nextBtn.getBoundingClientRect().top + window.scrollY;
-        handleScroll();
-      });
-  
-      // ----------------------------------------------------------
-      // 6) “STICKY” SCROLL LOGIC FOR NEXT & BACK
-      // ----------------------------------------------------------
-      //
-      // Each button has its own offset stored in dataset.originalOffset.
-      // If the user scrolls beyond that offset, we add .fixed-toggle.
-      // If we scroll back up, we remove it.
-      // We’ll do this for whichever container is visible.
-  
-      // Store initial offset for Next button on page load
-      nextBtn.dataset.originalOffset = nextBtn.getBoundingClientRect().top + window.scrollY;
-  
-      function handleScroll() {
-        // If container1 (page1) is active, do sticky logic for Next
-        if (container1.style.display !== "none") {
-          const offset = parseFloat(nextBtn.dataset.originalOffset) || 0;
-          if (window.scrollY >= offset) {
-            nextBtn.classList.add("fixed-toggle");
-          } else {
-            nextBtn.classList.remove("fixed-toggle");
-          }
-        }
-        // If container2 (page2) is active, do sticky logic for Back
-        else {
-          const offset = parseFloat(backBtn.dataset.originalOffset) || 0;
-          if (window.scrollY >= offset) {
-            backBtn.classList.add("fixed-toggle");
-          } else {
-            backBtn.classList.remove("fixed-toggle");
-          }
-        }
-      }
-  
-      window.addEventListener("scroll", handleScroll);
+// ─────────────────────────────────────────────
+// 5)  SIMPLE MULTI-PAGE NAV (now 3 pages)
+// ---------------------------------------------
+const pages      = ["no1", "no2", "no3"];  // wrappers we created
+let   pageIndex  = 0;                       // start on first page
+
+// cache all nav buttons in one go
+document.querySelectorAll(".toggle-button1")   // Next on page-1
+        .forEach(btn => btn.classList.add("toggle-next"));
+document.querySelectorAll(".toggle-button2")   // Back on page-2
+        .forEach(btn => btn.classList.add("toggle-back"));
+// page-3’s buttons are already toggle-next / toggle-back in the HTML
+
+function showPage(i) {
+  // clamp index
+  pageIndex = Math.max(0, Math.min(i, pages.length - 1));
+
+  // show/hide wrappers
+  pages.forEach((id, idx) => {
+    document.getElementById(id).style.display =
+      idx === pageIndex ? "block" : "none";
+  });
+
+  // set active container & (re)initialise draggables
+  activeContainerId = "container" + (pageIndex + 1);
+  setupDraggable(activeContainerId);
+
+  // after switching we recalc sticky offsets for whichever
+  // nav button is currently visible
+  document.querySelectorAll(".toggle-next, .toggle-back").forEach(btn => {
+    btn.dataset.originalOffset = btn.getBoundingClientRect().top + window.scrollY;
+  });
+  handleScroll();
+}
+
+// global click delegation for nav buttons
+document.addEventListener("click", e => {
+  if (e.target.closest(".toggle-next"))  showPage(pageIndex + 1);
+  if (e.target.closest(".toggle-back"))  showPage(pageIndex - 1);
+});
+
+// initialise (page-1 is already visible in the markup)
+showPage(0);
+
+
   
       // ----------------------------------------------------------
       // 7) HOVER TEXT MOUSE-EFFECT
