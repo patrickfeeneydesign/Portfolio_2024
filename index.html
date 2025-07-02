@@ -1,415 +1,1193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5BRPD33P');</script>
-<!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAZE International LGBTQIA Film Festival</title>
-    <meta name="description" content="Join the GAZE INTERNATIONAL LGBTQIA FILM FESTIVAL for a celebration of queer cinema.">
-    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
-    <link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patrick Feeney Design</title>
+  <meta property="og:title" content="Patrick Feeney Design" />
+  <meta property="og:description" content="Integrated Designer" />
+  <meta property="og:image" content="https://patrickfeeneydesign.com/img/Slide10.webp" />
+  <meta property="og:url" content="https://patrickfeeneydesign.com/" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="img/black_circle.png" type="image/png" />
+  <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css" />
+  <link rel="stylesheet" href="https://use.typekit.net/kyu3tgb.css" />
+  <style>
+    html, body {
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+    header {
+      position: fixed;
+      text-align: left;
+      border-radius: 0 0 40px 40px;
+      background-color: #fd86ff;
+      right: -9vw;
+      top: -0.1vw;
+      margin: 0;
+      padding: 0;
+      z-index: 90000 !important;
+    }
+    header:hover {
+      background-color: #acacac;
+    }
+    header.firstpage {
+      position: fixed;
+      text-align: left;
+      margin: 0;
+      height: 3vw;
+      padding-left: 1vw;
+      padding-right: 10vw;
+      padding-top: 0.8vw;
+      padding-bottom: 0.8vw;
+      z-index: 90000 !important;
+      align-content: center;
+    }
+    header img {
+      height: 1vw;
+      width: auto;
+      filter: invert(100%);
+      padding: 0 0 0 1vw;
+      transition: all 0.3s;
+    }
+    body {
+      font-family: tt-commons-pro, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #eeeeee;
+      scrollbar-width: none;
+    }
+    #backButton {
+      position: fixed;
+      padding: 1vw 1.5vw;
+      top: 0;
+      left: 0;
+      font-size: 1.2vw;
+      font-weight: 700;
+      background-color: #fd86ff;
+      color: rgb(20, 20, 20);
+      border: none;
+      cursor: pointer;
+      /* Increase z-index so that backButton is also above dynamic elements */
+      z-index: 10000 !important;
+    }
+    .band {
+      width: 100%;
+      height: fit-content;
+      background-color: rgb(18, 18, 18);
+      margin: 0;
+      padding: 5vh 30vh 5vh 25vh;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .band h3 {
+      font-weight: 200;
+      margin: 0;
+      padding: 0;
+      font-size: 3vh;
+      color: #eeeeee;
+    }
+    .band h1 {
+      font-weight: 500;
+      font-size: 5vh;
+      padding: 0;
+      margin: 0;
+      color: #eeeeee;
+    }
+    .band h2 {
+      font-weight: 400;
+      padding: 1vh 1.6vh 1vh 2vh;
+      margin: 2vh 0 0 0;
+      width: fit-content;
+      border-radius: 40px;
+      font-size: 2vh;
+    }
+    .band h2:hover {
+      border: none !important;
+      color: rgb(26, 26, 26) !important;
+      background-color: rgb(235, 235, 235) !important;
+    }
+    .band a {
+      margin: 0;
+      text-decoration: none;
+      color: #706700;
+    }
+    article {
+      background-color: #eeeeee;
+      padding: 10vw 23vw;
+    }
+    article p {
+      font-size: 1.3vw;
+      line-height: 2.5vw;
+    }
+    article h2 {
+      font-weight: 600;
+    }
 
-    <style>
-/* — Quick-Nav — */
-  .quick-nav{
-    position:fixed; bottom:0; left:0;
-    z-index:9999;
-    color: #ffffff;
-    background:rgba(21, 21, 21, 0);
-    backdrop-filter:blur(4px);
-    padding:1.5rem 2rem;
-    font-family:inherit;
-  }
-  .quick-nav ul{margin:0;padding:0;list-style:none;display:flex;gap:1rem;flex-wrap:wrap;}
-  .quick-nav a{font-size:clamp(.75rem,1vw,1rem);font-weight:500;color:#ffffff;text-decoration:none;transition:color .2s;}
-  .quick-nav a:hover,.quick-nav a:focus{color:#ffaea3;outline:none;}
 
-  /* mobile */
-  @media(max-width:767px){
-    .quick-nav{bottom:0;left:0;padding:1rem 1.2rem;}
-    .quick-nav ul{flex-direction:row;gap: .6rem 1.8rem;align-items:flex-end;}
-    .quick-nav a{font-size:3vw;}
-  }</style>
+/* This is for the grey text that changes opacity, the logic is in js */
+    .fade-me {
+  transition: opacity 1.3s ease;
+}
+
+    .splash {
+      background-color: rgb(18, 18, 18);
+      padding: 6vw 7vw 7vw 8vw;
+      color: #d9d9d9;
+    }
+    .splash h1 {
+      font-weight: 100;
+      font-size: 4vw;
+      letter-spacing: 1.1px;
+      line-height: 5.7vw;
+      color: #acacaca5;
+    }
+    .splash p {
+      font-weight: 300;
+      font-size: 2vw;
+      letter-spacing: 1.2px;
+      line-height: 0;
+    }
+    .splash a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #eeeeee;
+    }
+    .splash a img {
+      height: 0;
+      width: auto;
+      position: absolute;
+      margin: 10vw 0 0 0;
+      opacity: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .splash a:hover img {
+      opacity: 100%;
+      margin: 0;
+      height: 6vw;
+    }
+    #gaze2 .fill, #trust .fill, #un .fill {
+      color: #fd86ff;
+    }
+    .hover-text {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .hover-text .base {
+      color: white;
+    }
+    .hover-text .fill {
+      position: absolute;
+      color: #afeb2f;
+      top: 0;
+      left: 0;
+      clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+      transition: clip-path 0.7s ease;
+      pointer-events: none;
+    }
+    .hover-text:hover .fill {
+      clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+    }
+    .bodyimg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 120vh;
+      overflow: hidden;
+      position: relative;
+      margin: 0;
+      padding: 5vw 0 5vw 0;
+      background-color: rgb(16, 16, 16);
+    }
+    .bodyimg img {
+      height: 70%;
+      width: auto;
+      object-fit: contain;
+      transition: transform 3s ease;
+    }
+    .bodyimg img.zoom-effect {
+      transform: scale(1.1);
+    }
+    footer {
+      background-color: #1d1c1c;
+      height: 3.5vw;
+      width: 32vw;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000 !important;
+      color: #e0e0e0;
+      border-radius: 0px 30px 0 0;
+    }
+    .social-icons {
+      display: flex;
+      gap: 20px;
+    }
+    .social-icons a img {
+      height: 1.2vw;
+      width: auto;
+      padding-left: 1vw;
+      padding-right: 1vw;
+    }
+    .footer-text {
+      color: #e0e0e0;
+      font-size: 0.7vw;
+      text-align: right;
+      padding-left: 2vw;
+      font-weight: 300;
+    }
+    footer.black-background .footer-text {
+      color: #161717;
+    }
+    #container1, #container2, #container3 {
+      width: 100vw;
+      height: 160vh;
+      position: relative;
+      overflow: hidden;
+      background-color: rgb(0, 0, 0);
+    }
+    .info-text {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: rgb(234, 234, 234);
+      background-color: rgb(27, 27, 27);
+      padding: 0 30px 0 30px;
+      font-weight: 400;
+      font-size: 1.2rem;
+      z-index: 10000 !important;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .info-text:hover {
+      background-color: #afeb2f;
+      color: #161717;
+    }
+    .info-text:hover span {
+      color: #161717;
+    }
+    .info-text span {
+      font-weight: 500;
+      color: #afeb2f;
+      margin: 0;
+      padding-right: 10px;
+      font-size: 1.4rem;
+      line-height: 1;
+      display: inline-block;
+    }
+    .draggable {
+      position: absolute;
+      cursor: grab;
+      text-decoration: none;
+      user-select: none;
+      max-width: 30vw;
+      width: 100%;
+      height: auto;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background-color: #161717;
+    }
+    .draggable a {
+      text-decoration: none;
+    }
+    .draggable h1 {
+      opacity: 0;
+      height: 0;
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      padding: 0;
+      margin: 0;
+      transition: all ease-in-out 0.1s;
+    }
+    .draggable:hover h1 {
+      opacity: 1;
+      height: fit-content;
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      padding: 1vw;
+      margin: 0;
+    }
+    .draggable img.low-res {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: filter 0.5s ease;
+    }
+    .draggable img.high-res {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .draggable img.high-res.loaded {
+      opacity: 1;
+    }
+    .draggable.dragging {
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.766);
+      cursor: grabbing;
+    }
+    .draggable.dropped {
+      animation: bounce 2s ease;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(0); }
+    }
+    .toggle-next, .toggle-back {
+      position: sticky;
+      top: 0;
+      left: 0;
+      background-color: rgb(234, 234, 234);
+      color: rgb(19, 19, 19);
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.7rem;
+      font-weight: 400;
+      cursor: pointer;
+      /* Always keep these above dynamic elements */
+      z-index: 10000 !important;
+      transition: background-color 0.3s ease;
+    }
+    .toggle-next:hover, .toggle-back:hover {
+      background-color: #afeb2f;
+      color: rgb(12, 12, 12);
+    }
+    #no2 {
+      display: none;
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .fade-in.loaded {
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      html, body {
+        overflow-x: hidden;
+      }
+      body {
+        font-size: 4vw;
+        line-height: 1.4;
+      }
+      header.firstpage {
+        height: auto;
+        padding: 2vw;
+        right: 0;
+        top: 0;
+        border-radius: 0;
+      }
+      header img {
+        height: 3vw;
+        width: auto;
+      }
+      #backButton {
+        font-size: 4vw;
+        padding: 2vw;
+      }
+      .band {
+        padding: 10vw 5vw;
+        height: auto;
+      }
+      .band h1 {
+        font-size: 5vw;
+        line-height: 1.2;
+      }
+      .band h2, .band h3 {
+        font-size: 4vw;
+        width: fit-content;
+      }
+      article {
+        padding: 10vw 5vw;
+      }
+      article p {
+        font-size: 4vw;
+        line-height: 1.5;
+      }
+      .splash {
+        padding: 10vw 5vw;
+      }
+      .splash h1 {
+        font-size: 5vw;
+        line-height: 1.3;
+      }
+      .splash p {
+        font-size: 4vw;
+        line-height: 1.2;
+      }
+      footer {
+        width: 100%;
+        height: 5vh;
+        border-radius: 0;
+        padding: 3vw;
+        gap: 2vw;
+        position: relative;
+      }
+      .social-icons a img {
+        height: 3vw;
+      }
+      .footer-text {
+        font-size: 2vw;
+      }
+      #mobilehide {
+        display: none;
+      }
+      .mobilehide {
+        display: none;
+      }
+      .toggle-button1, .toggle-button2 {
+        font-size: 3vw;
+        padding: 3vw;
+      }
+      .draggable {
+        max-width: 55vw;
+      }
+      .info-text {
+        font-size: 3vw;
+      }
+      .info-text span {
+        font-size: 4vw;
+      }
+      .instruction-content {
+        width: 55vw !important;
+        padding: 50px 30px 50px 30px !important;
+        border-radius: 20px;
+      }
+      .instruction-content h2 {
+        font-size: 5.7vw !important;
+      }
+      .instruction-content p {
+        font-size: 3vw !important;
+      }
+    }
+    @media (min-width: 600px) {
+      .desktophide {
+        display: none;
+      }
+    }
+    .interactive-wrapper {
+      position: relative;
+    }
+    #instructionOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .instruction-content {
+      max-width: 80%;
+      height: fit-content;
+      margin-top: 10vw;
+      background: #1f1f1f;
+      color: #eee;
+      padding: 3.6rem 3.4rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 20px;
+    }
+    .instruction-content h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+    .instruction-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.7rem;
+      line-height: 1.6;
+    }
+    .instruction-content span {
+      font-weight: 500;
+      color: #fd86ff;
+    }
+    .close-overlay-btn {
+      font-size: 1rem;
+      padding: 0.7em 1.2em;
+      margin-top: 0.5rem;
+      background: #acacac;
+      color: #111;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .close-overlay-btn:hover {
+      background: #eee;
+    }
+    /* fixed-toggle class: when added, button sticks at top left */
+    .fixed-toggle {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BRPD33P"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
-    <!-- Main Title -->
-    <header tabindex="0" aria-label="Home Button" class="firstpage">
-        <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img class="mobilehide" src="img/gaze_logo_white.png">
-            <img class="desktophide" src="img/gaze_logo.png">
-        </a>
-    </header>
-    <!-- BUTTON TOGGLE MENU -->
-    <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
-    <!-- Menu -->
-    <nav>
-        <ul>
-            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
-                <ul class="dropdown-content">
-                    <!--
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
-                    <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
-                    -->
-                    <li tabindex="0" aria-label=" View past programmes" role="button"><a href="archive.html">Archive</a></li>
-                    <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="https://filmfreeway.com/gaze-ireland">Submit A Film</a></li>
-
-                </ul>
-            </li>
-            <li class="dropdown" tabindex="0" aria-label="Menu Section, Tickets">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">TICKETS</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="themes.html">Festival Line Up</a></li>
-                     <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="featured.html">Featured Events</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="timetable.html">Timetable</a></li>
-
-                    <!--
-                    <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">Timetable</a></li>
-                    <li tabindex="0" aria-label="Best Judys" role="button"><a href="judy.html">Best Judys</a></li>
-                    <li tabindex="0" aria-label="IFI @ Home" role="button"><a href="ifi.html">IFI @ Home</a></li>
-                    -->
-                </ul>
-            </li>
-            <!--
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">PROGRAMME</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 1st of August" role="button"><a href="thurs.html">Tuesday 29th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Friday the 2nd of August" role="button"><a href="fri.html">Wednesday 30th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Saturday the 3rd of August" role="button"><a href="sat.html">Thursday</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Sunday the 4th of August" role="button"><a href="sun.html">Sunday 4th August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Monday the 5th of August" role="button"><a href="mon.html">Monday 5th August 2024</a></li>
-                </ul>
-            </li>
-            -->
-            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
-                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="friend.html">Festival Friend</a></li>
-                    <li tabindex="0" aria-label=" Volunteer With GAZE" role="button"><a href="vol.html">Volunteer</a></li>
-                    <li tabindex="0" aria-label=" Star GAZE" role="button"><a href="stargaze.html">StarGAZE</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ACCESSIBILITY</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label="Video Guide To The Festival" role="button"><a href="https://youtu.be/PHfYZgj4Y2o" target="_blank">Video Guide</a></li>
-                    <li tabindex="0" aria-label="Easy Read Guide To The Festival" role="button"><a href="img/archive/GAZE Easy Read July 2024.pdf" target="_blank">Easy Read Guide</a></li>
-                    <li tabindex="0" aria-label="Easy Read Guide To Star Gaze" role="button"><a href="img/archive/starGAZE easy read document (2).pdf">StarGAZE</a></li>
-                    <li tabindex="0" aria-label="Easy Read Festival Programme" role="button"><a href="img/archive/GAZE large print programme 2024.pdf">Programme</a></li>
-                </ul>
-            </li>        
-        </ul>
-    </nav>
-<div class="mobilehide">
-<div class="quick-nav" aria-label="Section shortcuts">
-  <ul>
-    <li><a href="timetable.html">Timetable</a></li>
-    <li><a href="featured.html">Featured</a></li>
-    <li><a href="irish.html">Irish</a></li>
-    <li><a href="first.html">First Timers</a></li>
-    <li><a href="genre.html">Genre</a></li>
-    <li><a href="3x3.html">3x3</a></li>
-    <li><a href="animation.html">Animation</a></li>
-    <li><a href="doc.html">Documentary</a></li>
-    <li><a href="intense.html">Intense Connections</span></a></li>
-    <li><a href="messy.html">Messy People</a></li>
-  </ul>
-</div></div>
-    <!-- Main Body -->
-    <main id="maincontent">
-
-        <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
-            <p tabindex="0" role="heading" style="font-weight: 600;">gaze film fest.</p>
-        </section>
-
-        <section class="blue">
-            <p tabindex="0" role="heading">Explore the <br><a href="themes.html"><span class="mobilehide">Festival</span> Line Up</a>.</p>
-        </section>
-
-        <section class="backgroundimg2" aria-label="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
-            <p tabindex="0" role="heading" style="font-weight: 600; font-size: 5.5vw;">feast your eyes...</p>
-        </section>
-
-        
-<div class="mobilehide">
-
-            <section class="green">
-            <p tabindex="0" role="heading" style="font-weight: 600; font-size: 5.5vw;">fix your gaze...</p>
-        </section>
-
-        <section class="backgroundimg3" aria-label="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
-            <p tabindex="0" role="heading" style="font-weight: 600; font-size: 5.5vw;">29th July - 4th August 2025</p>
-        </section>
-</div>
-
-
-        <section class="blue">
-            <p tabindex="0" role="heading" >At The <br><a href="https://www.lighthousecinema.ie/" target="_blank">Light House Cinema</a>. <br>And <br><a href="https://ifi.ie/" target="_blank">Irish Film Institute</a>.</p>
-        </section>
-
-    </main>
-    <!-- Footer -->
-    <footer>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
-                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
-            </a>
-            <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
-                <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
-            </a>
-            <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
-                <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
-            </a>
-            <a href="https://www.tiktok.com/@gazefilmfest?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="Tiktok" role="link">
-                <img src="img/tiktok.png" alt="Link to Tiktok page" tabindex="0">
-            </a>
+  <header tabindex="0" aria-label="Home Button" class="firstpage">
+    <a href="index.html" style="display: inline-block; cursor: pointer;">
+      <img src="img/logo.png" alt="Logo" />
+    </a>
+  </header>
+  <button id="backButton"></button>
+  
+  
+  
+  <article class="splash">
+    <h1>
+      <span class="fade-me">Hi there, I'm </span>
+      <a id="me" href="https://www.linkedin.com/in/patrick-feeney-89920a258" target="_blank">
+        <div class="hover-text">
+          <span class="base">(Patrick)</span>
+          <span class="fill">(Patrick)</span>
         </div>
-        <div class="footer-text">
-            &copy; GAZE Film Festival 2025 | All rights reserved
+        <img src="img/Silver-Touch--4.jpg" />
+      </a>
+      <span class="fade-me">— </span>
+      <span class="fade-me"><br class="mobilehide">An integrated </span>
+      <a id="gaze2" href="game.html">
+        <div class="hover-text">
+          <span class="base">(designer)</span>
+          <span class="fill">(designer)</span>
         </div>
-    </footer>
-   <script>
+        <img src="img/playing.webp" />
+      </a>
+      <span class="fade-me"> working across <br class="mobilehide"> </span>
+      <a id="gaze" href="gaze24.html">
+        <div class="hover-text">
+          <span class="base">(branding)</span>
+          <span class="fill">(branding)</span>
+        </div>
+        <img src="img/gaze large format.png" />
+      </a> 
+      <span class="fade-me"> and technology </span>
+      <a id="trust" href="trust.html">
+        <div class="hover-text">
+          <span class="base">(ethics)</span>
+          <span class="fill">(ethics)</span>
+        </div>
+        <img src="img/Slide8.jpeg" />
+      </a>
+      <span class="fade-me">, where <br class="mobilehide"> I specialise in </span>
+      <a id="tech" href="tech.html">
+        <div class="hover-text">
+          <span class="base">(science)</span>
+          <span class="fill">(science)</span>
+        </div>
+        <img src="img/techad.png" />
+      </a>
+      <span class="fade-me"> communication , <br class="mobilehide"> and </span>
+      <a id="un" href="un.html">
+        <div class="hover-text">
+          <span class="base">(interaction)</span>
+          <span class="fill">(interaction)</span>
+        </div>
+        <img src="img/unfinished.webp" />
+      </a>
+      <span class="fade-me"> design .</span>
+    </h1>
+  </article>
+  
+ 
+ 
+ 
+ 
+ 
+  <div class="interactive-wrapper">
+    <!-- Instruction Overlay -->
+    <div id="instructionOverlay">
+      <div class="instruction-content">
+        <h2>How to Navigate</h2>
+        <p><span>Drag</span> an image to move it around,<br> or <span>double click</span> to learn more. <br> To see more projects, click<br> the <span>next</span> button on the top left.</p>
+        <button class="close-overlay-btn" id="closeInstructionBtn">Got it!</button>
+      </div>
+    </div>
+    <div id="no1">
+      <div id="container1">
+        <!-- Info-text acting as a button -->
+        <div class="info-text" role="button" tabindex="0">
+          <p><span>&#9432;</span> How to Navigate</p>
+        </div>
+        <button class="toggle-next">Next &#x27A1;</button>
+        <!-- Draggable Items with Low-res and High-res Images -->
+        <div class="draggable">
+          <a href="un.html">
+            <img src="img/low/unfinished.jpeg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/unfinished.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Unfinished Business <span style="opacity: 40%;">| Platform Development</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="52.html">
+            <img src="img/Main_Header_52Insights_MainChar.gif" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Main_Header_52Insights_MainChar.gif" alt="High-Res Image" class="high-res fade-in" />
+            <h1>52 Insights <span style="opacity: 40%;">| Youth Marketing</span></h1>
+          </a>
+        </div>
+        <div class="draggable" >
+          <a href="path.html">
+            <img src="img/low/Pathfinder_Background_V1.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Pathfinder_Background_V1.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Pathfinder <span style="opacity: 40%;">| A Brief Worth Breaking</span></h1>
+          </a>
+        </div>
+        <div class="draggable" id="mobilehide">
+          <a href="card.html">
+            <img src="img/Cast Of Characters.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Cast Of Characters.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Cast of Characters <span style="opacity: 40%;">| Interaction Design</span></h1>
+          </a>
+        </div>
+        <div class="draggable">
+          <a href="trust.html">
+            <img src="img/low/Slide10.jpeg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Slide10.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Trust Fall <span style="opacity: 40%;">| Interaction Design</span></h1>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <div id="no2">
+      <div id="container2">
+        <!-- Info-text acting as a button here as well -->
+        <div class="info-text" role="button" tabindex="0">
+          <p><span>&#9432;</span> How to Navigate</p>
+        </div>
+        <button class="toggle-back">&#x2B05; Back</button>
+        <button class="toggle-next">Next &#x27A1;</button>
+        <!-- Draggable Items with Low-res and High-res Images -->
+        <div class="draggable">
+          <a href="gaze23.html">
+            <img src="img/low/GAZE_01.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/GAZE_01.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>GAZE Film Fest 2023 <span style="opacity: 40%;">| Brand Identity</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="tech.html">
+            <img src="img/low/techad.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/techadoption.gif" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Tech Adoption <span style="opacity: 40%;">| Science Communication</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="game.html">
+            <img src="img/playing.webp" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/playing.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Playing The Port' <span style="opacity: 40%;">| Interactive Portfolio</span></h1>
+          </a>
+        </div>
+        <div class="draggable">
+          <a href="gaze24.html">
+            <img src="img/low/gazefilm.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/gazefilm.gif" alt="High-Res Image" class="high-res fade-in" />
+            <h1>GAZE Film Fest 2024 <span style="opacity: 40%;">| Accessible Ecosystem</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="newtennant.html">
+            <img src="img/low/catu02.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/catu02.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>The New Tenant <span style="opacity: 40%;">| Activism</span></h1>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div id="no3" style="display:none;">
+      <div id="container3">
+        <!-- Info text -->
+        <div class="info-text" role="button" tabindex="0">
+          <p><span>&#9432;</span> How to Navigate</p>
+        </div>
     
-    document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('nav');
-    const toggleButton = document.querySelector('.menu-toggle');
-    const dropdowns = document.querySelectorAll('.dropdown');
-    const cursor = createCustomCursor();
+        <!-- BACK button (goes to page-2) -->
+        <button class="toggle-back">&#x2B05; Back</button>
+    
+        <div class="draggable">
+          <a href="flag.html">
+            <img src="img/low/Final-render-New-Flag-2draft-2.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/Final-render-New-Flag-2draft-2.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Just To Flag <span style="opacity: 40%;">| Public Installation</span></h1>
+          </a>
+        </div>
 
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        const cursor = createCustomCursor();
-        setupCustomCursor(cursor);
-        setupDropdowns(dropdowns);
-        setupMenuToggle(document.querySelector('.menu-toggle'), document.querySelector('nav'));
-    }
-    setupDropdownZZ(dropdowns);
-    setupAccessibility();
-    initializeParallaxEffects();
+        <div class="draggable">
+          <a href="pol.html">
+            <img src="img/low/BLUE-jpeg-4.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/BLUE-jpeg-4.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Political Material <span style="opacity: 40%;">| Material Culture</span></h1>
+          </a>
+        </div>
 
+
+        <div class="draggable">
+          <a href="spec.html">
+            <img src="img/low/newspaper1.jpg" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/newspaper1.webp" alt="High-Res Image" class="high-res fade-in" />
+            <h1>The Daily Metaverse <span style="opacity: 40%;">| Speculative Design</span></h1>
+          </a>
+        </div>
+
+        <div class="draggable">
+          <a href="for.html">
+            <img src="img/low/foresightcreative.png" alt="Low-Res Image" class="low-res loading" />
+            <img src="img/low/foresightcreative.png" alt="High-Res Image" class="high-res fade-in" />
+            <h1>Creative Foresight <span style="opacity: 40%;">| Speculative Workshop</span></h1>
+          </a>
+        </div>
+    
+      </div>
+    </div>
+
+  </div>
+  <div class="band">
+    <h1>Playing The 'Port | Interactive Portfolio</h1>
+    <a href="game.html"><h2 style="color:#afeb2f; border: 1px solid #afeb2f;">Explore</h2></a>
+  </div>
+  <div class="band" style="background-color: #171717;">
+    <h1>AI Advertising & The Simulation of Diversity | Opinion</h1>
+    <a href="aidiversity.html"><h2 style="color:#afeb2f; border: 1px solid #afeb2f;">Explore</h2></a>
+  </div>
+  <div class="band" style="height: 2vh !important; padding: 2vw !important;"></div>
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/patrickfeeneydesigner/" target="_blank" aria-label="Instagram" role="link">
+        <img src="img/instagram-icon.png" alt="Instagram" tabindex="0" />
+      </a>
+      <a href="mailto:patfeeney1098@gmail.com" target="_blank" aria-label="Email" role="link">
+        <img src="img/email.png" alt="Email Me" tabindex="0" />
+      </a>
+    </div>
+    <div class="footer-text">
+      &copy; Patrick Feeney Design 2024 | All rights reserved
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let activeContainerId = "container1";
+      let isDragging = false;
+      let activeElement = null, offsetX = 0, offsetY = 0;
+      let velocityX = 0, velocityY = 0;
+      const friction = 0.95;
+      let zIndexCounter = 1000;
+  
+      const savedPositions = {
+  container1: [],
+  container2: [],
+  container3: []   // ← new
+};
+
+  
+      // Grab references to Next & Back buttons
+      const nextBtn = document.querySelector(".toggle-button1");
+      const backBtn = document.querySelector(".toggle-button2");
+  
+      // Determine which "page" (container) is visible
+      const container1 = document.getElementById("no1");
+      const container2 = document.getElementById("no2");
+  
+      // ----------------------------------------------------------
+      // 1) HELP/INFO OVERLAY LOGIC
+      // ----------------------------------------------------------
+      const overlayShown = localStorage.getItem("overlayShown") === "true";
+      const overlayClosedAt = localStorage.getItem("overlayClosedAt");
+      const oneDay = 24 * 60 * 60 * 1000;
+      const now = Date.now();
+  
+      if (!overlayShown || !overlayClosedAt || (now - parseInt(overlayClosedAt)) > oneDay) {
+        document.getElementById('instructionOverlay').style.display = 'flex';
+      } else {
+        document.getElementById('instructionOverlay').style.display = 'none';
+      }
+  
+      document.getElementById('closeInstructionBtn').addEventListener('click', () => {
+        document.getElementById('instructionOverlay').style.display = 'none';
+        localStorage.setItem("overlayShown", "true");
+        localStorage.setItem("overlayClosedAt", Date.now().toString());
+      });
+  
+      // Let the info-text also show the overlay
+      document.querySelectorAll('.info-text').forEach(infoText => {
+        infoText.addEventListener('click', () => {
+          document.getElementById('instructionOverlay').style.display = 'flex';
+        });
+      });
+  
+      // ----------------------------------------------------------
+      // 2) DRAGGABLE SETUP FUNCTION
+      // ----------------------------------------------------------
+      function setupDraggable(containerId) {
+        const container = document.getElementById(containerId);
+        const containerRect = container.getBoundingClientRect();
+        const draggables = container.querySelectorAll('.draggable');
+  
+        // If positions were already saved, restore them
+        if (savedPositions[containerId].length === draggables.length) {
+          draggables.forEach((elem, index) => {
+            const { left, top, zIndex } = savedPositions[containerId][index];
+            elem.style.left = `${left}px`;
+            elem.style.top = `${top}px`;
+            if (zIndex) {
+              elem.style.zIndex = zIndex;
+              if (zIndex > zIndexCounter) {
+                zIndexCounter = zIndex;
+              }
+            }
+          });
+          return;
+        }
+  
+        // Otherwise, place each draggable randomly without overlapping
+        let placedData = [];
+        draggables.forEach((elem, index) => {
+          const lowRes = elem.querySelector('img.low-res');
+  
+          function placeRandomly() {
+            const w = elem.offsetWidth;
+            const h = elem.offsetHeight;
+            const maxX = containerRect.width - w;
+            const maxY = containerRect.height - h;
+  
+            // Overlap check for "forbidden zone"
+            function overlapsZone(x, y, w, h) {
+              for (const d of placedData) {
+                if (
+                  x < d.fzX2 && (x + w) > d.fzX1 &&
+                  y < d.fzY2 && (y + h) > d.fzY1
+                ) {
+                  return true;
+                }
+              }
+              return false;
+            }
+  
+            let attempts = 500;
+            let randomX, randomY;
+            let foundSpot = false;
+            while (attempts > 0 && !foundSpot) {
+              randomX = Math.floor(Math.random() * maxX);
+              randomY = Math.floor(Math.random() * maxY);
+              if (!overlapsZone(randomX, randomY, w, h)) {
+                foundSpot = true;
+              }
+              attempts--;
+            }
+  
+            // If we couldn’t find a spot, place center
+            if (!foundSpot) {
+              randomX = Math.floor(maxX / 2);
+              randomY = Math.floor(maxY / 2);
+            }
+  
+            elem.style.left = `${randomX}px`;
+            elem.style.top = `${randomY}px`;
+  
+            // Create a smaller "forbidden zone" near the center of the image
+            const fzW = w * 0.22;
+            const fzH = h * 0.22;
+            const fzX1 = randomX + (w - fzW) / 2;
+            const fzY1 = randomY + (h - fzH) / 2;
+            placedData.push({
+              fzX1: fzX1,
+              fzX2: fzX1 + fzW,
+              fzY1: fzY1,
+              fzY2: fzY1 + fzH
+            });
+  
+            // Save position
+            savedPositions[containerId][index] = {
+              left: randomX,
+              top: randomY,
+              zIndex: parseInt(elem.style.zIndex) || 1000
+            };
+          }
+  
+          // If low-res is already loaded, place immediately
+          if (lowRes.complete && lowRes.naturalWidth > 0) {
+            placeRandomly();
+          } else {
+            lowRes.onload = placeRandomly;
+          }
+  
+          // Double-tap on mobile
+          let lastTapTime = 0;
+          const link = elem.querySelector('a');
+          link.addEventListener('touchend', function(e) {
+            const currentTime = new Date().getTime();
+            const gap = currentTime - lastTapTime;
+            if (gap < 300 && gap > 0) {
+              window.location.href = this.href;
+            }
+            lastTapTime = currentTime;
+            e.preventDefault();
+          }, false);
+  
+          // Double-click on desktop
+          let clickTimeout = null;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (clickTimeout !== null) {
+              clearTimeout(clickTimeout);
+              clickTimeout = null;
+              window.location.href = this.href;
+            } else {
+              clickTimeout = setTimeout(() => {
+                clickTimeout = null;
+              }, 300);
+            }
+          });
+        });
+      }
+  
+      // Init container1 by default
+      setupDraggable("container1");
+  
+      // ----------------------------------------------------------
+      // 3) DRAG EVENTS
+      // ----------------------------------------------------------
+      function startDrag(e) {
+        const container = document.getElementById(activeContainerId);
+        const target = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].target : e.target;
+        if (target.closest && target.closest('.draggable')) {
+          activeElement = target.closest('.draggable');
+          const rect = activeElement.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+          const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+  
+          offsetX = clientX - rect.left;
+          offsetY = clientY - rect.top;
+          isDragging = true;
+          velocityX = 0;
+          velocityY = 0;
+  
+          zIndexCounter++;
+          activeElement.style.zIndex = zIndexCounter;
+          activeElement.classList.add('dragging');
+          e.preventDefault();
+        }
+      }
+  
+      function onMove(e) {
+        if (isDragging && activeElement) {
+          const container = document.getElementById(activeContainerId);
+          const containerRect = container.getBoundingClientRect();
+          const clientX = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientX : e.clientX;
+          const clientY = (e.targetTouches && e.targetTouches[0]) ? e.targetTouches[0].clientY : e.clientY;
+  
+          const newX = clientX - containerRect.left - offsetX;
+          const newY = clientY - containerRect.top - offsetY;
+  
+          velocityX = newX - parseFloat(activeElement.style.left || 0);
+          velocityY = newY - parseFloat(activeElement.style.top || 0);
+  
+          activeElement.style.left = `${newX}px`;
+          activeElement.style.top = `${newY}px`;
+        }
+      }
+  
+      function endDrag() {
+        if (isDragging) {
+          isDragging = false;
+          if (activeElement) {
+            activeElement.classList.remove('dragging');
+            activeElement.classList.add('dropped');
+            activeElement.addEventListener('animationend', function handleAnimationEnd() {
+              activeElement.classList.remove('dropped');
+              activeElement.removeEventListener('animationend', handleAnimationEnd);
+            });
+  
+            // Update saved positions
+            const container = document.getElementById(activeContainerId);
+            const draggables = Array.from(container.querySelectorAll('.draggable'));
+            const index = draggables.indexOf(activeElement);
+            if (index > -1) {
+              savedPositions[activeContainerId][index].left = parseFloat(activeElement.style.left);
+              savedPositions[activeContainerId][index].top = parseFloat(activeElement.style.top);
+              savedPositions[activeContainerId][index].zIndex = parseInt(activeElement.style.zIndex);
+            }
+          }
+  
+          // Momentum effect
+          function applyMomentum() {
+            if (!isDragging && activeElement) {
+              const container = document.getElementById(activeContainerId);
+              const containerRect = container.getBoundingClientRect();
+              let newX = parseFloat(activeElement.style.left || 0) + velocityX;
+              let newY = parseFloat(activeElement.style.top || 0) + velocityY;
+  
+              velocityX *= friction;
+              velocityY *= friction;
+  
+              // Boundaries
+              newX = Math.max(0, Math.min(containerRect.width - activeElement.offsetWidth, newX));
+              newY = Math.max(0, Math.min(containerRect.height - activeElement.offsetHeight, newY));
+  
+              activeElement.style.left = `${newX}px`;
+              activeElement.style.top = `${newY}px`;
+  
+              // Update again
+              const draggables = Array.from(container.querySelectorAll('.draggable'));
+              const index = draggables.indexOf(activeElement);
+              if (index > -1) {
+                savedPositions[activeContainerId][index].left = newX;
+                savedPositions[activeContainerId][index].top = newY;
+              }
+  
+              if (Math.abs(velocityX) > 0.5 || Math.abs(velocityY) > 0.5) {
+                requestAnimationFrame(applyMomentum);
+              }
+            }
+          }
+          applyMomentum();
+        }
+      }
+  
+      document.addEventListener('mousedown', startDrag, false);
+      document.addEventListener('mousemove', onMove, false);
+      document.addEventListener('mouseup', endDrag, false);
+  
+      document.addEventListener('touchstart', startDrag, { passive: false });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', endDrag, false);
+  
+      // ----------------------------------------------------------
+      // 4) LAZY-LOAD HIGH-RES IMAGES
+      // ----------------------------------------------------------
+      const highResImages = document.querySelectorAll('img.high-res');
+      const loadHighResImage = (img) => {
+        const highResSrc = img.src;
+        if (!highResSrc) return;
+        const tmp = new Image();
+        tmp.src = highResSrc;
+        tmp.onload = () => {
+          img.classList.add('loaded');
+          const lowResImg = img.previousElementSibling;
+          if (lowResImg && lowResImg.classList.contains('loading')) {
+            lowResImg.classList.remove('loading');
+          }
+        };
+      };
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadHighResImage(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: "50px", threshold: 0.1 });
+        highResImages.forEach(img => observer.observe(img));
+      } else {
+        highResImages.forEach(img => loadHighResImage(img));
+      }
+  
+// ─────────────────────────────────────────────
+// 5)  SIMPLE MULTI-PAGE NAV (now 3 pages)
+// ---------------------------------------------
+const pages      = ["no1", "no2", "no3"];  // wrappers we created
+let   pageIndex  = 0;                       // start on first page
+
+// cache all nav buttons in one go
+document.querySelectorAll(".toggle-button1")   // Next on page-1
+        .forEach(btn => btn.classList.add("toggle-next"));
+document.querySelectorAll(".toggle-button2")   // Back on page-2
+        .forEach(btn => btn.classList.add("toggle-back"));
+// page-3’s buttons are already toggle-next / toggle-back in the HTML
+
+function showPage(i) {
+  // clamp index
+  pageIndex = Math.max(0, Math.min(i, pages.length - 1));
+
+  // show/hide wrappers
+  pages.forEach((id, idx) => {
+    document.getElementById(id).style.display =
+      idx === pageIndex ? "block" : "none";
+  });
+
+  // set active container & (re)initialise draggables
+  activeContainerId = "container" + (pageIndex + 1);
+  setupDraggable(activeContainerId);
+
+  // after switching we recalc sticky offsets for whichever
+  // nav button is currently visible
+  document.querySelectorAll(".toggle-next, .toggle-back").forEach(btn => {
+    btn.dataset.originalOffset = btn.getBoundingClientRect().top + window.scrollY;
+  });
+  handleScroll();
+}
+
+// global click delegation for nav buttons
+document.addEventListener("click", e => {
+  if (e.target.closest(".toggle-next"))  showPage(pageIndex + 1);
+  if (e.target.closest(".toggle-back"))  showPage(pageIndex - 1);
 });
 
-function createCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-    return cursor;
-}
+// initialise (page-1 is already visible in the markup)
+showPage(0);
 
-function setupCustomCursor(cursor) {
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    });
 
-    document.querySelectorAll('a, button, input').forEach(element => {
-        element.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        element.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-    });
-}
-
-// NAV FOCUS SETUP
-function setupFocusWithinNav(nav) {
-    const focusableElements = nav.querySelectorAll('a, button, input'); // Extend this selector to include other focusable elements if needed
-    focusableElements.forEach(element => {
-        element.addEventListener('focus', openMenu);
-    });
-}
-
-function setupMenuToggle(toggleButton, nav) {
-    let closeMenuTimeout;
-
-    // Function to open the menu
-    function openMenu() {
-        clearTimeout(closeMenuTimeout); // Clear any pending close command
-        nav.style.left = '0vw';
-        nav.style.opacity = '1';
-        toggleButton.setAttribute('aria-expanded', 'true');
-        toggleButton.classList.add('expanded');
-    }
-
-    // Function to close the menu
-    function closeMenu() {
-        clearTimeout(closeMenuTimeout); // Clear any pending open command to prevent conflicts
-        closeMenuTimeout = setTimeout(() => {
-            nav.style.left = '-20vw';
-            nav.style.opacity = '0';
-            toggleButton.setAttribute('aria-expanded', 'false');
-            toggleButton.classList.remove('expanded');
-        }, 2500); // Correct delay to 2000 milliseconds
-    }
-
-    // Toggle menu on click
-     // toggleButton.addEventListener('click', function() {
-     //    let isOpen = toggleButton.getAttribute('aria-expanded') === 'true';
-     //    if (isOpen) {
-     //        closeMenu();
-     //    } else {
-     //        openMenu();
-     //    }
-     // });
-
-    // Open menu on focus
-    toggleButton.addEventListener('focus', openMenu);
-
-    // Hover events
-    toggleButton.addEventListener('mouseenter', openMenu);
-    // Only close the menu when leaving both button and nav area
-    toggleButton.addEventListener('mouseleave', function(event) {
-        if (!nav.contains(event.relatedTarget)) {
-            closeMenu();
-        }
-    });
-    nav.addEventListener('mouseleave', function(event) {
-        if (!toggleButton.contains(event.relatedTarget)) {
-            closeMenu();
-        }
-    });
-
-    // Ensure keyboard accessibility
-    toggleButton.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault(); // Stop default action
-            toggleButton.click(); // Simulate click for keyboard
-        }
-    });
-}
-
-function setupDropdowns(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const mainLink = dropdown.querySelector('a:first-child');
-        const dropdownContent = dropdown.querySelector('.dropdown-content');
-        const dropdownLinks = dropdown.querySelectorAll('li');
-
-        mainLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            const isExpanded = dropdownContent.style.maxHeight !== '';
-            mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-            dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
+  
+      // ----------------------------------------------------------
+      // 7) HOVER TEXT MOUSE-EFFECT
+      // ----------------------------------------------------------
+      document.querySelectorAll('.hover-text').forEach((hoverText) => {
+        hoverText.addEventListener('mousemove', (e) => {
+          const rect = hoverText.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100 + '%';
+          const y = ((e.clientY - rect.top) / rect.height) * 100 + '%';
+          hoverText.style.setProperty('--x', x);
+          hoverText.style.setProperty('--y', y);
         });
-
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                mainLink.setAttribute('aria-expanded', 'false');
-                dropdownContent.style.maxHeight = '';
-            }
+        hoverText.addEventListener('mouseenter', () => {
+          hoverText.classList.add('active');
         });
-
-        // Adding key press event for dropdown items
-        dropdownLinks.forEach(item => {
-            item.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    const link = item.querySelector('a');
-                    if (link) {
-                        link.click();
-                    }
-                }
-            });
+        hoverText.addEventListener('mouseleave', () => {
+          hoverText.classList.remove('active');
         });
-        
-    });
-}
-
-
-// MOBILE
-function setupDropdownZZ(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const mainLink = dropdown.querySelector('a:first-child');
-        const dropdownContent = dropdown.querySelector('.dropdown-content');
-
-        mainLink.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault(); // Prevent navigation
-                const isExpanded = dropdownContent.style.maxHeight !== '';
-                mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-                dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
-            }
-        });
-
-        // Clicking outside to close dropdown
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                mainLink.setAttribute('aria-expanded', 'false');
-                dropdownContent.style.maxHeight = '';
-            }
-        });
-    });
-}
-
-function setupAccessibility() {
-    // Enhance accessibility for keyboard navigation
-    document.querySelector('header').addEventListener('keydown', (event) => {
-        if (event.key === "Enter" || event.keyCode === 13) {
-            const link = event.target.querySelector('a');
-            if (link) {
-                link.click();
-            }
+      });
+  
+      // ----------------------------------------------------------
+      // 8) FADE-ME TEXT ON SCROLL
+      // ----------------------------------------------------------
+      window.addEventListener('scroll', function() {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        let newOpacity = 1 - (scrollY / 300);
+        if (newOpacity < 0.6) {
+          newOpacity = 0.6;
         }
-    });
-}
-
-function initializeParallaxEffects() {
-    if (window.innerWidth > 768) {
-        applyParallaxEffect();
-    }
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            applyParallaxEffect();
-        } else {
-            resetParallaxEffect();
-        }
-    });
-}
-
-function applyParallaxEffect() {
-    document.addEventListener('scroll', () => {
-        const backgrounds = [
-            { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-            { element: document.querySelector('.animate'), startScroll: 0 },
-            { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
-            { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
-        ];
-
-        backgrounds.forEach(bg => {
-            if (bg.element) {
-                const scrollPosition = window.pageYOffset;
-                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.0001 : 1;
-                bg.element.style.transform = `scale(${scale})`;
-            }
+        document.querySelectorAll('.fade-me').forEach(span => {
+          span.style.opacity = newOpacity;
         });
+      });
     });
-}
-
-function resetParallaxEffect() {
-    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.animate'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
-    backgrounds.forEach(bg => {
-        if (bg) {
-            bg.style.transform = 'scale(1)';
-        }
-    });
-}
-</script>
+  </script>
+  
 </body>
 </html>
